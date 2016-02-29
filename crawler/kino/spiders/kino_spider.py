@@ -17,7 +17,7 @@ class KinoSpider(scrapy.Spider):
     def parse_movie_page(self, response):
         movie = MovieItem()
         movie['danish_title'] = response.css('.node-title').xpath('text()').extract()[0].strip()
+        movie['movie_url'] = response.url
         movie['original_title'] = response.css('.field-field-movie-original-title .field-item').xpath('text()[2]').extract()[0].strip()
         movie['poster_url'] = response.css('.field-field-movie-poster-image .field-item').xpath('img/@src').extract()[0]
-        movie['url'] = response.url
         yield movie

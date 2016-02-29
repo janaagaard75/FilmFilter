@@ -8,8 +8,19 @@
 import scrapy
 
 class MovieItem(scrapy.Item):
-    # define the fields for your item here like:
     danish_title = scrapy.Field()
+    movie_url = scrapy.Field() # ID of the movie.
     original_title = scrapy.Field()
     poster_url = scrapy.Field()
-    url = scrapy.Field()
+
+class TheatherItem(scrapy.Item):
+    address = scrapy.Field()
+    name = scrapy.Field()
+    theather_url = scrapy.Field() # ID of the theater.
+
+class ShowingsItem(scrapy.Item):
+    language = scrapy.Field()
+    movie_url = scrapy.Field() # Reference to the movie.
+    start = scrapy.Field() # Date and time.
+    theather_url = scrapy.Field() # Reference to the theater.
+    type = scrapy.Field() # 2D, 3D, etc.
