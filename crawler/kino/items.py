@@ -16,11 +16,11 @@ class MovieItem(scrapy.Item):
 class TheaterItem(scrapy.Item):
     address = scrapy.Field()
     name = scrapy.Field()
-    theather_url = scrapy.Field() # ID of the theater.
+    theater_url = scrapy.Field() # ID of the theater.
 
 class ShowingsItem(scrapy.Item):
     language = scrapy.Field()
     movie_url = scrapy.Field() # Reference to the movie.
     start = scrapy.Field() # Date and time.
-    theather_url = scrapy.Field() # Reference to the theater.
+    theater_url = scrapy.Field() # Reference to the theater.
     type = scrapy.Field() # 2D, 3D, etc.
