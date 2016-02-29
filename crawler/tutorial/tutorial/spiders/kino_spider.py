@@ -1,6 +1,6 @@
 import scrapy
 
-from tutorial.items import MovieItem
+from kino.items import MovieItem
 
 class KinoSpider(scrapy.Spider):
     name = "kino"
