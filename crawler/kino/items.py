@@ -13,7 +13,7 @@ class MovieItem(scrapy.Item):
     original_title = scrapy.Field()
     poster_url = scrapy.Field()
 
-class TheatherItem(scrapy.Item):
+class TheaterItem(scrapy.Item):
     address = scrapy.Field()
     name = scrapy.Field()
     theather_url = scrapy.Field() # ID of the theater.

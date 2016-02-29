@@ -2,17 +2,15 @@ import scrapy
 
 from kino.items import MovieItem
 
-class KinoSpider(scrapy.Spider):
+class MoviesSpider(scrapy.Spider):
     name = "movies"
     allowed_domains = ["kino.dk"]
-    start_urls = [
-        "http://www.kino.dk/aktuelle-film?page=0"
-    ]
+    start_urls = ["http://www.kino.dk/aktuelle-film?page=0"]
 
     def parse(self, response):
         for movie_href in response.css('.movies-list-inner-wrap').xpath('./h2/a/@href'):
-            url = response.urljoin(movie_href.extract())
-            yield scrapy.Request(url, callback=self.parse_movie_page)
+            movie_url = response.urljoin(movie_href.extract())
+            yield scrapy.Request(movie_url, callback=self.parse_movie_page)
 
     def parse_movie_page(self, response):
         movie = MovieItem()
