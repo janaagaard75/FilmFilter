@@ -19,4 +19,4 @@ class TheatersSpider(scrapy.Spider):
         theater['address'] = address_line_1 + ' ' + address_line_2
         theater['name'] = response.xpath('//h1/text()').extract()[0]
         theater['theater_url'] = response.url
-        yield theater
+        return theater

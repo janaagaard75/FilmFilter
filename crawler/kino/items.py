@@ -18,7 +18,7 @@ class TheaterItem(scrapy.Item):
     name = scrapy.Field()
     theater_url = scrapy.Field() # ID of the theater.
 
-class ShowingsItem(scrapy.Item):
+class ShowingItem(scrapy.Item):
     language = scrapy.Field()
     movie_url = scrapy.Field() # Reference to the movie.
     start = scrapy.Field() # Date and time.
