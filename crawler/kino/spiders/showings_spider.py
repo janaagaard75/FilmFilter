@@ -29,4 +29,6 @@ class ShowingsSpider(scrapy.Spider):
     def parse_showings_page(self, response):
         showing = ShowingItem()
         showing['movie_url'] = response.meta['movie_url']
+        # //h3.title-cinema/a@href gi'r theater_url.
+        # .cinema-movie-dates indeholder tiderne.
         return showing
