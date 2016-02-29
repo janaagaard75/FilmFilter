@@ -12,9 +12,9 @@ Finally run:
 
 # Using Scrapy
 
-Run the little demo with this command:
+Run the little demo with this command. Note that this will append to movies.json, not overwrite the file.
 
-    scrapy crawl kino -o movie.json
+    scrapy crawl kino -o output/movies.json
 
 It's possible to start up Scrapy in a shell mode, making it really easy to test the selectors:
 
