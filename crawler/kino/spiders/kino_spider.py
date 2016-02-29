@@ -3,7 +3,7 @@ import scrapy
 from kino.items import MovieItem
 
 class KinoSpider(scrapy.Spider):
-    name = "kino"
+    name = "movies"
     allowed_domains = ["kino.dk"]
     start_urls = [
         "http://www.kino.dk/aktuelle-film?page=0"
