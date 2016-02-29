@@ -1,19 +1,21 @@
 # Installing Scrapy
 
-## Prequisites
+Had to do the following to make the pip command work. Something about El Capitan shipping with lxml, but in an earlier version than the one required by Scrapy.
 
-* Had to install Python using Homebrew to make it work: `brew install python`.
+* Install Python using Homebrew: `brew install python`.
 * It might also be necessary to start up Xcode, since it installs some additional tools on first run.
-* Also run `xcode-select --install`.
+* Run `xcode-select --install`. I think this adds some command line features to OS X.
 
-## Installation
+Finally run:
 
     pip install scrapy
 
-# Run with this command
+# Using Scrapy
+
+Run the little demo with this command:
 
     scrapy crawl kino -o movie.json
 
-## To test scraping possiblities run
+It's possible to start up Scrapy in a shell mode, making it really easy to test the selectors:
 
     scrapy shell http://www.kino.dk/aktuelle-film
