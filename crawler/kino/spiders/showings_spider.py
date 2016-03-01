@@ -6,13 +6,13 @@ class ShowingsSpider(scrapy.Spider):
     name = 'showings'
     allowed_domains = ['kino.dk']
     start_urls = [
-        "http://www.kino.dk/aktuelle-film?page=0"#,
-        #"http://www.kino.dk/aktuelle-film?page=1",
-        #"http://www.kino.dk/aktuelle-film?page=2",
-        #"http://www.kino.dk/aktuelle-film?page=3",
-        #"http://www.kino.dk/aktuelle-film?page=4",
-        #"http://www.kino.dk/aktuelle-film?page=5",
-        #"http://www.kino.dk/aktuelle-film?page=6"
+        "http://www.kino.dk/aktuelle-film?page=0",
+        "http://www.kino.dk/aktuelle-film?page=1",
+        "http://www.kino.dk/aktuelle-film?page=2",
+        "http://www.kino.dk/aktuelle-film?page=3",
+        "http://www.kino.dk/aktuelle-film?page=4",
+        "http://www.kino.dk/aktuelle-film?page=5",
+        "http://www.kino.dk/aktuelle-film?page=6"
     ]
 
     def parse(self, response):

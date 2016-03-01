@@ -14,9 +14,9 @@ Finally run:
 
 Run the little demo with this command. Note that this will append to movies.json, not overwrite the file.
 
-    rm output/movies.json & scrapy crawl movies -o output/movies.json
-    rm output/theaters.json & scrapy crawl theaters -o output/theaters.json
-    rm output/showings.json & scrapy crawl showings -o output/showings.json
+    rm output/movies.json & scrapy crawl movies
+    rm output/showings.json & scrapy crawl showings
+    rm output/theaters.json & scrapy crawl theaters
 
 It's possible to start up Scrapy in a shell mode, making it really easy to test the selectors:
 
