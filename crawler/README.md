@@ -20,4 +20,4 @@ Run the little demo with this command. Note that this will append to movies.json
 
 It's possible to start up Scrapy in a shell mode, making it really easy to test the selectors:
 
-    scrapy shell http://www.kino.dk/aktuelle-film
+    scrapy shell "http://www.kino.dk/aktuelle-film"
