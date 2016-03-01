@@ -61,9 +61,12 @@ COOKIES_ENABLED=False
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'kino.pipelines.JsonPipeline': 500,
-#}
+# ITEM_PIPELINES = {
+#    'kino.pipelines.KinoPipeline': 500,
+# }
+
+FEED_URI='file:output/%(name)s.json'
+FEED_FORMAT='jsonlines'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

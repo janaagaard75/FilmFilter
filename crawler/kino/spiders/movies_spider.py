@@ -27,5 +27,7 @@ class MoviesSpider(scrapy.Spider):
         original_title_field = response.css('.field-field-movie-original-title .field-item')
         if len(original_title_field) > 0:
             movie['original_title'] = original_title_field.xpath('text()[2]').extract()[0].strip()
+        else:
+            movie['original_title'] = ""
         movie['poster_url'] = response.css('.field-field-movie-poster-image .field-item').xpath('img/@src').extract()[0]
         return movie

@@ -1,5 +1,5 @@
 import scrapy
-
+from datetime import datetime
 from kino.items import ShowingItem
 
 class ShowingsSpider(scrapy.Spider):
@@ -28,11 +28,28 @@ class ShowingsSpider(scrapy.Spider):
 
     def parse_showings_page(self, response):
         for movie_div in response.css('.booking-day-two-content').xpath('div[position()>1]'):
-            # Just using the first cinema-movie-dates for now.
-            for showings_column in movie_div.css('.cinema-movie-dates')[0].xpath('li'):
-                showing = ShowingItem()
-                showing['movie_url'] = response.meta['movie_url']
-                showing['theater_url'] = response.urljoin(movie_div.xpath('h3/a/@href').extract()[0])
-                date = showings_column.xpath('div[2]/text()').extract()
-                showing['start'] = date
-                yield showing
+            # Just using the first cinema-movie-dates for now, and don't worry about 3D and so on.
+            showings_type = movie_div.css('.version-dependent-item')[0]
+            for showings_column in showings_type.css('.cinema-movie-dates').xpath('li'):
+                for showing_cell in showings_column.xpath('ul/li/a'):
+                    dayAndMonth = showings_column.xpath('div[2]/text()')[0].extract().split('/')
+                    day = int(dayAndMonth[0])
+                    month = int(dayAndMonth[1])
+                    hourAndMinute = showing_cell.xpath('text()')[0].extract().split(':')
+                    hour = int(hourAndMinute[0])
+                    minute = int(hourAndMinute[1])
+                    date_obj = datetime(2016, month, day, hour, minute)
+
+                    showing = ShowingItem()
+                    showing['movie_url'] = response.meta['movie_url']
+                    showing['theater_url'] = response.urljoin(movie_div.xpath('h3/a/@href')[0].extract())
+                    showing['showing_url'] = response.urljoin(showing_cell.xpath('@href')[0].extract())
+                    showing['start'] = date_obj.strftime('%Y-%m-%d %H:%M:00')
+                    yield showing
+
+            next_page = showings_type.css('.showtimes-extra').xpath('a[last()]')
+            if next_page:
+                next_page_url = response.urljoin(next_page.xpath('@href')[0].extract())
+                request = scrapy.Request(next_page_url, self.parse_showings_page)
+                request.meta['movie_url'] = response.meta['movie_url']
+                yield request

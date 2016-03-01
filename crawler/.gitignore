@@ -6,3 +6,6 @@
 
 # Ignore the output files.
 output/**
+
+# Ignore Visual Studio Code's settings.
+.vscode
