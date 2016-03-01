@@ -47,8 +47,10 @@ class ShowingsSpider(scrapy.Spider):
                     showing['start'] = date_obj.strftime('%Y-%m-%d %H:%M:00')
                     yield showing
 
+            # Argh! kino.dk has a Next link even when there aren't any more shows. Need to also check for the 'Til næste forestilling >' button.
             next_page = showings_type.css('.showtimes-extra').xpath('a[last()]')
-            if next_page:
+            link_text = next_page.xpath('text()')[0].extract()
+            if link_text == u'N\xe6ste uge >':
                 next_page_url = response.urljoin(next_page.xpath('@href')[0].extract())
                 request = scrapy.Request(next_page_url, self.parse_showings_page)
                 request.meta['movie_url'] = response.meta['movie_url']

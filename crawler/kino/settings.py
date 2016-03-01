@@ -65,8 +65,13 @@ COOKIES_ENABLED=False
 #    'kino.pipelines.KinoPipeline': 500,
 # }
 
+FEED_EXPORTERS = {
+    'json': 'scrapy.exporters.JsonItemExporter',
+    'jsonlines': 'scrapy.contrib.exporter.JsonLinesItemExporter',
+}
 FEED_URI='file:output/%(name)s.json'
-FEED_FORMAT='jsonlines'
+#FEED_URI='stdout:'
+FEED_FORMAT='json'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -82,7 +87,7 @@ AUTOTHROTTLE_MAX_DELAY=60
 # Enable and configure HTTP caching (disabled by default)
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
 HTTPCACHE_ENABLED=True
-HTTPCACHE_EXPIRATION_SECS=3600
+HTTPCACHE_EXPIRATION_SECS=36000 # 10 hours.
 HTTPCACHE_DIR='httpcache'
 HTTPCACHE_IGNORE_HTTP_CODES=[]
 HTTPCACHE_STORAGE='scrapy.extensions.httpcache.FilesystemCacheStorage'
