@@ -24,11 +24,12 @@ class ShowingsSpider(scrapy.Spider):
         showings_url = response.urljoin(response.css('.button.color-red.versions-popup-button').xpath('@href')[0].extract())
         request = scrapy.Request(showings_url, callback=self.parse_showings_page)
         request.meta['movie_url'] = request.url
+        request.meta['recursive_calls'] = 4
         return request
 
     def parse_showings_page(self, response):
         for movie_div in response.css('.booking-day-two-content').xpath('div[position()>1]'):
-            # Just using the first cinema-movie-dates for now, and don't worry about 3D and so on.
+            # Just using the first cinema-movie-dates for now, and don't worry about 3D version and so on.
             showings_type = movie_div.css('.version-dependent-item')[0]
             for showings_column in showings_type.css('.cinema-movie-dates').xpath('li'):
                 for showing_cell in showings_column.xpath('ul/li/a'):
@@ -47,9 +48,12 @@ class ShowingsSpider(scrapy.Spider):
                     showing['start'] = date_obj.strftime('%Y-%m-%d %H:%M:00')
                     yield showing
 
-            next_page = showings_type.css('.showtimes-extra').xpath('a[last()]')
-            if next_page:
-                next_page_url = response.urljoin(next_page.xpath('@href')[0].extract())
-                request = scrapy.Request(next_page_url, self.parse_showings_page)
-                request.meta['movie_url'] = response.meta['movie_url']
-                yield request
+            recursive_calls = response.meta['recursive_calls']
+            if recursive_calls > 0:
+                next_page = showings_type.css('.showtimes-extra').xpath('a[last()]')
+                if next_page:
+                    next_page_url = response.urljoin(next_page.xpath('@href')[0].extract())
+                    request = scrapy.Request(next_page_url, self.parse_showings_page)
+                    request.meta['movie_url'] = response.meta['movie_url']
+                    request.meta['recursive_calls'] = recursive_calls - 1
+                    yield request
