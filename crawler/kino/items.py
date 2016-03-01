@@ -19,8 +19,7 @@ class TheaterItem(scrapy.Item):
     theater_url = scrapy.Field() # ID of the theater.
 
 class ShowingItem(scrapy.Item):
-    language = scrapy.Field()
     movie_url = scrapy.Field() # Reference to the movie.
     start = scrapy.Field() # Date and time.
     theater_url = scrapy.Field() # Reference to the theater.
-    type = scrapy.Field() # 2D, 3D, etc.
+    type = scrapy.Field() # 2D, 3D, etc. Will this also contain the language?

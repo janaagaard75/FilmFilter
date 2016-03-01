@@ -1,5 +1,8 @@
 # Python byte code files.
 *.pyc
 
+# Ignore Scrapy's cache.
+.scrapy/**
+
 # Ignore the output files.
 output/**

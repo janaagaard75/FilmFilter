@@ -27,8 +27,12 @@ class ShowingsSpider(scrapy.Spider):
         return request
 
     def parse_showings_page(self, response):
-        showing = ShowingItem()
-        showing['movie_url'] = response.meta['movie_url']
-        # //h3.title-cinema/a@href gi'r theater_url.
-        # .cinema-movie-dates indeholder tiderne.
-        return showing
+        for movie_div in response.css('.booking-day-two-content').xpath('div[position()>1]'):
+            # Just using the first cinema-movie-dates for now.
+            for showings_column in movie_div.css('.cinema-movie-dates')[0].xpath('li'):
+                showing = ShowingItem()
+                showing['movie_url'] = response.meta['movie_url']
+                showing['theater_url'] = response.urljoin(movie_div.xpath('h3/a/@href').extract()[0])
+                date = showings_column.xpath('div[2]/text()').extract()
+                showing['start'] = date
+                yield showing

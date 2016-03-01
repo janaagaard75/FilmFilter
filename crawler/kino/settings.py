@@ -62,7 +62,7 @@ COOKIES_ENABLED=False
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'kino.pipelines.SomePipeline': 300,
+#    'kino.pipelines.JsonPipeline': 500,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -78,8 +78,8 @@ AUTOTHROTTLE_MAX_DELAY=60
 
 # Enable and configure HTTP caching (disabled by default)
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
-#HTTPCACHE_ENABLED=True
-#HTTPCACHE_EXPIRATION_SECS=0
-#HTTPCACHE_DIR='httpcache'
-#HTTPCACHE_IGNORE_HTTP_CODES=[]
-#HTTPCACHE_STORAGE='scrapy.extensions.httpcache.FilesystemCacheStorage'
+HTTPCACHE_ENABLED=True
+HTTPCACHE_EXPIRATION_SECS=3600
+HTTPCACHE_DIR='httpcache'
+HTTPCACHE_IGNORE_HTTP_CODES=[]
+HTTPCACHE_STORAGE='scrapy.extensions.httpcache.FilesystemCacheStorage'
