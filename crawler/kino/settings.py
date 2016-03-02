@@ -65,12 +65,12 @@ COOKIES_ENABLED=False
 #    'kino.pipelines.KinoPipeline': 500,
 # }
 
+# Using a feed exporter instead of the pipeline.
 FEED_EXPORTERS = {
     'json': 'scrapy.exporters.JsonItemExporter',
     'jsonlines': 'scrapy.contrib.exporter.JsonLinesItemExporter',
 }
 FEED_URI='file:output/%(name)s.json'
-#FEED_URI='stdout:'
 FEED_FORMAT='json'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
