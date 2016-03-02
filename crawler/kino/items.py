@@ -9,6 +9,7 @@ import scrapy
 
 class MovieItem(scrapy.Item):
     danish_title = scrapy.Field()
+    length = scrapy.Field() # TODO
     movie_url = scrapy.Field() # ID of the movie.
     original_title = scrapy.Field()
     poster_url = scrapy.Field()
@@ -23,4 +24,4 @@ class ShowingItem(scrapy.Item):
     showing_url = scrapy.Field() # ID of the showing.
     start = scrapy.Field() # Date and time.
     theater_url = scrapy.Field() # Reference to the theater.
-    type = scrapy.Field() # 2D, 3D, etc. Will this also contain the language?
+    type = scrapy.Field() # TODO: 2D, 3D, etc. This is just a string, so postprocessing will be necessary.

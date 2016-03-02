@@ -48,6 +48,11 @@ class ShowingsSpider(scrapy.Spider):
                     showing['start'] = date_obj.strftime('%Y-%m-%d %H:%M:00')
                     yield showing
 
+            # Better version instead of maximum number of recursive calls:
+            # If at least one show then crawl 'naeste uge' link.
+            # If a 'til naeste forestilling >' button, then crawl that link.
+            # movie_div.css('.jump-to-show').xpath('a/text()') == u'Til n\xe6ste forestilling >'
+            # Otherwize we're done with this cinema.
             recursive_calls = response.meta['recursive_calls']
             if recursive_calls > 0:
                 next_page = showings_type.css('.showtimes-extra').xpath('a[last()]')
