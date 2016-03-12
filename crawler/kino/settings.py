@@ -91,3 +91,5 @@ HTTPCACHE_EXPIRATION_SECS=36000 # 10 hours.
 HTTPCACHE_DIR='httpcache'
 HTTPCACHE_IGNORE_HTTP_CODES=[]
 HTTPCACHE_STORAGE='scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+DUPEFILTER_CLASS = 'kino.filters.NoDupeFilter'
