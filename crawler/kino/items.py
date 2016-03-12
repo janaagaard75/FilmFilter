@@ -24,4 +24,4 @@ class ShowingItem(scrapy.Item):
     showing_url = scrapy.Field() # ID of the showing.
     start = scrapy.Field() # Date and time.
     theater_url = scrapy.Field() # Reference to the theater.
-    type = scrapy.Field() # TODO: 2D, 3D, etc. This is just a string, so postprocessing will be necessary.
+    version = scrapy.Field() # TODO: 2D, 3D, etc. This is just a string for now.
