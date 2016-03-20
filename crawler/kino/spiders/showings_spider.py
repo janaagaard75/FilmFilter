@@ -76,7 +76,7 @@ class TheatersSpider(scrapy.Spider):
                 showing['movie_url'] = movie_url
                 showing['theater_url'] = theater_url
                 showing['showing_url'] = response.urljoin(showing_cell.xpath('@href').extract_first())
-                showing['start'] = date_obj.strftime('%Y-%m-%d %H:%M:00')
+                showing['start'] = date_obj.strftime('%Y-%m-%dT%H:%M:00')
                 showing['version'] = version
                 yield showing
 
