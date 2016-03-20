@@ -26,7 +26,7 @@ class TheatersSpider(scrapy.Spider):
                     # Strip the first dash.
                     version = version_item.re(r' - (.*)')[0]
                 else:
-                    # No version info - defaulting to just calling this a 2D movie.
+                    # No version info - defaulting to categorizing as a 2D movie.
                     version = '2D'
 
                 request = scrapy.Request(response.url, callback=self.parse_showings_table)
