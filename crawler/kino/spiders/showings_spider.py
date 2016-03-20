@@ -1,5 +1,6 @@
 import scrapy
 from datetime import datetime
+from urlparse import urldefrag
 from kino.items import ShowingItem
 
 class TheatersSpider(scrapy.Spider):
@@ -50,8 +51,7 @@ class TheatersSpider(scrapy.Spider):
         if len(jump_links) >= 1:
             jump_link = jump_links[-1]
             if jump_link.xpath('text()').extract_first().endswith(u'>'):
-                # TODO: Might want to remove the hash part of the URL since it seems that it's being cached separately.
-                jump_url = response.urljoin(jump_link.xpath('@href').extract_first())
+                jump_url = urldefrag(response.urljoin(jump_link.xpath('@href').extract_first()))[0]
                 request = scrapy.Request(jump_url, callback=self.parse_showings_table)
                 request.meta['movie_url'] = movie_url
                 request.meta['showings_table_value'] = showings_table_value
@@ -82,8 +82,7 @@ class TheatersSpider(scrapy.Spider):
             if at_least_one_showing_found:
                 next_page = showings_table.css('.showtimes-extra').xpath('a[last()]')
                 if next_page:
-                    # TODO: Might want to remove the hash part of the URL since it seems that it's being cached separately.
-                    next_page_url = response.urljoin(next_page.xpath('@href')[0].extract())
+                    next_page_url = urldefrag(response.urljoin(next_page.xpath('@href')[0].extract()))[0]
                     request = scrapy.Request(next_page_url, callback=self.parse_showings_table)
                     request.meta['movie_url'] = movie_url
                     request.meta['showings_table_value'] = showings_table_value
