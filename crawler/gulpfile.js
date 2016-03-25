@@ -7,16 +7,16 @@ const runSequence = require('run-sequence')
 const shell = require("gulp-shell")
 
 const timestamp = moment().format("YYYYMMDDHHmmss")
-const moviesFileWithTimestamp = "movies-" + timestamp + ".json"
+const moviesFileWithTimestamp = `movies-${timestamp}.json`
 const moviesPathWithoutDuplicates = "output/movies-without-duplicates.json"
 const moviesPathWithoutTimestamp = "output/movies.json"
-const moviesPathWithTimestamp = "output/" + moviesFileWithTimestamp
-const showingsFileWithTimestamp = "showings-" + timestamp + ".json"
+const moviesPathWithTimestamp = `output/${moviesFileWithTimestamp}`
+const showingsFileWithTimestamp = `showings-${timestamp}.json`
 const showingsPathWithoutTimestamp = "output/showings.json"
-const showingsPathWithTimestamp = "output/" + showingsFileWithTimestamp
-const theatersFileWithTimestamp = "theaters-" + timestamp + ".json"
+const showingsPathWithTimestamp = `output/${showingsFileWithTimestamp}`
+const theatersFileWithTimestamp = `theaters-${timestamp}.json`
 const theatersPathWithoutTimestamp = "output/theaters.json"
-const theatersPathWithTimestamp = "output/" + theatersFileWithTimestamp
+const theatersPathWithTimestamp = `output/${theatersFileWithTimestamp}`
 
 function deleteIfExists (path, done) {
     fs.access(path, fs.R_OK | fs.W_OK, (error) => {
@@ -65,7 +65,7 @@ gulp.task("create-link-to-theaters-file", done => {
 })
 
 gulp.task("create-movies-file-without-duplicates",
-    shell.task("sort " + moviesPathWithoutTimestamp + " | uniq -u > " + moviesPathWithoutDuplicates))
+    shell.task(`sort ${moviesPathWithoutTimestamp} | uniq -u > ${moviesPathWithoutDuplicates}`))
 
 gulp.task("delete-movies-file", done => {
     deleteIfExists(moviesPathWithoutTimestamp, done)
