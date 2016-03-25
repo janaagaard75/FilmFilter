@@ -88,8 +88,9 @@ AUTOTHROTTLE_ENABLED=True
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
 HTTPCACHE_ENABLED=True
 HTTPCACHE_EXPIRATION_SECS=36000 # 10 hours.
-HTTPCACHE_DIR='httpcache'
-HTTPCACHE_IGNORE_HTTP_CODES=[]
 HTTPCACHE_STORAGE='scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 DUPEFILTER_CLASS = 'kino.filters.NoDupeFilter'
+
+#  'CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG'
+LOG_LEVEL='INFO'
