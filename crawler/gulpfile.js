@@ -1,10 +1,11 @@
 var gulp = require("gulp")
-var runSequence = require('run-sequence');
+var moment = require('moment')
+var runSequence = require('run-sequence')
 var shell = require("gulp-shell")
 
 // Crawling of the same URL has been allowed in settings.py to make showings crawling work. But this results in some duplicates of the movies occurring. So they are removed manually after the crawl.
 gulp.task("crawl-movies", shell.task([
-    "rm output/movies.json",
+    "mv output/movies.json output/movies-" + moment().format("YYYYMMDDHHmmss") + ".json",
     "scrapy crawl movies",
     "sort output/movies.json | uniq -u > output/movies-without-duplicates.json",
     "rm output/movies.json",
@@ -12,12 +13,12 @@ gulp.task("crawl-movies", shell.task([
 ]))
 
 gulp.task("crawl-showings", shell.task([
-    "rm output/showings.json",
+    "mv output/showings.json output/showings-" + moment().format("YYYYMMDDHHmmss") + ".json",
     "scrapy crawl showings"
 ]))
 
 gulp.task("crawl-theaters", shell.task([
-    "rm output/theaters.json",
+    "mv output/theathers.json output/theaters-" + moment().format("YYYYMMDDHHmmss") + ".json",
     "scrapy crawl theaters"
 ]))
 
