@@ -39,17 +39,17 @@ gulp.task("add-timestamp-to-theaters-file", done => {
 })
 
 gulp.task("create-link-to-movies-file", done => {
-    fs.linkSync(moviesFileWithTimestamp, moviesFileWithoutTimestamp)
+    fs.symlinkSync(moviesFileWithTimestamp, moviesFileWithoutTimestamp)
     done()
 })
 
 gulp.task("create-link-to-showings-file", done => {
-    fs.linkSync(showingsFileWithTimestamp, showingsFileWithoutTimestamp)
+    fs.symlinkSync(showingsFileWithTimestamp, showingsFileWithoutTimestamp)
     done()
 })
 
 gulp.task("create-link-to-theaters-file", done => {
-    fs.linkSync(theatersFileWithTimestamp, theatersFileWithoutTimestamp)
+    fs.symlinkSync(theatersFileWithTimestamp, theatersFileWithoutTimestamp)
     done()
 })
 
