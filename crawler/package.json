@@ -4,7 +4,8 @@
   "description": "Scraper for kino.dk.",
   "dependencies": {},
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "gulp-shell": "^0.5.2"
   },
   "author": "Jan Aagaard",
   "license": "ISC"
