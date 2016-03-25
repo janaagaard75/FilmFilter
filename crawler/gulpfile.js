@@ -38,6 +38,12 @@ gulp.task("add-timestamp-to-theaters-file", done => {
     done()
 })
 
+gulp.task("crawl-movies", shell.task("scrapy crawl movies"))
+
+gulp.task("crawl-showings", shell.task("scrapy crawl showings"))
+
+gulp.task("crawl-theaters", shell.task("scrapy crawl theaters"))
+
 gulp.task("create-link-to-movies-file", done => {
     fs.symlinkSync(moviesFileWithTimestamp, moviesFileWithoutTimestamp)
     done()
@@ -53,18 +59,12 @@ gulp.task("create-link-to-theaters-file", done => {
     done()
 })
 
+gulp.task("create-movies-file-without-duplicates",
+    shell.task("sort " + moviesFileWithoutTimestamp + " | uniq -u > " + moviesFileWithoutDuplicates))
+
 gulp.task("delete-movies-file", done => {
     deleteIfExists(moviesFileWithoutTimestamp, done)
 })
-
-gulp.task("crawl-movies", shell.task("scrapy crawl movies"))
-
-gulp.task("crawl-showings", shell.task("scrapy crawl showings"))
-
-gulp.task("crawl-theaters", shell.task("scrapy crawl theaters"))
-
-gulp.task("create-movies-file-without-duplicates",
-    shell.task("sort " + moviesFileWithoutTimestamp + " | uniq -u > " + moviesFileWithoutDuplicates))
 
 gulp.task("rename-to-movies-json", done => {
     fs.unlinkSync(moviesFileWithoutTimestamp)
@@ -85,15 +85,19 @@ gulp.task("movies", done => {
 
 gulp.task("showings", done => {
     runSequence(
+        "delete-showings-file",
         "crawl-showings",
         "add-timestamp-to-showings-file",
+        "create-link-to-showings-file",
         done)
 })
 
 gulp.task("theaters", done => {
     runSequence(
+        "delete-theaters-file",
         "crawl-theaters",
         "add-timestamp-to-theaters-file",
+        "create-link-to-theaters-file",
         done)
 })
 
