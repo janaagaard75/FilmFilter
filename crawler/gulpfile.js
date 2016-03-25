@@ -5,13 +5,13 @@ const runSequence = require('run-sequence')
 const shell = require("gulp-shell")
 
 const timestamp = moment().format("YYYYMMDDHHmmss")
-const moviesFileWithoutDuplicates = "output/movies-without-duplicates.json"
-const moviesFileWithoutTimestamp = "output/movies.json"
-const moviesFileWithTimestamp = "output/movies-" + timestamp + ".json"
-const showingsFileWithoutTimestamp = "output/showings.json"
-const showingsFileWithTimestamp = "output/showings-" + timestamp + ".json"
-const theatersFileWithoutTimestamp = "output/theaters.json"
-const theatersFileWithTimestamp = "output/theaters-" + timestamp + ".json"
+const moviesPathWithoutDuplicates = "output/movies-without-duplicates.json"
+const moviesPathWithoutTimestamp = "output/movies.json"
+const moviesPathWithTimestamp = "output/movies-" + timestamp + ".json"
+const showingsPathWithoutTimestamp = "output/showings.json"
+const showingsPathWithTimestamp = "output/showings-" + timestamp + ".json"
+const theatersPathWithoutTimestamp = "output/theaters.json"
+const theatersPathWithTimestamp = "output/theaters-" + timestamp + ".json"
 
 function deleteIfExists (path, done) {
     fs.access(path, fs.R_OK | fs.W_OK, (error) => {
@@ -24,17 +24,17 @@ function deleteIfExists (path, done) {
 }
 
 gulp.task("add-timestamp-to-movies-file", done => {
-    fs.renameSync(moviesFileWithoutTimestamp, moviesFileWithTimestamp)
+    fs.renameSync(moviesPathWithoutTimestamp, moviesPathWithTimestamp)
     done()
 })
 
 gulp.task("add-timestamp-to-showings-file", done => {
-    fs.renameSync(showingsFileWithoutTimestamp, showingsFileWithTimestamp)
+    fs.renameSync(showingsPathWithoutTimestamp, showingsPathWithTimestamp)
     done()
 })
 
 gulp.task("add-timestamp-to-theaters-file", done => {
-    fs.renameSync(theatersFileWithoutTimestamp, theatersFileWithTimestamp)
+    fs.renameSync(theatersPathWithoutTimestamp, theatersPathWithTimestamp)
     done()
 })
 
@@ -45,30 +45,30 @@ gulp.task("crawl-showings", shell.task("scrapy crawl showings"))
 gulp.task("crawl-theaters", shell.task("scrapy crawl theaters"))
 
 gulp.task("create-link-to-movies-file", done => {
-    fs.symlinkSync(moviesFileWithTimestamp, moviesFileWithoutTimestamp)
+    fs.symlinkSync(moviesPathWithTimestamp, moviesPathWithoutTimestamp)
     done()
 })
 
 gulp.task("create-link-to-showings-file", done => {
-    fs.symlinkSync(showingsFileWithTimestamp, showingsFileWithoutTimestamp)
+    fs.symlinkSync(showingsPathWithTimestamp, showingsPathWithoutTimestamp)
     done()
 })
 
 gulp.task("create-link-to-theaters-file", done => {
-    fs.symlinkSync(theatersFileWithTimestamp, theatersFileWithoutTimestamp)
+    fs.symlinkSync(theatersPathWithTimestamp, theatersPathWithoutTimestamp)
     done()
 })
 
 gulp.task("create-movies-file-without-duplicates",
-    shell.task("sort " + moviesFileWithoutTimestamp + " | uniq -u > " + moviesFileWithoutDuplicates))
+    shell.task("sort " + moviesPathWithoutTimestamp + " | uniq -u > " + moviesPathWithoutDuplicates))
 
 gulp.task("delete-movies-file", done => {
-    deleteIfExists(moviesFileWithoutTimestamp, done)
+    deleteIfExists(moviesPathWithoutTimestamp, done)
 })
 
 gulp.task("rename-to-movies-json", done => {
-    fs.unlinkSync(moviesFileWithoutTimestamp)
-    fs.renameSync(moviesFileWithoutDuplicates, moviesFileWithoutTimestamp)
+    fs.unlinkSync(moviesPathWithoutTimestamp)
+    fs.renameSync(moviesPathWithoutDuplicates, moviesPathWithoutTimestamp)
     done()
 })
 
