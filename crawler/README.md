@@ -18,6 +18,10 @@ Run the little demo with this command. Note that this will append to movies.json
     rm output/showings.json & scrapy crawl showings
     rm output/theaters.json & scrapy crawl theaters
 
+## Removing duplicates from movies.json
+
+    sort movies.json | uniq -c | awk '{if ($1 < 2) for (i=2; i<=NF; i++) printf $i " "; print $NF}' > movies-without-duplicates.json
+
 It's possible to start up Scrapy in a shell mode, making it really easy to test the selectors:
 
     scrapy shell "http://www.kino.dk/aktuelle-film"
