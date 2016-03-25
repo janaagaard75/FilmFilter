@@ -9,10 +9,12 @@ const moviesFileWithTimestamp = "movies-" + timestamp + ".json"
 const moviesPathWithoutDuplicates = "output/movies-without-duplicates.json"
 const moviesPathWithoutTimestamp = "output/movies.json"
 const moviesPathWithTimestamp = "output/" + moviesFileWithTimestamp
+const showingsFileWithTimestamp = "showings-" + timestamp + ".json"
 const showingsPathWithoutTimestamp = "output/showings.json"
-const showingsPathWithTimestamp = "output/showings-" + timestamp + ".json"
+const showingsPathWithTimestamp = "output/" + showingsFileWithTimestamp
+const theatersFileWithTimestamp = theaters-" + timestamp + ".json
 const theatersPathWithoutTimestamp = "output/theaters.json"
-const theatersPathWithTimestamp = "output/theaters-" + timestamp + ".json"
+const theatersPathWithTimestamp = "output/" + theatersFileWithTimestamp
 
 function deleteIfExists (path, done) {
     fs.access(path, fs.R_OK | fs.W_OK, (error) => {
@@ -51,12 +53,12 @@ gulp.task("create-link-to-movies-file", done => {
 })
 
 gulp.task("create-link-to-showings-file", done => {
-    fs.symlinkSync(showingsPathWithTimestamp, showingsPathWithoutTimestamp)
+    fs.symlinkSync(showingsFileWithTimestamp, showingsPathWithoutTimestamp)
     done()
 })
 
 gulp.task("create-link-to-theaters-file", done => {
-    fs.symlinkSync(theatersPathWithTimestamp, theatersPathWithoutTimestamp)
+    fs.symlinkSync(theatersFileWithTimestamp, theatersPathWithoutTimestamp)
     done()
 })
 
