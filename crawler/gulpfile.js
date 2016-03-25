@@ -1,3 +1,5 @@
+"use strict";
+
 const fs = require('fs');
 const gulp = require("gulp")
 const moment = require('moment')
@@ -12,7 +14,7 @@ const moviesPathWithTimestamp = "output/" + moviesFileWithTimestamp
 const showingsFileWithTimestamp = "showings-" + timestamp + ".json"
 const showingsPathWithoutTimestamp = "output/showings.json"
 const showingsPathWithTimestamp = "output/" + showingsFileWithTimestamp
-const theatersFileWithTimestamp = theaters-" + timestamp + ".json
+const theatersFileWithTimestamp = "theaters-" + timestamp + ".json"
 const theatersPathWithoutTimestamp = "output/theaters.json"
 const theatersPathWithTimestamp = "output/" + theatersFileWithTimestamp
 
