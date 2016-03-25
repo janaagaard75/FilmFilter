@@ -87,7 +87,7 @@ AUTOTHROTTLE_ENABLED=True
 # Enable and configure HTTP caching (disabled by default)
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
 HTTPCACHE_ENABLED=True
-HTTPCACHE_EXPIRATION_SECS=36000 # 10 hours.
+HTTPCACHE_EXPIRATION_SECS=3600 # 1 hour. Pages aren't cached between crawls.
 HTTPCACHE_STORAGE='scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 DUPEFILTER_CLASS = 'kino.filters.NoDupeFilter'
