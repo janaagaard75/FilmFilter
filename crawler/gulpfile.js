@@ -4,6 +4,15 @@ const moment = require('moment')
 const runSequence = require('run-sequence')
 const shell = require("gulp-shell")
 
+gulp.task("crawl-movies", shell.task("scrapy crawl movies"))
+
+gulp.task("crawl-showings", shell.task("scrapy crawl showings"))
+
+gulp.task("crawl-theaters", shell.task("scrapy crawl theaters"))
+
+gulp.task("create-movies-file-without-duplicates",
+    shell.task("sort output/movies.json | uniq -u > output/movies-without-duplicates.json"))
+
 gulp.task("rename-movies-file", done => {
     fs.access("output/movies.json", fs.R_OK | fs.W_OK, (error) => {
         if (!error) {
@@ -13,18 +22,6 @@ gulp.task("rename-movies-file", done => {
 
         done()
     })
-})
-
-gulp.task("crawl-movies", shell.task("scrapy crawl movies"))
-
-gulp.task("create-movies-file-without-duplicates",
-    shell.task("sort output/movies.json | uniq -u > output/movies-without-duplicates.json"))
-
-
-gulp.task("rename-to-movies-json", done => {
-    fs.unlinkSync("output/movies.json")
-    fs.renameSync("output/movies-without-duplicates.json", "output/movies.json")
-    done()
 })
 
 gulp.task("rename-showings-file", done => {
@@ -38,8 +35,6 @@ gulp.task("rename-showings-file", done => {
     })
 })
 
-gulp.task("crawl-showings", shell.task("scrapy crawl showings"))
-
 gulp.task("rename-theaters-file", done => {
     fs.access("output/theaters.json", fs.R_OK | fs.W_OK, (error) => {
         if (!error) {
@@ -51,7 +46,11 @@ gulp.task("rename-theaters-file", done => {
     })
 })
 
-gulp.task("crawl-theaters", shell.task("scrapy crawl theaters"))
+gulp.task("rename-to-movies-json", done => {
+    fs.unlinkSync("output/movies.json")
+    fs.renameSync("output/movies-without-duplicates.json", "output/movies.json")
+    done()
+})
 
 gulp.task("movies", done => {
     runSequence(
