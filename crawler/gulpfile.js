@@ -34,7 +34,7 @@ gulp.task("add-timestamp-to-showings-file", done => {
 })
 
 gulp.task("add-timestamp-to-theaters-file", done => {
-    fs.renameSync(showingsFileWithoutTimestamp, showingsFileWithTimestamp)
+    fs.renameSync(theatersFileWithoutTimestamp, theatersFileWithTimestamp)
     done()
 })
 
