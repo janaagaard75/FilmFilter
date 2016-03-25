@@ -5,9 +5,10 @@ const runSequence = require('run-sequence')
 const shell = require("gulp-shell")
 
 const timestamp = moment().format("YYYYMMDDHHmmss")
+const moviesFileWithTimestamp = "movies-" + timestamp + ".json"
 const moviesPathWithoutDuplicates = "output/movies-without-duplicates.json"
 const moviesPathWithoutTimestamp = "output/movies.json"
-const moviesPathWithTimestamp = "output/movies-" + timestamp + ".json"
+const moviesPathWithTimestamp = "output/" + moviesFileWithTimestamp
 const showingsPathWithoutTimestamp = "output/showings.json"
 const showingsPathWithTimestamp = "output/showings-" + timestamp + ".json"
 const theatersPathWithoutTimestamp = "output/theaters.json"
@@ -45,7 +46,7 @@ gulp.task("crawl-showings", shell.task("scrapy crawl showings"))
 gulp.task("crawl-theaters", shell.task("scrapy crawl theaters"))
 
 gulp.task("create-link-to-movies-file", done => {
-    fs.symlinkSync(moviesPathWithTimestamp, moviesPathWithoutTimestamp)
+    fs.symlinkSync(moviesFileWithTimestamp, moviesPathWithoutTimestamp)
     done()
 })
 
