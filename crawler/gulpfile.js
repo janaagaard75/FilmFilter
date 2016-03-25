@@ -1,29 +1,85 @@
-var gulp = require("gulp")
-var moment = require('moment')
-var runSequence = require('run-sequence')
-var shell = require("gulp-shell")
+const fs = require('fs');
+const gulp = require("gulp")
+const moment = require('moment')
+const runSequence = require('run-sequence')
+const shell = require("gulp-shell")
 
-// Crawling of the same URL has been allowed in settings.py to make showings crawling work. But this results in some duplicates of the movies occurring. So they are removed manually after the crawl.
-gulp.task("crawl-movies", shell.task([
-    "mv output/movies.json output/movies-" + moment().format("YYYYMMDDHHmmss") + ".json",
-    "scrapy crawl movies",
-    "sort output/movies.json | uniq -u > output/movies-without-duplicates.json",
-    "rm output/movies.json",
-    "mv output/movies-without-duplicates.json output/movies.json"
-]))
+gulp.task("rename-movies-file", done => {
+    fs.access("output/movies.json", fs.R_OK | fs.W_OK, (error) => {
+        if (!error) {
+            fs.renameSync("output/movies.json",
+                "output/movies-" + moment().format("YYYYMMDDHHmmss") + ".json")
+        }
 
-gulp.task("crawl-showings", shell.task([
-    "mv output/showings.json output/showings-" + moment().format("YYYYMMDDHHmmss") + ".json",
-    "scrapy crawl showings"
-]))
+        done()
+    })
+})
 
-gulp.task("crawl-theaters", shell.task([
-    "mv output/theathers.json output/theaters-" + moment().format("YYYYMMDDHHmmss") + ".json",
-    "scrapy crawl theaters"
-]))
+gulp.task("crawl-movies", shell.task("scrapy crawl movies"))
 
-gulp.task("default", runSequence(
-    "crawl-movies",
-    "crawl-showings",
-    "crawl-theaters"
-))
+gulp.task("create-movies-file-without-duplicates",
+    shell.task("sort output/movies.json | uniq -u > output/movies-without-duplicates.json"))
+
+
+gulp.task("rename-to-movies-json", done => {
+    fs.unlinkSync("output/movies.json")
+    fs.renameSync("output/movies-without-duplicates.json", "output/movies.json")
+    done()
+})
+
+gulp.task("rename-showings-file", done => {
+    fs.access("output/showings.json", fs.R_OK | fs.W_OK, (error) => {
+        if (!error) {
+            fs.renameSync("output/showings.json",
+                "output/showings-" + moment().format("YYYYMMDDHHmmss") + ".json")
+        }
+
+        done()
+    })
+})
+
+gulp.task("crawl-showings", shell.task("scrapy crawl showings"))
+
+gulp.task("rename-theaters-file", done => {
+    fs.access("output/theaters.json", fs.R_OK | fs.W_OK, (error) => {
+        if (!error) {
+            fs.renameSync("output/theaters.json",
+                "output/theaters-" + moment().format("YYYYMMDDHHmmss") + ".json")
+        }
+
+        done()
+    })
+})
+
+gulp.task("crawl-theaters", shell.task("scrapy crawl theaters"))
+
+gulp.task("movies", done => {
+    runSequence(
+        "rename-movies-file",
+        "crawl-movies",
+        "create-movies-file-without-duplicates",
+        "rename-to-movies-json",
+        done)
+})
+
+gulp.task("showings", done => {
+    runSequence(
+        "rename-showings-file",
+        "crawl-showings",
+        done)
+})
+
+gulp.task("theaters", done => {
+    runSequence(
+        "rename-theaters-file",
+        "crawl-theaters",
+        done)
+})
+
+gulp.task("default", done => {
+    runSequence(
+        "movies",
+        "showings",
+        "theaters",
+        done)
+})
