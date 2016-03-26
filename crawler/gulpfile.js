@@ -78,6 +78,14 @@ gulp.task("delete-movies-file", done => {
     deleteIfExists(movies.pathWithoutTimestamp, done)
 })
 
+gulp.task("delete-showings-file", done => {
+    deleteIfExists(showings.pathWithoutTimestamp, done)
+})
+
+gulp.task("delete-theaters-file", done => {
+    deleteIfExists(theaters.pathWithoutTimestamp, done)
+})
+
 gulp.task("rename-to-movies-json", done => {
     fs.unlinkSync(movies.pathWithoutTimestamp)
     fs.renameSync(movies.pathWithoutDuplicates, movies.pathWithoutTimestamp)
