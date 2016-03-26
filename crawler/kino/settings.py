@@ -17,7 +17,7 @@ COOKIES_ENABLED=False
 # Using a feed exporter instead of the pipeline.
 FEED_EXPORTERS = {
     'json': 'scrapy.exporters.JsonItemExporter',
-    'jsonlines': 'scrapy.contrib.exporter.JsonLinesItemExporter',
+    'jsonlines': 'scrapy.exporters.JsonLinesItemExporter',
 }
 FEED_URI='file:output/%(name)s.json'
 FEED_FORMAT='json'
