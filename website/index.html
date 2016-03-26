@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <title>I'm in a React app!</title>
+    <meta charset="utf-8"/>
+    <title>React tutorail</title>
   </head>
   <body>
     <div id="react-app"></div>
@@ -10,25 +10,32 @@
     <script src="https://fb.me/react-0.14.7.js"></script>
     <script src="https://fb.me/react-dom-0.14.7.js"></script>
     <script>
-var contacts = [
-  {key: 1, name: "James Nelson", email: "james@jamesknelson.com"},
-  {key: 2, name: "Bob"}
+const contacts = [
+  {
+    key: 1,
+    name: "James Nelson",
+    email: "james@jamesknelson.com"
+  },
+  {
+    key: 2,
+    name: "Bob"
+  }
 ]
 
-var listElements = contacts
-  .filter(function(contact) { return contact.email; })
-  .map(function(contact) {
-    return React.createElement('li', {key: contact.key},
+const listElements = contacts
+  .filter(contact => { return contact.email })
+  .map(contact => {
+    return React.createElement("li", { key: contact.key },
       React.createElement('h2', {}, contact.name),
-      React.createElement('a', {href: 'mailto:'+contact.email}, contact.email)
+      React.createElement('a', { href: `mailto:${contact.email}` }, contact.email)
     )
   })
 
-var rootElement =
+const rootElement =
   React.createElement('div', {},
     React.createElement('h1', {}, "Contacts"),
 
-    // If your `children` is an array, you'll need to give each one a unique `key` prop. I'll explain why a little later.
+    // If your children is an array, you'll need to give each one a unique key prop. I'll explain why a little later.
     React.createElement('ul', {}, listElements)
   )
 
