@@ -37,4 +37,4 @@ HTTPCACHE_STORAGE='scrapy.extensions.httpcache.FilesystemCacheStorage'
 DUPEFILTER_CLASS = 'kino.filters.NoDupeFilter'
 
 # Possilbe values: 'CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG'.
-LOG_LEVEL='WARNING'
+LOG_LEVEL='INFO'
