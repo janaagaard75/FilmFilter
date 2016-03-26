@@ -1,22 +1,34 @@
-const contacts = [
-  {
-    key: 1,
-    name: "James Nelson",
-    email: "james@jamesknelson.com"
-  },
-  {
-    key: 2,
-    name: "Bob"
-  }
+var contacts = [
+    {key: 1, name: "James K Nelson", email: "james@jamesknelson.com", description: "Front-end Unicorn"},
+    {key: 2, name: "Jim", email: "jim@example.com"},
+    {key: 3, name: "Joe"},
+    {key: 4, name: "Jan", email: "jan@aagaard.net", description: "CPNHGN"}
 ]
 
-const listElements = contacts
-  .filter(contact => { return contact.email })
-  .map(contact => {
-    return React.createElement("li", { key: contact.key },
-      React.createElement('h2', {}, contact.name),
-      React.createElement('a', { href: `mailto:${contact.email}` }, contact.email)
+var ContactItem = React.createClass({
+  propTypes: {
+    name: React.PropTypes.string.isRequired,
+    email: React.PropTypes.string.isRequired,
+    description: React.PropTypes.string
+  },
+
+  render: function() {
+    return (
+      React.createElement('li', {className: 'Contact'},
+        React.createElement('h2', {className: 'Contact-name'}, this.props.name),
+        React.createElement("a", { href: `mailto:${this.props.email}` }, this.props.email),
+        this.props.description
+          ? React.createElement("p", {}, this.props.description )
+          : null
+      )
     )
+  },
+})
+
+var listElements = contacts
+  .filter(function (contact) { return contact.email })
+  .map(function(contact) {
+    return React.createElement(ContactItem, contact)
   })
 
 const rootElement =
