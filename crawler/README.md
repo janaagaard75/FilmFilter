@@ -1,4 +1,6 @@
-# Installing Scrapy
+# Set up
+
+## Installing Scrapy
 
 Had to do the following to make the pip command work. Something about El Capitan shipping with lxml, but in an earlier version than the one required by Scrapy.
 
@@ -10,17 +12,27 @@ Finally run:
 
     pip install scrapy
 
+## Installing Gulp
+
+Install gulp-cli if it isn't already installed
+
+    sudo npm --global gulp-cli
+
+## Installing Node packages
+
+    npm install
+
 # Scraping kino.dk
 
-Run the little demo with this command. Note that this will append to movies.json, not overwrite the file.
+Run the scraper with gulp
 
-    rm output/movies.json & scrapy crawl movies
-    rm output/showings.json & scrapy crawl showings
-    rm output/theaters.json & scrapy crawl theaters
+    gulp
 
-## Removing duplicates from movies.json
+To scrape only part of kino.dk
 
-    sort movies.json | uniq -u | movies-without-duplicates.json
+    gulp { movies | showings | theaters }
+
+# Debugging
 
 It's possible to start up Scrapy in a shell mode, making it really easy to test the selectors:
 
