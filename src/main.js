@@ -88,7 +88,7 @@ var ContactForm = React.createClass({
               "button",
               {
                 className: "btn btn-primary",
-                type: "submit",
+                type: "submit"
               },
               "Add contact"
             )
