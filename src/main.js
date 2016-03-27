@@ -6,10 +6,19 @@ var ContactForm = React.createClass({
     onChange: React.PropTypes.func.isRequired
   },
 
-  render: function() {
-    var oldContact = this.props.value
-    var onChange = this.props.onChange
+  onNameChange: function(event) {
+    this.props.onChange(Object.assign({}, this.props.value, { name: event.target.value }))
+  },
 
+  onEmailAddressChange: function(event) {
+    this.props.onChange(Object.assign({}, this.props.value, { emailAddress: event.target.value }))
+  },
+
+  onDescriptionChange: function(event) {
+    this.props.onChange(Object.assign({}, this.props.value, { description: event.target.value }))
+  },
+
+  render: function() {
     return (
       React.createElement("form", { className: "form-horizontal" },
         React.createElement("div", { className: "form-group" },
@@ -25,9 +34,7 @@ var ContactForm = React.createClass({
               "input", {
                 className: "form-control",
                 id: "name",
-                onChange: function(event) {
-                  onChange(Object.assign({}, oldContact, { name: event.target.value }))
-                },
+                onChange: this.onNameChange,
                 placeholder: "Required",
                 type: "text",
                 value: this.props.value.name
@@ -47,13 +54,10 @@ var ContactForm = React.createClass({
             React.createElement("input", {
               className: "form-control",
               id: "emailAddress",
-              onChange: function(event) {
-                onChange(Object.assign({}, oldContact, { emailAddress: event.target.value }))
-              },
+              onChange: this.onEmailAddressChange,
               type: "email",
               value: this.props.value.emailAddress
-            }
-            )
+            })
           )
         ),
         React.createElement("div", { className: "form-group" },
@@ -69,9 +73,7 @@ var ContactForm = React.createClass({
               "textarea", {
                 className: "form-control",
                 id: "description",
-                onChange: function(event) {
-                  onChange(Object.assign({}, oldContact, { description: event.target.value }))
-                },
+                onChange: this.onDescriptionChange,
                 rows: 2,
                 value: this.props.value.description
               }
@@ -129,8 +131,6 @@ var ContactsView = React.createClass({
     var contactRows = this.props.contacts
       .filter(function(contact) { return contact.emailAddress })
       .map(function(contact) { return React.createElement(ContactRow, contact) })
-
-    var onContactsChange = this.props.onContactsChange
 
     return (
       React.createElement("div", { className: "container" },
