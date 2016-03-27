@@ -12,8 +12,7 @@ var ContactForm = React.createClass({
       React.createElement("form", { className: "form-horizontal" },
         React.createElement("div", { className: "form-group" },
           React.createElement(
-            "label",
-            {
+            "label", {
               className: "control-label col-sm-3",
               htmlFor: "name"
             },
@@ -21,8 +20,7 @@ var ContactForm = React.createClass({
           ),
           React.createElement("div", { className: "col-sm-9" },
             React.createElement(
-              "input",
-              {
+              "input", {
                 className: "form-control",
                 id: "name",
                 onChange: function (event) {
@@ -37,16 +35,14 @@ var ContactForm = React.createClass({
         ),
         React.createElement("div", { className: "form-group" },
           React.createElement(
-            "label",
-            {
+            "label", {
               className: "control-label col-sm-3",
               htmlForm: "emailAddress"
             },
             "Email address"
           ),
           React.createElement("div", { className: "col-sm-9" },
-            React.createElement("input",
-              {
+            React.createElement("input", {
                 className: "form-control",
                 id: "emailAddress",
                 onChange: function (event) {
@@ -60,8 +56,7 @@ var ContactForm = React.createClass({
         ),
         React.createElement("div", { className: "form-group" },
           React.createElement(
-            "label",
-            {
+            "label", {
               className: "control-label col-sm-3",
               htmlFor: "description"
             },
@@ -69,8 +64,7 @@ var ContactForm = React.createClass({
           ),
           React.createElement("div", { className: "col-sm-9" },
             React.createElement(
-              "textarea",
-              {
+              "textarea", {
                 className: "form-control",
                 id: "description",
                 onChange: function (event) {
@@ -85,8 +79,7 @@ var ContactForm = React.createClass({
         React.createElement("div", { className: "form-group" },
           React.createElement("div", { className: "col-sm-offset-3 col-sm-9" },
             React.createElement(
-              "button",
-              {
+              "button", {
                 className: "btn btn-primary",
                 type: "submit"
               },
@@ -156,8 +149,7 @@ var ContactsView = React.createClass({
           ),
           React.createElement("tbody", {}, contactRows)
         ),
-        React.createElement(ContactForm,
-        {
+        React.createElement(ContactForm, {
           value: newContact,
           onChange: function(contact) {
             console.log(contact)
