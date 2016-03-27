@@ -143,6 +143,8 @@ var ContactsView = React.createClass({
       .filter(function (contact) { return contact.emailAddress })
       .map(function(contact) { return React.createElement(ContactRow, contact) })
 
+    var onContactsChange = this.props.onContactsChange
+
     return (
       React.createElement("div", { className: "container" },
         React.createElement("h1", {}, "Contacts"),
@@ -159,7 +161,7 @@ var ContactsView = React.createClass({
         React.createElement(ContactForm, {
           value: newContact,
           onChange: function(contact) {
-            console.log(contact)
+            onContactsChange(contact)
           }
         })
       )
@@ -172,8 +174,8 @@ ReactDOM.render(
   React.createElement(ContactsView, {
     contacts: contacts,
     newContact: newContact,
-    onContactsChange: function() {
-
+    onContactsChange: function(contact) {
+      console.debug(contact)
     }
   }),
   document.getElementById("rootElement")
