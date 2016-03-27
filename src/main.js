@@ -1,8 +1,8 @@
 var contacts = [
-    {key: 1, name: "James K Nelson", email: "james@jamesknelson.com", description: "Front-end Unicorn"},
-    {key: 2, name: "Jim", email: "jim@example.com"},
-    {key: 3, name: "Joe"},
-    {key: 4, name: "Jan", email: "jan@aagaard.net", description: "CPNHGN"}
+  { key: 1, name: "James K Nelson", email: "james@jamesknelson.com", description: "Front-end Unicorn" },
+  { key: 2, name: "Jim", email: "jim@example.com" },
+  { key: 3, name: "Joe" },
+  { key: 4, name: "Jan", email: "jan@aagaard.net", description: "CPNHGN" }
 ]
 
 var ContactItem = React.createClass({
@@ -14,11 +14,11 @@ var ContactItem = React.createClass({
 
   render: function() {
     return (
-      React.createElement('li', {className: 'Contact'},
-        React.createElement('h2', {className: 'Contact-name'}, this.props.name),
+      React.createElement('li', { className: 'Contact' },
+        React.createElement('h2', { className: 'Contact-name' }, this.props.name),
         React.createElement("a", { href: `mailto:${this.props.email}` }, this.props.email),
         this.props.description
-          ? React.createElement("p", {}, this.props.description )
+          ? React.createElement("p", {}, this.props.description)
           : null
       )
     )
@@ -26,7 +26,7 @@ var ContactItem = React.createClass({
 })
 
 var listElements = contacts
-  .filter(function (contact) { return contact.email })
+  .filter(function(contact) { return contact.email })
   .map(function(contact) {
     return React.createElement(ContactItem, contact)
   })
