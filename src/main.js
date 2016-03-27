@@ -160,4 +160,4 @@ const rootElement =
     })
   )
 
-ReactDOM.render(rootElement, document.getElementById("root-element"))
+ReactDOM.render(rootElement, document.getElementById("rootElement"))
