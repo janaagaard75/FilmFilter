@@ -25,7 +25,7 @@ var ContactForm = React.createClass({
               "input", {
                 className: "form-control",
                 id: "name",
-                onChange: function (event) {
+                onChange: function(event) {
                   onChange(Object.assign({}, oldContact, { name: event.target.value }))
                 },
                 placeholder: "Required",
@@ -45,14 +45,14 @@ var ContactForm = React.createClass({
           ),
           React.createElement("div", { className: "col-sm-9" },
             React.createElement("input", {
-                className: "form-control",
-                id: "emailAddress",
-                onChange: function (event) {
-                  onChange(Object.assign({}, oldContact, { emailAddress: event.target.value }))
-                },
-                type: "email",
-                value: this.props.value.emailAddress
-              }
+              className: "form-control",
+              id: "emailAddress",
+              onChange: function(event) {
+                onChange(Object.assign({}, oldContact, { emailAddress: event.target.value }))
+              },
+              type: "email",
+              value: this.props.value.emailAddress
+            }
             )
           )
         ),
@@ -69,7 +69,7 @@ var ContactForm = React.createClass({
               "textarea", {
                 className: "form-control",
                 id: "description",
-                onChange: function (event) {
+                onChange: function(event) {
                   onChange(Object.assign({}, oldContact, { description: event.target.value }))
                 },
                 rows: 2,
@@ -109,7 +109,7 @@ var ContactRow = React.createClass({
         React.createElement("td", {}, this.props.name),
         React.createElement("td", {},
           React.createElement("a", { href: "mailto:" + this.props.emailAddress }, this.props.emailAddress)
-          ),
+        ),
         React.createElement("td", {}, this.props.description)
       )
     )
@@ -127,7 +127,7 @@ var ContactsView = React.createClass({
 
   render: function() {
     var contactRows = this.props.contacts
-      .filter(function (contact) { return contact.emailAddress })
+      .filter(function(contact) { return contact.emailAddress })
       .map(function(contact) { return React.createElement(ContactRow, contact) })
 
     var onContactsChange = this.props.onContactsChange
@@ -146,7 +146,7 @@ var ContactsView = React.createClass({
           React.createElement("tbody", {}, contactRows)
         ),
         React.createElement(ContactForm, {
-          value: newContact,
+          value: this.props.newContact,
           onChange: this.props.onNewContactChange
         })
       )
@@ -154,26 +154,36 @@ var ContactsView = React.createClass({
   }
 })
 
-var contacts = [
-  { key: 1, name: "James K Nelson", email: "james@jamesknelson.com", description: "Front-end Unicorn" },
-  { key: 2, name: "Jim", emailAddress: "jim@example.com" },
-  { key: 3, name: "Joe" },
-  { key: 4, name: "Jan", emailAddress: "jan@aagaard.net", description: "CPNHGN" }
-]
-
-var newContact = {
-  name: "",
-  emailAddress: "",
-  description: ""
+function updateNewConcact(contact) {
+  setState({ newContact: contact })
 }
 
-ReactDOM.render(
-  React.createElement(ContactsView, {
-    contacts: contacts,
-    newContact: newContact,
-    onNewContactChange: function(contact) {
-      console.debug(contact)
-    }
-  }),
-  document.getElementById("rootElement")
-)
+function setState(changes) {
+  Object.assign(state, changes);
+
+  // Don't contaminate the state with the callback function.
+  var stateWithCallback = Object.assign({}, state, {
+    onNewContactChange: updateNewConcact
+  })
+
+  ReactDOM.render(
+    React.createElement(ContactsView, stateWithCallback),
+    document.getElementById("rootElement")
+  )
+}
+
+var state = {}
+
+setState({
+  contacts: [
+    { key: 1, name: "James K Nelson", email: "james@jamesknelson.com", description: "Front-end Unicorn" },
+    { key: 2, name: "Jim", emailAddress: "jim@example.com" },
+    { key: 3, name: "Joe" },
+    { key: 4, name: "Jan", emailAddress: "jan@aagaard.net", description: "CPNHGN" }
+  ],
+  newContact: {
+    name: "",
+    emailAddress: "",
+    description: ""
+  }
+})
