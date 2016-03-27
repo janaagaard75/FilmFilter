@@ -5,6 +5,12 @@ var contacts = [
   { key: 4, name: "Jan", email: "jan@aagaard.net", description: "CPNHGN" }
 ]
 
+var newContact = {
+  name: "",
+  email: "",
+  description: ""
+}
+
 var ContactForm = React.createClass({
   propTypes: {
     contact: React.PropTypes.object.isRequired
@@ -13,10 +19,29 @@ var ContactForm = React.createClass({
   render: function() {
     return (
       React.createElement("form", {},
-        React.createElement("input", {type="text"}),
-        React.createElement("input", {type="email"}),
-        React.createElement("textarea", {}),
-        React.createElement("input", {type="submit"}, "Add")
+        React.createElement(
+          "input",
+          {
+            type: "text",
+            placeholder: "Name (required)",
+            value: this.props.contact.name
+          }),
+        React.createElement("input",
+          {
+            type: "email",
+            placeholder: "Email address",
+            value: this.props.contact.email
+          }),
+        React.createElement(
+          "textarea",
+          {
+            placeholder: "Description",
+            value: this.props.contact.description
+          }),
+        React.createElement(
+          "button",
+          { type: "submit" },
+          "Add contact")
       )
     )
   }
@@ -51,9 +76,8 @@ var listElements = contacts
 const rootElement =
   React.createElement('div', {},
     React.createElement('h1', {}, "Contacts"),
-
-    // If your children is an array, you'll need to give each one a unique key prop. I'll explain why a little later.
-    React.createElement('ul', {}, listElements)
+    React.createElement('ul', {}, listElements),
+    React.createElement(ContactForm, { contact: newContact })
   )
 
 ReactDOM.render(rootElement, document.getElementById('react-app'))
