@@ -13,10 +13,14 @@ var newContact = {
 
 var ContactForm = React.createClass({
   propTypes: {
-    contact: React.PropTypes.object.isRequired
+    value: React.PropTypes.object.isRequired,
+    onChange: React.PropTypes.func.isRequired
   },
 
   render: function() {
+    var oldContact = this.props.value
+    var onChange = this.props.onChange
+
     return (
       React.createElement("form", { className: "form-horizontal" },
         React.createElement("div", { className: "form-group" },
@@ -34,9 +38,12 @@ var ContactForm = React.createClass({
               {
                 className: "form-control",
                 id: "name",
+                onChange: function (event) {
+                  onChange(Object.assign({}, oldContact, { name: event.target.value }))
+                },
                 placeholder: "Required",
                 type: "text",
-                value: this.props.contact.name
+                value: this.props.value.name
               }
             )
           )
@@ -55,8 +62,11 @@ var ContactForm = React.createClass({
               {
                 className: "form-control",
                 id: "emailAddress",
+                onChange: function (event) {
+                  onChange(Object.assign({}, oldContact, { email: event.target.value }))
+                },
                 type: "email",
-                value: this.props.contact.email
+                value: this.props.value.email
               }
             )
           )
@@ -76,8 +86,11 @@ var ContactForm = React.createClass({
               {
                 className: "form-control",
                 id: "description",
+                onChange: function (event) {
+                  onChange(Object.assign({}, oldContact, { description: event.target.value }))
+                },
                 rows: 2,
-                value: this.props.contact.description
+                value: this.props.value.description
               }
             )
           )
@@ -138,7 +151,13 @@ const rootElement =
       ),
       React.createElement("tbody", {}, listElements)
     ),
-    React.createElement(ContactForm, { contact: newContact })
+    React.createElement(ContactForm,
+    {
+      value: newContact,
+      onChange: function(contact) {
+        console.log(contact)
+      }
+    })
   )
 
 ReactDOM.render(rootElement, document.getElementById("root-element"))
