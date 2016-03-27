@@ -56,12 +56,12 @@ var ContactItem = React.createClass({
 
   render: function() {
     return (
-      React.createElement('li', { className: 'Contact' },
-        React.createElement('h2', { className: 'Contact-name' }, this.props.name),
-        React.createElement("a", { href: "mailto:" + this.props.email }, this.props.email),
-        this.props.description
-          ? React.createElement("p", {}, this.props.description)
-          : null
+      React.createElement("tr", {},
+        React.createElement("td", {}, this.props.name),
+        React.createElement("td", {},
+          React.createElement("a", { href: "mailto:" + this.props.email }, this.props.email)
+          ),
+        React.createElement("td", {}, this.props.description)
       )
     )
   },
@@ -74,10 +74,19 @@ var listElements = contacts
   })
 
 const rootElement =
-  React.createElement('div', {},
-    React.createElement('h1', {}, "Contacts"),
-    React.createElement('ul', {}, listElements),
+  React.createElement("div", { className: "container" },
+    React.createElement("h1", {}, "Contacts"),
+    React.createElement("table", { className: "table" },
+      React.createElement("thead", {},
+        React.createElement("tr", {},
+          React.createElement("th", {}, "Name"),
+          React.createElement("th", {}, "Email address"),
+          React.createElement("th", {}, "Description")
+        )
+      ),
+      React.createElement("tbody", {}, listElements)
+    ),
     React.createElement(ContactForm, { contact: newContact })
   )
 
-ReactDOM.render(rootElement, document.getElementById('react-app'))
+ReactDOM.render(rootElement, document.getElementById("root-element"))
