@@ -132,32 +132,47 @@ var newContact = {
   description: ""
 }
 
-var listElements = contacts
-  .filter(function(contact) { return contact.emailAddress })
-  .map(function(contact) {
-    return React.createElement(ContactRow, contact)
-  })
+var ContactsView = React.createClass({
+  propTypes: {
+    contacts: React.PropTypes.array.isRequired,
+    newContact: React.PropTypes.object.isRequired
+  },
 
-const rootElement =
-  React.createElement("div", { className: "container" },
-    React.createElement("h1", {}, "Contacts"),
-    React.createElement("table", { className: "table" },
-      React.createElement("thead", {},
-        React.createElement("tr", {},
-          React.createElement("th", {}, "Name"),
-          React.createElement("th", {}, "Email address"),
-          React.createElement("th", {}, "Description")
-        )
-      ),
-      React.createElement("tbody", {}, listElements)
-    ),
-    React.createElement(ContactForm,
-    {
-      value: newContact,
-      onChange: function(contact) {
-        console.log(contact)
-      }
-    })
-  )
+  render: function() {
+    var contactRows = this.props.contacts
+      .filter(function (contact) { return contact.emailAddress })
+      .map(function(contact) { return React.createElement(ContactRow, contact) })
 
-ReactDOM.render(rootElement, document.getElementById("rootElement"))
+    return (
+      React.createElement("div", { className: "container" },
+        React.createElement("h1", {}, "Contacts"),
+        React.createElement("table", { className: "table" },
+          React.createElement("thead", {},
+            React.createElement("tr", {},
+              React.createElement("th", {}, "Name"),
+              React.createElement("th", {}, "Email address"),
+              React.createElement("th", {}, "Description")
+            )
+          ),
+          React.createElement("tbody", {}, contactRows)
+        ),
+        React.createElement(ContactForm,
+        {
+          value: newContact,
+          onChange: function(contact) {
+            console.log(contact)
+          }
+        })
+      )
+    )
+  }
+})
+
+
+ReactDOM.render(
+  React.createElement(ContactsView, {
+    contacts: contacts,
+    newContact: newContact
+  }),
+  document.getElementById("rootElement")
+)
