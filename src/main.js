@@ -112,7 +112,7 @@ var ContactForm = React.createClass({
   }
 })
 
-var ContactItem = React.createClass({
+var ContactView = React.createClass({
   propTypes: {
     name: React.PropTypes.string.isRequired,
     emailAddress: React.PropTypes.string.isRequired,
@@ -135,7 +135,7 @@ var ContactItem = React.createClass({
 var listElements = contacts
   .filter(function(contact) { return contact.emailAddress })
   .map(function(contact) {
-    return React.createElement(ContactItem, contact)
+    return React.createElement(ContactView, contact)
   })
 
 const rootElement =
