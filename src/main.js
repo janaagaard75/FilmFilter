@@ -154,10 +154,6 @@ var ContactsView = React.createClass({
   }
 })
 
-function updateNewConcact(contact) {
-  setState({ newContact: contact })
-}
-
 function setState(changes) {
   Object.assign(state, changes);
 
@@ -170,6 +166,10 @@ function setState(changes) {
     React.createElement(ContactsView, stateWithCallback),
     document.getElementById("rootElement")
   )
+}
+
+function updateNewConcact(contact) {
+  setState({ newContact: contact })
 }
 
 var state = {}
