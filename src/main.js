@@ -1,13 +1,13 @@
 var contacts = [
   { key: 1, name: "James K Nelson", email: "james@jamesknelson.com", description: "Front-end Unicorn" },
-  { key: 2, name: "Jim", email: "jim@example.com" },
+  { key: 2, name: "Jim", emailAddress: "jim@example.com" },
   { key: 3, name: "Joe" },
-  { key: 4, name: "Jan", email: "jan@aagaard.net", description: "CPNHGN" }
+  { key: 4, name: "Jan", emailAddress: "jan@aagaard.net", description: "CPNHGN" }
 ]
 
 var newContact = {
   name: "",
-  email: "",
+  emailAddress: "",
   description: ""
 }
 
@@ -63,10 +63,10 @@ var ContactForm = React.createClass({
                 className: "form-control",
                 id: "emailAddress",
                 onChange: function (event) {
-                  onChange(Object.assign({}, oldContact, { email: event.target.value }))
+                  onChange(Object.assign({}, oldContact, { emailAddress: event.target.value }))
                 },
                 type: "email",
-                value: this.props.value.email
+                value: this.props.value.emailAddress
               }
             )
           )
@@ -115,7 +115,7 @@ var ContactForm = React.createClass({
 var ContactItem = React.createClass({
   propTypes: {
     name: React.PropTypes.string.isRequired,
-    email: React.PropTypes.string.isRequired,
+    emailAddress: React.PropTypes.string.isRequired,
     description: React.PropTypes.string
   },
 
@@ -124,7 +124,7 @@ var ContactItem = React.createClass({
       React.createElement("tr", {},
         React.createElement("td", {}, this.props.name),
         React.createElement("td", {},
-          React.createElement("a", { href: "mailto:" + this.props.email }, this.props.email)
+          React.createElement("a", { href: "mailto:" + this.props.emailAddress }, this.props.emailAddress)
           ),
         React.createElement("td", {}, this.props.description)
       )
@@ -133,7 +133,7 @@ var ContactItem = React.createClass({
 })
 
 var listElements = contacts
-  .filter(function(contact) { return contact.email })
+  .filter(function(contact) { return contact.emailAddress })
   .map(function(contact) {
     return React.createElement(ContactItem, contact)
   })
