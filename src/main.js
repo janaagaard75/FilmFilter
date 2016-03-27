@@ -5,6 +5,23 @@ var contacts = [
   { key: 4, name: "Jan", email: "jan@aagaard.net", description: "CPNHGN" }
 ]
 
+var ContactForm = React.createClass({
+  propTypes: {
+    contact: React.PropTypes.object.isRequired
+  },
+
+  render: function() {
+    return (
+      React.createElement("form", {},
+        React.createElement("input", {type="text"}),
+        React.createElement("input", {type="email"}),
+        React.createElement("textarea", {}),
+        React.createElement("input", {type="submit"}, "Add")
+      )
+    )
+  }
+})
+
 var ContactItem = React.createClass({
   propTypes: {
     name: React.PropTypes.string.isRequired,
@@ -16,7 +33,7 @@ var ContactItem = React.createClass({
     return (
       React.createElement('li', { className: 'Contact' },
         React.createElement('h2', { className: 'Contact-name' }, this.props.name),
-        React.createElement("a", { href: `mailto:${this.props.email}` }, this.props.email),
+        React.createElement("a", { href: "mailto:" + this.props.email }, this.props.email),
         this.props.description
           ? React.createElement("p", {}, this.props.description)
           : null
