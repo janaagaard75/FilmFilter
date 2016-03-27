@@ -116,26 +116,13 @@ var ContactRow = React.createClass({
   },
 })
 
-var contacts = [
-  { key: 1, name: "James K Nelson", email: "james@jamesknelson.com", description: "Front-end Unicorn" },
-  { key: 2, name: "Jim", emailAddress: "jim@example.com" },
-  { key: 3, name: "Joe" },
-  { key: 4, name: "Jan", emailAddress: "jan@aagaard.net", description: "CPNHGN" }
-]
-
-var newContact = {
-  name: "",
-  emailAddress: "",
-  description: ""
-}
-
 var ContactsView = React.createClass({
   displayName: "ContactsView",
 
   propTypes: {
     contacts: React.PropTypes.array.isRequired,
     newContact: React.PropTypes.object.isRequired,
-    onContactsChange: React.PropTypes.func.isRequired
+    onNewContactChange: React.PropTypes.func.isRequired
   },
 
   render: function() {
@@ -160,21 +147,31 @@ var ContactsView = React.createClass({
         ),
         React.createElement(ContactForm, {
           value: newContact,
-          onChange: function(contact) {
-            onContactsChange(contact)
-          }
+          onChange: this.props.onNewContactChange
         })
       )
     )
   }
 })
 
+var contacts = [
+  { key: 1, name: "James K Nelson", email: "james@jamesknelson.com", description: "Front-end Unicorn" },
+  { key: 2, name: "Jim", emailAddress: "jim@example.com" },
+  { key: 3, name: "Joe" },
+  { key: 4, name: "Jan", emailAddress: "jan@aagaard.net", description: "CPNHGN" }
+]
+
+var newContact = {
+  name: "",
+  emailAddress: "",
+  description: ""
+}
 
 ReactDOM.render(
   React.createElement(ContactsView, {
     contacts: contacts,
     newContact: newContact,
-    onContactsChange: function(contact) {
+    onNewContactChange: function(contact) {
       console.debug(contact)
     }
   }),
