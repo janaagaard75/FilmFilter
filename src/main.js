@@ -1,4 +1,6 @@
 var ContactForm = React.createClass({
+  displayName: "ContactForm",
+
   propTypes: {
     value: React.PropTypes.object.isRequired,
     onChange: React.PropTypes.func.isRequired
@@ -93,6 +95,8 @@ var ContactForm = React.createClass({
 })
 
 var ContactRow = React.createClass({
+  displayName: "ContactRow",
+
   propTypes: {
     name: React.PropTypes.string.isRequired,
     emailAddress: React.PropTypes.string.isRequired,
@@ -126,9 +130,12 @@ var newContact = {
 }
 
 var ContactsView = React.createClass({
+  displayName: "ContactsView",
+
   propTypes: {
     contacts: React.PropTypes.array.isRequired,
-    newContact: React.PropTypes.object.isRequired
+    newContact: React.PropTypes.object.isRequired,
+    onContactsChange: React.PropTypes.func.isRequired
   },
 
   render: function() {
@@ -164,7 +171,10 @@ var ContactsView = React.createClass({
 ReactDOM.render(
   React.createElement(ContactsView, {
     contacts: contacts,
-    newContact: newContact
+    newContact: newContact,
+    onContactsChange: function() {
+
+    }
   }),
   document.getElementById("rootElement")
 )
