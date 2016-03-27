@@ -18,30 +18,82 @@ var ContactForm = React.createClass({
 
   render: function() {
     return (
-      React.createElement("form", {},
-        React.createElement(
-          "input",
-          {
-            type: "text",
-            placeholder: "Name (required)",
-            value: this.props.contact.name
-          }),
-        React.createElement("input",
-          {
-            type: "email",
-            placeholder: "Email address",
-            value: this.props.contact.email
-          }),
-        React.createElement(
-          "textarea",
-          {
-            placeholder: "Description",
-            value: this.props.contact.description
-          }),
-        React.createElement(
-          "button",
-          { type: "submit" },
-          "Add contact")
+      React.createElement("form", { className: "form-horizontal" },
+        React.createElement("div", { className: "form-group" },
+          React.createElement(
+            "label",
+            {
+              className: "control-label col-sm-3",
+              htmlFor: "name"
+            },
+            "Name"
+          ),
+          React.createElement("div", { className: "col-sm-9" },
+            React.createElement(
+              "input",
+              {
+                className: "form-control",
+                id: "name",
+                placeholder: "Required",
+                type: "text",
+                value: this.props.contact.name
+              }
+            )
+          )
+        ),
+        React.createElement("div", { className: "form-group" },
+          React.createElement(
+            "label",
+            {
+              className: "control-label col-sm-3",
+              htmlForm: "emailAddress"
+            },
+            "Email address"
+          ),
+          React.createElement("div", { className: "col-sm-9" },
+            React.createElement("input",
+              {
+                className: "form-control",
+                id: "emailAddress",
+                type: "email",
+                value: this.props.contact.email
+              }
+            )
+          )
+        ),
+        React.createElement("div", { className: "form-group" },
+          React.createElement(
+            "label",
+            {
+              className: "control-label col-sm-3",
+              htmlFor: "description"
+            },
+            "Description"
+          ),
+          React.createElement("div", { className: "col-sm-9" },
+            React.createElement(
+              "textarea",
+              {
+                className: "form-control",
+                id: "description",
+                rows: 2,
+                value: this.props.contact.description
+              }
+            )
+          )
+        ),
+        React.createElement("div", { className: "form-group" },
+          React.createElement("div", { className: "col-sm-offset-3 col-sm-9" },
+            React.createElement(
+              "button",
+              {
+                className: "btn btn-primary",
+                type: "submit",
+              },
+              "Add contact"
+            )
+          )
+        )
       )
     )
   }
