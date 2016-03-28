@@ -207,7 +207,7 @@ var state = {}
 
 setState({
   contacts: [
-    { key: 1, name: "James K Nelson", email: "james@jamesknelson.com", description: "Front-end Unicorn" },
+    { key: 1, name: "James K Nelson", emailAddress: "james@jamesknelson.com", description: "Front-end Unicorn" },
     { key: 2, name: "Jim", emailAddress: "jim@example.com" },
     { key: 3, name: "Joe" },
     { key: 4, name: "Jan", emailAddress: "jan@aagaard.net", description: "CPNHGN" }
