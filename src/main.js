@@ -166,17 +166,19 @@ var ContactsView = React.createClass({
   }
 })
 
+const emptyContact = {
+  name: "",
+  emailAddress: "",
+  description: ""
+}
+
 function newContactSubmitted(contact) {
   var contactWithKey = Object.assign({}, contact, { key: state.contacts.length + 1 })
   var contacts = state.contacts.concat(contactWithKey)
 
   var stateChanges = {
     contacts: contacts,
-    newContact: {
-      name: "",
-      emailAddress: "",
-      description: ""
-    }
+    newContact: Object.assign({}, emptyContact)
   }
 
   setState(stateChanges)
@@ -210,9 +212,5 @@ setState({
     { key: 3, name: "Joe" },
     { key: 4, name: "Jan", emailAddress: "jan@aagaard.net", description: "CPNHGN" }
   ],
-  newContact: {
-    name: "",
-    emailAddress: "",
-    description: ""
-  }
+  newContact: Object.assign({}, emptyContact)
 })
