@@ -2,8 +2,9 @@ var ContactForm = React.createClass({
   displayName: "ContactForm",
 
   propTypes: {
-    value: React.PropTypes.object.isRequired,
-    onChange: React.PropTypes.func.isRequired
+    onChange: React.PropTypes.func.isRequired,
+    onSubmit: React.PropTypes.func.isRequired,
+    value: React.PropTypes.object.isRequired
   },
 
   onNameChange: function(event) {
@@ -18,9 +19,17 @@ var ContactForm = React.createClass({
     this.props.onChange(Object.assign({}, this.props.value, { description: event.target.value }))
   },
 
+  onFormSubmit: function(event) {
+    event.preventDefault()
+    this.props.onSubmit(this.props.value)
+  },
+
   render: function() {
     return (
-      React.createElement("form", { className: "form-horizontal" },
+      React.createElement("form", {
+          className: "form-horizontal",
+          onSubmit: this.onFormSubmit
+        },
         React.createElement("div", { className: "form-group" },
           React.createElement(
             "label", {
@@ -36,6 +45,7 @@ var ContactForm = React.createClass({
                 id: "name",
                 onChange: this.onNameChange,
                 placeholder: "Required",
+                required: true,
                 type: "text",
                 value: this.props.value.name
               }
@@ -124,7 +134,8 @@ var ContactsView = React.createClass({
   propTypes: {
     contacts: React.PropTypes.array.isRequired,
     newContact: React.PropTypes.object.isRequired,
-    onNewContactChange: React.PropTypes.func.isRequired
+    onNewContactChange: React.PropTypes.func.isRequired,
+    onNewContactSubmit: React.PropTypes.func.isRequired
   },
 
   render: function() {
@@ -147,28 +158,46 @@ var ContactsView = React.createClass({
         ),
         React.createElement(ContactForm, {
           value: this.props.newContact,
-          onChange: this.props.onNewContactChange
+          onChange: this.props.onNewContactChange,
+          onSubmit: this.props.onNewContactSubmit
         })
       )
     )
   }
 })
 
+function newContactSubmitted(contact) {
+  var contactWithKey = Object.assign({}, contact, { key: state.contacts.length + 1 })
+  var contacts = state.contacts.concat(contactWithKey)
+
+  var stateChanges = {
+    contacts: contacts,
+    newContact: {
+      name: "",
+      emailAddress: "",
+      description: ""
+    }
+  }
+
+  setState(stateChanges)
+}
+
 function setState(changes) {
   Object.assign(state, changes);
 
   // Don't contaminate the state with the callback function.
-  var stateWithCallback = Object.assign({}, state, {
-    onNewContactChange: updateNewConcact
+  var stateWithCallbacks = Object.assign({}, state, {
+    onNewContactChange: setNewContact,
+    onNewContactSubmit: newContactSubmitted
   })
 
   ReactDOM.render(
-    React.createElement(ContactsView, stateWithCallback),
+    React.createElement(ContactsView, stateWithCallbacks),
     document.getElementById("rootElement")
   )
 }
 
-function updateNewConcact(contact) {
+function setNewContact(contact) {
   setState({ newContact: contact })
 }
 
