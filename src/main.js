@@ -141,6 +141,7 @@ var ContactsView = React.createClass({
   render: function() {
     var contactRows = this.props.contacts
       .filter(function(contact) { return contact.emailAddress })
+      .sort(function(contactA, contactB) { return contactA.name > contactB.name })
       .map(function(contact) { return React.createElement(ContactRow, contact) })
 
     return (
@@ -187,7 +188,7 @@ function newContactSubmitted(contact) {
 function setState(changes) {
   Object.assign(state, changes);
 
-  // Don't contaminate the state with the callback function.
+  // Don't contaminate the state with the callback functions.
   var stateWithCallbacks = Object.assign({}, state, {
     onNewContactChange: setNewContact,
     onNewContactSubmit: newContactSubmitted
