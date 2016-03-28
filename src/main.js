@@ -174,10 +174,10 @@ const emptyContact = {
 
 function newContactSubmitted(contact) {
   var contactWithKey = Object.assign({}, contact, { key: state.contacts.length + 1 })
-  var contacts = state.contacts.concat(contactWithKey)
+  var updatedContacts = state.contacts.concat(contactWithKey)
 
   var stateChanges = {
-    contacts: contacts,
+    contacts: updatedContacts,
     newContact: Object.assign({}, emptyContact)
   }
 
