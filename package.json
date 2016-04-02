@@ -1,0 +1,11 @@
+{
+  "name": "filmfilter",
+  "version": "0.1.0",
+  "description": "Website for filtering films in cinemas.",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  },
+  "author": "Jan Aagaard",
+  "license": "ISC"
+}

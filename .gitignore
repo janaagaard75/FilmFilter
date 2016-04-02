@@ -1,2 +1,8 @@
 # Node modules.
 node_modules/
+
+# Distribution files.
+dist/**
+
+# Include gitkeep files.
+!**/.gitkeep
