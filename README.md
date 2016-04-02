@@ -8,3 +8,11 @@ See README in the scraper folder.
 
 # Website
 
+## Setup
+
+    sudo npm install --global gulp-cli
+    npm install
+
+## Building
+
+    gulp
