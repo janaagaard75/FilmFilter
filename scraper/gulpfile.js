@@ -24,7 +24,6 @@ theaters.fileWithTimestamp = `theaters-${timestamp}.json`
 theaters.pathWithoutTimestamp = "output/theaters.json"
 theaters.pathWithTimestamp = `output/${theaters.fileWithTimestamp}`
 
-
 function deleteIfExists (path, done) {
     fs.access(path, fs.R_OK | fs.W_OK, (error) => {
         if (!error) {
