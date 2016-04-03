@@ -27,9 +27,9 @@ var ContactForm = React.createClass({
   render: function() {
     return (
       React.createElement("form", {
-          className: "form-horizontal",
-          onSubmit: this.onFormSubmit
-        },
+        className: "form-horizontal",
+        onSubmit: this.onFormSubmit
+      },
         React.createElement("div", { className: "form-group" },
           React.createElement(
             "label", {

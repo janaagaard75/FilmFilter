@@ -29,6 +29,11 @@ gulp.task("build", [
   "copy-javascript-files"]
 )
 
+gulp.task("watch", () => {
+  gulp.watch("src/*.html", ["copy-html-files"])
+  gulp.watch("src/*.js", ["copy-javascript-files"])
+})
+
 gulp.task("default", [
   "build"
 ])
