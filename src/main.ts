@@ -4,9 +4,9 @@ import * as React from "react"
 import * as ReactDOM from "react-dom"
 
 interface NewContact {
-  name: string,
+  description?: string,
   emailAddress?: string,
-  description?: string
+  name: string
 }
 
 interface SavedContact extends NewContact {
@@ -206,9 +206,9 @@ const ContactsView = React.createClass({
 })
 
 const emptyContact = {
-  name: "",
+  description: "",
   emailAddress: "",
-  description: ""
+  name: ""
 }
 
 const newContactSubmitted = (contact: NewContact) => {
