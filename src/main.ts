@@ -31,24 +31,24 @@ const ContactForm = React.createClass({
     value: React.PropTypes.object.isRequired
   },
 
-  onNameChange: function(event: React.FormEvent) {
+  onNameChange: (event: React.FormEvent) => {
     this.props.onChange(Object.assign({}, this.props.value, { name: (<InputEventTarget>event.target).value }))
   },
 
-  onEmailAddressChange: function(event: React.FormEvent) {
+  onEmailAddressChange: (event: React.FormEvent) => {
     this.props.onChange(Object.assign({}, this.props.value, { emailAddress: (<InputEventTarget>event.target).value }))
   },
 
-  onDescriptionChange: function(event: React.FormEvent) {
+  onDescriptionChange: (event: React.FormEvent) => {
     this.props.onChange(Object.assign({}, this.props.value, { description: (<InputEventTarget>event.target).value }))
   },
 
-  onFormSubmit: function(event: React.FormEvent) {
+  onFormSubmit: (event: React.FormEvent) => {
     event.preventDefault()
     this.props.onSubmit(this.props.value)
   },
 
-  render: function() {
+  render: () => {
     return (
       React.createElement("form", {
         className: "form-horizontal",
@@ -139,7 +139,7 @@ const ContactRow = React.createClass({
     description: React.PropTypes.string
   },
 
-  render: function() {
+  render: () => {
     return (
       React.createElement("tr", {},
         React.createElement("td", {}, this.props.name),
@@ -162,10 +162,12 @@ const ContactsView = React.createClass({
     onNewContactSubmit: React.PropTypes.func.isRequired
   },
 
-  render: function() {
+  render: () => {
     var contactRows = (<Array<SavedContact>>this.props.contacts)
-      .filter(function(contact) { return contact.emailAddress == null })
-      .sort(function(contactA, contactB) {
+      .filter(contact => {
+        return contact.emailAddress == null
+      })
+      .sort((contactA, contactB) => {
         if (contactA.name > contactB.name) {
           return 1
         }
@@ -176,7 +178,9 @@ const ContactsView = React.createClass({
 
         return 0
       })
-      .map(function(contact) { return React.createElement(ContactRow, contact) })
+      .map(contact => {
+        return React.createElement(ContactRow, contact)
+      })
 
     return (
       React.createElement("div", { className: "container" },
@@ -207,7 +211,7 @@ const emptyContact = {
   description: ""
 }
 
-function newContactSubmitted(contact: NewContact) {
+const newContactSubmitted = (contact: NewContact) => {
   const contactWithKey: SavedContact = Object.assign({}, contact, { key: state.contacts.length + 1 })
   const updatedContacts = state.contacts.concat(contactWithKey)
 
@@ -219,7 +223,7 @@ function newContactSubmitted(contact: NewContact) {
   setState(stateChanges)
 }
 
-function setState(changes: State) {
+const setState = (changes: State) => {
   Object.assign(state, changes);
 
   // Don't contaminate the state with the callback functions.
@@ -234,7 +238,7 @@ function setState(changes: State) {
   )
 }
 
-function setNewContact(contact: NewContact) {
+const setNewContact = (contact: NewContact) => {
   setState({ newContact: contact })
 }
 
