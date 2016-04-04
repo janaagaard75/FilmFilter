@@ -9,7 +9,9 @@ See README in the scraper folder.
 ## Setup
 
     sudo npm install --global gulp-cli
+    sudo npm install --global tsd
     npm install
+    tsd install
 
 ## Building
 

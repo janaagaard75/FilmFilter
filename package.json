@@ -5,7 +5,9 @@
   "dependencies": {},
   "devDependencies": {
     "browser-sync": "^2.11.2",
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^2.12.2",
+    "tslint": "^3.7.0"
   },
   "author": "Jan Aagaard",
   "license": "ISC"

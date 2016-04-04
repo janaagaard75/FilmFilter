@@ -2,6 +2,9 @@
 
 const browserSync = require('browser-sync').create()
 const gulp = require("gulp")
+const tsc = require("gulp-typescript")
+
+const tsProject = tsc.createProject("tsconfig.json")
 
 function deleteIfExists(path, done) {
   fs.access(path, fs.R_OK | fs.W_OK, (error) => {
@@ -25,6 +28,13 @@ gulp.task("copy-javascript-files", () => {
     .src("src/*.js")
     .pipe(gulp.dest("dist"))
     .pipe(browserSync.stream())
+})
+
+gulp.task("build-typescript", () => {
+  return gulp
+    .src("src/*.ts")
+    .pipe(tsc(tsProject))
+    .pipe(gulp.dest("dist"))
 })
 
 gulp.task("build", [

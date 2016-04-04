@@ -1,8 +1,11 @@
+# Distribution files.
+dist/**
+
 # Node modules.
 node_modules/
 
-# Distribution files.
-dist/**
+# TypeScript typings.
+typings/
 
 # Include gitkeep files.
 !**/.gitkeep
