@@ -22,6 +22,12 @@ interface InputEventTarget extends EventTarget {
   value: string
 }
 
+class Startup {
+  public static main(): void {
+
+  }
+}
+
 const ContactForm = React.createClass({
   displayName: "ContactForm",
 

@@ -53,4 +53,8 @@ gulp.task("serve", () => {
   gulp.watch("src/*.js", ["copy-javascript-files"])
 })
 
-gulp.task("default", ["serve"])
+gulp.task("default", [
+  "copy-html-files",
+  "copy-javascript-files",
+  "serve"]
+)
