@@ -1,7 +1,6 @@
 {
   "rules": {
-    "semicolon": [
-      "never"
-    ]
+    "semicolon": [true, "never"],
+    "quotemark": [true, "single", "avoid-escape"]
   }
 }
