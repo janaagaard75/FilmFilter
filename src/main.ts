@@ -18,7 +18,11 @@ interface State {
   newContact?: NewContact
 }
 
-interface InputEventTarget extends EventTarget {
+interface ValueFormEvent extends React.FormEvent {
+  target: ValueEventTarget
+}
+
+interface ValueEventTarget extends EventTarget {
   value: string
 }
 
@@ -37,16 +41,16 @@ const ContactForm = React.createClass({
     value: React.PropTypes.object.isRequired
   },
 
-  onNameChange: (event: React.FormEvent) => {
-    this.props.onChange(Object.assign({}, this.props.value, { name: (<InputEventTarget>event.target).value }))
+  onNameChange: (event: ValueFormEvent) => {
+    this.props.onChange(Object.assign({}, this.props.value, { name: event.target.value }))
   },
 
-  onEmailAddressChange: (event: React.FormEvent) => {
-    this.props.onChange(Object.assign({}, this.props.value, { emailAddress: (<InputEventTarget>event.target).value }))
+  onEmailAddressChange: (event: ValueFormEvent) => {
+    this.props.onChange(Object.assign({}, this.props.value, { emailAddress: event.target.value }))
   },
 
-  onDescriptionChange: (event: React.FormEvent) => {
-    this.props.onChange(Object.assign({}, this.props.value, { description: (<InputEventTarget>event.target).value }))
+  onDescriptionChange: (event: ValueFormEvent) => {
+    this.props.onChange(Object.assign({}, this.props.value, { description: event.target.value }))
   },
 
   onFormSubmit: (event: React.FormEvent) => {
