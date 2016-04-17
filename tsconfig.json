@@ -1,14 +1,17 @@
 {
   "compilerOptions": {
+    // TODO: Test the line below. See http://stackoverflow.com/a/33794133/37147
+    // "allowSyntheticDefaultImports": true,
     "module": "commonjs",
     "noImplicitAny": true,
-    "outFile": "compiled.js",
+    "outDir": "dist",
+    //"outFile": "dist/compiled.js",
     "preserveConstEnums": true,
     "removeComments": true,
     "sourceMap": true,
     "target": "es2015"
   },
   "files": [
-    "src/*.ts"
+    "src/main.ts"
   ]
 }

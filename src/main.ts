@@ -1,5 +1,6 @@
 /// <reference path="../typings/tsd.d.ts" />
 
+// TODO: Figure out how to import these in the browser. https://github.com/tomastrajan/react-typescript-webpack or simply RequireJS.
 import * as React from "react"
 import * as ReactDOM from "react-dom"
 
@@ -28,7 +29,7 @@ interface ValueEventTarget extends EventTarget {
 
 class Startup {
   public static main(): void {
-
+    // TODO: Add some startup code in here.
   }
 }
 

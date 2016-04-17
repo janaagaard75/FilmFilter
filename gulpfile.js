@@ -1,6 +1,6 @@
 "use strict";
 
-const browserSync = require('browser-sync').create()
+const browserSync = require("browser-sync").create()
 const gulp = require("gulp")
 const tsc = require("gulp-typescript")
 
@@ -45,7 +45,7 @@ gulp.task("build", [
 gulp.task("serve", () => {
   browserSync.init({
     server: {
-      baseDir: "src"
+      baseDir: "dist"
     }
   })
 
