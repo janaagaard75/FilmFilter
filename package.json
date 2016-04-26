@@ -4,10 +4,10 @@
   "description": "Website for filtering films in cinemas.",
   "dependencies": {},
   "devDependencies": {
-    "browser-sync": "2.11.2",
+    "browser-sync": "2.12.5",
     "gulp": "3.9.1",
-    "gulp-typescript": "2.12.2",
-    "tslint": "3.7.0"
+    "gulp-typescript": "2.13.0",
+    "tslint": "3.8.1"
   },
   "author": "Jan Aagaard",
   "license": "ISC"
