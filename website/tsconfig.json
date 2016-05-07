@@ -1,23 +1,23 @@
 {
-    "compilerOptions": {
-        "allowJs": true,
-        "forceConsistentCasingInFileNames": true,
-        "isolatedModules": false,
-        "jsx": "react",
-        "module": "amd",
-        "newLine": "LF",
-        "noImplicitAny": true,
-        "noLib": false,
-        "preserveConstEnums": true,
-        "removeComments": true,
-        "sourceMap": true,
-        "suppressImplicitAnyIndexErrors": true,
-        "target": "es5"
-    },
-    "exclude": [
-      "js",
-      "node_modules",
-      "typings/main",
-      "typings/main.d.ts"
-    ]
+  "compilerOptions": {
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": false,
+    "jsx": "react",
+    "module": "amd",
+    "newLine": "LF",
+    "noImplicitAny": true,
+    "noLib": false,
+    "preserveConstEnums": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "target": "es5"
+  },
+  "exclude": [
+    "js",
+    "node_modules",
+    "typings/main",
+    "typings/main.d.ts"
+  ]
 }

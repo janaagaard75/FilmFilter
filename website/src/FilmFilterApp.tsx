@@ -8,15 +8,15 @@ export interface IAppState {
 }
 
 export default class FilmFilterApp extends React.Component<IAppProps, IAppState> {
-    public render() {
-        return (
-            <div className="container">
-                <h1>Film Filter</h1>
-            </div>)
-    }
+  public render() {
+    return (
+      <div className="container">
+        <h1>Film Filter</h1>
+      </div>)
+  }
 }
 
 ReactDOM.render(
-    <FilmFilterApp/>,
-    document.getElementById("filmFilterApp")
+  <FilmFilterApp/>,
+  document.getElementById("filmFilterApp")
 )
