@@ -42,21 +42,21 @@ const ContactForm = React.createClass({
     value: React.PropTypes.object.isRequired
   },
 
-  onNameChange: (event: ValueFormEvent) => {
-    this.props.onChange(Object.assign({}, this.props.value, { name: event.target.value }))
+  onDescriptionChange: (event: ValueFormEvent) => {
+    this.props.onChange(Object.assign({}, this.props.value, { description: event.target.value }))
   },
 
   onEmailAddressChange: (event: ValueFormEvent) => {
     this.props.onChange(Object.assign({}, this.props.value, { emailAddress: event.target.value }))
   },
 
-  onDescriptionChange: (event: ValueFormEvent) => {
-    this.props.onChange(Object.assign({}, this.props.value, { description: event.target.value }))
-  },
-
   onFormSubmit: (event: React.FormEvent) => {
     event.preventDefault()
     this.props.onSubmit(this.props.value)
+  },
+
+  onNameChange: (event: ValueFormEvent) => {
+    this.props.onChange(Object.assign({}, this.props.value, { name: event.target.value }))
   },
 
   render: () => {
@@ -160,7 +160,7 @@ const ContactRow = React.createClass({
         React.createElement("td", {}, this.props.description)
       )
     )
-  },
+  }
 })
 
 const ContactsView = React.createClass({
@@ -174,7 +174,7 @@ const ContactsView = React.createClass({
   },
 
   render: () => {
-    var contactRows = (<Array<SavedContact>>this.props.contacts)
+    const contactRows = (<Array<SavedContact>>this.props.contacts)
       .filter(contact => {
         return contact.emailAddress == null
       })
