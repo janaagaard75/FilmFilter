@@ -1,13 +1,25 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom"
 
-export interface IAppProps {
+export interface AppProps {
 }
 
-export interface IAppState {
+export interface AppState {
 }
 
-export default class FilmFilterApp extends React.Component<IAppProps, IAppState> {
+export interface Showing {
+  "showing_url": string;
+  "start": string;
+  "theater_url": string;
+  "version": string;
+  "movie_url": string;
+  "danish_title": string;
+  "original_title": string;
+  "poster_url": string;
+  "name": string;
+}
+
+export default class FilmFilterApp extends React.Component<AppProps, AppState> {
   public render() {
     return (
       <div className="container">
