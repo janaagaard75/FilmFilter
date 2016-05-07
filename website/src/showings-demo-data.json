@@ -7,7 +7,8 @@
         "movie_url": "http://www.kino.dk/film/z/zo/zootropolis",
         "danish_title": "Zootropolis",
         "original_title": "Zootopia",
-        "poster_url": "http://cdn01.kino.dk/sites/default/files/imagecache/k_poster_big/movie-posters/zootropolis_plakat1.jpg"
+        "poster_url": "http://cdn01.kino.dk/sites/default/files/imagecache/k_poster_big/movie-posters/zootropolis_plakat1.jpg",
+        "name": "V\u00e6rl\u00f8se Bio"
     },
     {
         "showing_url": "http://www.kino.dk/ticketflow/1755103",
@@ -17,7 +18,8 @@
         "movie_url": "http://www.kino.dk/film/k/ko/kollektivet",
         "danish_title": "Kollektivet",
         "original_title": "Kollektivet",
-        "poster_url": "http://cdn01.kino.dk/sites/default/files/imagecache/k_poster_big/movie-posters/kollektivet_plakat.jpg"
+        "poster_url": "http://cdn01.kino.dk/sites/default/files/imagecache/k_poster_big/movie-posters/kollektivet_plakat.jpg",
+        "name": "Nodisk Film Biografer Palads"
     },
     {
         "showing_url": "http://www.kino.dk/ticketflow/1751864",
@@ -27,6 +29,7 @@
         "movie_url": "http://www.kino.dk/film/a/al/alvin-og-de-fraekke-jordegern-4-paa-farten",
         "danish_title": "Alvin og de fr\u00e6kke jordegern 4 - P\u00e5 farten",
         "original_title": "Alvin and the Chipmunks: The Road Chip",
-        "poster_url": "http://cdn01.kino.dk/sites/default/files/imagecache/k_poster_big/movie-posters/alvin_4_plakat.jpg"
+        "poster_url": "http://cdn01.kino.dk/sites/default/files/imagecache/k_poster_big/movie-posters/alvin_4_plakat.jpg",
+        "name": "Nodisk Film Biografer Palads"
     }
 ]
