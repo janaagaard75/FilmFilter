@@ -1,13 +1,9 @@
 {
     "compilerOptions": {
-        "declaration": false,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
         "forceConsistentCasingInFileNames": true,
         "isolatedModules": false,
         "jsx": "react",
         "module": "amd",
-        "moduleResolution": "node",
         "newLine": "LF",
         "noImplicitAny": true,
         "noLib": false,
