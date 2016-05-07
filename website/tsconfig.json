@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "declaration": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "forceConsistentCasingInFileNames": true,
+        "isolatedModules": false,
+        "jsx": "react",
+        "module": "amd",
+        "moduleResolution": "node",
+        "newLine": "LF",
+        "noImplicitAny": true,
+        "noLib": false,
+        "preserveConstEnums": true,
+        "removeComments": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "target": "es5"
+    },
+    "exclude": [
+      "js",
+      "node_modules",
+      "typings/main",
+      "typings/main.d.ts"
+    ]
+}
