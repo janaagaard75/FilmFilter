@@ -4,5 +4,8 @@ node_modules/
 # Distribution folder.
 dist/
 
+# Generated files.
+js/
+
 # Type definition files.
 typings/
