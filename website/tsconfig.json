@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "allowJs": true,
         "forceConsistentCasingInFileNames": true,
         "isolatedModules": false,
         "jsx": "react",
@@ -9,6 +10,7 @@
         "noLib": false,
         "preserveConstEnums": true,
         "removeComments": true,
+        "sourceMap": true,
         "suppressImplicitAnyIndexErrors": true,
         "target": "es5"
     },
