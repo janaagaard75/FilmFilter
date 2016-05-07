@@ -51,6 +51,7 @@
         "no-var-keyword": true,
         "no-var-requires": true,
         "object-literal-sort-keys": true,
+        "one-variable-per-delaration": true,
         "typedef": [
             true,
             "parameter"
