@@ -3,3 +3,6 @@ node_modules/
 
 # Distribution folder.
 dist/
+
+# Type definition files.
+typings/
