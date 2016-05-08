@@ -1,5 +1,5 @@
 module.exports = {
-  entry: "./src/FilmFilterApp.tsx",
+  entry: "./src/Main.ts",
   output: {
     filename: "./js/bundle.js",
   },
