@@ -1,5 +1,6 @@
 import * as React from "react"
 
+// TODO: This interface might belong to a different file.
 export interface IShowing {
   "danish_title": string
   "movie_url": string
