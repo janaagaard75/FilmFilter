@@ -34,6 +34,18 @@ To scrape only part of kino.dk
 
 # Debugging
 
+## Scraper
+
 It's possible to start up Scrapy in a shell mode, making it really easy to test the selectors:
 
     scrapy shell "http://www.kino.dk/aktuelle-film"
+
+## JSON results
+
+At https://jqplay.org/ it's possible to play around with JSON data. This commands selects all the unique movie URLs in showings.json.
+
+    unique_by(.movieUrl) | [ .[].movieUrl ]
+
+And this command counts them. There are over 200, so the movies scraper is missing 2/3rds of all the movies.
+
+    unique_by(.movieUrl) | length
