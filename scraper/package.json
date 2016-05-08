@@ -1,7 +1,7 @@
 {
   "name": "crawler",
   "version": "1.0.0",
-  "description": "Scraper for kino.dk.",
+  "description": "kino.dk scraper for Film Filter.",
   "dependencies": {},
   "devDependencies": {
     "gulp": "3.9.1",
