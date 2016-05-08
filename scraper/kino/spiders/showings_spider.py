@@ -4,9 +4,9 @@ from urlparse import urldefrag
 from kino.items import ShowingItem
 
 class TheatersSpider(scrapy.Spider):
-    name = "showings"
-    allowed_domains = ["kino.dk"]
-    start_urls = ["http://www.kino.dk/sitemap"]
+    name = 'showings'
+    allowed_domains = ['kino.dk']
+    start_urls = ['http://www.kino.dk/sitemap']
 
     def parse(self, response):
         for theather_href in response.xpath('//a[starts-with(@href, "/biografer/") and not(starts-with(@href, "/biografer/sal/"))]/@href'):
