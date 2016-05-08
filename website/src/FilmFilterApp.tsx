@@ -1,13 +1,15 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom"
 
-export interface AppProps {
+const showings: Array<IShowing> = require("./showings-demo-data.json")
+
+export interface IAppProps {
 }
 
-export interface AppState {
+export interface IAppState {
 }
 
-export interface Showing {
+export interface IShowing {
   "danish_title": string
   "movie_url": string
   "name": string
@@ -19,7 +21,7 @@ export interface Showing {
   "version": string
 }
 
-export default class FilmFilterApp extends React.Component<AppProps, AppState> {
+export default class FilmFilterApp extends React.Component<IAppProps, IAppState> {
   public render() {
     return (
       <div className="container">

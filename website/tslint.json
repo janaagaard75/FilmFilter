@@ -37,7 +37,7 @@
     ],
     "no-internal-module": true,
     "no-irregular-whitespace": true,
-    "no-require-imports": true,
+    "no-require-imports": false,
     "no-shadowed-variable": true,
     "no-string-literal": false,
     "no-switch-case-fall-through": true,
@@ -49,7 +49,7 @@
     ],
     "no-use-before-declare": true,
     "no-var-keyword": true,
-    "no-var-requires": true,
+    "no-var-requires": false,
     "object-literal-sort-keys": true,
     "one-variable-per-declaration": true,
     "typedef": [

@@ -9,16 +9,19 @@ module.exports = {
 
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
+    extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js", ".json"]
   },
 
   module: {
     loaders: [
+      { test: /\.json$/, loader: "json-loader" },
       // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
+      // TODO: Try naming the loader simply "ts".
       { test: /\.tsx?$/, loader: "ts-loader" }
     ],
 
     preLoaders: [
+      // TODO: Try adding TSLint in here. See https://github.com/keokilee/react-typescript-boilerplate/blob/master/config/webpack.dev.js.
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       { test: /\.js$/, loader: "source-map-loader" }
     ]
