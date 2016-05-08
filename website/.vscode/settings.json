@@ -3,5 +3,6 @@
   "editor.detectIndentation": false,
   "editor.tabSize": 2,
   "jscs.enable": false,
-  "jshint.enable": false
+  "jshint.enable": false,
+  "tslint.enable": true
 }
