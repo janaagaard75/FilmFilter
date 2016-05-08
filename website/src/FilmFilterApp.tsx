@@ -24,15 +24,13 @@ export interface IShowing {
 
 export default class FilmFilterApp extends React.Component<IAppProps, IAppState> {
   public render() {
-    const showingItems = this.props.showings.map(showing => {
-      return (<li key={showing.showing_url}>{showing.original_title}</li>)
-    })
-
     return (
       <div className="container">
         <h1>Film Filter</h1>
         <ul>
-          {showingItems}
+          {this.props.showings.map(showing => {
+            return (<li key={showing.showing_url}>{showing.original_title}</li>)
+          })}
         </ul>
       </div>)
   }
