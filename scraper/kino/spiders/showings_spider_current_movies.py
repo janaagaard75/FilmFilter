@@ -17,13 +17,13 @@ class ShowingsSpider(scrapy.Spider):
 
     def parse(self, response):
         for movie_href in response.css('.movies-list-inner-wrap').xpath('./h2/a/@href'):
-            movie_url = response.urljoin(movie_href.extract())
-            yield scrapy.Request(movie_url, callback=self.parse_movie_page)
+            movieUrl = response.urljoin(movie_href.extract())
+            yield scrapy.Request(movieUrl, callback=self.parse_movie_page)
 
     def parse_movie_page(self, response):
         showings_url = response.urljoin(response.css('.button.color-red.versions-popup-button').xpath('@href')[0].extract())
         request = scrapy.Request(showings_url, callback=self.parse_showings_page)
-        request.meta['movie_url'] = request.url
+        request.meta['movieUrl'] = request.url
         request.meta['recursive_calls'] = 4
         return request
 
@@ -42,9 +42,9 @@ class ShowingsSpider(scrapy.Spider):
                     date_obj = datetime(2016, month, day, hour, minute)
 
                     showing = ShowingItem()
-                    showing['movie_url'] = response.meta['movie_url']
-                    showing['theater_url'] = response.urljoin(movie_div.xpath('h3/a/@href')[0].extract())
-                    showing['showing_url'] = response.urljoin(showing_cell.xpath('@href')[0].extract())
+                    showing['movieUrl'] = response.meta['movieUrl']
+                    showing['theaterUrl'] = response.urljoin(movie_div.xpath('h3/a/@href')[0].extract())
+                    showing['showingUrl'] = response.urljoin(showing_cell.xpath('@href')[0].extract())
                     showing['start'] = date_obj.strftime('%Y-%m-%d %H:%M:00')
                     yield showing
 
@@ -59,6 +59,6 @@ class ShowingsSpider(scrapy.Spider):
                 if next_page:
                     next_page_url = response.urljoin(next_page.xpath('@href')[0].extract())
                     request = scrapy.Request(next_page_url, self.parse_showings_page)
-                    request.meta['movie_url'] = response.meta['movie_url']
+                    request.meta['movieUrl'] = response.meta['movieUrl']
                     request.meta['recursive_calls'] = recursive_calls - 1
                     yield request

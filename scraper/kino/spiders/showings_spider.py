@@ -31,17 +31,17 @@ class TheatersSpider(scrapy.Spider):
                     version = '2D'
 
                 request = scrapy.Request(response.url, callback=self.parse_showings_table)
-                request.meta['movie_url'] = movie_url
+                request.meta['movieUrl'] = movie_url
                 request.meta['showings_table_value'] = title_item.xpath('@value').extract_first()
-                request.meta['theater_url'] = response.url
+                request.meta['theaterUrl'] = response.url
                 request.meta['version'] = version
                 yield request
 
 
     def parse_showings_table(self, response):
-        movie_url = response.meta['movie_url']
+        movie_url = response.meta['movieUrl']
         showings_table_value = response.meta['showings_table_value']
-        theater_url = response.meta['theater_url']
+        theater_url = response.meta['theaterUrl']
         version = response.meta['version']
 
         showings_table = response.xpath('//div[@class="cinema-movie clearfix"]/div[@value="' + showings_table_value + '"]')
@@ -53,9 +53,9 @@ class TheatersSpider(scrapy.Spider):
             if jump_link.xpath('text()').extract_first().endswith(u'>'):
                 jump_url = urldefrag(response.urljoin(jump_link.xpath('@href').extract_first()))[0]
                 request = scrapy.Request(jump_url, callback=self.parse_showings_table)
-                request.meta['movie_url'] = movie_url
+                request.meta['movieUrl'] = movie_url
                 request.meta['showings_table_value'] = showings_table_value
-                request.meta['theater_url'] = theater_url
+                request.meta['theaterUrl'] = theater_url
                 request.meta['version'] = version
                 yield request
 
@@ -72,9 +72,9 @@ class TheatersSpider(scrapy.Spider):
                     date_obj = datetime(2016, month, day, hour, minute)
 
                     showing = ShowingItem()
-                    showing['movie_url'] = movie_url
-                    showing['theater_url'] = theater_url
-                    showing['showing_url'] = response.urljoin(showing_cell.xpath('@href').extract_first())
+                    showing['movieUrl'] = movie_url
+                    showing['theaterUrl'] = theater_url
+                    showing['showingUrl'] = response.urljoin(showing_cell.xpath('@href').extract_first())
                     showing['start'] = date_obj.strftime('%Y-%m-%dT%H:%M:00')
                     showing['version'] = version
                     yield showing
@@ -84,8 +84,8 @@ class TheatersSpider(scrapy.Spider):
                 if next_page:
                     next_page_url = urldefrag(response.urljoin(next_page.xpath('@href')[0].extract()))[0]
                     request = scrapy.Request(next_page_url, callback=self.parse_showings_table)
-                    request.meta['movie_url'] = movie_url
+                    request.meta['movieUrl'] = movie_url
                     request.meta['showings_table_value'] = showings_table_value
-                    request.meta['theater_url'] = theater_url
+                    request.meta['theaterUrl'] = theater_url
                     request.meta['version'] = version
                     yield request

@@ -9,8 +9,8 @@ class TheatersSpider(scrapy.Spider):
 
     def parse(self, response):
         for theather_href in response.xpath('//a[starts-with(@href, "/biografer/") and not(starts-with(@href, "/biografer/sal/"))]/@href'):
-            theater_url = response.urljoin(theather_href.extract())
-            yield scrapy.Request(theater_url, callback=self.parse_theater_page)
+            theaterUrl = response.urljoin(theather_href.extract())
+            yield scrapy.Request(theaterUrl, callback=self.parse_theater_page)
 
     def parse_theater_page(self, response):
         theater = TheaterItem()
@@ -23,5 +23,5 @@ class TheatersSpider(scrapy.Spider):
         #     address = 'NO_ADDRESS'
         theater['address'] = response.css('.cinema-address').xpath('/text()').extract()
         theater['name'] = response.xpath('//h1/text()').extract()[0]
-        theater['theater_url'] = response.url
+        theater['theaterUrl'] = response.url
         return theater

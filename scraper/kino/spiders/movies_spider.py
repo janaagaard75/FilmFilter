@@ -17,17 +17,17 @@ class MoviesSpider(scrapy.Spider):
 
     def parse(self, response):
         for movie_href in response.css('.movies-list-inner-wrap').xpath('./h2/a/@href'):
-            movie_url = response.urljoin(movie_href.extract())
-            yield scrapy.Request(movie_url, callback=self.parse_movie_page)
+            movieUrl = response.urljoin(movie_href.extract())
+            yield scrapy.Request(movieUrl, callback=self.parse_movie_page)
 
     def parse_movie_page(self, response):
         movie = MovieItem()
-        movie['danish_title'] = response.css('.node-title').xpath('text()').extract()[0].strip()
-        movie['movie_url'] = response.url
+        movie['danishTitle'] = response.css('.node-title').xpath('text()').extract()[0].strip()
+        movie['movieUrl'] = response.url
         original_title_field = response.css('.field-field-movie-original-title .field-item')
         if len(original_title_field) > 0:
-            movie['original_title'] = original_title_field.xpath('text()[2]').extract()[0].strip()
+            movie['originalTitle'] = original_title_field.xpath('text()[2]').extract()[0].strip()
         else:
-            movie['original_title'] = ""
-        movie['poster_url'] = response.css('.field-field-movie-poster-image .field-item').xpath('img/@src').extract()[0]
+            movie['originalTitle'] = ""
+        movie['posterUrl'] = response.css('.field-field-movie-poster-image .field-item').xpath('img/@src').extract()[0]
         return movie
