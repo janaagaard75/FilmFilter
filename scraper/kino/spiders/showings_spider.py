@@ -27,13 +27,13 @@ class ShowingsSpider(scrapy.Spider):
                     # Strip the first dash.
                     version = version_item.re(r' - (.*)')[0]
                 else:
-                    # Defaulting to categorizing as a 2D movie when there is not version info.
+                    # Categorize as 2D when there is no version info.
                     version = '2D'
 
                 request = scrapy.Request(response.url, callback=self.parse_showings_table)
                 request.meta['movieUrl'] = movie_url
                 request.meta['showings_table_value'] = title_item.xpath('@value').extract_first()
-                request.meta['theaterUrl'] = response.url
+                request.meta['theater_url'] = response.url
                 request.meta['version'] = version
                 yield request
 
@@ -41,7 +41,7 @@ class ShowingsSpider(scrapy.Spider):
     def parse_showings_table(self, response):
         movie_url = response.meta['movieUrl']
         showings_table_value = response.meta['showings_table_value']
-        theater_url = response.meta['theaterUrl']
+        theater_url = response.meta['theater_url']
         version = response.meta['version']
 
         showings_table = response.xpath('//div[@class="cinema-movie clearfix"]/div[@value="' + showings_table_value + '"]')
@@ -55,7 +55,7 @@ class ShowingsSpider(scrapy.Spider):
                 request = scrapy.Request(jump_url, callback=self.parse_showings_table)
                 request.meta['movieUrl'] = movie_url
                 request.meta['showings_table_value'] = showings_table_value
-                request.meta['theaterUrl'] = theater_url
+                request.meta['theater_url'] = theater_url
                 request.meta['version'] = version
                 yield request
 
@@ -69,6 +69,7 @@ class ShowingsSpider(scrapy.Spider):
                     hourAndMinute = showing_cell.xpath('text()').extract_first().split(':')
                     hour = int(hourAndMinute[0])
                     minute = int(hourAndMinute[1])
+                    # TODO: This will only work as long as all movies start this year.
                     date_obj = datetime(2016, month, day, hour, minute)
 
                     showing = ShowingItem()
@@ -86,6 +87,6 @@ class ShowingsSpider(scrapy.Spider):
                     request = scrapy.Request(next_page_url, callback=self.parse_showings_table)
                     request.meta['movieUrl'] = movie_url
                     request.meta['showings_table_value'] = showings_table_value
-                    request.meta['theaterUrl'] = theater_url
+                    request.meta['theater_url'] = theater_url
                     request.meta['version'] = version
                     yield request
