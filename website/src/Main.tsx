@@ -14,7 +14,7 @@ export interface ShowingData {
 }
 
 // TODO: Load the data using an AJAX call instead of embedding it the bundle.
-const showings: Array<ShowingData> = require("../../scraper/output/showings-20160508212716.json")
+const showings: Array<ShowingData> = require("../../scraper/output/showings.json")
 
 ReactDOM.render(
   <FilmFilterApp showings={showings}/>,
