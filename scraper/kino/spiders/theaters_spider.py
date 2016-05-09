@@ -14,6 +14,7 @@ class TheatersSpider(scrapy.Spider):
 
     def parse_theater_page(self, response):
         theater = TheaterItem()
+        # Attempt to parse the address. Didn't work, so turned off for now.
         # address_line_1_item = response.css('.cinema-address')
         # if len(address_line_1_item) >= 1:
         #     address_line_1 = address_line_1_item[0].xpath('p/text()')[1].extract().strip()
@@ -22,6 +23,6 @@ class TheatersSpider(scrapy.Spider):
         # else:
         #     address = 'NO_ADDRESS'
         theater['address'] = response.css('.cinema-address').xpath('/text()').extract()
-        theater['name'] = response.xpath('//h1/text()').extract()[0]
+        theater['name'] = response.xpath('//h1/text()').extract_first()
         theater['theaterUrl'] = response.url
         return theater

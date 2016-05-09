@@ -3,7 +3,7 @@ from datetime import datetime
 from urlparse import urldefrag
 from kino.items import ShowingItem
 
-class TheatersSpider(scrapy.Spider):
+class ShowingsSpider(scrapy.Spider):
     name = 'showings'
     allowed_domains = ['kino.dk']
     start_urls = ['http://www.kino.dk/sitemap']
