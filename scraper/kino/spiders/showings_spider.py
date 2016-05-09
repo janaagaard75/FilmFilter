@@ -25,10 +25,12 @@ class ShowingsSpider(scrapy.Spider):
                 version_item = title_item.xpath('h3/a/span/text()')
                 if len(version_item) >= 1:
                     # Strip the first dash.
-                    version = version_item.re(r' - (.*)')[0]
+                    version_string = version_item.re(r' - (.*)')[0]
                 else:
                     # Categorize as 2D when there is no version info.
-                    version = '2D'
+                    version_string = '2D'
+
+                version = version_string.split(' - ')
 
                 request = scrapy.Request(response.url, callback=self.parse_showings_table)
                 request.meta['movieUrl'] = movie_url
