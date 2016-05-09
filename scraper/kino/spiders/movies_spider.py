@@ -5,41 +5,9 @@ from kino.items import MovieItem
 class MoviesSpider(scrapy.Spider):
     name = 'movies'
     allowed_domains = ['kino.dk']
-    start_urls = [
-        'http://www.kino.dk/aktuelle-film?page=0',
-        'http://www.kino.dk/aktuelle-film?page=1',
-        'http://www.kino.dk/aktuelle-film?page=2',
-        'http://www.kino.dk/aktuelle-film?page=3',
-        'http://www.kino.dk/aktuelle-film?page=4',
-        'http://www.kino.dk/aktuelle-film?page=5',
-        'http://www.kino.dk/aktuelle-film?page=6',
-        'http://www.kino.dk/aktuelle-film?page=7',
-        'http://www.kino.dk/film-paa-vej?page=0',
-        'http://www.kino.dk/film-paa-vej?page=1',
-        'http://www.kino.dk/film-paa-vej?page=2',
-        'http://www.kino.dk/film-paa-vej?page=3',
-        'http://www.kino.dk/film-paa-vej?page=4',
-        'http://www.kino.dk/film-paa-vej?page=5',
-        'http://www.kino.dk/film-paa-vej?page=6',
-        'http://www.kino.dk/film-paa-vej?page=7',
-        'http://www.kino.dk/film-paa-vej?page=8',
-        'http://www.kino.dk/film-paa-vej?page=9',
-        'http://www.kino.dk/film-paa-vej?page=10',
-        'http://www.kino.dk/film-paa-vej?page=11',
-        'http://www.kino.dk/film-paa-vej?page=12',
-        'http://www.kino.dk/film-paa-vej?page=13',
-        'http://www.kino.dk/film-paa-vej?page=14',
-        'http://www.kino.dk/film-paa-vej?page=15',
-        'http://www.kino.dk/film-paa-vej?page=16',
-        'http://www.kino.dk/film-paa-vej?page=17',
-        'http://www.kino.dk/film-paa-vej?page=18',
-        'http://www.kino.dk/film-paa-vej?page=19',
-        'http://www.kino.dk/film-paa-vej?page=20',
-        'http://www.kino.dk/film-paa-vej?page=21',
-        'http://www.kino.dk/film-paa-vej?page=22',
-        'http://www.kino.dk/film-paa-vej?page=23',
-        'http://www.kino.dk/film-paa-vej?page=24'
-    ]
+    aktuelle_film_urls = map(lambda n: "http://www.kino.dk/aktuelle-film?page=%d" % n, range(10))
+    film_paa_vej_urls = map(lambda n: "http://www.kino.dk/film-paa-vej?page=%d" % n, range(30))
+    start_urls = aktuelle_film_urls + film_paa_vej_urls
 
     def parse(self, response):
         for movie_href in response.css('.movies-list-inner-wrap').xpath('./h2/a/@href'):
