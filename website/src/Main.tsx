@@ -8,7 +8,7 @@ import FilmFilterApp from "./FilmFilterApp"
 export interface ShowingData {
   "start": string
   "showingUrl": string
-  "version": string
+  "version": Array<string>
   "theaterUrl": string
   "movieUrl": string
 }
