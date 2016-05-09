@@ -1,6 +1,7 @@
 {
   "author": "Jan Aagaard",
   "dependencies": {
+    "moment": "2.13.0",
     "react": "15.0.2",
     "react-dom": "15.0.2"
   },
