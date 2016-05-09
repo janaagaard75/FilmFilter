@@ -1,8 +1,9 @@
 import * as React from "react"
-import Showing, { IShowing } from "./Showing"
+import ShowingRow from "./ShowingRow"
+import { ShowingData } from "./Main"
 
 export interface FilmFilterAppProps {
-  showings: Array<IShowing>
+  showings: Array<ShowingData>
 }
 
 export interface FilmFilterAppState {
@@ -18,12 +19,14 @@ export default class FilmFilterApp extends React.Component<FilmFilterAppProps, F
       <div className="container">
         <h1>Film Filter</h1>
         <ul>
-          {this.props.showings.map(showing => {
-            return <Showing
-              key={showing.showing_url}
-              original_title={showing.original_title}
-              start={showing.start}/>
-          })}
+          {this.props.showings
+            .filter(showing => showing.movieUrl !== "NO_MOVIE_URL")
+            .map(showing => {
+              return <ShowingRow
+                key={showing.showingUrl}
+                movieUrl={showing.movieUrl}
+                start={showing.start}/>
+            })}
         </ul>
       </div>)
   }
