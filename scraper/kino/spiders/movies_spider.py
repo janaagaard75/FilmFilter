@@ -36,7 +36,9 @@ class MoviesSpider(scrapy.Spider):
         'http://www.kino.dk/film-paa-vej?page=19',
         'http://www.kino.dk/film-paa-vej?page=20',
         'http://www.kino.dk/film-paa-vej?page=21',
-        'http://www.kino.dk/film-paa-vej?page=22'
+        'http://www.kino.dk/film-paa-vej?page=22',
+        'http://www.kino.dk/film-paa-vej?page=23',
+        'http://www.kino.dk/film-paa-vej?page=24'
     ]
 
     def parse(self, response):
