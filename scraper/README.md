@@ -42,7 +42,7 @@ It's possible to start up Scrapy in a shell mode, making it really easy to test 
 
 ## JSON results
 
-At https://jqplay.org/ it's possible to play around with JSON data. This commands selects all the unique movie URLs in showings.json.
+At https://jqplay.org/ it's possible to play around with JSON Lines data. This commands selects all the unique movie URLs in showings.jsonl.
 
     unique_by(.movieUrl) | [ .[].movieUrl ]
 

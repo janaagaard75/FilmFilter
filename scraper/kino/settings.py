@@ -19,8 +19,8 @@ FEED_EXPORTERS = {
     'json': 'scrapy.exporters.JsonItemExporter',
     'jsonlines': 'scrapy.exporters.JsonLinesItemExporter',
 }
-FEED_URI='file:output/%(name)s.json'
-FEED_FORMAT='json'
+FEED_URI='file:output/%(name)s.jsonl'
+FEED_FORMAT='jsonlines'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

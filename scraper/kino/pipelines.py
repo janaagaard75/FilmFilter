@@ -22,7 +22,7 @@ class KinoPipeline(object):
 
     def spider_opened(self, spider):
         # It might be possible to add indent=4 and ensure_ascii=False somewhere.
-        file = open('output/' + spider.name + '.json', 'w+b', encoding='utf-8')
+        file = open('output/' + spider.name + '.jsonl', 'w+b', encoding='utf-8')
         self.files[spider] = file
         self.exporter = JsonLinesItemExporter(file)
         self.exporter.start_exporting()
