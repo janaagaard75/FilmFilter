@@ -1,6 +1,9 @@
+//var path = require("path")
+
 module.exports = {
   entry: "./src/Main.tsx",
   output: {
+    //path: path.resolve(__dirname, ""),
     filename: "./js/bundle.js",
   },
 
