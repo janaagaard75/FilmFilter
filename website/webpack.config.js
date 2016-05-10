@@ -14,6 +14,7 @@ module.exports = {
 
   module: {
     loaders: [
+      // TODO: Might want to remove the json-loader - it's not used any longer.
       { test: /\.json$/, loader: "json-loader" },
       // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
       // TODO: Try naming the loader simply "ts".
