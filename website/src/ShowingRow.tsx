@@ -1,4 +1,5 @@
 import * as React from "react"
+import * as moment from "moment"
 
 interface ShowingProps {
   "key": string
@@ -16,7 +17,7 @@ export default class ShowingRow extends React.Component<ShowingProps, ShowingSta
 
   render() {
     return (
-      <li>{this.props.start}: {this.props.movieUrl}</li>
+      <li>{moment(this.props.start).format("D/M HH:mm")} - {this.props.movieUrl}</li>
     )
   }
 }
