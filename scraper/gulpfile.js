@@ -9,19 +9,19 @@ const shell = require("gulp-shell")
 const timestamp = moment().format("YYYYMMDDHHmmss")
 
 const movies = {}
-movies.fileWithTimestamp = `movies-${timestamp}.json`
-movies.pathWithoutDuplicates = "output/movies-without-duplicates.json"
-movies.pathWithoutTimestamp = "output/movies.json"
+movies.fileWithTimestamp = `movies-${timestamp}.jsonl`
+movies.pathWithoutDuplicates = "output/movies-without-duplicates.jsonl"
+movies.pathWithoutTimestamp = "output/movies.jsonl"
 movies.pathWithTimestamp = `output/${movies.fileWithTimestamp}`
 
 const showings = {}
-showings.fileWithTimestamp = `showings-${timestamp}.json`
-showings.pathWithoutTimestamp = "output/showings.json"
+showings.fileWithTimestamp = `showings-${timestamp}.jsonl`
+showings.pathWithoutTimestamp = "output/showings.jsonl"
 showings.pathWithTimestamp = `output/${showings.fileWithTimestamp}`
 
 const theaters = {}
-theaters.fileWithTimestamp = `theaters-${timestamp}.json`
-theaters.pathWithoutTimestamp = "output/theaters.json"
+theaters.fileWithTimestamp = `theaters-${timestamp}.jsonl`
+theaters.pathWithoutTimestamp = "output/theaters.jsonl"
 theaters.pathWithTimestamp = `output/${theaters.fileWithTimestamp}`
 
 function deleteIfExists (path, done) {
