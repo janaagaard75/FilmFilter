@@ -10,7 +10,7 @@ Had to do the following to make the pip command work. Something about El Capitan
 
 Finally run:
 
-    pip install scrapy
+    pip install Scrapy
 
 ## Installing Gulp
 
@@ -36,7 +36,7 @@ To scrape only part of kino.dk
 
 ## Scraper
 
-It's possible to start up Scrapy in a shell mode, making it really easy to test the selectors:
+It's possible to start up Scrapy in a shell mode, great for testing the selectors:
 
     scrapy shell "http://www.kino.dk/aktuelle-film"
 
