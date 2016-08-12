@@ -16,7 +16,7 @@ Finally run:
 
 Install gulp-cli if it isn't already installed
 
-    sudo npm --global gulp-cli
+    npm --global gulp-cli
 
 ## Installing Node packages
 
