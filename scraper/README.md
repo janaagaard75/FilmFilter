@@ -6,7 +6,7 @@ Had to do the following to make the pip command work. Something about El Capitan
 
 * Install Python using Homebrew `brew install python` to get a version of pip that works.
 * If Xcode has not been run before, it might be necessary to start up Xcode, since this installs some additional tools.
-* Run `xcode-select --install`. I think this adds some command line features to OS X.
+* Run `xcode-select --install`. I think this adds some command line features to macOS.
 
 Finally run:
 
