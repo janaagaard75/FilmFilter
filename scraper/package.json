@@ -6,8 +6,8 @@
   "devDependencies": {
     "gulp": "3.9.1",
     "gulp-shell": "0.5.2",
-    "moment": "2.13.0",
-    "run-sequence": "1.1.5"
+    "moment": "2.14.1",
+    "run-sequence": "1.2.2"
   },
   "author": "Jan Aagaard",
   "license": "ISC"
