@@ -20,7 +20,7 @@ Finally run:
 
 Install gulp-cli if it isn't already installed
 
-    npm --global gulp-cli
+    npm install --global gulp-cli
 
 ## Installing Node packages
 
