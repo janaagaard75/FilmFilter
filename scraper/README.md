@@ -12,6 +12,10 @@ Finally run:
 
     pip install Scrapy
 
+### Upgrading Scrapy
+
+    pip install --upgrade Scrapy
+
 ## Installing Gulp
 
 Install gulp-cli if it isn't already installed
