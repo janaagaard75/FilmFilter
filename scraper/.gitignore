@@ -1,11 +1,11 @@
 # Node modules.
-node_modules/
+/node_modules/
 
 # Output files.
-output/**
+/output/**
 
 # Python byte code files.
 *.pyc
 
 # Scrapy's cache.
-.scrapy/**
+/.scrapy/**
