@@ -16,9 +16,14 @@ Finally run:
 
     pip install --upgrade Scrapy
 
+If upgrading fails, uninstall and then reinstall:
+
+    pip uninstall Scrapy
+    pip install Scrapy
+
 ## Installing Gulp
 
-Install gulp-cli if it isn't already installed
+Install gulp-cli if it isn't already installed:
 
     npm install --global gulp-cli
 
@@ -28,11 +33,11 @@ Install gulp-cli if it isn't already installed
 
 # Scraping kino.dk
 
-Run the scraper with gulp
+Run the scraper with gulp:
 
     gulp
 
-To scrape only part of kino.dk
+To scrape only part of kino.dk.
 
     gulp { movies | showings | theaters }
 
