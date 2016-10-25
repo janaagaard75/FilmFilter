@@ -1,8 +1,10 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { enableProdMode } from '@angular/core'
 
 import { AppModule } from './app.module';
 
-const platform = platformBrowserDynamic();
-platform.bootstrapModule(AppModule);
+if (process.env.ENV === 'production') {
+  enableProdMode();
+}
 
-// TODO: Next step: https://angular.io/docs/ts/latest/tutorial/toh-pt6.html
+platformBrowserDynamic().bootstrapModule(AppModule);
