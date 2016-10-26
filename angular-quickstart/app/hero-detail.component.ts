@@ -13,7 +13,7 @@ import { HeroService } from './hero.service'
 })
 export class HeroDetailComponent implements OnInit {
   constructor(
-    private heroSerice: HeroService,
+    private heroService: HeroService,
     private route: ActivatedRoute,
     private location: Location
   ) { }
@@ -24,12 +24,17 @@ export class HeroDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.forEach((params: Params) => {
       let id = parseInt(params['id'], 10);
-      this.heroSerice.getHero(id)
+      this.heroService.getHero(id)
         .then(hero => this.hero = hero)
     });
   }
 
   goBack(): void {
     this.location.back();
+  }
+
+  save(): void {
+    this.heroService.update(this.hero)
+      .then(() => this.goBack())
   }
 }

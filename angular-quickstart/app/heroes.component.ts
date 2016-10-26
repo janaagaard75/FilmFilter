@@ -19,6 +19,29 @@ export class HeroesComponent implements OnInit {
   heroes: Array<Hero>;
   selectedHero: Hero;
 
+  add(name: string) {
+    name = name.trim();
+    if (!name) {
+      return;
+    }
+
+    this.heroService.create(name)
+      .then(hero => {
+        this.heroes.push(hero);
+        this.selectedHero = null;
+      });
+  }
+
+  delete(hero: Hero) {
+    this.heroService.remove(hero)
+      .then(() => {
+        this.heroes = this.heroes.filter(h => h !== hero);
+        if (this.selectedHero === hero) {
+          this.selectedHero = null;
+        }
+      });
+  }
+
   getHeroes(): void {
     this.heroService.getHeroes()
       .then(heroes => this.heroes = heroes);
