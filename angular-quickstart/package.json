@@ -4,11 +4,8 @@
   "scripts": {
     "start": "webpack-dev-server --inline --progress --port 8080",
     "test": "karma start",
-    "start2": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
     "lite": "lite-server",
-    "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
-    "build2": "tsc",
-    "build2:w": "tsc -w"
+    "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail"
   },
   "licenses": [
     {
@@ -31,7 +28,6 @@
     "core-js": "2.4.1",
     "reflect-metadata": "0.1.8",
     "rxjs": "5.0.0-beta.12",
-    "systemjs": "0.19.40",
     "zone.js": "0.6.26"
   },
   "devDependencies": {
