@@ -28,3 +28,5 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(link)
   }
 }
+
+// TODO: Use Bootstrap components. See https://ng-bootstrap.github.io/#/home.
