@@ -36,5 +36,5 @@
         defaultExtension: 'js'
       }
     }
-  });
-})(this);
+  })
+})(this)

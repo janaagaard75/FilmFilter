@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { Component, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
+import { Observable } from 'rxjs/Observable'
+import { Subject } from 'rxjs/Subject'
 
-import { HeroSearchService } from './hero-search.service';
-import { Hero } from './hero';
+import { HeroSearchService } from './hero-search.service'
+import { Hero } from './hero'
 
 @Component({
   moduleId: module.id,
@@ -19,8 +19,8 @@ export class HeroSearchComponent implements OnInit {
     private router: Router
   ) { }
 
-  heroes: Observable<Array<Hero>>;
-  private searchTerms = new Subject<string>();
+  heroes: Observable<Array<Hero>>
+  private searchTerms = new Subject<string>()
 
   ngOnInit(): void {
     this.heroes = this.searchTerms
@@ -28,25 +28,25 @@ export class HeroSearchComponent implements OnInit {
       .distinctUntilChanged() // Ignore if next search term is same as previous.
       .switchMap(term => {
         if (!term) {
-          return Observable.of<Array<Hero>>([]);
+          return Observable.of<Array<Hero>>([])
         }
 
-        return this.heroSearchService.search(term);
+        return this.heroSearchService.search(term)
       })
       .catch(error => {
         // TODO: real error handling.
-        console.log(error);
-        return Observable.of<Array<Hero>>([]);
-      });
+        console.log(error)
+        return Observable.of<Array<Hero>>([])
+      })
   }
 
   gotoDetail(hero: Hero): void {
-    let link = ['/detail', hero.id];
-    this.router.navigate(link);
+    let link = ['/detail', hero.id]
+    this.router.navigate(link)
   }
 
   /** Push a search term into the observable stream. */
   search(term: string): void {
-    this.searchTerms.next(term);
+    this.searchTerms.next(term)
   }
 }

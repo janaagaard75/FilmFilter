@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core'
+import { OnInit } from '@angular/core'
+import { Router } from '@angular/router'
 
-import { Hero } from './hero';
-import { HeroService } from './hero.service';
+import { Hero } from './hero'
+import { HeroService } from './hero.service'
 
 @Component({
   selector: 'my-heroes',
@@ -17,45 +17,45 @@ export class HeroesComponent implements OnInit {
   ) { }
 
   heroes: Array<Hero>;
-  selectedHero: Hero;
+  selectedHero: Hero
 
   add(name: string) {
-    name = name.trim();
+    name = name.trim()
     if (!name) {
-      return;
+      return
     }
 
     this.heroService.create(name)
       .then(hero => {
-        this.heroes.push(hero);
-        this.selectedHero = null;
-      });
+        this.heroes.push(hero)
+        this.selectedHero = null
+      })
   }
 
   delete(hero: Hero) {
     this.heroService.remove(hero)
       .then(() => {
-        this.heroes = this.heroes.filter(h => h !== hero);
+        this.heroes = this.heroes.filter(h => h !== hero)
         if (this.selectedHero === hero) {
-          this.selectedHero = null;
+          this.selectedHero = null
         }
-      });
+      })
   }
 
   getHeroes(): void {
     this.heroService.getHeroes()
-      .then(heroes => this.heroes = heroes);
+      .then(heroes => this.heroes = heroes)
   }
 
   gotoDetail(): void {
-    this.router.navigate(['/detail', this.selectedHero.id]);
+    this.router.navigate(['/detail', this.selectedHero.id])
   }
 
   onSelect(hero: Hero): void {
-    this.selectedHero = hero;
+    this.selectedHero = hero
   }
 
   ngOnInit(): void {
-    this.getHeroes();
+    this.getHeroes()
   }
 }
