@@ -47,8 +47,9 @@ export class HeroesComponent implements OnInit {
       .then(heroes => this.heroes = heroes)
   }
 
+  // TODO: Should this be some kind of globally accessible method? 'hero' is repeated quite a few times in the app.
   gotoDetail(): void {
-    this.router.navigate(['/detail', this.selectedHero.id])
+    this.router.navigate(['/hero', this.selectedHero.id])
   }
 
   onSelect(hero: Hero): void {
