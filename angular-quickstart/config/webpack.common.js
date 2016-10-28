@@ -3,6 +3,10 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var helpers = require('./helpers')
 
+var loaders = [
+
+]
+
 module.exports = {
   entry: {
     'polyfills': './app/polyfills.ts',
@@ -15,7 +19,7 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.ts$/,
         loaders: ['awesome-typescript-loader', 'angular2-template-loader']
@@ -26,13 +30,23 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-        loader: 'file-loader?name=assets/[name].[hash].[ext]'
+        loader: 'file-loader',
+        query: {
+          name: 'assets/[name].[hash].[ext]'
+        }
       },
       {
         test: /\.css$/,
         exclude: helpers.root('src', 'app'),
         loaders: [
-          ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap'),
+          // ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap'),
+          ExtractTextPlugin.extract({
+            fallbackLoader: 'style-loader',
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          }),
           'to-string-loader',
           'css-loader'
         ]
