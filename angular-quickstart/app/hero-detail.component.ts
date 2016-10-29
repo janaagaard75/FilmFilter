@@ -19,14 +19,14 @@ export class HeroDetailComponent implements OnInit {
   ) { }
 
   @Input()
-  hero: Hero;
+  hero: Hero
 
   ngOnInit(): void {
     this.route.params.forEach((params: Params) => {
       let id = parseInt(params['id'], 10)
       this.heroService.getHero(id)
         .then(hero => this.hero = hero)
-    });
+    })
   }
 
   goBack(): void {

@@ -16,7 +16,7 @@ export class HeroesComponent implements OnInit {
     private router: Router
   ) { }
 
-  heroes: Array<Hero>;
+  heroes: Array<Hero>
   selectedHero: Hero
 
   add(name: string) {
