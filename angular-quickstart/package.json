@@ -1,6 +1,8 @@
 {
   "name": "angular-quickstart",
+  "description": "Angular 2's Tour of Heroes",
   "version": "1.0.0",
+  "license": "ISC",
   "scripts": {
     "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
     "serve": "lite-server",
@@ -24,7 +26,9 @@
     "@angular/router": "3.1.2",
     "@angular/upgrade": "2.1.2",
     "angular-in-memory-web-api": "0.1.13",
+    "bootstrap": "4.0.0-alpha.5",
     "core-js": "2.4.1",
+    "reflect-metadata": "0.1.8",
     "rxjs": "5.0.0-beta.12",
     "zone.js": "0.6.26"
   },
@@ -39,7 +43,9 @@
     "html-loader": "0.4.4",
     "html-webpack-plugin": "2.24.0",
     "lite-server": "2.2.2",
+    "node-sass": "3.10.1",
     "rimraf": "2.5.4",
+    "sass-loader": "4.0.2",
     "style-loader": "0.13.1",
     "to-string-loader": "1.1.5",
     "typescript": "2.0.6",
