@@ -17,8 +17,6 @@ import { HeroesComponent } from './heroes.component'
 import { HeroSearchComponent } from './hero-search.component'
 import { HeroService } from './hero.service'
 
-import '../node_modules/bootstrap/scss/bootstrap.scss'
-
 @NgModule({
   bootstrap: [
     AppComponent
