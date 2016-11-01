@@ -2,11 +2,16 @@
   "name": "vue-typescript",
   "version": "0.0.0",
   "description": "Vue & TypeScript playground",
-  "main": "index.js",
   "repository": {
     "url": "https://github.com/janaagaard75/FilmFilter.git",
     "type": "git"
   },
   "author": "Jan Aagaard",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "vue": "^2.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^2.0.6"
+  }
 }
