@@ -32,6 +32,7 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 * Upgrade to Webpack 2. http://javascriptplayground.com/blog/2016/10/moving-to-webpack-2/.
 * Configure Webpack to compile TypeScript. https://github.com/s-panferov/awesome-typescript-loader.
 * Migrate the source to TypeScript. https://github.com/itsFrank/vue-typescript.
+* Migrate as much as possible of the build and config to TypeScript.
 * Migrate the tests to TypeScript.
 * Remove a bunch of Babel stuff.
 * Replace ESLint with TSLint.
