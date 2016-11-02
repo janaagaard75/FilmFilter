@@ -24,7 +24,7 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loaders: ['vue-loader'],
+        loader: 'vue-loader',
         options: {
           loaders: {},
           postcss: [
@@ -38,7 +38,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loaders: ['babel-loader'],
+        loader: 'babel-loader',
         exclude: [/node_modules/],
         options: {
           babelrc: false,
