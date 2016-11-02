@@ -6,17 +6,11 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const base = require('./webpack.base')
 const pkg = require('../package')
 const _ = require('./utils')
-const useElectron = false
 
-if (useElectron) {
-  // remove dist folder in electron mode
-  exec('rm -rf app/assets/')
-} else {
-  // remove dist folder in web app mode
-  exec('rm -rf dist/')
-  // use source-map in web app mode
-  base.devtool = 'source-map'
-}
+// remove dist folder in web app mode
+exec('rm -rf dist/')
+// use source-map in web app mode
+base.devtool = 'source-map'
 
 // TODO: Use webpack-merge instead of this base syntax. See https://github.com/AngularClass/angular2-webpack-starter/blob/master/config/webpack.prod.js
 
