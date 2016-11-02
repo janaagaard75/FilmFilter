@@ -2,6 +2,7 @@ var path = require('path')
 var config = require('../config')
 var utils = require('./utils')
 var projectRoot = path.resolve(__dirname, '../')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 var env = process.env.NODE_ENV
 // check env & config/index.js to decide weither to enable CSS Sourcemaps for the
@@ -47,10 +48,18 @@ module.exports = {
         exclude: /node_modules/
       }
     ],
-    loaders: [
+    rules: [
       {
         test: /\.vue$/,
-        loader: 'vue'
+        loader: 'vue',
+        options: {
+          loaders: {
+            css: ExtractTextPlugin.extract({
+              loader: 'css-loader',
+              fallbackLoader: 'vue-style-loader'
+            })
+          }
+        }
       },
       {
         test: /\.js$/,
