@@ -1,25 +1,19 @@
 # vuepack-typescript
 
+Based on https://github.com/egoist/vuepack, and then converted to use TypeScript.
+
 To start:
 
-```bash
-$ npm install
-```
+    $ yarn install
 
 To develop:
 
-```bash
-$ npm run dev```
+    $ yarn start
 
 To build for production:
 
-```bash
-$ npm run build
-```
+    $ yarn run build
 
 To lint you code:
 
-```bash
-$ npm run lint
-```
-
+    $ yarn run lint
