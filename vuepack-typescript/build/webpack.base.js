@@ -25,20 +25,20 @@ module.exports = {
     loaders: [
       {
         test: /\.vue$/,
-        loaders: ['vue']
+        loaders: ['vue-loader']
       },
       {
         test: /\.js$/,
-        loaders: ['babel'],
+        loaders: ['babel-loader'],
         exclude: [/node_modules/]
       },
       {
         test: /\.es6$/,
-        loaders: ['babel']
+        loaders: ['babel-loader']
       },
       {
         test: /\.(ico|jpg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
-        loader: 'file',
+        loader: 'file-loader',
         query: {
           name: 'static/media/[name].[hash:8].[ext]'
         }
