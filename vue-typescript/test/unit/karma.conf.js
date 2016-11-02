@@ -35,7 +35,7 @@ delete webpackConfig.entry
 webpackConfig.module.preLoaders = webpackConfig.module.preLoaders || []
 webpackConfig.module.preLoaders.unshift({
   test: /\.js$/,
-  loader: 'isparta',
+  loader: 'isparta-loader',
   include: path.resolve(projectRoot, 'src')
 })
 
