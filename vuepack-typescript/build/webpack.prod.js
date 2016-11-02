@@ -48,8 +48,22 @@ base.plugins.push(
 base.module.rules.push({
   test: /\.css$/,
   loader: ExtractTextPlugin.extract({
-    loader: _.cssLoader,
-    fallbackLoader: 'style-loader'
+    fallbackLoader: 'style-loader',
+    // TODO: Loaders is repeated in both dev and prod.
+    loader: [
+      {
+        loader: 'style-loader'
+      },
+      {
+        loader: 'css-loader',
+        options: {
+          autoprefixer: false
+        }
+      },
+      {
+        loader:'postcss-loader'
+      }
+    ]
   })
 })
 

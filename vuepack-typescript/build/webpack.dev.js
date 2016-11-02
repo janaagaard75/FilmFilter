@@ -16,7 +16,20 @@ base.plugins.push(
 base.module.rules.push(
   {
     test: /\.css$/,
-    loader: _.cssLoader
+    loader: [
+      {
+        loader: 'style-loader'
+      },
+      {
+        loader: 'css-loader',
+        options: {
+          autoprefixer: false
+        }
+      },
+      {
+        loader:'postcss-loader'
+      }
+    ]
   }
 )
 
