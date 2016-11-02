@@ -13,7 +13,7 @@ base.plugins.push(
 )
 
 // push loader for .css file
-base.module.loaders.push(
+base.module.rules.push(
   {
     test: /\.css$/,
     loader: _.cssLoader

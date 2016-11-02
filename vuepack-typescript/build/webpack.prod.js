@@ -6,9 +6,9 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const base = require('./webpack.base')
 const pkg = require('../package')
 const _ = require('./utils')
-const config = require('./config')
+const useElectron = false
 
-if (config.electron) {
+if (useElectron) {
   // remove dist folder in electron mode
   exec('rm -rf app/assets/')
 } else {
@@ -18,8 +18,10 @@ if (config.electron) {
   base.devtool = 'source-map'
 }
 
+// TODO: Use webpack-merge instead of this base syntax. See https://github.com/AngularClass/angular2-webpack-starter/blob/master/config/webpack.prod.js
+
 // a white list to add dependencies to vendor chunk
-base.entry.vendor = config.vendor
+base.entry.vendor = Object.keys(pkg.dependencies)
 // use hash filename to support long-term caching
 base.output.filename = '[name].[chunkhash:8].js'
 // add webpack plugins
@@ -49,7 +51,7 @@ base.plugins.push(
 )
 
 // extrac css in standalone .css files
-base.module.loaders.push({
+base.module.rules.push({
   test: /\.css$/,
   loader: ExtractTextPlugin.extract({
     loader: _.cssLoader,
@@ -58,9 +60,10 @@ base.module.loaders.push({
 })
 
 // extract css in single-file components
-base.vue.loaders.css = ExtractTextPlugin.extract({
-  loader: 'css-loader?-autoprefixer',
-  fallbackLoader: 'vue-style-loader'
-})
+// TODO: Figure out how to write this.
+// base.vue.loaders.css = ExtractTextPlugin.extract({
+//   loader: 'css-loader?-autoprefixer',
+//   fallbackLoader: 'vue-style-loader'
+// })
 
 module.exports = base

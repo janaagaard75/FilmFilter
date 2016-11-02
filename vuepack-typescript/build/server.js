@@ -4,11 +4,10 @@ const path = require('path')
 const express = require('express')
 const webpack = require('webpack')
 const webpackConfig = require('./webpack.dev')
-const config = require('./config')
 
 const app = express()
 
-const port = config.port
+const port = 4000
 webpackConfig.entry.client = [
   `webpack-hot-middleware/client`,
   webpackConfig.entry.client
