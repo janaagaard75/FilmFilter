@@ -1,4 +1,6 @@
-Based on https://github.com/TeaMeow/VuePack
+# Info
+
+Based on https://github.com/TeaMeow/VuePack. Conversion inspired by https://github.com/AbeHaruhiko/vue-webpack-typescript.
 
 # Packges
 
@@ -8,6 +10,8 @@ Based on https://github.com/TeaMeow/VuePack
 - Webpack 2
 - Babel 6
 - SASS、CSS
+- TypeScript
+
 
 # Build
 

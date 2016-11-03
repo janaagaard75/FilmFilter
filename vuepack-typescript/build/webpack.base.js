@@ -21,7 +21,7 @@ module.exports = {
     publicPath: './assets'
   },
   resolve: {
-    extensions: ['.js', '.vue', '.css', '.json']
+    extensions: ['.css', '.js', '.json', '.ts', '.vue']
   },
   module: {
     rules: [
@@ -32,6 +32,11 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
+        exclude: [/node_modules/]
+      },
+      {
+        test: /\.ts$/,
+        loader: 'awesome-typescript-loader',
         exclude: [/node_modules/]
       },
       {

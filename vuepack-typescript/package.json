@@ -6,7 +6,7 @@
     "scripts": {
         "test": "echo wow, such TeaMeow, very Spring!",
         "build": "rm -rf dist && webpack --config build/webpack.prod.js",
-        "dev": "node build/server.js",
+        "start": "node build/server.js",
         "gh": "npm run build && gh-pages -d dist"
     },
     "repository": {
@@ -29,12 +29,14 @@
     },
     "homepage": "https://github.com/TeaMeow/vuepack#readme",
     "dependencies": {
-        "vue": "2.0.3",
+        "vue": "^2.0.3",
         "vue-router": "2.0.1",
+        "vue-typescript-component": "^0.5.0",
         "vuex": "2.0.0",
         "vuex-router-sync": "3.0.0"
     },
     "devDependencies": {
+        "@types/node": "^6.0.46",
         "autoprefixer": "6.5.1",
         "awesome-typescript-loader": "^2.2.4",
         "babel-core": "6.18.2",
@@ -54,6 +56,9 @@
         "typescript": "^2.0.6",
         "url-loader": "0.5.7",
         "vue-loader": "9.7.0",
+        "vue-typescript-component": "^0.5.0",
+        "vue-typescript-import-dts": "^2.0.0",
+        "vuex": "^2.0.0",
         "webpack": "2.1.0-beta.25",
         "webpack-dev-middleware": "1.8.4",
         "webpack-hot-middleware": "2.13.1",
