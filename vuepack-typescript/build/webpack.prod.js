@@ -74,18 +74,22 @@ module.exports = webpackMerge.smart(baseConfig, {
       {
         test: /\.vue$/,
         options: {
-          loaders: ExtractTextPlugin.extract({
-            fallbackLoader: 'vue-style-loader',
-            loader: [
-              {
-                loader: 'css-loader',
-                options: {
-                  'autoprefixer': false
-                }
-              }
-            ]
-          })
+          loaders: {
+            css: ExtractTextPlugin.extract({
+              fallbackLoader: 'vue-style-loader',
+              loader: 'css-loader'
+            })
+          }
         }
+        // TODO: Turn off autoprefixer.
+        // loader: [
+        //   {
+        //     loader: 'css-loader',
+        //     options: {
+        //       'autoprefixer': false
+        //     }
+        //   }
+        // ]
       }
     ]
   }
