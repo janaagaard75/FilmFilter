@@ -1,10 +1,10 @@
 'use strict'
-const exec = require('child_process').execSync
-const webpack = require('webpack')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const baseConfig = require('./webpack.base')
+const exec = require('child_process').execSync
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const npmPackage = require('../package')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 
 // TODO: Consider using rimraf instead.

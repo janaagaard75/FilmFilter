@@ -1,6 +1,6 @@
 'use strict'
-const webpack = require('webpack')
 const base = require('./webpack.base')
+const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 
 module.exports = webpackMerge.smart(base, {

@@ -1,7 +1,7 @@
 'use strict'
+const express = require('express')
 const fs = require('fs')
 const path = require('path')
-const express = require('express')
 const webpack = require('webpack')
 const webpackConfig = require('./webpack.dev')
 
