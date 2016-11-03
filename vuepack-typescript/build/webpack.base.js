@@ -91,7 +91,7 @@ module.exports = {
       }
     }),
     new HtmlWebpackPlugin({
-      title: 'TeaMeow',
+      title: 'Vue + TypeScript',
       template: __dirname + '/index.html',
       filename: '../index.html'
     }),

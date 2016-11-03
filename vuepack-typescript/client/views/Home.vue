@@ -1,15 +1,15 @@
 <template>
   <div class="page">
-    <counter></counter>
+    <counter-ts></counter-ts>
   </div>
 </template>
 
 <script>
-  import Counter from '../components/Counter'
+  import CounterTs from '../components/CounterTs'
 
   export default {
     components: {
-      Counter
+      CounterTs
     }
   }
 </script>
