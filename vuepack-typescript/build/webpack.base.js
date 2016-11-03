@@ -29,7 +29,7 @@ module.exports = {
           loaders: {},
           postcss: [
             require('autoprefixer')({
-              // Vue does not support ie 8 and below
+              // Vue does not support IE 8 and below.
               browsers: ['last 2 versions', 'ie > 8']
             }),
             require('postcss-nested')
@@ -67,5 +67,5 @@ module.exports = {
       filename: _.outputIndexPath
     })
   ],
-  target: _.target
+  target: 'web'
 }

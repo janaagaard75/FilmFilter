@@ -12,7 +12,7 @@ base.plugins.push(
   new webpack.NoErrorsPlugin()
 )
 
-// push loader for .css file
+// Push loader for .css file.
 base.module.rules.push(
   {
     test: /\.css$/,
