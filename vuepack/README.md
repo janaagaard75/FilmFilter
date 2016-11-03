@@ -12,6 +12,6 @@ Based on https://github.com/TeaMeow/VuePack
 # Build
 
 ```bash
-$ yarn run dev
+$ yarn start
 $ yarn run build
 ```

@@ -16,6 +16,6 @@ Based on https://github.com/TeaMeow/VuePack. Conversion inspired by https://gith
 # Build
 
 ```bash
-$ yarn run dev
+$ yarn start
 $ yarn run build
 ```
