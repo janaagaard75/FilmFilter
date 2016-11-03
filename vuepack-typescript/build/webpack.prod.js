@@ -28,15 +28,16 @@ base.plugins.push(
   new webpack.LoaderOptionsPlugin({
     minimize: true
   }),
-  new webpack.optimize.UglifyJsPlugin({
-    sourceMap: true,
-    compress: {
-      warnings: false
-    },
-    output: {
-      comments: false
-    }
-  }),
+  // TODO: Uglyfy doesn't support ES6. See https://github.com/mishoo/UglifyJS2/issues/448.
+  // new webpack.optimize.UglifyJsPlugin({
+  //   sourceMap: true,
+  //   compress: {
+  //     warnings: false
+  //   },
+  //   output: {
+  //     comments: false
+  //   }
+  // }),
   // Extract vendor chunks.
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
