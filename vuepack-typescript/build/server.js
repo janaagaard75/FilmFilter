@@ -10,8 +10,7 @@ const webpack = require('webpack')
 const devMiddleWare = require('webpack-dev-middleware')(compiler,
   {
     publicPath: config.output.publicPath,
-    stats:
-    {
+    stats: {
       colors: true,
       modules: false,
       children: false,
