@@ -27,11 +27,11 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loaders: ['vue-loader']
+        loader: 'vue-loader'
       },
       {
         test: /\.js$/,
-        loaders: ['babel-loader'],
+        loader: 'babel-loader',
         exclude: [/node_modules/]
       },
       {
