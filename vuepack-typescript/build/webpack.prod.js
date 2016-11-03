@@ -4,8 +4,7 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const baseConfig = require('./webpack.base')
-const pkg = require('../package')
-const _ = require('./utils')
+const npmPackage = require('../package')
 const webpackMerge = require('webpack-merge')
 
 // TODO: Consider using rimraf instead.
@@ -17,7 +16,7 @@ module.exports = webpackMerge.smart(baseConfig, {
   devtool: 'source-map',
   entry: {
     // A white list to add dependencies to vendor chunk.
-    vendor: Object.keys(pkg.dependencies)
+    vendor: Object.keys(npmPackage.dependencies)
   },
   output: {
     // Use hash filename to support long-term caching.

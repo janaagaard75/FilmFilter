@@ -2,14 +2,13 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const _ = require('./utils')
 
 module.exports = {
   entry: {
     client: './client/index.js'
   },
   output: {
-    path: _.outputPath,
+    path: path.join(__dirname, '../dist'),
     filename: '[name].js',
     publicPath: '/'
   },
@@ -69,7 +68,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'vuepack-typescript',
       template: __dirname + '/index.html',
-      filename: _.outputIndexPath
+      filename: path.join(__dirname, '../dist/index.html')
     })
   ],
   target: 'web'
