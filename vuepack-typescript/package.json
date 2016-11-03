@@ -1,7 +1,7 @@
 {
-    "name": "vuepack",
+    "name": "vuepack-typescript",
     "version": "0.0.0",
-    "description": "A modern Vue.js starter which uses Vue 2, Vuex, Vue-router and Webpack 2.",
+    "description": "A modern Vue.js starter which uses Vue 2, Vuex, Vue-router, Webpack 2 and TypeScript",
     "main": "client/index.js",
     "scripts": {
         "test": "echo wow, such TeaMeow, very Spring!",
@@ -14,12 +14,13 @@
         "url": "git+https://github.com/TeaMeow/vuepack.git"
     },
     "keywords": [
-        "vue",
-        "vuex",
-        "vue-router",
-        "webpack",
+        "boilerplate",
         "starter",
-        "boilerplate"
+        "typescript",
+        "vue",
+        "vue-router",
+        "vuex",
+        "webpack"
     ],
     "author": "Yami Odymel <yamiodymel@gmail.com>",
     "license": "MIT",

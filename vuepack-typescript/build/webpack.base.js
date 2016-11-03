@@ -27,16 +27,16 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loaders: ['vue']
+        loaders: ['vue-loader']
       },
       {
         test: /\.js$/,
-        loaders: ['babel'],
+        loaders: ['babel-loader'],
         exclude: [/node_modules/]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url',
+        loader: 'url-loader',
         query:
         {
           limit: 10000,
@@ -45,7 +45,7 @@ module.exports = {
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url'
+        loader: 'url-loader'
       },
       {
         test: /\.css$/,
