@@ -1,11 +1,12 @@
 'use strict'
 
-const path = require('path')
-const express = require('express')
-const webpack = require('webpack')
-const config = require('./webpack.dev')
 const app = express()
+const config = require('./webpack.dev')
 const compiler = webpack(config)
+const express = require('express')
+const path = require('path')
+const webpack = require('webpack')
+
 const devMiddleWare = require('webpack-dev-middleware')(compiler,
   {
     publicPath: config.output.publicPath,
@@ -31,5 +32,5 @@ app.get('*', (req, res) => {
 })
 
 app.listen(8080, () => {
-  console.log(`【正位於 http://localhost:8080 監聽中】`)
+  console.log('Site available on http://localhost:8080/')
 })

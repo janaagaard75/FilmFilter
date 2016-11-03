@@ -1,8 +1,8 @@
 'use strict'
 
-const webpack = require('webpack')
-const merge = require('webpack-merge')
 const config = require('./webpack.base')
+const merge = require('webpack-merge')
+const webpack = require('webpack')
 
 config.entry.client =
   [

@@ -1,11 +1,11 @@
 'use strict'
 
-const webpack = require('webpack')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const ProgressBarPlugin = require('progress-bar-webpack-plugin')
-const merge = require('webpack-merge')
 const config = require('./webpack.base')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const merge = require('webpack-merge')
 const pkg = require('../package')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = merge(config,
   {
@@ -16,8 +16,7 @@ module.exports = merge(config,
     entry:
     {
       vendor: Object.keys(pkg.dependencies).filter(name => {
-        // update the code if you want to
-        // remove some dependencies you don't need in the vendor bundle
+        // Update the code if you want to remove some dependencies you don't need in the vendor bundle.
         return true
       })
     },
@@ -42,7 +41,7 @@ module.exports = merge(config,
           comments: false
         }),
 
-      // extract vendor chunks
+      // Extract vendor chunks.
       new webpack.optimize.CommonsChunkPlugin
         ({
           name: 'vendor',
