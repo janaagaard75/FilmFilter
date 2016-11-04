@@ -9,12 +9,6 @@
     "start": "webpack-dev-server --inline --progress --port 8080",
     "test": "karma start"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/angular/angular.io/blob/master/LICENSE"
-    }
-  ],
   "dependencies": {
     "@angular/common": "2.1.2",
     "@angular/compiler": "2.1.2",
