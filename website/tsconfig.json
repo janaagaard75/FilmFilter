@@ -1,13 +1,15 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "removeComments": false,
+    "module": "commonjs",
+    "moduleResolution": "node",
     "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true
+    "removeComments": false,
+    "sourceMap": true,
+    // Angular 2 does not yet support strictNullChecks. https://github.com/angular/angular/issues/11844
+    "strictNullChecks": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "target": "es5"
   }
 }
