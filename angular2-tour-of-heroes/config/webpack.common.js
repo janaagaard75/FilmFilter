@@ -1,11 +1,9 @@
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var helpers = require('./helpers')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const helpers = require('./helpers')
 
-var loaders = [
-
-]
+const loaders = []
 
 module.exports = {
   entry: {
@@ -32,7 +30,7 @@ module.exports = {
         loader: 'html-loader'
       },
       {
-        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+        test: /\.(eot|gif|ico|jpe?g|png|svg|ttf|woff|woff2)$/,
         loader: 'file-loader',
         query: {
           name: 'assets/[name].[hash].[ext]'
