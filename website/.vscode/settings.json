@@ -1,0 +1,11 @@
+{
+  "editor.tabSize": 2,
+  "eslint.enable": false,
+  "scss.validate": true,
+  "search.exclude": {
+    "dist/": true
+  },
+  "stylelint.enable": true,
+  "tslint.enable": true,
+  "typescript.tsdk": "./node_modules/typescript/lib"
+}
