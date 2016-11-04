@@ -82,6 +82,12 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       template: 'app/index.html'
-    })
+    }),
+
+    // Fix "Critical dependency: the request of a dependency is an expression". See https://github.com/AngularClass/angular2-webpack-starter/issues/993.
+    new webpack.ContextReplacementPlugin(
+      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+      __dirname
+    )
   ]
 }
