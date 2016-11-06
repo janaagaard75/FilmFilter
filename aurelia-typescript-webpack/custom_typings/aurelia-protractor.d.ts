@@ -3,14 +3,17 @@
 // Definitions by: Enrapt <https://github.com/Enrapt>, Kirill Grishin <https://github.com/KirillGrishin>
 
 // Extend existing interfaces with additional functionality from Aurelia Protractor Extender (aurelia.protractor.js)
+import * as protractor from 'protractor'
+declare module 'protractor' {
+  interface Browser {
+    loadAndWaitForAureliaPage(url: string): any;
+    waitForRouterComplete(): any;
 
-declare module protractor {
-  interface IBrowser extends protractor.Protractor {
-    loadAndWaitForAureliaPage(url: string): protractor.Protractor;
-    waitForRouterComplete();
+    // this should eventually be defined externally:
+    switchTo(): any;
   }
 
-  interface IProtractorLocatorStrategy {
-    valueBind(bindTarget: string): webdriver.Locator;
+  interface ProtractorBy {
+    valueBind(bindTarget: string): Locator;
   }
 }

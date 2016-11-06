@@ -1,27 +1,28 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
-    "sourceMap": true,
-    "target": "es5",
-    "module": "amd",
-    "declaration": false,
-    "noImplicitAny": false,
-    "removeComments": true,
+    "target": "es2015",
+    "module": "es2015",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
-    "lib": ["es2015", "dom"]
+    "sourceMap": true,
+    "allowJs": true
+  },
+  "awesomeTypescriptLoaderOptions": {
+    "doTypeCheck": true,
+    "forkChecker": true,
+    "useBabel": true,
+    "useCache": true,
+    "babelOptions": {
+      "presets": ["es2015-loose-native-modules"]
+    }
   },
   "exclude": [
-    "node_modules"
-  ],
-  "filesGlob": [
-    "./src/**/*.ts",
-    "./test/**/*.ts",
-    "./typings/index.d.ts",
-    "./custom_typings/**/*.d.ts"
-  ],
-  "atom": {
-    "rewriteTsconfig": false
-  }
+    "node_modules",
+    "dist",
+    "release",
+    "index.js",
+    "webpack.config.js",
+    "config"
+  ]
 }
