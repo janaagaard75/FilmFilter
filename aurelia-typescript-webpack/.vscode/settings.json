@@ -4,5 +4,7 @@
   "search.exclude": {
     "node_modules/": true,
     "dist/": true
-  }
+  },
+  "scss.validate": false,
+  "stylelint.enable": true
 }
