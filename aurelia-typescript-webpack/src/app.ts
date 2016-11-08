@@ -7,6 +7,8 @@ export class App {
 
   configureRouter(config: RouterConfiguration, router: Router) {
     config.title = 'Aurelia'
+    config.options.pushState = true
+    config.options.root = '/'
     config.map([
       {
         route: ['', 'welcome'],
