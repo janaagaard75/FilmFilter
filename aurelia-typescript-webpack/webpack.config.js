@@ -14,23 +14,12 @@ const outDir = path.resolve('dist')
 const rootDir = path.resolve()
 const srcDir = path.resolve('src')
 
-
-const aureliaBootstrap = [
-  'aurelia-bootstrapper-webpack',
-  'aurelia-polyfills',
-  'aurelia-pal-browser'
-]
-
-const aureliaModules = Object.keys(packageJson.dependencies).filter(dep => dep.startsWith('aurelia-'))
-
 module.exports = {
   resolve: {
     extensions: ['.ts', '.js']
   },
   entry: {
-    'app': ['./src/main'], // Filled by aurelia-webpack-plugin.
-    'aurelia-bootstrap': aureliaBootstrap,
-    'aurelia-modules': aureliaModules.filter(pkg => aureliaBootstrap.indexOf(pkg) === -1)
+    'app': ['./src/main'] // Filled by aurelia-webpack-plugin.
   },
   output: {
     filename: '[name].bundle.js',
@@ -45,18 +34,38 @@ module.exports = {
   devtool: 'source-map',
   module: {
     rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015', 'stage-1'],
-          plugins: ['transform-decorators-legacy']
-        }
-      },
+      // {
+      //   test: /\.js$/,
+      //   exclude: /node_modules/,
+      //   loader: 'babel-loader',
+      //   query: {
+      //     presets: ['es2015', 'stage-1'],
+      //     plugins: ['transform-decorators-legacy']
+      //   }
+      // },
       {
         test: /\.ts$/,
-        loader: 'awesome-typescript-loader'
+        use: [
+          {
+            loader: 'babel-loader',
+            query: {
+              presets: [
+                [
+                  'es2015',
+                  {
+                    loose: true, // This helps simplify javascript transformation.
+                    module: false // This helps enable tree shaking for Webpack 2.
+                  }
+                ],
+                'stage-1'
+              ],
+              plugins: ['transform-decorators-legacy']
+            }
+          },
+          {
+            loader: 'awesome-typescript-loader'
+          }
+        ]
       },
       {
         test: /\.css?$/,
@@ -93,7 +102,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 8192,
-          name: 'assets/[name].[hash:8].[ext]'
+          name: debug ? 'assets/[name].[ext]' : 'assets/[name].[hash:8].[ext]'
         }
       }
     ]
@@ -108,12 +117,18 @@ module.exports = {
       to: 'favicon.ico'
     }]),
     new HtmlWebpackPlugin({
-      template: 'src/index.ejs',
       metadata: {
         baseUrl: baseUrl,
         NODE_ENV: process.env.NODE_ENV,
         HMR: false
-      }
+      },
+      minify: {
+        collapseBooleanAttributes: true,
+        collapseWhitespace: true,
+        removeComments: true,
+        removeScriptTypeAttributes: true
+      },
+      template: 'src/index.ejs'
     }),
     new webpack.LoaderOptionsPlugin({
       debug: debug,
@@ -133,11 +148,14 @@ module.exports = {
         }
       }
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: [
-        'aurelia-bootstrap',
-        'aurelia-modules'
-      ]
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: [
+    //     '1-aurelia-bootstrap',
+    //     '2-aurelia-modules'
+    //   ]
+    // }),
+    new webpack.ProvidePlugin({
+      regeneratorRuntime: 'regenerator-runtime', // Add support for await/async syntax.
     })
   ],
   devServer: {
