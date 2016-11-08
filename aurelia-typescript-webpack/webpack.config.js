@@ -1,78 +1,89 @@
-const AureliaWebpackPlugin = require('aurelia-webpack-plugin');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin')
+// Based on https://github.com/aurelia/skeleton-navigation/issues/688.
+// More options here and here: https://github.com/aurelia/framework/blob/master/doc/article/drafts/manual-webpack-configuration.md and https://github.com/aurelia/framework/blob/master/doc/article/drafts/manual-webpack-configuration.md.
+const AureliaWebpackPlugin = require('aurelia-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const path = require('path');
-const ProvidePlugin = require('webpack/lib/ProvidePlugin');
+const packageJson = require('./package.json')
+const path = require('path')
+const ProvidePlugin = require('webpack/lib/ProvidePlugin')
+const webpack = require('webpack')
+
+const baseUrl = '/'
+const debug = (process.env.NODE_ENV !== 'production')
+const outDir = path.resolve('dist')
+const rootDir = path.resolve()
+const srcDir = path.resolve('src')
+
+
+const aureliaBootstrap = [
+  'aurelia-bootstrapper-webpack',
+  'aurelia-polyfills',
+  'aurelia-pal-browser'
+]
+
+const aureliaModules = Object.keys(packageJson.dependencies).filter(dep => dep.startsWith('aurelia-'))
 
 module.exports = {
   resolve: {
     extensions: ['.ts', '.js']
   },
-  devServer: {
-    host: 'localhost',
-    port: 3000
-  },
   entry: {
-    main: [
-      './src/main'
-    ]
+    'app': ['./src/main'], // Filled by aurelia-webpack-plugin.
+    'aurelia-bootstrap': aureliaBootstrap,
+    'aurelia-modules': aureliaModules.filter(pkg => aureliaBootstrap.indexOf(pkg) === -1)
   },
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: '[name].bundle.js',
+    path: outDir
   },
-  plugins: [
-    new AureliaWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: "src/index.ejs",
-      metadata:
-      {
-        baseUrl: "/",
-        ENV: "development",
-        HMR: false,
-        host: "localhost",
-        port: 3000,
-        title: "Aurelia in TypeScript with Webpack (webpack.config.js)"
-      }
-    })
-  ],
+  output: {
+    chunkFilename: debug ? '[id].chunk.js' : '[id].[chunkhash:8].chunk.js',
+    filename: debug ? '[name].bundle.js' : '[name].[chunkhash:8].bundle.js',
+    path: outDir,
+    sourceMapFilename: debug ? '[name].bundle.map' : '[name].[chunkhash:8].bundle.map'
+  },
+  devtool: 'source-map',
   module: {
-    loaders: [
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015', 'stage-1'],
+          plugins: ['transform-decorators-legacy']
+        }
+      },
       {
         test: /\.ts$/,
         loader: 'awesome-typescript-loader'
       },
       {
         test: /\.css?$/,
-        loaders: [
+        use: [
           'style-loader',
           'css-loader'
         ]
       },
       // TODO: Consider adding https://github.com/vieron/stylelint-webpack-plugin.
       {
-        test: /\.scss?$/,
-        loaders: [
-          'style-loader',
-          'css-loader',
+        test: /\.(css|scss)?$/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              singleton: !debug
+            }
+          },
+          {
+            loader: 'css-loader',
+            query: {
+              minimize: !debug
+            }
+          },
           'sass-loader'
         ]
       },
-      // {
-      //   test: /\.scss$/,
-      //   loaders: [
-      //     ExtractTextPlugin.extract({
-      //       fallbackLoader: 'style-loader',
-      //       loader: 'css-loader',
-      //       options: {
-      //         sourceMap: true
-      //       }
-      //     }),
-      //     'to-string-loader',
-      //     'css-loader',
-      //     'sass-loader'
-      //   ]
-      // },
       {
         test: /\.html$/,
         loader: 'html-loader'
@@ -85,33 +96,54 @@ module.exports = {
           name: 'assets/[name].[hash:8].[ext]'
         }
       }
-      // {
-      //   test: /\.(eot|svg|ttf|woff|woff2)$/,
-      //   loader: 'url-loader',
-      //   options: {
-      //     limit: 10000
-      //   }
-      // }
-      // {
-      //   test: /\.(eot|svg|ttf)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      //   loader: 'file-loader'
-      // },
-      // {
-      //   test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      //   loader: 'url-loader',
-      //   options: {
-      //     limit: '10000',
-      //     mimetype: 'application/font-woff'
-      //   }
-      // },
-      // {
-      //   test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      //   loader: 'url-loader',
-      //   options: {
-      //     limit: '10000',
-      //     mimetype: 'application/font-woff2'
-      //   }
-      // }
     ]
+  },
+  plugins: [
+    new AureliaWebpackPlugin({
+      root: rootDir,
+      src: srcDir
+    }),
+    new CopyWebpackPlugin([{
+      from: 'src/favicon.ico',
+      to: 'favicon.ico'
+    }]),
+    new HtmlWebpackPlugin({
+      template: 'src/index.ejs',
+      metadata: {
+        baseUrl: baseUrl,
+        NODE_ENV: process.env.NODE_ENV,
+        HMR: false
+      }
+    }),
+    new webpack.LoaderOptionsPlugin({
+      debug: debug,
+      devtool: 'source-map',
+      options: {
+        context: __dirname,
+        'html-minifier-loader': {
+          collapseBooleanAttributes: true,
+          collapseInlineTagWhitespace: true,
+          collapseWhitespace: true,
+          minifyCSS: true,
+          minifyJS: true,
+          removeAttributeQuotes: false,
+          removeComments: true,
+          removeScriptTypeAttributes: true,
+          removeStyleLinkTypeAttributes: true
+        }
+      }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: [
+        'aurelia-bootstrap',
+        'aurelia-modules'
+      ]
+    })
+  ],
+  devServer: {
+    host: 'localhost',
+    port: 3000,
+    progress: true,
+    outputPath: outDir
   }
-};
+}
