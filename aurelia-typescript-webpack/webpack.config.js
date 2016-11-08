@@ -139,18 +139,13 @@ module.exports = {
         }
       }
     }),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: [
-    //     '1-aurelia-bootstrap',
-    //     '2-aurelia-modules'
-    //   ]
-    // }),
     new webpack.ProvidePlugin({
       regeneratorRuntime: 'regenerator-runtime', // Add support for await/async syntax.
     })
   ].concat(debug ? [
     // Plugins for development mode.
   ] : [
+    // TODO: Not sure this is necessary, since there's only one bundle.
     new webpack.optimize.DedupePlugin(),
 
     // Plugins for production mode.
