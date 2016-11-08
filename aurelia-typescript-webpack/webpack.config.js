@@ -24,15 +24,15 @@ module.exports = {
   plugins: [
     new AureliaWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: "index.html",
+      template: "src/index.ejs",
       metadata:
       {
-        port: 3000,
-        host: "localhost",
+        baseUrl: "/",
         ENV: "development",
         HMR: false,
-        title: "Aurelia Navigation Skeleton",
-        baseUrl: "/",
+        host: "localhost",
+        port: 3000,
+        title: "Aurelia in TypeScript with Webpack (webpack.config.js)"
       }
     })
   ],
@@ -49,6 +49,7 @@ module.exports = {
           'css-loader'
         ]
       },
+      // TODO: Consider adding https://github.com/vieron/stylelint-webpack-plugin.
       {
         test: /\.scss?$/,
         loaders: [

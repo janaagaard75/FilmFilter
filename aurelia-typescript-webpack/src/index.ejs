@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%- webpackConfig.metadata.title %></title>
+    <!-- TODO: Add utf-8 and viewport. -->
+    <title>Aurelia with TypeScript and Webpack</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <base href="<%- webpackConfig.metadata.baseUrl %>">
+    <base href="<%- JSON.stringify(webpackConfig) %>">
     <!-- imported CSS are concatenated and added automatically -->
   </head>
   <body aurelia-app="main">
     <div class="splash">
-      <div class="message"><%- webpackConfig.metadata.title %></div>
+      <div class="message">Loading the application.</div>
       <span class="fa fa-spinner fa-spin"></span>
     </div>
-    <% if (webpackConfig.metadata.ENV === 'development') { %>
+    <!--% if (webpackConfig.metadata.ENV === 'development') { %-->
       <!-- Webpack Dev Server reload -->
       <script src="/webpack-dev-server.js"></script>
-    <% } %>
+    <!--% } %-->
   </body>
 </html>
