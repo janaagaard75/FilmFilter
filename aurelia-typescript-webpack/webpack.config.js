@@ -143,12 +143,13 @@ module.exports = {
       regeneratorRuntime: 'regenerator-runtime', // Add support for await/async syntax.
     })
   ].concat(debug ? [
-    // Plugins for development mode.
+    // No extra plugins for development mode.
   ] : [
+    // Extra plugins for production mode.
+
     // TODO: Not sure this is necessary, since there's only one bundle.
     new webpack.optimize.DedupePlugin(),
 
-    // Plugins for production mode.
     new webpack.optimize.UglifyJsPlugin({
       mangle: {
         screw_ie8: true,
