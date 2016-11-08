@@ -1,6 +1,7 @@
 import {Aurelia} from 'aurelia-framework';
 import {Router, RouterConfiguration} from 'aurelia-router';
 
+// TODO: Consider using inject, see http://tutaurelia.net/2016/07/02/getting-started-with-aurelia-and-typescript-in-visual-studio-2015-update-3/.
 export class App {
   router: Router;
 

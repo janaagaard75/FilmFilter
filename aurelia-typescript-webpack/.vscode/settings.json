@@ -2,8 +2,8 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "search.exclude": {
-    "node_modules/": true,
-    "dist/": true
+    "dist/": true,
+    "yarn.lock": true
   },
   "scss.validate": false,
   "stylelint.enable": true
