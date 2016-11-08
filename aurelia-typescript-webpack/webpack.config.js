@@ -34,15 +34,6 @@ module.exports = {
   devtool: 'source-map',
   module: {
     rules: [
-      // {
-      //   test: /\.js$/,
-      //   exclude: /node_modules/,
-      //   loader: 'babel-loader',
-      //   query: {
-      //     presets: ['es2015', 'stage-1'],
-      //     plugins: ['transform-decorators-legacy']
-      //   }
-      // },
       {
         test: /\.ts$/,
         use: [
@@ -157,7 +148,30 @@ module.exports = {
     new webpack.ProvidePlugin({
       regeneratorRuntime: 'regenerator-runtime', // Add support for await/async syntax.
     })
-  ],
+  ].concat(debug ? [
+    // Plugins for development mode.
+  ] : [
+    new webpack.optimize.DedupePlugin(),
+
+    // Plugins for production mode.
+    new webpack.optimize.UglifyJsPlugin({
+      mangle: {
+        screw_ie8: true,
+        keep_fnames: true
+      },
+      dead_code: true,
+      unused: true,
+      comments: true,
+      compress: {
+        screw_ie8: true,
+        keep_fnames: true,
+        drop_debugger: false,
+        dead_code: false,
+        unused: false,
+        warnings: false
+      }
+    })
+  ]),
   devServer: {
     host: 'localhost',
     port: 3000,
