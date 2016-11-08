@@ -290,25 +290,6 @@ aurelia-binding@^1.0.0, aurelia-binding@^1.0.7:
     aurelia-pal "^1.0.0"
     aurelia-task-queue "^1.0.0"
 
-aurelia-bootstrapper:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/aurelia-bootstrapper/-/aurelia-bootstrapper-1.0.1.tgz#a59a71349f0f632c408468a7f59cc163fc3a817e"
-  dependencies:
-    aurelia-event-aggregator "^1.0.0"
-    aurelia-framework "^1.0.0"
-    aurelia-history "^1.0.0"
-    aurelia-history-browser "^1.0.0"
-    aurelia-loader-default "^1.0.0"
-    aurelia-logging-console "^1.0.0"
-    aurelia-pal "^1.0.0"
-    aurelia-pal-browser "^1.0.0"
-    aurelia-polyfills "^1.0.0"
-    aurelia-router "^1.0.1"
-    aurelia-templating "^1.0.0"
-    aurelia-templating-binding "^1.0.0"
-    aurelia-templating-resources "^1.0.0"
-    aurelia-templating-router "^1.0.0"
-
 aurelia-bootstrapper-webpack@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/aurelia-bootstrapper-webpack/-/aurelia-bootstrapper-webpack-1.0.0.tgz#00b9376990f1cea4d2a21e1b5582e4755d58cacd"
@@ -335,7 +316,7 @@ aurelia-fetch-client@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/aurelia-fetch-client/-/aurelia-fetch-client-1.0.1.tgz#ae61c42a6aa9567e8c64e6e7c4c22237a47b0772"
 
-aurelia-framework@^1.0.0, aurelia-framework@1.0.7:
+aurelia-framework@1.0.7:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/aurelia-framework/-/aurelia-framework-1.0.7.tgz#97a31fb6f4553352cf51e993d28904e6863f40ba"
   dependencies:
@@ -349,7 +330,7 @@ aurelia-framework@^1.0.0, aurelia-framework@1.0.7:
     aurelia-task-queue "^1.0.0"
     aurelia-templating "^1.0.0"
 
-aurelia-history-browser@^1.0.0, aurelia-history-browser@1.0.0:
+aurelia-history-browser@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/aurelia-history-browser/-/aurelia-history-browser-1.0.0.tgz#954e31cb5d9a18914502e02e544e83c0c152d07c"
   dependencies:
@@ -359,14 +340,6 @@ aurelia-history-browser@^1.0.0, aurelia-history-browser@1.0.0:
 aurelia-history@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/aurelia-history/-/aurelia-history-1.0.0.tgz#3b3a47eea34a2c2cb17e46d4fbe3565fa7461149"
-
-aurelia-loader-default@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/aurelia-loader-default/-/aurelia-loader-default-1.0.0.tgz#b5edfb71f61734427fd1b131aeee2ede6f4e6c1f"
-  dependencies:
-    aurelia-loader "^1.0.0"
-    aurelia-metadata "^1.0.0"
-    aurelia-pal "^1.0.0"
 
 aurelia-loader-webpack@^1.0.0, aurelia-loader-webpack@1.0.3:
   version "1.0.3"
@@ -384,7 +357,7 @@ aurelia-loader@^1.0.0:
     aurelia-metadata "^1.0.0"
     aurelia-path "^1.0.0"
 
-aurelia-logging-console@^1.0.0, aurelia-logging-console@1.0.0:
+aurelia-logging-console@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/aurelia-logging-console/-/aurelia-logging-console-1.0.0.tgz#edf7507a97fc68b40513a17c677d70414101adb4"
   dependencies:
@@ -443,7 +416,7 @@ aurelia-task-queue@^1.0.0, aurelia-task-queue@^1.1.0:
   dependencies:
     aurelia-pal "^1.0.0"
 
-aurelia-templating-binding@^1.0.0, aurelia-templating-binding@1.0.0:
+aurelia-templating-binding@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/aurelia-templating-binding/-/aurelia-templating-binding-1.0.0.tgz#abf17a09212ffce27278d6fd042232e61b146f92"
   dependencies:
@@ -451,7 +424,7 @@ aurelia-templating-binding@^1.0.0, aurelia-templating-binding@1.0.0:
     aurelia-logging "^1.0.0"
     aurelia-templating "^1.0.0"
 
-aurelia-templating-resources@^1.0.0, aurelia-templating-resources@1.1.1:
+aurelia-templating-resources@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/aurelia-templating-resources/-/aurelia-templating-resources-1.1.1.tgz#fd55bbdde07d2a7249ac244ae5c696efb8b0bfb7"
   dependencies:
@@ -465,7 +438,7 @@ aurelia-templating-resources@^1.0.0, aurelia-templating-resources@1.1.1:
     aurelia-task-queue "^1.0.0"
     aurelia-templating "^1.0.0"
 
-aurelia-templating-router@^1.0.0, aurelia-templating-router@1.0.0:
+aurelia-templating-router@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/aurelia-templating-router/-/aurelia-templating-router-1.0.0.tgz#862f3d32e0de4bf13db2d2d249b6b56b4f9996bb"
   dependencies:

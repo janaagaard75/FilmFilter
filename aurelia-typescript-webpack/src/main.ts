@@ -1,5 +1,5 @@
-﻿import {Aurelia} from 'aurelia-framework'
-import {bootstrap} from 'aurelia-bootstrapper-webpack'
+﻿import { Aurelia } from 'aurelia-framework'
+import { bootstrap } from 'aurelia-bootstrapper-webpack'
 // We want font-awesome to load as soon as possible to show the fa-spinner.
 import '../styles/main.scss'
 

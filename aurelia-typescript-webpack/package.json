@@ -49,7 +49,6 @@
   "license": "CC0-1.0",
   "author": "Jan Aagaard <jan@aagaard.net> (http://cpnhgn.dk/)",
   "dependencies": {
-    "aurelia-bootstrapper": "^1.0.1",
     "aurelia-event-aggregator": "1.0.0",
     "aurelia-fetch-client": "1.0.1",
     "aurelia-framework": "1.0.7",
