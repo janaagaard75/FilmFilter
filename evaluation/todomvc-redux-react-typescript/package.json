@@ -7,14 +7,14 @@
     "url": "git@github.com:jaysoo/todomvc-redux-react-typescript.git"
   },
   "scripts": {
+    "build:prod": "cross-env NODE_ENV=production webpack --config webpack/webpack-production.config.js --progress --profile --colors",
+    "build": "node webpack/dev-server.js",
     "postinstall": "typings install",
-    "build": "cross-env NODE_ENV=production webpack --config webpack/webpack-production.config.js --progress --profile --colors",
-    "build:dev": "node webpack/dev-server.js",
-    "start": "concurrently \"npm run build\" \"node server/production\"",
-    "start:dev": "concurrently \"npm run build:dev\" \"node server/development\"",
+    "start:prod": "concurrently \"npm run build\" \"node server/production\"",
+    "start": "concurrently \"npm run build:dev\" \"node server/development\"",
     "test": "tsc && mocha --require test-setup --recursive ./dist/**/__spec__/**/*-spec.js"
   },
-  "author": "Jack Hsu <jack.hsu@gmail.com>",
+  "author": "Jack Hsu <jack.hsu@gmail.com>, modified by Jan Aagaard <jan@aagaard.net>",
   "license": "ISC",
   "dependencies": {
     "classnames": "2.2.3",
