@@ -23,11 +23,11 @@ module.exports = function (options) {
 
   var loaders = {
     "js": {
-      loaders: options.development ? ["react-hot", "babel-loader"] : ["babel-loader"],
+      loaders: options.development ? ["react-hot-loader", "babel-loader"] : ["babel-loader"],
       include: path.join(__dirname, "..", "client")
     },
     "ts|tsx": {
-      loaders: ['react-hot', 'ts-loader']
+      loaders: ['react-hot-loader', 'ts-loader']
     }
   }
 
@@ -35,9 +35,7 @@ module.exports = function (options) {
     "css": 'css-loader'
   }
 
-  var publicPath = options.development
-    ? 'http://localhost:2992/_assets/'
-    : '/_assets/'
+  var publicPath = options.development ? 'http://localhost:2992/_assets/' : '/_assets/'
 
   var plugins = [
     new webpack.PrefetchPlugin("react"),
