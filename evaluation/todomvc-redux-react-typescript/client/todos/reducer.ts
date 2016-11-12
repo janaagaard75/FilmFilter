@@ -18,7 +18,8 @@ const initialState: IState = [<Todo>{
 }]
 
 export default handleActions<IState>({
-  [ADD_TODO]: (state: IState, action: Action): IState => {
+  // TODO: Figure out how to write type safe reducers.
+  [ADD_TODO]: (state: IState, action: Action<any>): IState => {
     return [{
       id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
       completed: action.payload.completed,
@@ -26,13 +27,13 @@ export default handleActions<IState>({
     }, ...state]
   },
 
-  [DELETE_TODO]: (state: IState, action: Action): IState => {
+  [DELETE_TODO]: (state: IState, action: Action<any>): IState => {
     return state.filter(todo =>
       todo.id !== action.payload.id
     );
   },
 
-  [EDIT_TODO]: (state: IState, action: Action): IState => {
+  [EDIT_TODO]: (state: IState, action: Action<any>): IState => {
     return <IState>state.map(todo =>
       todo.id === action.payload.id
         ? assign(<Todo>{}, todo, { text: action.payload.text })
@@ -40,7 +41,7 @@ export default handleActions<IState>({
     )
   },
 
-  [COMPLETE_TODO]: (state: IState, action: Action): IState => {
+  [COMPLETE_TODO]: (state: IState, action: Action<any>): IState => {
     return <IState>state.map(todo =>
       todo.id === action.payload.id
         ? assign({}, todo, { completed: !todo.completed })
@@ -48,14 +49,14 @@ export default handleActions<IState>({
     )
   },
 
-  [COMPLETE_ALL]: (state: IState, action: Action): IState => {
+  [COMPLETE_ALL]: (state: IState, action: Action<any>): IState => {
     const areAllMarked = state.every(todo => todo.completed);
     return <IState>state.map(todo => assign({}, todo, {
       completed: !areAllMarked
     }))
   },
 
-  [CLEAR_COMPLETED]: (state: IState, action: Action): IState => {
+  [CLEAR_COMPLETED]: (state: IState, action: Action<any>): IState => {
     return state.filter(todo => todo.completed === false)
   }
 }, initialState)
