@@ -1,7 +1,7 @@
 export type Todo = {
-  id?: number;
-  text: string;
-  completed: boolean;
-};
+  id?: number
+  text: string
+  completed: boolean
+}
 
-export type IState = Todo[];
+export type IState = Array<Todo>

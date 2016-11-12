@@ -16,7 +16,7 @@ const TODO_FILTERS = {
 }
 
 interface MainSectionProps {
-  todos: Todo[]
+  todos: Array<Todo>
   clearCompleted: () => void
   completeAll: () => void
   editTodo: (todo: Todo, text: string) => void

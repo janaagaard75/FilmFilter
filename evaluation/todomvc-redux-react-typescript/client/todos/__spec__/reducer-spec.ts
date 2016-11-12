@@ -14,7 +14,7 @@ import {
 
 describe('todo reducer', () => {
   it('handles add', () => {
-    let state: Todo[] = [{ id: 0, text: '', completed: true }]
+    let state: Array<Todo> = [{ id: 0, text: '', completed: true }]
 
     state = reducer(state, {
       type: ADD_TODO,
@@ -27,7 +27,7 @@ describe('todo reducer', () => {
   })
 
   it('handles delete', () => {
-    let state: Todo[] = [{ id: 1, text: '', completed: false }]
+    let state: Array<Todo> = [{ id: 1, text: '', completed: false }]
 
     state = reducer(state, {
       type: DELETE_TODO,
@@ -38,7 +38,7 @@ describe('todo reducer', () => {
   })
 
   it('handles edit', () => {
-    let state: Todo[] = [{ id: 1, text: '', completed: false }]
+    let state: Array<Todo> = [{ id: 1, text: '', completed: false }]
 
     state = reducer(state, {
       type: EDIT_TODO,
@@ -52,7 +52,7 @@ describe('todo reducer', () => {
 
   it('handles complete all', () => {
 
-    let state: Todo[] = [
+    let state: Array<Todo> = [
       { id: 1, text: '', completed: false }
     ]
 
@@ -67,7 +67,7 @@ describe('todo reducer', () => {
   })
 
   it('handles complete all', () => {
-    let state: Todo[] = [
+    let state: Array<Todo> = [
       { id: 1, text: '', completed: false },
       { id: 2, text: '', completed: true },
       { id: 3, text: '', completed: false }
@@ -97,7 +97,7 @@ describe('todo reducer', () => {
   })
 
   it('handles clear completed', () => {
-    let state: Todo[] = [
+    let state: Array<Todo> = [
       { id: 1, text: '', completed: false },
       { id: 2, text: '', completed: true }
     ]

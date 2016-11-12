@@ -15,7 +15,7 @@ import {
 } from '../../todos'
 
 interface AppProps {
-  todos: model.Todo[]
+  todos: Array<model.Todo>
   dispatch: IDispatch
 }
 
