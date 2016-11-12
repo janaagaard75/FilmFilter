@@ -4,4 +4,4 @@ module.exports = [
     minimize: true,
     devtool: "source-map"
   })
-];
+]

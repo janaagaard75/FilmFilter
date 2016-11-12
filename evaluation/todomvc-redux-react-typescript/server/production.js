@@ -3,4 +3,4 @@ require("./index")({
   separateStylesheet: true,
   devServer: false,
   defaultPort: 8080
-});
+})
