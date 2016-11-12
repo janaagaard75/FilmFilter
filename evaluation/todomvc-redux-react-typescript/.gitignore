@@ -1,9 +1,8 @@
-.vscode/
-.idea/
-node_modules/
-typings/
-npm-debug.log
-build/stats-dev.json*
-tmp/
-dist/
+/build/
+/dist/
+/node_modules/
+/tmp/
+/typings/
+
+/*.log
 .sw[a-z]
