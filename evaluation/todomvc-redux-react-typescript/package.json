@@ -10,8 +10,8 @@
     "build:prod": "cross-env NODE_ENV=production webpack --config webpack/webpack-production.config.js --progress --profile --colors",
     "build": "node webpack/dev-server.js",
     "postinstall": "typings install",
-    "start:prod": "concurrently \"npm run build\" \"node server/production\"",
-    "start": "concurrently \"npm run build:dev\" \"node server/development\"",
+    "start:prod": "concurrently \"npm run build:prod\" \"node server/production\"",
+    "start": "concurrently \"npm run build\" \"node server/development\"",
     "test": "tsc && mocha --require test-setup --recursive ./dist/**/__spec__/**/*-spec.js"
   },
   "author": "Jack Hsu <jack.hsu@gmail.com>, modified by Jan Aagaard <jan@aagaard.net>",
