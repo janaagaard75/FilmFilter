@@ -1,5 +1,7 @@
 'use strict'
 
+// Help about Vue2 + TypeScript2: https://herringtondarkholme.github.io/2016/10/03/vue2-ts2/.
+
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
@@ -13,7 +15,7 @@ const postcss = [
 
 module.exports = {
   entry: {
-    client: './client/index.js'
+    client: './client/index.ts'
   },
   output: {
     path: path.join(__dirname, '../dist/assets'),
@@ -21,18 +23,25 @@ module.exports = {
     publicPath: './assets'
   },
   resolve: {
-    extensions: ['.css', '.js', '.json', '.vue']
+    extensions: ['.css', '.js', '.json', '.ts']
   },
   module: {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
+        options: {
+          // Instruct vue-loader to load TypeScript.
+          loaders: {
+            js: 'vue-ts-loader'
+          },
+          // Make TypeScript generated code cooperate with vue-loader.
+          esModule: true
+        }
       },
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: [/node_modules/]
+        test: /\.ts$/,
+        loader: 'vue-ts-loader'
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -53,36 +62,25 @@ module.exports = {
           fallbackLoader: 'style-loader',
           loader: 'css-loader'
         })
-      },
+      }/*,
       {
         test: /\.sass$/,
         loader: 'sass-loader'
-      }
+      }*/
     ]
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({
       options: {
-        babel: {
-          babelrc: false,
-          presets: [
-            [
-              'es2015',
-              {
-                modules: false
-              }
-            ],
-            'stage-1'
-          ]
-        },
         postcss,
         vue: {
           postcss
         },
-        sassLoader: {
-          includePaths: [path.resolve(__dirname)]
-        },
-        context: '/'
+        // sassLoader: {
+        //   includePaths: [path.resolve(__dirname)]
+        // },
+        context: '/',
+        resolve: {} // Required by vue-ts-loader, see https://github.com/TypeStrong/ts-loader/issues/283.
       }
     }),
     new HtmlWebpackPlugin({
