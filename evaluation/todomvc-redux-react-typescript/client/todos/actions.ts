@@ -1,3 +1,4 @@
+// TODO: Replace redux-actions with redux-typescript-actions, https://github.com/aikoven/redux-typescript-actions.
 import { createAction, Action } from 'redux-actions'
 import { assign } from 'lodash'
 
