@@ -1,12 +1,14 @@
-var path = require("path")
-var webpack = require("webpack")
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
-var StatsPlugin = require("stats-webpack-plugin")
-var loadersByExtension = require("../config/loadersByExtension")
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const loadersByExtension = require("../config/loadersByExtension")
+const path = require("path")
+const StatsPlugin = require("stats-webpack-plugin")
+const webpack = require("webpack")
 
 module.exports = function (options) {
-  var entry
+  if (!options.development) {
+  }
 
+  var entry
   if (options.development) {
     entry = {
       todos: [
@@ -21,7 +23,7 @@ module.exports = function (options) {
     }
   }
 
-  var loaders = {
+  const loaders = {
     "js": {
       loaders: options.development ? ["react-hot-loader", "babel-loader"] : ["babel-loader"],
       include: path.join(__dirname, "..", "client")
@@ -31,16 +33,16 @@ module.exports = function (options) {
     }
   }
 
-  var stylesheetLoaders = {
+  const stylesheetLoaders = {
     "css": 'css-loader'
   }
 
-  var publicPath = options.development ? 'http://localhost:2992/_assets/' : '/_assets/'
+  const publicPath = options.development ? 'http://localhost:2992/_assets/' : '/_assets/'
 
   var plugins = [
     new webpack.PrefetchPlugin("react"),
     new webpack.PrefetchPlugin("react/lib/ReactComponentBrowserEnvironment"),
-    new StatsPlugin(path.join(__dirname, "..", "build", options.development ? "stats-dev.json" : "stats.json"), {
+    new StatsPlugin(path.join("..", options.development ? "stats-dev.json" : "stats.json"), {
       chunkModules: true
     })
   ]
@@ -95,10 +97,12 @@ module.exports = function (options) {
       })
     ])
   } else {
-    plugins = plugins.concat([new webpack.DefinePlugin({
-      __DEVELOPMENT__: false,
-      __DEVPANEL__: false
-    })])
+    plugins = plugins.concat([
+      new webpack.DefinePlugin({
+        __DEVELOPMENT__: false,
+        __DEVPANEL__: false
+      })
+    ])
   }
 
   return {
@@ -108,7 +112,7 @@ module.exports = function (options) {
       publicPath: publicPath,
       filename: options.development ? "[id].js" : "[name].js",
       chunkFilename: "[id].js",
-      sourceMapFilename: "debugging/[file].map",
+      sourceMapFilename: "[file].map",
       pathinfo: options.debug
     },
     target: 'web',
