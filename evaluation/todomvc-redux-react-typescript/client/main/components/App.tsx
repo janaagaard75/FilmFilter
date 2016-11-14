@@ -43,4 +43,4 @@ const mapStateToProps = state => ({
   todos: state.todos
 })
 
-export default connect(mapStateToProps)(App)
+export const ConnectedApp = connect(mapStateToProps)(App)
