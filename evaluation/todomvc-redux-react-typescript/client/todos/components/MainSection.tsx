@@ -1,8 +1,8 @@
 import * as React from 'react'
 
 import { Todo, TodoId } from '../model'
-import TodoItem from './TodoItem'
-import Footer from './Footer'
+import { TodoItem } from './TodoItem'
+import { Footer } from './Footer'
 import {
   SHOW_ALL,
   SHOW_COMPLETED,
@@ -27,7 +27,7 @@ interface MainSectionState {
   filter: string
 }
 
-class MainSection extends React.Component<MainSectionProps, MainSectionState> {
+export class MainSection extends React.Component<MainSectionProps, MainSectionState> {
   constructor(props, context) {
     super(props, context)
     this.state = { filter: SHOW_ALL }
@@ -102,5 +102,3 @@ class MainSection extends React.Component<MainSectionProps, MainSectionState> {
     )
   }
 }
-
-export default MainSection

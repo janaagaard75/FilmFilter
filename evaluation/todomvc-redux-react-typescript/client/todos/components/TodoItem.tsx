@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as classNames from 'classnames'
 
 import { Todo, TodoId } from '../model'
-import TodoTextInput from './TodoTextInput'
+import { TodoTextInput } from './TodoTextInput'
 
 interface TodoItemProps {
   todo: Todo
@@ -11,11 +11,12 @@ interface TodoItemProps {
   deleteTodo: (todoId: TodoId) => void
   editTodo: (todoId: TodoId, newText: string) => void
 }
+
 interface TodoItemState {
   editing: boolean
 }
 
-class TodoItem extends React.Component<TodoItemProps, TodoItemState> {
+export class TodoItem extends React.Component<TodoItemProps, TodoItemState> {
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -75,5 +76,3 @@ class TodoItem extends React.Component<TodoItemProps, TodoItemState> {
     )
   }
 }
-
-export default TodoItem

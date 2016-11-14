@@ -1,12 +1,12 @@
 import * as React from 'react'
 
-import TodoTextInput from './TodoTextInput'
+import { TodoTextInput } from './TodoTextInput'
 
 interface HeaderProps {
   addTodo: (text: string) => any
 }
 
-class Header extends React.Component<HeaderProps, void> {
+export class Header extends React.Component<HeaderProps, void> {
   handleSave(text: string) {
     if (text.length !== 0) {
       this.props.addTodo(text)
@@ -26,5 +26,3 @@ class Header extends React.Component<HeaderProps, void> {
     )
   }
 }
-
-export default Header

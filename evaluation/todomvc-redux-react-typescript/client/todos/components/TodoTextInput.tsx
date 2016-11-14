@@ -12,7 +12,7 @@ interface TodoTextInputState {
   text: string
 }
 
-class TodoTextInput extends React.Component<TodoTextInputProps, TodoTextInputState> {
+export class TodoTextInput extends React.Component<TodoTextInputProps, TodoTextInputState> {
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -60,5 +60,3 @@ class TodoTextInput extends React.Component<TodoTextInputProps, TodoTextInputSta
     )
   }
 }
-
-export default TodoTextInput
