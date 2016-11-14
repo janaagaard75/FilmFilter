@@ -5,11 +5,11 @@ import { IState, Todo } from '../model'
 
 import {
   addTodo,
+  clearCompletedTodos,
   deleteTodo,
   editTodo,
-  completeTodo,
-  completeAll,
-  clearCompleted
+  toggleAllTodos,
+  toggleTodo
 } from '../actions'
 
 describe('todo reducer', () => {
@@ -66,7 +66,7 @@ describe('todo reducer', () => {
       completed: false
     }]
 
-    const state2 = reducer(state1, completeTodo(1))
+    const state2 = reducer(state1, toggleTodo(1))
 
     expect(state2[0]).to.equal({
       id: 1,
@@ -74,7 +74,7 @@ describe('todo reducer', () => {
       completed: true
     })
 
-    const state3 = reducer(state2, completeTodo(1))
+    const state3 = reducer(state2, toggleTodo(1))
 
     expect(state3[0]).to.equal({
       id: 1,
@@ -90,7 +90,7 @@ describe('todo reducer', () => {
       { id: 3, text: '', completed: false }
     ]
 
-    const state2 = reducer(state1, completeAll())
+    const state2 = reducer(state1, toggleAllTodos())
 
     expect(state2).to.equal([
       { id: 1, text: '', completed: true },
@@ -98,7 +98,7 @@ describe('todo reducer', () => {
       { id: 3, text: '', completed: true }
     ])
 
-    const state3 = reducer(state2, completeAll())
+    const state3 = reducer(state2, toggleAllTodos())
 
     expect(state3).to.equal([
       { id: 1, text: '', completed: false },
@@ -113,7 +113,7 @@ describe('todo reducer', () => {
       { id: 2, text: '', completed: true }
     ]
 
-    const afterState = reducer(beforeState, clearCompleted())
+    const afterState = reducer(beforeState, clearCompletedTodos())
 
     expect(afterState).to.equal([{
       id: 1,

@@ -8,9 +8,9 @@ import {
   addTodo,
   deleteTodo,
   editTodo,
-  completeTodo,
-  completeAll,
-  clearCompleted
+  toggleTodo,
+  toggleAllTodos,
+  clearCompletedTodos
 } from './actions'
 
 const initialState: IState = [<Todo>{
@@ -43,7 +43,7 @@ export const reducer = (state: IState = initialState, action: ReduxAction): ISta
     )
   }
 
-  if (isType(action, completeTodo)) {
+  if (isType(action, toggleTodo)) {
     return <IState>state.map(todo =>
       todo.id === action.payload
         ? assign({}, todo, { completed: !todo.completed })
@@ -51,14 +51,14 @@ export const reducer = (state: IState = initialState, action: ReduxAction): ISta
     )
   }
 
-  if (isType(action, completeAll)) {
+  if (isType(action, toggleAllTodos)) {
     const areAllMarked = state.every(todo => todo.completed);
     return <IState>state.map(todo => assign({}, todo, {
       completed: !areAllMarked
     }))
   }
 
-  if (isType(action, clearCompleted)) {
+  if (isType(action, clearCompletedTodos)) {
     return state.filter(todo => todo.completed === false)
   }
 
