@@ -1,8 +1,8 @@
 // TODO: Replace redux-actions with redux-typescript-actions, https://github.com/aikoven/redux-typescript-actions.
-import { createAction, Action } from 'redux-actions'
+import actionCreatorFactory from 'redux-typescript-actions'
 import { assign } from 'lodash'
 
-import { Todo } from './model'
+import { TodoId, Todo } from './model'
 
 export const ADD_TODO = 'ADD_TODO'
 export const DELETE_TODO = 'DELETE_TODO'
@@ -11,35 +11,21 @@ export const COMPLETE_TODO = 'COMPLETE_TODO'
 export const COMPLETE_ALL = 'COMPLETE_ALL'
 export const CLEAR_COMPLETED = 'CLEAR_COMPLETED'
 
-const addTodo = createAction<string, Todo>(
-  ADD_TODO,
-  (text: string) => ({ text, completed: false })
-)
+const actionCreator = actionCreatorFactory()
 
-const deleteTodo = createAction<Todo>(
-  DELETE_TODO,
-  (todo: Todo) => todo
-)
+// TODO: These action creators should be named differently. E.g. createAddTodo or todoCreated.
+const addTodo = actionCreator<string>(ADD_TODO)
 
-const editTodo = createAction<{ todo: Todo, newText: string }, Todo>(
-  EDIT_TODO,
-  (todo: Todo, newText: string) => <Todo>assign(todo, { text: newText })
-)
+const deleteTodo = actionCreator<TodoId>(DELETE_TODO)
 
-const completeTodo = createAction<Todo>(
-  COMPLETE_TODO,
-  (todo: Todo) => todo
-)
+const editTodo = actionCreator<{todoId: TodoId, newText: string}>(EDIT_TODO)
 
-const completeAll = createAction<void>(
-  COMPLETE_ALL,
-  () => { }
-)
+// TODO: Rename to toggleTodo.
+const completeTodo = actionCreator<TodoId>(COMPLETE_TODO)
 
-const clearCompleted = createAction<void>(
-  CLEAR_COMPLETED,
-  () => { }
-)
+const completeAll = actionCreator(COMPLETE_ALL)
+
+const clearCompleted = actionCreator(CLEAR_COMPLETED)
 
 export {
   addTodo,

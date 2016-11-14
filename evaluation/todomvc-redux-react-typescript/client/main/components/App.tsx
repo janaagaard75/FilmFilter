@@ -1,4 +1,4 @@
-import { IDispatch } from 'redux'
+import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
 import * as React from 'react'
 
@@ -16,7 +16,7 @@ import {
 
 interface AppProps {
   todos: Array<model.Todo>
-  dispatch: IDispatch
+  dispatch: Dispatch<model.IState>
 }
 
 class App extends React.Component<AppProps, void> {

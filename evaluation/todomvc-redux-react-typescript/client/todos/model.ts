@@ -1,6 +1,8 @@
+export type TodoId = number
+
 export type Todo = {
   // TOOD: Make the ID required.
-  id?: number
+  id?: TodoId
   text: string
   completed: boolean
 }

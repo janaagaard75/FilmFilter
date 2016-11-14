@@ -6,6 +6,7 @@ export { default as TodoTextInput } from './components/TodoTextInput'
 export * from './actions'
 import * as model from './model'
 export { model }
-import reducer from './reducer'
+import { reducer } from './reducer'
 // TODO: Remove default exports.
+// TODO: Consider removing index files.
 export default reducer

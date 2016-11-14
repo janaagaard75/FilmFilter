@@ -1,95 +1,106 @@
 import { expect } from 'chai'
 
-import reducer from '../reducer'
-import { Todo } from '../model'
+import { reducer } from '../reducer'
+import { IState, Todo } from '../model'
 
 import {
-  ADD_TODO,
-  DELETE_TODO,
-  EDIT_TODO,
-  COMPLETE_TODO,
-  COMPLETE_ALL,
-  CLEAR_COMPLETED
+  addTodo,
+  deleteTodo,
+  editTodo,
+  completeTodo,
+  completeAll,
+  clearCompleted
 } from '../actions'
 
 describe('todo reducer', () => {
   it('handles add', () => {
-    let state: Array<Todo> = [{ id: 0, text: '', completed: true }]
+    const beforeState: IState = [{
+      id: 0,
+      text: '',
+      completed: true
+    }]
 
-    state = reducer(state, {
-      type: ADD_TODO,
-      payload: { text: 'hello', completed: false }
+    const afterState = reducer(beforeState, addTodo('hello'))
+
+    expect(afterState[0]).to.equal({
+      id: 1,
+      text: 'hello',
+      completed: false
     })
-
-    expect(state[0]).to.eql(
-      { id: 1, text: 'hello', completed: false }
-    )
   })
 
   it('handles delete', () => {
-    let state: Array<Todo> = [{ id: 1, text: '', completed: false }]
+    const beforeState: IState = [{
+      id: 1,
+      text: '', completed: false
+    }]
 
-    state = reducer(state, {
-      type: DELETE_TODO,
-      payload: { id: 1 }
-    })
+    const afterState = reducer(beforeState, deleteTodo(1))
 
-    expect(state).to.eql([])
+    expect(afterState).to.equal([])
   })
 
   it('handles edit', () => {
-    let state: Array<Todo> = [{ id: 1, text: '', completed: false }]
+    const beforeState: IState = [{
+      id: 1,
+      text: '',
+      completed: false
+    }]
 
-    state = reducer(state, {
-      type: EDIT_TODO,
-      payload: { id: 1, text: 'hello' }
+    const afterState1 = reducer(beforeState, editTodo({
+      todoId: 1,
+      newText: 'hello'
+    }))
+
+    expect(afterState1[0]).to.equal({
+      id: 1,
+      text: 'hello',
+      completed: false
     })
-
-    expect(state[0]).to.eql(
-      { id: 1, text: 'hello', completed: false }
-    )
   })
 
   it('handles complete all', () => {
+    const state1: IState = [{
+      id: 1,
+      text: '',
+      completed: false
+    }]
 
-    let state: Array<Todo> = [
-      { id: 1, text: '', completed: false }
-    ]
+    const state2 = reducer(state1, completeTodo(1))
 
-    state = reducer(state, {
-      type: COMPLETE_TODO,
-      payload: { id: 1 }
+    expect(state2[0]).to.equal({
+      id: 1,
+      text: '',
+      completed: true
     })
 
-    expect(state[0]).to.eql(
-      { id: 1, text: '', completed: true }
-    )
+    const state3 = reducer(state2, completeTodo(1))
+
+    expect(state3[0]).to.equal({
+      id: 1,
+      text: '',
+      completed: false
+    })
   })
 
   it('handles complete all', () => {
-    let state: Array<Todo> = [
+    const state1: IState = [
       { id: 1, text: '', completed: false },
       { id: 2, text: '', completed: true },
       { id: 3, text: '', completed: false }
     ]
 
-    state = reducer(state, {
-      type: COMPLETE_ALL,
-      payload: {}
-    })
+    const state2 = reducer(state1, completeAll())
 
-    expect(state).to.eql([
+    expect(state2).to.equal([
       { id: 1, text: '', completed: true },
       { id: 2, text: '', completed: true },
       { id: 3, text: '', completed: true }
     ])
 
-    state = reducer(state, {
-      type: COMPLETE_ALL,
-      payload: {}
-    })
+    const state3 = reducer(state2, completeAll())
 
-    expect(state).to.eql([
+    expect(state3).to.equal([
       { id: 1, text: '', completed: false },
       { id: 2, text: '', completed: false },
       { id: 3, text: '', completed: false }
@@ -97,18 +108,17 @@ describe('todo reducer', () => {
   })
 
   it('handles clear completed', () => {
-    let state: Array<Todo> = [
+    let beforeState: IState = [
       { id: 1, text: '', completed: false },
       { id: 2, text: '', completed: true }
     ]
 
-    state = reducer(state, {
-      type: CLEAR_COMPLETED,
-      payload: {}
-    })
+    const afterState = reducer(beforeState, clearCompleted())
 
-    expect(state).to.eql([
-      { id: 1, text: '', completed: false }
-    ])
+    expect(afterState).to.equal([{
+      id: 1,
+      text: '',
+      completed: false
+    }])
   })
 })

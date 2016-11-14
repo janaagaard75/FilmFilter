@@ -1,14 +1,16 @@
 import { assign } from 'lodash'
-import { handleActions, Action } from 'redux-actions'
+import { Action as ReduxAction } from 'redux'
+import { isType, Action } from 'redux-typescript-actions'
+// import { handleActions, Action } from 'redux-actions'
 
-import { Todo, IState } from './model';
+import { Todo, IState } from './model'
 import {
-  ADD_TODO,
-  DELETE_TODO,
-  EDIT_TODO,
-  COMPLETE_TODO,
-  COMPLETE_ALL,
-  CLEAR_COMPLETED
+  addTodo,
+  deleteTodo,
+  editTodo,
+  completeTodo,
+  completeAll,
+  clearCompleted
 } from './actions'
 
 const initialState: IState = [<Todo>{
@@ -17,46 +19,48 @@ const initialState: IState = [<Todo>{
   id: 0
 }]
 
-export default handleActions<IState>({
-  // TODO: Figure out how to write type safe reducers.
-  [ADD_TODO]: (state: IState, action: Action<any>): IState => {
+// TODO: Consider renaming to reduce.
+export const reducer = (state: IState = initialState, action: ReduxAction): IState => {
+  if (isType(action, addTodo)) {
     return [{
       id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
-      completed: action.payload.completed,
-      text: action.payload.text
+      completed: false,
+      text: action.payload
     }, ...state]
-  },
+  }
 
-  [DELETE_TODO]: (state: IState, action: Action<any>): IState => {
+  if (isType(action, deleteTodo)) {
     return state.filter(todo =>
-      todo.id !== action.payload.id
-    );
-  },
+      todo.id !== action.payload
+    )
+  }
 
-  [EDIT_TODO]: (state: IState, action: Action<any>): IState => {
+  if (isType(action, editTodo)) {
     return <IState>state.map(todo =>
-      todo.id === action.payload.id
-        ? assign(<Todo>{}, todo, { text: action.payload.text })
+      todo.id === action.payload.todoId
+        ? assign(<Todo>{}, todo, { text: action.payload.newText })
         : todo
     )
-  },
+  }
 
-  [COMPLETE_TODO]: (state: IState, action: Action<any>): IState => {
+  if (isType(action, completeTodo)) {
     return <IState>state.map(todo =>
-      todo.id === action.payload.id
+      todo.id === action.payload
         ? assign({}, todo, { completed: !todo.completed })
         : todo
     )
-  },
+  }
 
-  [COMPLETE_ALL]: (state: IState, action: Action<any>): IState => {
+  if (isType(action, completeAll)) {
     const areAllMarked = state.every(todo => todo.completed);
     return <IState>state.map(todo => assign({}, todo, {
       completed: !areAllMarked
     }))
-  },
+  }
 
-  [CLEAR_COMPLETED]: (state: IState, action: Action<any>): IState => {
+  if (isType(action, clearCompleted)) {
     return state.filter(todo => todo.completed === false)
   }
-}, initialState)
+
+  return state
+}
