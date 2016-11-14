@@ -49,4 +49,4 @@ module.exports = function (options) {
   server.listen(config.port, function () {
     console.log('listening on http://localhost:' + config.port)
   })
-};
+}
