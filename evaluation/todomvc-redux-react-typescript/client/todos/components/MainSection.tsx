@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { Todo } from '../model'
+import { Todo, TodoId } from '../model'
 import TodoItem from './TodoItem'
 import Footer from './Footer'
 import {
@@ -19,9 +19,9 @@ interface MainSectionProps {
   todos: Array<Todo>
   clearCompleted: () => void
   completeAll: () => void
-  editTodo: (todo: Todo, text: string) => void
-  completeTodo: (todo: Todo) => void
-  deleteTodo: (todo: Todo) => void
+  completeTodo: (todoId: TodoId) => void
+  deleteTodo: (todoId: TodoId) => void
+  editTodo: (todoId: TodoId, newText: string) => void
 }
 interface MainSectionState {
   filter: string
@@ -67,7 +67,8 @@ class MainSection extends React.Component<MainSectionProps, MainSectionState> {
           activeCount={activeCount}
           filter={filter}
           onClearCompleted={this.handleClearCompleted.bind(this)}
-          onShow={this.handleShow.bind(this)} />
+          onShow={this.handleShow.bind(this)}
+         />
       )
     }
   }
@@ -92,7 +93,8 @@ class MainSection extends React.Component<MainSectionProps, MainSectionState> {
               todo={todo}
               editTodo={editTodo}
               completeTodo={completeTodo}
-              deleteTodo={deleteTodo} />
+              deleteTodo={deleteTodo}
+            />
           )}
         </ul>
         {this.renderFooter(completedCount)}

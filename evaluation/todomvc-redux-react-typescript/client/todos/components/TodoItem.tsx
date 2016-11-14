@@ -1,15 +1,15 @@
 import * as React from 'react'
 import * as classNames from 'classnames'
 
-import { Todo } from '../model'
+import { Todo, TodoId } from '../model'
 import TodoTextInput from './TodoTextInput'
 
 interface TodoItemProps {
   todo: Todo
-  editTodo: (todo: Todo, text: string) => void
-  deleteTodo: (todo: Todo) => void
-  completeTodo: (todo: Todo) => void
   key?: any
+  completeTodo: (todoId: TodoId) => void
+  deleteTodo: (todoId: TodoId) => void
+  editTodo: (todoId: TodoId, newText: string) => void
 }
 interface TodoItemState {
   editing: boolean
@@ -29,9 +29,9 @@ class TodoItem extends React.Component<TodoItemProps, TodoItemState> {
 
   handleSave(todo: Todo, text: string) {
     if (text.length === 0) {
-      this.props.deleteTodo(todo)
+      this.props.deleteTodo(todo.id)
     } else {
-      this.props.editTodo(todo, text)
+      this.props.editTodo(todo.id, text)
     }
     this.setState({ editing: false })
   }
@@ -44,7 +44,8 @@ class TodoItem extends React.Component<TodoItemProps, TodoItemState> {
       element = (
         <TodoTextInput text={todo.text}
           editing={this.state.editing}
-          onSave={(text) => this.handleSave(todo, text)} />
+          onSave={(text) => this.handleSave(todo, text)}
+        />
       )
     } else {
       element = (
@@ -52,12 +53,14 @@ class TodoItem extends React.Component<TodoItemProps, TodoItemState> {
           <input className="toggle"
             type="checkbox"
             checked={todo.completed}
-            onChange={() => completeTodo(todo)} />
+            onChange={() => completeTodo(todo.id)}
+          />
           <label onDoubleClick={this.handleDoubleClick.bind(this)}>
             {todo.text}
           </label>
           <button className="destroy"
-            onClick={() => deleteTodo(todo)} />
+            onClick={() => deleteTodo(todo.id)}
+          />
         </div>
       )
     }

@@ -28,11 +28,12 @@ class App extends React.Component<AppProps, void> {
         <Header addTodo={(text: string) => dispatch(addTodo(text))} />
         <MainSection
           todos={todos}
-          editTodo={(t, s) => dispatch(editTodo(t, s))}
-          deleteTodo={(t: model.Todo) => dispatch(deleteTodo(t))}
-          completeTodo={(t: model.Todo) => dispatch(completeTodo(t))}
           clearCompleted={() => dispatch(clearCompleted())}
-          completeAll={() => dispatch(completeAll())} />
+          completeAll={() => dispatch(completeAll())}
+          completeTodo={(todoId) => dispatch(completeTodo(todoId))}
+          deleteTodo={(todoId) => dispatch(deleteTodo(todoId))}
+          editTodo={(todoId, newText) => dispatch(editTodo({ todoId: todoId, newText: newText }))}
+        />
       </div>
     )
   }
