@@ -7,4 +7,5 @@ export * from './actions'
 import * as model from './model'
 export { model }
 import reducer from './reducer'
+// TODO: Remove default exports.
 export default reducer
