@@ -1,14 +1,15 @@
 ![https://travis-ci.org/jaysoo/todomvc-redux-react-typescript](https://api.travis-ci.org/jaysoo/todomvc-redux-react-typescript.svg)
 
-This is an implementation of [TodoMVC](http://todomvc.com/) built using
+This is an implementation of [TodoMVC](http://todomvc.com/) built using:
 
 - [React](http://facebook.github.io/react/)
 - [Redux](https://github.com/rackt/redux)
 - [Redux TypeScript Actions](https://github.com/aikoven/redux-typescript-actions)
-- [TypeScript](http://www.typescriptlang.org/)
-- [Webpack 2](http://webpack.js.org/)
+- [TypeScript 2](http://www.typescriptlang.org/)
+- TypeScript's built-in type definition files
+- [Webpack 2 beta](http://webpack.js.org/)
 
-It based on initial implementation by Jack Hsu <jack.hsu@gmail.com>, that was adapted from the [redux TodoMVC example](https://github.com/rackt/redux/tree/master/examples/todomvc). Jack has a blog post about his implementation: http://jaysoo.ca/2015/09/26/typed-react-and-redux/.
+It is based on an initial implementation by Jack Hsu <jack.hsu@gmail.com>, that was adapted from the [redux TodoMVC example](https://github.com/rackt/redux/tree/master/examples/todomvc). Jack has a blog post about his implementation: http://jaysoo.ca/2015/09/26/typed-react-and-redux/.
 
 # Notes about the implementation
 
@@ -20,6 +21,8 @@ No default exports because that makes it possible to refactor names across files
 
 No index files to avoid files with the same names.
 
+I like that everything has a specific place in the code, so thing are generally sorted alphabetically.
+
 ## To do
 
 - Follow Redux's example of deviding into presentation components and container components, as described in their [Todo List Example](http://redux.js.org/docs/basics/ExampleTodoList.html).
@@ -28,6 +31,7 @@ No index files to avoid files with the same names.
 - Make the production server.
 - Make the tests run with Webpack 2.
 - Remove the deprecated build setup.
+- Update the Travis CI build image.
 - Bump the version to 1.0.0.
 
 # Getting started
