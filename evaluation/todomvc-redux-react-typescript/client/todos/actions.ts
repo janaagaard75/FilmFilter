@@ -1,5 +1,4 @@
 import actionCreatorFactory from 'redux-typescript-actions'
-import { assign } from 'lodash'
 
 import { TodoId } from './model'
 
