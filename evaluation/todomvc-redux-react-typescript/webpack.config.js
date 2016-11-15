@@ -32,8 +32,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "TodoMVC"
-      // TODO: Add a template with <div id="app"></div>.
+      template: "client/index.ejs"
     })
   ],
   resolve: {
