@@ -18,7 +18,7 @@ const initialState: IState = [<Todo>{
   id: 0
 }]
 
-export const todos = (state: IState = initialState, action: ReduxAction): IState => {
+export const todosReducer = (state: IState = initialState, action: ReduxAction): IState => {
   if (isType(action, createAddTodo)) {
     return [{
       id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
