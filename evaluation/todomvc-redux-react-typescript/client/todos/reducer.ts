@@ -1,7 +1,6 @@
 import { assign } from 'lodash'
 import { Action as ReduxAction } from 'redux'
 import { isType, Action } from 'redux-typescript-actions'
-// import { handleActions, Action } from 'redux-actions'
 
 import { Todo, IState } from './model'
 import {
@@ -19,7 +18,6 @@ const initialState: IState = [<Todo>{
   id: 0
 }]
 
-// TODO: Consider renaming to reduce.
 export const reducer = (state: IState = initialState, action: ReduxAction): IState => {
   if (isType(action, createAddTodo)) {
     return [{
