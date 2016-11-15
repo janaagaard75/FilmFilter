@@ -7,11 +7,13 @@
     "url": "git@github.com:jaysoo/todomvc-redux-react-typescript.git"
   },
   "scripts": {
+    "build:dev": "rimraf dist && cross-env NODE_ENV=development webpack --config config/webpack.config.js --progress --profile --colors",
     "build:prod": "rimraf build && cross-env NODE_ENV=production webpack --config webpack/webpack-production.config.js --progress --profile --colors",
     "build": "node webpack/dev-server.js",
-    "start:prod": "npm run build:prod && node server/production",
-    "start": "concurrently \"npm run build\" \"node server/development\"",
-    "test": "tsc && mocha --require test-setup --recursive ./dist/**/__spec__/**/*-spec.js"
+    "start:prod": "yarn run build:prod && node server/production",
+    "start": "yarn run build && node server/development",
+    "test": "tsc && mocha --require test-setup --recursive ./dist/**/__spec__/**/*-spec.js",
+    "webpackdevserver": "webpack-dev-server"
   },
   "author": "Jan Aagaard <jan@aagaard.net>",
   "license": "ISC",
@@ -60,7 +62,7 @@
     "ts-loader": "1.2.1",
     "typescript": "2.0.9",
     "typings": "2.0.0",
-    "webpack": "1.13.3",
+    "webpack": "2.1.0-beta.26",
     "webpack-dev-server": "1.16.2"
   }
 }

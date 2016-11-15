@@ -5,9 +5,6 @@ const StatsPlugin = require("stats-webpack-plugin")
 const webpack = require("webpack")
 
 module.exports = function (options) {
-  if (!options.development) {
-  }
-
   var entry
   if (options.development) {
     entry = {
@@ -38,11 +35,13 @@ module.exports = function (options) {
   }
 
   const publicPath = options.development ? 'http://localhost:2992/_assets/' : '/_assets/'
+  const statsFilePath = options.development ? path.join(__dirname, "build", "stats-dev.json") : path.join("..", "stats.json")
+  console.info(`statsFilePath: ${statsFilePath}.`)
 
   var plugins = [
     new webpack.PrefetchPlugin("react"),
     new webpack.PrefetchPlugin("react/lib/ReactComponentBrowserEnvironment"),
-    new StatsPlugin(path.join("..", options.development ? "stats-dev.json" : "stats.json"), {
+    new StatsPlugin(statsFilePath, {
       chunkModules: true
     })
   ]

@@ -1,27 +1,30 @@
-var path = require('path')
-var express = require('express')
-var http = require('http')
-var serveStatic = require('serve-static')
-var config = require('./config')
+const express = require('express')
+const http = require('http')
+const path = require('path')
+const serveStatic = require('serve-static')
+
+const config = require('./config')
 
 module.exports = function (options) {
-  var Renderer = require("../config/SimpleRenderer.js")
+  console.info("Starting web server.")
 
-  // load bundle information from stats
-  var stats = options.devServer ? require("../build/stats-dev.json") : require("../build/stats.json")
+  const Renderer = require("../config/SimpleRenderer.js")
 
-  var publicPath = stats.publicPath
+  // Load bundle information from stats.
+  const stats = options.devServer ? require("../build/stats-dev.json") : require("../build/stats.json")
 
-  var renderer = new Renderer({
+  const publicPath = stats.publicPath
+
+  const renderer = new Renderer({
     styleUrl: options.separateStylesheet && (publicPath + "todos.css?" + stats.hash),
     scriptUrl: publicPath + [].concat(stats.assetsByChunkName.todos)[0]
   })
 
-  var app = express()
+  const app = express()
 
-  // serve the static assets
+  // Serve the static assets.
   app.use("/_assets", express.static(path.join(__dirname, "..", "build", "public"), {
-    maxAge: "200d" // We can cache them as they include hashes
+    maxAge: "200d" // We can cache them as they include hashes.
   }))
   app.use("/", express.static(path.join(__dirname, "..", "public"), {
   }))
@@ -44,7 +47,7 @@ module.exports = function (options) {
 
   //app.use(serveStatic(config.publicPath, {'index': ['index.html']}))
 
-  var server = http.createServer(app)
+  const server = http.createServer(app)
 
   server.listen(config.port, function () {
     console.log('listening on http://localhost:' + config.port)
