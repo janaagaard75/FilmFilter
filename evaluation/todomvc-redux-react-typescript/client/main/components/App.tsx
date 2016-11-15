@@ -8,15 +8,16 @@ import {
   createDeleteTodo,
   createEditTodo,
   createToggleAllTodos,
-  createToggleTodo,
-  Header,
-  MainSection,
-  model
-} from '../../todos'
+  createToggleTodo
+} from '../../todos/actions'
+
+import { Header } from '../../todos/components/Header'
+import { MainSection } from '../../todos/components/MainSection'
+import { IState, Todo } from '../../todos/model'
 
 interface AppProps {
-  todos: Array<model.Todo>
-  dispatch: Dispatch<model.IState>
+  todos: Array<Todo>
+  dispatch: Dispatch<IState>
 }
 
 class App extends React.Component<AppProps, void> {

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
-import todos from '../todos'
+import { reducer } from '../todos/reducer'
 
 export const rootReducer = combineReducers({
-  todos
+  reducer
 })
