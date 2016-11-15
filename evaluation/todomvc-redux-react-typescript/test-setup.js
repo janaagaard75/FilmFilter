@@ -1,7 +1,9 @@
-var jsdom = require('jsdom')
+const jsdom = require('jsdom')
 require('babel-polyfill')
 
-['.wav', '.css', 'sass', '.scss'].forEach(function (ext) {
+// Don't know why it's necessary to define these in a variable.
+const extensions = ['.wav', '.css', 'sass', '.scss']
+extensions.forEach(ext => {
   require.extensions[ext] = function (module, filename) {
   }
 })
