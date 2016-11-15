@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 
-import { todos } from '../todos'
+import { todosReducer } from '../todos'
 import { IState, Todo } from '../model'
 
 import {
@@ -20,7 +20,7 @@ describe('todos reducer', () => {
       completed: true
     }]
 
-    const afterState = todos(beforeState, createAddTodo('hello'))
+    const afterState = todosReducer(beforeState, createAddTodo('hello'))
 
     expect(afterState[0]).to.deep.equal({
       id: 1,
@@ -35,7 +35,7 @@ describe('todos reducer', () => {
       text: '', completed: false
     }]
 
-    const afterState = todos(beforeState, createDeleteTodo(1))
+    const afterState = todosReducer(beforeState, createDeleteTodo(1))
 
     expect(afterState).to.deep.equal([])
   })
@@ -47,7 +47,7 @@ describe('todos reducer', () => {
       completed: false
     }]
 
-    const afterState1 = todos(beforeState, createEditTodo({
+    const afterState1 = todosReducer(beforeState, createEditTodo({
       todoId: 1,
       newText: 'hello'
     }))
@@ -66,7 +66,7 @@ describe('todos reducer', () => {
       completed: false
     }]
 
-    const state2 = todos(state1, createToggleTodo(1))
+    const state2 = todosReducer(state1, createToggleTodo(1))
 
     expect(state2[0]).to.deep.equal({
       id: 1,
@@ -74,7 +74,7 @@ describe('todos reducer', () => {
       completed: true
     })
 
-    const state3 = todos(state2, createToggleTodo(1))
+    const state3 = todosReducer(state2, createToggleTodo(1))
 
     expect(state3[0]).to.deep.equal({
       id: 1,
@@ -90,7 +90,7 @@ describe('todos reducer', () => {
       { id: 3, text: '', completed: false }
     ]
 
-    const state2 = todos(state1, createToggleAllTodos())
+    const state2 = todosReducer(state1, createToggleAllTodos())
 
     expect(state2).to.deep.equal([
       { id: 1, text: '', completed: true },
@@ -98,7 +98,7 @@ describe('todos reducer', () => {
       { id: 3, text: '', completed: true }
     ])
 
-    const state3 = todos(state2, createToggleAllTodos())
+    const state3 = todosReducer(state2, createToggleAllTodos())
 
     expect(state3).to.deep.equal([
       { id: 1, text: '', completed: false },
@@ -113,7 +113,7 @@ describe('todos reducer', () => {
       { id: 2, text: '', completed: true }
     ]
 
-    const afterState = todos(beforeState, createClearCompletedTodos())
+    const afterState = todosReducer(beforeState, createClearCompletedTodos())
 
     expect(afterState).to.deep.equal([{
       id: 1,
