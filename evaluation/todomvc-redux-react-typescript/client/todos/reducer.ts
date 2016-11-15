@@ -5,12 +5,12 @@ import { isType, Action } from 'redux-typescript-actions'
 
 import { Todo, IState } from './model'
 import {
-  addTodo,
-  deleteTodo,
-  editTodo,
-  toggleTodo,
-  toggleAllTodos,
-  clearCompletedTodos
+  createAddTodo,
+  createClearCompletedTodos,
+  createDeleteTodo,
+  createEditTodo,
+  createToggleAllTodos,
+  createToggleTodo
 } from './actions'
 
 const initialState: IState = [<Todo>{
@@ -21,7 +21,7 @@ const initialState: IState = [<Todo>{
 
 // TODO: Consider renaming to reduce.
 export const reducer = (state: IState = initialState, action: ReduxAction): IState => {
-  if (isType(action, addTodo)) {
+  if (isType(action, createAddTodo)) {
     return [{
       id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
       completed: false,
@@ -29,13 +29,13 @@ export const reducer = (state: IState = initialState, action: ReduxAction): ISta
     }, ...state]
   }
 
-  if (isType(action, deleteTodo)) {
+  if (isType(action, createDeleteTodo)) {
     return state.filter(todo =>
       todo.id !== action.payload
     )
   }
 
-  if (isType(action, editTodo)) {
+  if (isType(action, createEditTodo)) {
     return <IState>state.map(todo =>
       todo.id === action.payload.todoId
         ? assign(<Todo>{}, todo, { text: action.payload.newText })
@@ -43,7 +43,7 @@ export const reducer = (state: IState = initialState, action: ReduxAction): ISta
     )
   }
 
-  if (isType(action, toggleTodo)) {
+  if (isType(action, createToggleTodo)) {
     return <IState>state.map(todo =>
       todo.id === action.payload
         ? assign({}, todo, { completed: !todo.completed })
@@ -51,14 +51,14 @@ export const reducer = (state: IState = initialState, action: ReduxAction): ISta
     )
   }
 
-  if (isType(action, toggleAllTodos)) {
+  if (isType(action, createToggleAllTodos)) {
     const areAllMarked = state.every(todo => todo.completed);
     return <IState>state.map(todo => assign({}, todo, {
       completed: !areAllMarked
     }))
   }
 
-  if (isType(action, clearCompletedTodos)) {
+  if (isType(action, createClearCompletedTodos)) {
     return state.filter(todo => todo.completed === false)
   }
 

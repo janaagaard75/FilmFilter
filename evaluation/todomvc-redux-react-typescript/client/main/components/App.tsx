@@ -3,15 +3,15 @@ import { connect } from 'react-redux'
 import * as React from 'react'
 
 import {
-  addTodo,
-  clearCompletedTodos,
-  deleteTodo,
-  editTodo,
+  createAddTodo,
+  createClearCompletedTodos,
+  createDeleteTodo,
+  createEditTodo,
+  createToggleAllTodos,
+  createToggleTodo,
   Header,
   MainSection,
-  model,
-  toggleAllTodos,
-  toggleTodo
+  model
 } from '../../todos'
 
 interface AppProps {
@@ -25,14 +25,14 @@ class App extends React.Component<AppProps, void> {
 
     return (
       <div className="todoapp">
-        <Header addTodo={(text: string) => dispatch(addTodo(text))} />
+        <Header addTodo={(text: string) => dispatch(createAddTodo(text))} />
         <MainSection
           todos={todos}
-          clearCompleted={() => dispatch(clearCompletedTodos())}
-          completeAll={() => dispatch(toggleAllTodos())}
-          completeTodo={(todoId) => dispatch(toggleTodo(todoId))}
-          deleteTodo={(todoId) => dispatch(deleteTodo(todoId))}
-          editTodo={(todoId, newText) => dispatch(editTodo({ todoId: todoId, newText: newText }))}
+          clearCompleted={() => dispatch(createClearCompletedTodos())}
+          completeAll={() => dispatch(createToggleAllTodos())}
+          completeTodo={(todoId) => dispatch(createToggleTodo(todoId))}
+          deleteTodo={(todoId) => dispatch(createDeleteTodo(todoId))}
+          editTodo={(todoId, newText) => dispatch(createEditTodo({ todoId: todoId, newText: newText }))}
         />
       </div>
     )
