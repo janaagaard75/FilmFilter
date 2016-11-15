@@ -1,7 +1,8 @@
 {
   "editor.tabSize": 2,
   "search.exclude": {
-    "build/": true
+    "build/": true,
+    "dist/": true
   },
   "typescript.tsdk": "./node_modules/typescript/lib"
 }
