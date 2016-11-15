@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 
-import { reducer } from '../reducer'
+import { todosReducer } from '../todosReducer'
 import { IState, Todo } from '../model'
 
 import {
@@ -12,7 +12,7 @@ import {
   createToggleTodo
 } from '../actions'
 
-describe('todo reducer', () => {
+describe('todos reducer', () => {
   it('handles add', () => {
     const beforeState: IState = [{
       id: 0,
@@ -20,7 +20,7 @@ describe('todo reducer', () => {
       completed: true
     }]
 
-    const afterState = reducer(beforeState, createAddTodo('hello'))
+    const afterState = todosReducer(beforeState, createAddTodo('hello'))
 
     expect(afterState[0]).to.deep.equal({
       id: 1,
@@ -35,7 +35,7 @@ describe('todo reducer', () => {
       text: '', completed: false
     }]
 
-    const afterState = reducer(beforeState, createDeleteTodo(1))
+    const afterState = todosReducer(beforeState, createDeleteTodo(1))
 
     expect(afterState).to.deep.equal([])
   })
@@ -47,7 +47,7 @@ describe('todo reducer', () => {
       completed: false
     }]
 
-    const afterState1 = reducer(beforeState, createEditTodo({
+    const afterState1 = todosReducer(beforeState, createEditTodo({
       todoId: 1,
       newText: 'hello'
     }))
@@ -66,7 +66,7 @@ describe('todo reducer', () => {
       completed: false
     }]
 
-    const state2 = reducer(state1, createToggleTodo(1))
+    const state2 = todosReducer(state1, createToggleTodo(1))
 
     expect(state2[0]).to.deep.equal({
       id: 1,
@@ -74,7 +74,7 @@ describe('todo reducer', () => {
       completed: true
     })
 
-    const state3 = reducer(state2, createToggleTodo(1))
+    const state3 = todosReducer(state2, createToggleTodo(1))
 
     expect(state3[0]).to.deep.equal({
       id: 1,
@@ -90,7 +90,7 @@ describe('todo reducer', () => {
       { id: 3, text: '', completed: false }
     ]
 
-    const state2 = reducer(state1, createToggleAllTodos())
+    const state2 = todosReducer(state1, createToggleAllTodos())
 
     expect(state2).to.deep.equal([
       { id: 1, text: '', completed: true },
@@ -98,7 +98,7 @@ describe('todo reducer', () => {
       { id: 3, text: '', completed: true }
     ])
 
-    const state3 = reducer(state2, createToggleAllTodos())
+    const state3 = todosReducer(state2, createToggleAllTodos())
 
     expect(state3).to.deep.equal([
       { id: 1, text: '', completed: false },
@@ -113,7 +113,7 @@ describe('todo reducer', () => {
       { id: 2, text: '', completed: true }
     ]
 
-    const afterState = reducer(beforeState, createClearCompletedTodos())
+    const afterState = todosReducer(beforeState, createClearCompletedTodos())
 
     expect(afterState).to.deep.equal([{
       id: 1,
