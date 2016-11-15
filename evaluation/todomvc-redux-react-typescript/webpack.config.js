@@ -18,7 +18,10 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        loader: "css-loader"
+        use: [
+          "style-loader",
+          "css-loader"
+        ]
       },
       {
         test: /\.tsx?$/,
@@ -36,7 +39,6 @@ module.exports = {
     })
   ],
   resolve: {
-    extensions: [".js", ".ts", ".tsx"],
-  },
-  target: "web"
+    extensions: [".js", ".ts", ".tsx"]
+  }
 }
