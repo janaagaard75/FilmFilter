@@ -2,15 +2,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require("path")
 const webpack = require('webpack')
 
-const outputDir = path.join(__dirname, "dist")
-const isProduction = process.env.NODE_ENV === "production"
+const nodeEnv = process.env.NODE_ENV || 'development';
+const isProduction = nodeEnv === 'production';
+
+const outputDir = path.join(__dirname, 'dist')
 
 const plugins = [
   new HtmlWebpackPlugin({
     template: "client/index.ejs"
   }),
   new webpack.DefinePlugin({
-    'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV) }
+    'process.env': { NODE_ENV: JSON.stringify(nodeEnv) }
   })
 ]
 
