@@ -3,6 +3,46 @@ const path = require("path")
 const webpack = require('webpack')
 
 const outputDir = path.join(__dirname, "dist")
+const isProduction = process.env.NODE_ENV === "production"
+
+const plugins = [
+  new HtmlWebpackPlugin({
+    template: "client/index.ejs"
+  }),
+  new webpack.DefinePlugin({
+    'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV) }
+  })
+]
+
+if (isProduction) {
+  plugins.push(
+    new webpack.LoaderOptionsPlugin({
+      debug: false,
+      minimize: true
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        comparisons: true,
+        conditionals: true,
+        dead_code: true,
+        evaluate: true,
+        if_return: true,
+        join_vars: true,
+        screw_ie8: true,
+        sequences: true,
+        unused: true,
+        warnings: false,
+      },
+      output: {
+        comments: false
+      },
+    })
+  );
+} else {
+  plugins.push(
+    new webpack.HotModuleReplacementPlugin()
+  );
+}
 
 module.exports = {
   devServer: {
@@ -20,7 +60,12 @@ module.exports = {
         test: /\.css$/,
         use: [
           "style-loader",
-          "css-loader"
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: true
+            }
+          }
         ]
       },
       {
@@ -30,14 +75,10 @@ module.exports = {
     ]
   },
   output: {
-    filename: "[name].[chunkhash:8].js",
+    filename: "[name].[hash:8].js",
     path: outputDir
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: "client/index.ejs"
-    })
-  ],
+  plugins: plugins,
   resolve: {
     extensions: [".js", ".ts", ".tsx"]
   }
