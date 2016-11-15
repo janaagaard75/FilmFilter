@@ -6,6 +6,8 @@ import { Provider } from 'react-redux'
 import { ConnectedApp } from './main/components/App'
 import { rootReducer } from './main/reducer'
 
+import 'todomvc-app-css/index.css'
+
 const initialState = {}
 
 const store: Store<any> = createStore(rootReducer, initialState)

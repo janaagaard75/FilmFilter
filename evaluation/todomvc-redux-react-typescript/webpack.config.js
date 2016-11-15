@@ -54,7 +54,7 @@ module.exports = {
   },
   devtool: "source-map",
   entry: {
-    "client": "./client/index.js"
+    "client": "./client/main.tsx"
   },
   module: {
     rules: [
