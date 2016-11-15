@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 
-import { todosReducer } from '../todos'
-import { IState, Todo } from '../model'
+import { todosReducer } from '../client/todos/todos'
+import { IState, Todo } from '../client/todos/model'
 
 import {
   createAddTodo,
@@ -10,7 +10,7 @@ import {
   createEditTodo,
   createToggleAllTodos,
   createToggleTodo
-} from '../actions'
+} from '../client/todos/actions'
 
 describe('todos reducer', () => {
   it('handles add', () => {
