@@ -1,10 +1,9 @@
 export type TodoId = number
 
 export type Todo = {
-  // TOOD: Make the ID required.
-  id?: TodoId
-  text: string
   completed: boolean
+  id: TodoId
+  text: string
 }
 
 export type IState = Array<Todo>
