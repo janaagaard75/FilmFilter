@@ -16,4 +16,4 @@ global.navigator = {
 }
 
 // NodeJS does not have console.debug, but React uses it.
-global.console.debug = function () {};
+global.console.debug = function () {}

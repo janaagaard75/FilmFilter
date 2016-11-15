@@ -22,7 +22,7 @@ describe('todo reducer', () => {
 
     const afterState = reducer(beforeState, addTodo('hello'))
 
-    expect(afterState[0]).to.equal({
+    expect(afterState[0]).to.deep.equal({
       id: 1,
       text: 'hello',
       completed: false
@@ -37,7 +37,7 @@ describe('todo reducer', () => {
 
     const afterState = reducer(beforeState, deleteTodo(1))
 
-    expect(afterState).to.equal([])
+    expect(afterState).to.deep.equal([])
   })
 
   it('handles edit', () => {
@@ -52,7 +52,7 @@ describe('todo reducer', () => {
       newText: 'hello'
     }))
 
-    expect(afterState1[0]).to.equal({
+    expect(afterState1[0]).to.deep.equal({
       id: 1,
       text: 'hello',
       completed: false
@@ -68,7 +68,7 @@ describe('todo reducer', () => {
 
     const state2 = reducer(state1, toggleTodo(1))
 
-    expect(state2[0]).to.equal({
+    expect(state2[0]).to.deep.equal({
       id: 1,
       text: '',
       completed: true
@@ -76,7 +76,7 @@ describe('todo reducer', () => {
 
     const state3 = reducer(state2, toggleTodo(1))
 
-    expect(state3[0]).to.equal({
+    expect(state3[0]).to.deep.equal({
       id: 1,
       text: '',
       completed: false
@@ -92,7 +92,7 @@ describe('todo reducer', () => {
 
     const state2 = reducer(state1, toggleAllTodos())
 
-    expect(state2).to.equal([
+    expect(state2).to.deep.equal([
       { id: 1, text: '', completed: true },
       { id: 2, text: '', completed: true },
       { id: 3, text: '', completed: true }
@@ -100,7 +100,7 @@ describe('todo reducer', () => {
 
     const state3 = reducer(state2, toggleAllTodos())
 
-    expect(state3).to.equal([
+    expect(state3).to.deep.equal([
       { id: 1, text: '', completed: false },
       { id: 2, text: '', completed: false },
       { id: 3, text: '', completed: false }
@@ -115,7 +115,7 @@ describe('todo reducer', () => {
 
     const afterState = reducer(beforeState, clearCompletedTodos())
 
-    expect(afterState).to.equal([{
+    expect(afterState).to.deep.equal([{
       id: 1,
       text: '',
       completed: false
