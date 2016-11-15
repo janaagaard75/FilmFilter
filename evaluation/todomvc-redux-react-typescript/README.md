@@ -28,6 +28,7 @@ No index files to avoid files with the same names.
 - Make the production server.
 - Make the tests run with Webpack 2.
 - Remove the deprecated build setup.
+- Bump the version to 1.0.0.
 
 # Getting started
 
