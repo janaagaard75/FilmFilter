@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 
-import { todosReducer } from '../client/todos/todos'
+import { todosReducer } from '../client/todos/todosReducer'
 import { IState, Todo } from '../client/todos/model'
 
 import {
