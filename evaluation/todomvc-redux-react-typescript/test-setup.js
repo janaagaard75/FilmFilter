@@ -12,7 +12,7 @@ extensions.forEach(ext => {
 global.document = jsdom.jsdom('<!doctype html><html><body></body></html>')
 global.window = document.parentWindow
 global.navigator = {
-  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36'
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36'
 }
 
 // NodeJS does not have console.debug, but React uses it.
