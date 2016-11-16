@@ -52,11 +52,4 @@ const mapStateToProps = (state: GlobalReduxState): AppStateProps => {
   }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//   const mapped = {
-//     todoActions: bindActionCreators(actions, dispatch)
-//   }
-//   return
-// }
-
 export const ConnectedApp = connect(mapStateToProps)(App)
