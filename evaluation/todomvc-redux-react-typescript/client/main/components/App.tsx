@@ -15,15 +15,15 @@ import { Header } from '../../todos/components/Header'
 import { MainSection } from '../../todos/components/MainSection'
 import { IState, Todo } from '../../todos/model'
 
-interface StateProps {
+interface AppStateProps {
   todos: Array<Todo>
 }
 
-interface DispatchProps {
+interface AppDispatchProps {
   dispatch: Dispatch<IState>
 }
 
-interface AppProps extends StateProps, DispatchProps { }
+interface AppProps extends AppStateProps, AppDispatchProps { }
 
 class App extends React.Component<AppProps, void> {
   render() {
@@ -45,15 +45,14 @@ class App extends React.Component<AppProps, void> {
   }
 }
 
-type ReduxState = {
+type GlobalReduxState = {
   todos: Array<Todo>
 }
 
-const mapStateToProps/*: StateProps*/ = (state: ReduxState) => {
-  const mapped = {
+const mapStateToProps = (state: GlobalReduxState): AppStateProps => {
+  return  {
     todos: state.todos
   }
-  return mapped
 }
 
 // const mapDispatchToProps = (dispatch) => {
