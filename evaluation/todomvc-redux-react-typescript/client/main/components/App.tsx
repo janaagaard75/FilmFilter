@@ -1,4 +1,4 @@
-import { Dispatch } from 'redux'
+import { Dispatch, bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as React from 'react'
 
@@ -15,10 +15,15 @@ import { Header } from '../../todos/components/Header'
 import { MainSection } from '../../todos/components/MainSection'
 import { IState, Todo } from '../../todos/model'
 
-interface AppProps {
+interface StateProps {
   todos: Array<Todo>
+}
+
+interface DispatchProps {
   dispatch: Dispatch<IState>
 }
+
+interface AppProps extends StateProps, DispatchProps { }
 
 class App extends React.Component<AppProps, void> {
   render() {
@@ -40,11 +45,22 @@ class App extends React.Component<AppProps, void> {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    // TODO: Why does this has to be todosReducer in order to work? It's an array of todos, not the reducer function.
-    todos: state.todosReducer
-  }
+type ReduxState = {
+  todos: Array<Todo>
 }
+
+const mapStateToProps/*: StateProps*/ = (state: ReduxState) => {
+  const mapped = {
+    todos: state.todos
+  }
+  return mapped
+}
+
+// const mapDispatchToProps = (dispatch) => {
+//   const mapped = {
+//     todoActions: bindActionCreators(actions, dispatch)
+//   }
+//   return
+// }
 
 export const ConnectedApp = connect(mapStateToProps)(App)

@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build:dev": "rimraf dist && webpack",
-    "build:prod": "rimraf dist && webpack -p",
+    "build": "rimraf dist && webpack -p",
     "start": "webpack-dev-server",
     "oldbuild:prod": "rimraf build && cross-env NODE_ENV=production webpack --config webpack/webpack-production.config.js --progress --profile --colors",
     "oldbuild:dev": "node webpack/dev-server.js",

@@ -5,9 +5,9 @@ This is an implementation of [TodoMVC](http://todomvc.com/) built using:
 - [React](http://facebook.github.io/react/)
 - [Redux](https://github.com/rackt/redux)
 - [Redux TypeScript Actions](https://github.com/aikoven/redux-typescript-actions)
-- [TypeScript 2](http://www.typescriptlang.org/)
+- [TypeScript](http://www.typescriptlang.org/)
 - TypeScript's built-in type definition files
-- [Webpack 2 beta](http://webpack.js.org/)
+- [Webpack 2](http://webpack.js.org/), currently in beta
 
 It is based on an initial implementation by Jack Hsu <jack.hsu@gmail.com>, that was adapted from the [redux TodoMVC example](https://github.com/rackt/redux/tree/master/examples/todomvc). Jack has a blog post about his implementation: http://jaysoo.ca/2015/09/26/typed-react-and-redux/.
 
@@ -22,6 +22,8 @@ No default exports because that makes it possible to refactor names across files
 No index files to avoid files with the same names.
 
 I like that everything has a specific place in the code, so thing are generally sorted alphabetically.
+
+Type definitions use the more verbose `Array<foo>` syntax to distinguish from instatiating empty arrays and to keep the syntax consistent with objects like `Map` and `Set`.
 
 ## To do
 
@@ -42,7 +44,9 @@ Install dependencies:
 
     yarn install
 
-# Running development server
+# Build commands
+
+## Running the code
 
 Run Webpack Dev Server:
 
@@ -50,13 +54,15 @@ Run Webpack Dev Server:
 
 Visit [http://localhost:8000/](http://localhost:8000/).
 
-# Running production server
+## Building the code
 
-    yarn start:prod
+Build production-ready code:
 
-Visit [http://localhost:8000/](http://localhost:8000/).
+    yarn run build:prod
 
-**Note:** This will run the pre-built JavaScript files.
+It's also possibel to build the development version of the code with `yarn run build:dev`.
+
+Run the pre-build code: `yarn start:build`.
 
 # Testing
 
