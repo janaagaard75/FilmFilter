@@ -1,4 +1,4 @@
-import { Dispatch, bindActionCreators } from 'redux'
+import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
 import * as React from 'react'
 
