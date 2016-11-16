@@ -7,15 +7,15 @@ import {
   SHOW_ACTIVE
 } from '../constants/TodoFilters'
 
-const FILTER_TITLES = {
+const filterLabels = {
   [SHOW_ALL]: 'All',
   [SHOW_ACTIVE]: 'Active',
   [SHOW_COMPLETED]: 'Completed'
 }
 
 interface FooterProps {
-  completedCount: number
   activeCount: number
+  completedCount: number
   filter: string
   onClearCompleted: () => void
   onShow: (filter: string) => void
@@ -34,7 +34,7 @@ export class Footer extends React.Component<FooterProps, void> {
   }
 
   renderFilterLink(filter) {
-    const title = FILTER_TITLES[filter]
+    const title = filterLabels[filter]
     const { filter: selectedFilter, onShow } = this.props
 
     return (

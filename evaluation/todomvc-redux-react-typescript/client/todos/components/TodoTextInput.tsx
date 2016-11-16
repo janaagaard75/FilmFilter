@@ -2,12 +2,13 @@ import * as React from 'react'
 import * as classNames from 'classnames'
 
 interface TodoTextInputProps {
-  onSave: (text: string) => void
-  text?: string
-  placeholder?: string,
   editing?: boolean
   newTodo?: boolean
+  placeholder?: string
+  text?: string
+  onSave: (text: string) => void
 }
+
 interface TodoTextInputState {
   text: string
 }

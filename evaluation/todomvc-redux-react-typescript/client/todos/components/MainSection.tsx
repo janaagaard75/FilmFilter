@@ -9,7 +9,7 @@ import {
   SHOW_ACTIVE
 } from '../constants/TodoFilters'
 
-const TODO_FILTERS = {
+const todoFilterFunctions = {
   [SHOW_ALL]: () => true,
   [SHOW_ACTIVE]: todo => !todo.completed,
   [SHOW_COMPLETED]: todo => todo.completed
@@ -23,6 +23,7 @@ interface MainSectionProps {
   deleteTodo: (todoId: TodoId) => void
   editTodo: (todoId: TodoId, newText: string) => void
 }
+
 interface MainSectionState {
   filter: string
 }
@@ -78,7 +79,7 @@ export class MainSection extends React.Component<MainSectionProps, MainSectionSt
     const { todos, completeTodo, deleteTodo, editTodo } = this.props
     const { filter } = this.state
 
-    const filteredTodos = todos.filter(TODO_FILTERS[filter])
+    const filteredTodos = todos.filter(todoFilterFunctions[filter])
     const completedCount = todos.reduce((count: number, todo): number =>
       todo.completed ? count + 1 : count,
       0
