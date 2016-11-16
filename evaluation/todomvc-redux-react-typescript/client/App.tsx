@@ -9,12 +9,12 @@ import {
   createEditTodo,
   createToggleAllTodos,
   createToggleTodo
-} from '../../todos/actions'
+} from './todos/actions'
 
-import { Header } from '../../todos/components/Header'
-import { MainSection } from '../../todos/components/MainSection'
-import { Todos, Todo } from '../../todos/model'
-import { GlobalReduxState } from '../../main'
+import { Header } from './todos/components/Header'
+import { MainSection } from './todos/components/MainSection'
+import { Todos, Todo } from './todos/model'
+import { GlobalReduxState } from './main'
 
 interface AppStateProps {
   todos: Array<Todo>
