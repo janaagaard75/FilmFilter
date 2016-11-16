@@ -13,7 +13,6 @@ export type GlobalReduxState = {
   todos?: Array<Todo>
 }
 
-// TODO: If initialState is initialized with todos being an empty array, then the initial state is todosReducer is ignored.
 const initialState: GlobalReduxState = {}
 
 const store: Store<GlobalReduxState> = createStore<GlobalReduxState>(rootReducer, initialState)

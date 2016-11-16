@@ -51,7 +51,8 @@ export class MainSection extends React.Component<MainSectionProps, MainSectionSt
         <input className="toggle-all"
           type="checkbox"
           checked={completedCount === todos.length}
-          onChange={() => completeAll()} />
+          onChange={() => completeAll()}
+        />
       )
     }
   }
@@ -68,7 +69,7 @@ export class MainSection extends React.Component<MainSectionProps, MainSectionSt
           filter={filter}
           onClearCompleted={this.handleClearCompleted.bind(this)}
           onShow={this.handleShow.bind(this)}
-         />
+        />
       )
     }
   }
