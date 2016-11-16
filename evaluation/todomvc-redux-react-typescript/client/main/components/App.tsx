@@ -40,9 +40,11 @@ class App extends React.Component<AppProps, void> {
   }
 }
 
-const mapStateToProps = storeState => ({
-  // TODO: Why does this has to be todosReducer in order to work?
-  todos: storeState.todosReducer
-})
+const mapStateToProps = state => {
+  return {
+    // TODO: Why does this has to be todosReducer in order to work? It's an array of todos, not the reducer function.
+    todos: state.todosReducer
+  }
+}
 
 export const ConnectedApp = connect(mapStateToProps)(App)
