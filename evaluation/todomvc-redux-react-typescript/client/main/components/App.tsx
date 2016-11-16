@@ -14,6 +14,7 @@ import {
 import { Header } from '../../todos/components/Header'
 import { MainSection } from '../../todos/components/MainSection'
 import { IState, Todo } from '../../todos/model'
+import { GlobalReduxState } from '../../main'
 
 interface AppStateProps {
   todos: Array<Todo>
@@ -43,10 +44,6 @@ class App extends React.Component<AppProps, void> {
       </div>
     )
   }
-}
-
-type GlobalReduxState = {
-  todos: Array<Todo>
 }
 
 const mapStateToProps = (state: GlobalReduxState): AppStateProps => {

@@ -5,12 +5,18 @@ import { Provider } from 'react-redux'
 
 import { ConnectedApp } from './main/components/App'
 import { rootReducer } from './main/rootReducer'
+import { Todo } from './todos/model'
 
 import 'todomvc-app-css/index.css'
 
-const initialState = {}
+export type GlobalReduxState = {
+  todos?: Array<Todo>
+}
 
-const store: Store<any> = createStore(rootReducer, initialState)
+// TODO: If initialState is initialized with todos being an empty array, then the initial state is todosReducer is ignored.
+const initialState: GlobalReduxState = {}
+
+const store: Store<GlobalReduxState> = createStore<GlobalReduxState>(rootReducer, initialState)
 
 ReactDOM.render(
   <Provider store={store}>
