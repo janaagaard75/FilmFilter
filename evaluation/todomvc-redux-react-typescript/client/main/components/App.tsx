@@ -13,7 +13,7 @@ import {
 
 import { Header } from '../../todos/components/Header'
 import { MainSection } from '../../todos/components/MainSection'
-import { IState, Todo } from '../../todos/model'
+import { Todos, Todo } from '../../todos/model'
 import { GlobalReduxState } from '../../main'
 
 interface AppStateProps {
@@ -21,7 +21,7 @@ interface AppStateProps {
 }
 
 interface AppDispatchProps {
-  dispatch: Dispatch<IState>
+  dispatch: Dispatch<Todos>
 }
 
 interface AppProps extends AppStateProps, AppDispatchProps { }

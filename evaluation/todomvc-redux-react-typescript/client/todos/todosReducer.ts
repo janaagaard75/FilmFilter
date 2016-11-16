@@ -2,7 +2,7 @@ import { assign } from 'lodash'
 import { Action as ReduxAction } from 'redux'
 import { isType, Action } from 'redux-typescript-actions'
 
-import { Todo, IState } from './model'
+import { Todo, Todos } from './model'
 import {
   createAddTodo,
   createClearCompletedTodos,
@@ -12,13 +12,13 @@ import {
   createToggleTodo
 } from './actions'
 
-const initialState: IState = [<Todo>{
+const initialState: Todos = [<Todo>{
   text: 'Use Redux with TypeScript',
   completed: false,
   id: 0
 }]
 
-export const todosReducer = (state: IState = initialState, action: ReduxAction): IState => {
+export const todosReducer = (state: Todos = initialState, action: ReduxAction): Todos => {
   if (isType(action, createAddTodo)) {
     return [{
       id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
@@ -34,7 +34,7 @@ export const todosReducer = (state: IState = initialState, action: ReduxAction):
   }
 
   if (isType(action, createEditTodo)) {
-    return <IState>state.map(todo =>
+    return <Todos>state.map(todo =>
       todo.id === action.payload.todoId
         ? assign(<Todo>{}, todo, { text: action.payload.newText })
         : todo
@@ -42,7 +42,7 @@ export const todosReducer = (state: IState = initialState, action: ReduxAction):
   }
 
   if (isType(action, createToggleTodo)) {
-    return <IState>state.map(todo =>
+    return <Todos>state.map(todo =>
       todo.id === action.payload
         ? assign({}, todo, { completed: !todo.completed })
         : todo
@@ -51,7 +51,7 @@ export const todosReducer = (state: IState = initialState, action: ReduxAction):
 
   if (isType(action, createToggleAllTodos)) {
     const areAllMarked = state.every(todo => todo.completed);
-    return <IState>state.map(todo => assign({}, todo, {
+    return <Todos>state.map(todo => assign({}, todo, {
       completed: !areAllMarked
     }))
   }

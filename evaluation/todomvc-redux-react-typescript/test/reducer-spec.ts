@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 
 import { todosReducer } from '../client/todos/todosReducer'
-import { IState, Todo } from '../client/todos/model'
+import { Todos, Todo } from '../client/todos/model'
 
 import {
   createAddTodo,
@@ -14,7 +14,7 @@ import {
 
 describe('todos reducer', () => {
   it('handles add', () => {
-    const beforeState: IState = [{
+    const beforeState: Todos = [{
       id: 0,
       text: '',
       completed: true
@@ -30,7 +30,7 @@ describe('todos reducer', () => {
   })
 
   it('handles delete', () => {
-    const beforeState: IState = [{
+    const beforeState: Todos = [{
       id: 1,
       text: '', completed: false
     }]
@@ -41,7 +41,7 @@ describe('todos reducer', () => {
   })
 
   it('handles edit', () => {
-    const beforeState: IState = [{
+    const beforeState: Todos = [{
       id: 1,
       text: '',
       completed: false
@@ -60,7 +60,7 @@ describe('todos reducer', () => {
   })
 
   it('handles complete all', () => {
-    const state1: IState = [{
+    const state1: Todos = [{
       id: 1,
       text: '',
       completed: false
@@ -84,7 +84,7 @@ describe('todos reducer', () => {
   })
 
   it('handles complete all', () => {
-    const state1: IState = [
+    const state1: Todos = [
       { id: 1, text: '', completed: false },
       { id: 2, text: '', completed: true },
       { id: 3, text: '', completed: false }
@@ -108,7 +108,7 @@ describe('todos reducer', () => {
   })
 
   it('handles clear completed', () => {
-    let beforeState: IState = [
+    let beforeState: Todos = [
       { id: 1, text: '', completed: false },
       { id: 2, text: '', completed: true }
     ]

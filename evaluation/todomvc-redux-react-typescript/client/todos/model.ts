@@ -6,4 +6,4 @@ export type Todo = {
   text: string
 }
 
-export type IState = Array<Todo>
+export type Todos = Array<Todo>
