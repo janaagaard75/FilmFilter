@@ -1,18 +1,11 @@
-# FilmFilter
+# Film Filter
 
-A side project testing how a filtering approach could work when selecting a movie.
+A side project, about testing how a filtering approach could work, when selecting a movie to see in the theater.
 
 ## Scraper
 
 See README in the scraper folder.
 
-## Setup
+## Website
 
-    (sudo) npm install --global gulp-cli
-    (sudo) npm install --global tsd
-    npm install
-    tsd install
-
-## Building
-
-    gulp
+See README in the website folder.
