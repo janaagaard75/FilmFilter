@@ -1,8 +1,0 @@
-/build/
-/dist/
-/node_modules/
-/tmp/
-/typings/
-
-/*.log
-.sw[a-z]
