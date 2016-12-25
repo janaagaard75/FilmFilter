@@ -29,7 +29,7 @@ Install gulp-cli if it isn't already installed:
 
 ## Installing Node packages
 
-    npm install
+    yarn install
 
 # Scraping kino.dk
 
