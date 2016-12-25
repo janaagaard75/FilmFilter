@@ -1,0 +1,11 @@
+{
+  "name": "film-filter-website",
+  "version": "0.0.0",
+  "description": "Interface for movies scraped on kino.dk.",
+  "repository": "https://github.com/janaagaard75/FilmFilter.git",
+  "author": {
+    "name": "Jan Aagaard",
+    "email": "jan@aagaard.net"
+  },
+  "license": "ISC"
+}
