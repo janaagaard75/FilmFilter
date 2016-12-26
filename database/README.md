@@ -13,4 +13,6 @@
 
 MovieVersions table
 * movieVersionId
+* dimensions
+* ...
 
