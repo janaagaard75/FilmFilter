@@ -2,11 +2,18 @@
   "name": "film-filter-database",
   "version": "0.0.0",
   "description": "Database for the info scraped from kino.dk.",
-  "main": "index.js",
+  "main": "index.ts",
   "repository": "https://github.com/janaagaard75/film-filter.git",
   "author": {
     "name": "Jan Aagaard",
     "email": "jan@aagaard.net"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "scripts": {
+    "start": "ts-node main.ts"
+  },
+  "dependencies": {
+    "ts-node": "1.7.2",
+    "typescript": "2.1.4"
+  }
 }
