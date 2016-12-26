@@ -6,7 +6,7 @@ const readJsonLines = (path: string): Array<string> => {
   return lines
 }
 
-const readScraperOutput = (filename: string): Array<string> =>  {
+const readScraperOutput = (filename: string): Array<string> => {
   const lines = readJsonLines('../scraper/output/' + filename)
   return lines
 }
