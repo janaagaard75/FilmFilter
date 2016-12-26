@@ -10,12 +10,11 @@
   },
   "license": "ISC",
   "scripts": {
-    "build": "tsc",
+    "build": "rimraf built && tsc",
     "lint": "tslint *.ts",
-    "start": "ts-node main.ts"
+    "start": "yarn build && rimraf output && node built/main.js"
   },
   "dependencies": {
-    "ts-node": "1.7.2",
     "typescript": "2.1.4"
   },
   "devDependencies": {
