@@ -1,0 +1,9 @@
+{
+  "name": "film-filter-database",
+  "version": "0.0.0",
+  "description": "Database for the info scraped from kino.dk.",
+  "main": "index.js",
+  "repository": "https://github.com/janaagaard75/film-filter",
+  "author": "Jan Aagaard",
+  "license": "ICS"
+}
