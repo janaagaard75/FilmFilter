@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 
-export class ScraperOutputReader {
+export class ScraperReader {
   public static readData<TLine>(filename: string): Array<TLine> {
     const lines = this.readScraperOutput(filename)
     const parsed = lines

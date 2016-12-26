@@ -1,11 +1,11 @@
 import { MovieLine } from './MovieLine'
-import { ScraperOutputReader } from './ScraperOutputReader'
+import { ScraperReader } from './ScraperReader'
 import { ShowingLine } from './ShowingLine'
 import { TheaterLine } from './TheaterLine'
 
-const movies = ScraperOutputReader.readData<MovieLine>('movies.jsonl')
-const theaters = ScraperOutputReader.readData<TheaterLine>('theaters.jsonl')
-const showings = ScraperOutputReader.readData<ShowingLine>('showings.jsonl')
+const movies = ScraperReader.readData<MovieLine>('movies.jsonl')
+const theaters = ScraperReader.readData<TheaterLine>('theaters.jsonl')
+const showings = ScraperReader.readData<ShowingLine>('showings.jsonl')
 
 console.info(`${movies.length} movies.`)
 console.info(`${theaters.length} theathers.`)
