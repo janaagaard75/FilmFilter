@@ -1,10 +1,19 @@
 const fs = require('fs')
 
-const outputFolder = '../scraper/output/'
+const readJsonLines = (path: string): Array<string> => {
+  const content = fs.readFileSync(path, 'utf8')
+  const lines = content.split('\n')
+  return lines
+}
 
-const movies = fs.readFileSync(outputFolder + 'movies.jsonl', 'utf8').split('\n')
-const showings = fs.readFileSync(outputFolder + 'showings.jsonl', 'utf8').split('\n')
-const theaters = fs.readFileSync(outputFolder + 'theaters.jsonl', 'utf8').split('\n')
+const readScraperOutput = (filename: string): Array<string> =>  {
+  const lines = readJsonLines('../scraper/output/' + filename)
+  return lines
+}
+
+const movies = readScraperOutput('movies.jsonl')
+const showings = readScraperOutput('showings.jsonl')
+const theaters = readScraperOutput('theaters.jsonl')
 
 console.info(`${movies.length} movies.`)
 console.info(`${showings.length} showings.`)
