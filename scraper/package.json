@@ -2,16 +2,16 @@
   "name": "film-filter-crawler",
   "version": "1.0.0",
   "description": "kino.dk scraper.",
-  "repository": "https://github.com/janaagaard75/FilmFilter.git",
+  "repository": "https://github.com/janaagaard75/film-filter.git",
+  "author": {
+    "name": "Jan Aagaard",
+    "email": "jan@aagaard.net"
+  },
+  "license": "ISC",
   "dependencies": {
     "gulp": "3.9.1",
     "gulp-shell": "0.5.2",
     "moment": "2.17.1",
     "run-sequence": "1.2.2"
-  },
-  "author": {
-    "name": "Jan Aagaard",
-    "email": "jan@aagaard.net"
-  },
-  "license": "ISC"
+  }
 }
