@@ -1,26 +1,7 @@
+import { MovieLine } from './MovieLine'
 import { ScraperOutputReader } from './ScraperOutputReader'
-
-interface MovieLine {
-  danishTitle: string
-  movieUrl: string
-  originalTitle: string
-  posterUrl: string
-}
-
-type VersionFlag = '2D' | '3D' | 'IMAX 2D' | 'IMAX 3D' | 'dansk tale' | 'S\u00e6rvisning'
-
-interface ShowingLine {
-  movieUrl: string
-  showingUrl: string
-  start: string
-  theatherUrl: string
-  versionFlags: Array<VersionFlag>
-}
-
-interface TheaterLine {
-  name: string
-  theaterUrl: string
-}
+import { ShowingLine } from './ShowingLine'
+import { TheaterLine } from './TheaterLine'
 
 const movies = ScraperOutputReader.readData<MovieLine>('movies.jsonl')
 const theaters = ScraperOutputReader.readData<TheaterLine>('theaters.jsonl')
