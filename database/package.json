@@ -10,6 +10,7 @@
   },
   "license": "ISC",
   "scripts": {
+    "lint": "tslint *.ts",
     "start": "ts-node main.ts"
   },
   "dependencies": {
@@ -17,6 +18,8 @@
     "typescript": "2.1.4"
   },
   "devDependencies": {
-    "@types/node": "6.0.53"
+    "@types/node": "6.0.53",
+    "tslint": "4.2.0",
+    "tslint-eslint-rules": "3.2.3"
   }
 }
