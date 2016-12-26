@@ -1,15 +1,4 @@
-const fs = require('fs')
-
-const readJsonLines = (path: string): Array<string> => {
-  const content = fs.readFileSync(path, 'utf8')
-  const lines = content.split('\n')
-  return lines
-}
-
-const readScraperOutput = (filename: string): Array<string> => {
-  const lines = readJsonLines('../scraper/output/' + filename)
-  return lines
-}
+import { ScraperOutputReader } from './ScraperOutputReader'
 
 interface MovieLine {
   danishTitle: string
@@ -33,10 +22,10 @@ interface TheaterLine {
   theaterUrl: string
 }
 
-const movieLines = readScraperOutput('movies.jsonl')
-const showingLines = readScraperOutput('showings.jsonl')
-const theaterLines = readScraperOutput('theaters.jsonl')
+const movies = ScraperOutputReader.readData<MovieLine>('movies.jsonl')
+const theaters = ScraperOutputReader.readData<TheaterLine>('theaters.jsonl')
+const showings = ScraperOutputReader.readData<ShowingLine>('showings.jsonl')
 
-console.info(`${movieLines.length} movies.`)
-console.info(`${showingLines.length} showings.`)
-console.info(`${theaterLines.length} theathers.`)
+console.info(`${movies.length} movies.`)
+console.info(`${theaters.length} theathers.`)
+console.info(`${showings.length} showings.`)

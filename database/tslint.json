@@ -28,7 +28,6 @@
     "no-console": [
       false
     ],
-    "no-var-requires": false,
     "no-unused-expression": true,
     "no-unused-new": true,
     "no-unused-variable": [
