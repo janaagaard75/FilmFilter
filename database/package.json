@@ -15,5 +15,8 @@
   "dependencies": {
     "ts-node": "1.7.2",
     "typescript": "2.1.4"
+  },
+  "devDependencies": {
+    "@types/node": "6.0.53"
   }
 }
