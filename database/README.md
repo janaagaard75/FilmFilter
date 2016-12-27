@@ -27,19 +27,23 @@ Convert the data from the scraper into something that makes more sense for the w
 
 * JSON arrays.
 * The ID is the position in the array.
-* What about the verions of the movies? Would it make sense to put them in a separate table? It's a many-to-many relation. Introduce a relation table?
-* What kind of cross references are needed? Is it enough to link a showing to a movie and a theater?
-
+* What about the verions of the movies?
+  1. Version information stored togehter with the showing. Easies but will take up most space.
+  1. Version information stored together with the movies. Each movie will exist multiple times.
+  1. Version information in separte array. The array will fill up as the different combinations are created. Takes up least space.
+  1. Version contains a link to the movie. Takes up even less space.
 
  * Movies
+   * danishName: string
    * movieId: number
    * movieUrl: string
-   * danishName: string
    * originalName: string
    * posterUrl: string
+
+ * Movie Version
    * dimensions: '2D' | '3D'
-   * language: 'Original' | 'Danish'
    * Imax: boolean
+   * language: 'Original' | 'Danish'
    * SpecialShowing: boolean
 
  * Theaters
