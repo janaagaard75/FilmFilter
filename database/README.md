@@ -18,9 +18,9 @@ Convert the data from the scraper into something that makes more sense for the w
 
 * Showings
   * showingUrl (PK)
-  * movieUrl (KF)
+  * movieUrl (FK)
   * start
-  * theaterUrl (KF)
+  * theaterUrl (FK)
   * version (2D, 3D, dansk tale, IMAX 2D, IMAX 3D, Særvisning)
 
 ## Output
@@ -30,32 +30,31 @@ Convert the data from the scraper into something that makes more sense for the w
 * What about the verions of the movies?
   1. Version information stored togehter with the showing. Easies but will take up most space.
   1. Version information stored together with the movies. Each movie will exist multiple times.
-  1. Version information in separte array. The array will fill up as the different combinations are created. Takes up least space.
+  1. Selected: Version information in separte array. The array will fill up as the different combinations are created. Takes up least space.
   1. Version contains a link to the movie. Takes up even less space.
 
  * Movies
-   * danishName: string
-   * movieId: number
+   * danishName?: string
    * movieUrl: string
    * originalName: string
    * posterUrl: string
 
- * Movie Version
-   * dimensions: '2D' | '3D'
-   * Imax: boolean
-   * language: 'Original' | 'Danish'
-   * SpecialShowing: boolean
+ * Versions
+   * dimensions: enum? '2D' | '3D'
+   * imax: boolean
+   * language: enum? 'Original' | 'Danish'
+   * specialShowing: boolean
 
  * Theaters
-   * theaterId
+   * name
    * theaterUrl
 
  * Showings
-   * showingId
    * movieId
    * theaterId
    * start
+   * versionId
 
 # Searches
 
-All showings this Friday in Copenhagen in 2D.
+"Showings this Friday in Copenhagen in 2D."
