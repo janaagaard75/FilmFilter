@@ -26,7 +26,7 @@ if (!fs.existsSync('output')) {
 
 fs.writeFileSync(
   'output/data.json',
-  JSON.stringify(outputData, undefined, 2),
+  JSON.stringify(outputData, undefined, 1),
   {
     encoding: 'utf8'
   }
