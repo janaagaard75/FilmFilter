@@ -25,14 +25,14 @@ Convert the data from the scraper into something that makes more sense for the w
 
 ## Output
 
-* JSON arrays.
+* JSON object with arrays of movies, showings and theaters.
 * The ID is the position in the array.
-* What about the verions of the movies?
-  1. Version information stored togehter with the showing. Easies but will take up most space.
+* What about the versions of the movies?
+  1. Selected: Version information stored togehter with the showing. Easies but will take up most space.
   1. Version information stored together with the movies. Each movie will exist multiple times.
-  1. Selected: Version information in separte array. The array will fill up as the different combinations are created. Takes up least space.
+  1. Version information in separte array. The array will fill up as the different combinations are created. Takes up least space.
   1. Version contains a link to the movie. Takes up even less space.
-
+* Some of the properties have been made optional to limit the size of the final data object. Start with mandatory field and make the optional if the data enda up being too large.
 
  * Movies
    * danishName?: string
