@@ -33,6 +33,7 @@ Convert the data from the scraper into something that makes more sense for the w
   1. Selected: Version information in separte array. The array will fill up as the different combinations are created. Takes up least space.
   1. Version contains a link to the movie. Takes up even less space.
 
+
  * Movies
    * danishName?: string
    * movieUrl: string
