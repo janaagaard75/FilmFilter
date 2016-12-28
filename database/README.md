@@ -39,21 +39,18 @@ Convert the data from the scraper into something that makes more sense for the w
    * originalName: string
    * posterUrl: string
 
- * Versions
-   * dimensions: enum? '2D' | '3D'
-   * imax: boolean
-   * language: enum? 'Original' | 'Danish'
-   * specialShowing: boolean
-
  * Theaters
-   * name
-   * theaterUrl
+   * name: string
+   * theaterUrl: string
 
  * Showings
-   * movieId
-   * theaterId
-   * start
-   * versionId
+   * movieId: number
+   * theaterId: number
+   * start: Array<Date>
+   * threeD?: boolean
+   * imax?: boolean
+   * synchronized?: boolean
+   * specialShowing?: boolean
 
 # Searches
 
