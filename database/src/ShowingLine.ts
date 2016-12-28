@@ -5,6 +5,6 @@ export interface ShowingLine {
   movieUrl: string
   showingUrl: string
   start: string
-  theatherUrl: string
-  versionFlags: Array<VersionFlag>
+  theaterUrl: string
+  version: Array<VersionFlag>
 }
