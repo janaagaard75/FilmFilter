@@ -53,7 +53,7 @@ export class Showing {
       parseInt(numbers[0], 10),
       parseInt(numbers[1], 10) - 1,
       parseInt(numbers[2], 10),
-      parseInt(numbers[3], 10) - 1,
+      parseInt(numbers[3], 10),
       parseInt(numbers[4], 10),
       parseInt(numbers[5], 10))
 
