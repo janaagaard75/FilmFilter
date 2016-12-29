@@ -32,7 +32,7 @@ export class Showing {
 
     this.specialShowing = (line.version.find(flag => flag === 'Særvisning') !== undefined)
 
-    this.start = new Date(line.start)
+    this.start = this.parseAsLocalDateTime(line.start)
 
     const theaterUrl = UrlUtil.removeStandardPrefix(line.theaterUrl)
     const theater = theaters.find(t => t.theatherUrl === theaterUrl)
@@ -45,6 +45,19 @@ export class Showing {
     }
 
     this.threeD = (line.version.find(flag => flag === '3D' || flag === 'IMAX 3D') !== undefined)
+  }
+
+  private parseAsLocalDateTime(dateString: string): Date {
+    const numbers = dateString.split(/\D/)
+    const date = new Date(
+      parseInt(numbers[0], 10),
+      parseInt(numbers[1], 10) - 1,
+      parseInt(numbers[2], 10),
+      parseInt(numbers[3], 10) - 1,
+      parseInt(numbers[4], 10),
+      parseInt(numbers[5], 10))
+
+    return date
   }
 
   public readonly dubbed: boolean
