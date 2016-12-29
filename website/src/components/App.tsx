@@ -13,7 +13,7 @@ export class App extends Component<Props, void> {
   public render() {
     return (
       <div className="container-fluid">
-        <h1>FilmFilter</h1>
+        <h1>Film Filter</h1>
       </div>
     )
   }
