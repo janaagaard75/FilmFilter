@@ -58,6 +58,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.json$/,
+        loader: 'json-loader'
+      },
+      {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style-loader',
