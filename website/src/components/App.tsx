@@ -26,7 +26,7 @@ export class App extends Component<Props, void> {
           </thead>
           <tbody>
             {this.props.store.matchingShowings.map(showing =>
-              <ShowingRow key={showing.showingUrl} showing={showing} store={this.props.store}/>
+              <ShowingRow key={showing.showingUrl} showing={showing}/>
             )}
           </tbody>
         </table>

@@ -1,23 +1,68 @@
+import { action } from 'mobx'
 import { computed } from 'mobx'
 import { observable } from 'mobx'
 
-import { Data } from './Data'
-import { ShowingData } from './Data'
+import { Data } from './data/Data'
+import { Movie } from './Movie'
+import { Showing } from './Showing'
+import { Theater } from './Theater'
 
 export class Store {
   constructor() {
     this.data = require<Data>('../data.json')
+
+    this.movies = new Map()
+    this.theaters = new Map()
+
+    this.showings = this.data.showings.map(showingData => new Showing(showingData, this))
+
+    this.movieName = ''
   }
 
-  @observable
-  public data: Data
+  private data: Data
+  private movies: Map<number, Movie>
+  private showings: Array<Showing>
+  private theaters: Map<number, Theater>
+
+  @observable public movieName: string
 
   @computed
-  public get matchingShowings(): Array<ShowingData> {
-    const matching = this.data.showings
+  public get matchingShowings(): Array<Showing> {
+    const matching = this.showings
       // TODO: Support movies that don't have a separate move page.
-      .filter(showing => showing.movieId !== -1)
+      .filter(showing => showing.movie !== undefined)
+      .filter(showing => this.matchesMovieName(showing))
       .slice(0, 100)
     return matching
+  }
+
+  private matchesMovieName(showing: Showing) {
+    const match = showing.movie.originalTitle.indexOf(this.movieName) >= 0
+      || (showing.movie.danishTitle !== undefined && showing.movie.danishTitle.indexOf(this.movieName) >= 0)
+    return match
+  }
+
+  public getMovie(movieId: number): Movie {
+    if (movieId === -1) {
+      return Movie.UndefinedMovie
+    }
+
+    let movie = this.movies.get(movieId)
+    if (movie === undefined) {
+      movie = new Movie(this.data.movies[movieId])
+      this.movies.set(movieId, movie)
+    }
+
+    return movie
+  }
+
+  public getTheater(theaterId: number): Theater {
+    let theater = this.theaters.get(theaterId)
+    if (theater === undefined) {
+      theater = new Theater(this.data.theaters[theaterId])
+      this.theaters.set(theaterId, theater)
+    }
+
+    return theater
   }
 }
