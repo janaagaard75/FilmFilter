@@ -16,9 +16,18 @@ interface Props {
 export class App extends Component<Props, void> {
   public render() {
     return (
+      // TODO: Avoid the br element.
       <div className="container-fluid">
         <h1>Film Filter</h1>
-        <FilterForm setMovieNameFilter={e => this.props.store.setMovieNameFilter(e)} />
+        <div className="row">
+          <div className="col-sm-6">
+            <FilterForm setMovieNameFilter={e => this.props.store.setMovieNameFilter(e)} />
+          </div>
+          <div className="col-sm-6">
+            Biograf
+          </div>
+        </div>
+        <br/>
         <ShowingsTable showings={this.props.store.matchingShowings}/>
       </div>
     )
