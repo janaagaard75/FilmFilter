@@ -43,7 +43,7 @@
     "quotemark": [
       true,
       "single",
-      "jsx-single"
+      "jsx-double"
     ],
     "semicolon": [
       true,
