@@ -10,6 +10,14 @@ interface State {
 }
 
 export class FilterForm extends Component<Props, State> {
+  constructor(props: Props, context?: any) {
+    super(props, context)
+
+    this.setState({
+      text: ''
+    })
+  }
+
   private handleChange(e: React.FormEvent<HTMLInputElement>) {
     this.setState({
       text: e.currentTarget.value
