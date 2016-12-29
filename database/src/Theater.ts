@@ -7,6 +7,6 @@ export class Theater {
     this.theatherUrl = UrlUtil.removeStandardPrefix(line.theaterUrl)
   }
 
-  public name: string
-  public theatherUrl: string
+  public readonly name: string
+  public readonly theatherUrl: string
 }

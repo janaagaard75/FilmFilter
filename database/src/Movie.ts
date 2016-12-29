@@ -12,8 +12,8 @@ export class Movie {
     }
   }
 
-  public danishTitle?: string
-  public movieUrl: string
-  public originalTitle: string
-  public posterUrl: string
+  public readonly danishTitle?: string
+  public readonly movieUrl: string
+  public readonly originalTitle: string
+  public readonly posterUrl: string
 }
