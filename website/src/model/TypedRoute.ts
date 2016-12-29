@@ -1,4 +1,4 @@
-import { RouteComponentClass } from "./RouteComponent"
+import { RouteComponentClass } from './RouteComponent'
 
 export class TypedRoute<LinkPath extends (...args: Array<any>) => string> {
   constructor(

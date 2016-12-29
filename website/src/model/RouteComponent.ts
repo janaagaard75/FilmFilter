@@ -1,6 +1,6 @@
-import { Component } from "react"
-import { ComponentClass } from "react"
-import { RouterContext } from "react-router"
+import { Component } from 'react'
+import { ComponentClass } from 'react'
+import { RouterContext } from 'react-router'
 
 interface RouteComponentProps extends RouterContext.RouterContextProps { }
 
