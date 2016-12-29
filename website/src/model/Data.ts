@@ -9,6 +9,7 @@ interface Showing {
   readonly dubbed: boolean
   readonly imax: boolean
   readonly movieId: number
+  readonly showingUrl: string
   readonly specialShowing: boolean
   readonly start: Date
   readonly theaterId: number
