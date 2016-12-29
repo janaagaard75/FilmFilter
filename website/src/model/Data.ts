@@ -11,7 +11,7 @@ export interface ShowingData {
   readonly movieId: number
   readonly showingUrl: string
   readonly specialShowing: boolean
-  readonly start: Date
+  readonly start: string
   readonly theaterId: number
   readonly threeD: boolean
 }
