@@ -21,7 +21,6 @@ export class Showing {
       const movieUrl = UrlUtil.removeStandardPrefix(line.movieUrl)
       const movie = movies.find(m => m.movieUrl === movieUrl)
       if (movie === undefined) {
-        console.error(`Movie with url '${movieUrl}' was not found, line number ${lineIndex + 1}.`)
         this.movieId = -1
       }
       else {
