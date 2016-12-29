@@ -28,6 +28,8 @@ export class Showing {
       }
     }
 
+    this.showingUrl = UrlUtil.removeStandardPrefix(line.showingUrl)
+
     this.specialShowing = (line.version.find(flag => flag === 'Særvisning') !== undefined)
 
     this.start = new Date(line.start)
@@ -48,6 +50,7 @@ export class Showing {
   public readonly dubbed: boolean
   public readonly imax: boolean
   public readonly movieId: number
+  public readonly showingUrl: string
   public readonly specialShowing: boolean
   public readonly start: Date
   public readonly theaterId: number
