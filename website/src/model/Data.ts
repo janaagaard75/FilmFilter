@@ -1,11 +1,11 @@
-interface Movie {
+export interface MovieData {
   readonly danishTitle?: string
   readonly movieUrl: string
   readonly originalTitle: string
   readonly posterUrl: string
 }
 
-export interface Showing {
+export interface ShowingData {
   readonly dubbed: boolean
   readonly imax: boolean
   readonly movieId: number
@@ -16,13 +16,13 @@ export interface Showing {
   readonly threeD: boolean
 }
 
-interface Theater {
+export interface TheaterData {
   readonly name: string
   readonly theatherUrl: string
 }
 
 export interface Data {
-  movies: Array<Movie>,
-  showings: Array<Showing>,
-  theaters: Array<Theater>
+  movies: Array<MovieData>,
+  showings: Array<ShowingData>,
+  theaters: Array<TheaterData>
 }

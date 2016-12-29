@@ -2,7 +2,7 @@ import { computed } from 'mobx'
 import { observable } from 'mobx'
 
 import { Data } from './Data'
-import { Showing } from './Data'
+import { ShowingData } from './Data'
 
 export class Store {
   constructor() {
@@ -13,7 +13,7 @@ export class Store {
   public data: Data
 
   @computed
-  public get first100Showings(): Array<Showing> {
+  public get first100Showings(): Array<ShowingData> {
     const first100 = this.data.showings.slice(0, 100)
     return first100
   }
