@@ -5,7 +5,7 @@ interface Movie {
   readonly posterUrl: string
 }
 
-interface Showing {
+export interface Showing {
   readonly dubbed: boolean
   readonly imax: boolean
   readonly movieId: number
