@@ -13,9 +13,9 @@ export class FilterForm extends Component<Props, State> {
   constructor(props: Props, context?: any) {
     super(props, context)
 
-    this.setState({
+    this.state = {
       text: ''
-    })
+    }
   }
 
   private handleChange(e: React.FormEvent<HTMLInputElement>) {
