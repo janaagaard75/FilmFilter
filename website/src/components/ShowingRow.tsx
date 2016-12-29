@@ -1,9 +1,7 @@
-import * as moment from 'moment'
 import * as React from 'react'
 import { Component } from 'react'
 
 import { Showing } from '../model/Showing'
-import { Store } from '../model/Store'
 
 interface Props {
   showing: Showing

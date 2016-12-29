@@ -1,5 +1,5 @@
 import { MovieData } from './MovieData'
-import { ShowingData} from './ShowingData'
+import { ShowingData } from './ShowingData'
 import { TheaterData } from './TheaterData'
 
 export interface Data {

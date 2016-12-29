@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { Component } from 'react'
 import { RouterContext } from 'react-router'
-import * as moment from 'moment'
 
 import { ShowingRow } from './ShowingRow'
 import { Store } from '../model/Store'
