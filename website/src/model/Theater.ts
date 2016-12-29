@@ -8,4 +8,9 @@ export class Theater {
 
   public readonly name: string
   public readonly theatherUrl: string
+
+  public static readonly UndefinedTheater = new Theater({
+    name: '',
+    theatherUrl: ''
+  })
 }
