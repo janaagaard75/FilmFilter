@@ -13,7 +13,10 @@ export class Store {
 
     // TODO: It's probably better to use an array instead of a map.
     this.movies = new Map()
-    this.theaters = this.data.theaters.map(theaterData => new Theater(theaterData))
+
+    this.theaters = this.data.theaters
+      .map(theaterData => new Theater(theaterData))
+      .sort((a, b) => this.compareByName(a, b))
 
     this.showings = this.data.showings.map(showingData => new Showing(showingData, this))
 
@@ -23,7 +26,7 @@ export class Store {
   private data: Data
   private movies: Map<number, Movie>
   private showings: Array<Showing>
-  private theaters: Array<Theater>
+  public theaters: Array<Theater>
 
   @observable
   private movieNameFilter: string
@@ -66,11 +69,6 @@ export class Store {
     }
 
     return theater
-  }
-
-  public getTheaters(): Array<Theater> {
-    const sortedTheaters = this.theaters.sort((a, b) => this.compareByName(a, b))
-    return sortedTheaters
   }
 
   private compareByName(a: Theater, b: Theater) {

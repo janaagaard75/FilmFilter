@@ -25,7 +25,7 @@ export class App extends Component<Props, void> {
             <FilterForm setMovieNameFilter={e => this.props.store.setMovieNameFilter(e)} />
           </div>
           <div className="col-sm-6">
-            <TheaterForm theaters={this.props.store.getTheaters()}/>
+            <TheaterForm theaters={this.props.store.theaters}/>
           </div>
         </div>
         <br/>
