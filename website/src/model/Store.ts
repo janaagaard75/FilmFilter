@@ -11,8 +11,9 @@ export class Store {
   constructor() {
     this.data = require<Data>('../data.json')
 
+    // TODO: It's probably better to use an array instead of a map.
     this.movies = new Map()
-    this.theaters = new Map()
+    this.theaters = this.data.theaters.map(theaterData => new Theater(theaterData))
 
     this.showings = this.data.showings.map(showingData => new Showing(showingData, this))
 
@@ -22,7 +23,7 @@ export class Store {
   private data: Data
   private movies: Map<number, Movie>
   private showings: Array<Showing>
-  private theaters: Map<number, Theater>
+  private theaters: Array<Theater>
 
   @observable
   private movieNameFilter: string
@@ -58,13 +59,30 @@ export class Store {
   }
 
   public getTheater(theaterId: number): Theater {
-    let theater = this.theaters.get(theaterId)
+    let theater = this.theaters[theaterId]
+
     if (theater === undefined) {
-      theater = new Theater(this.data.theaters[theaterId])
-      this.theaters.set(theaterId, theater)
+      return Theater.UndefinedTheater
     }
 
     return theater
+  }
+
+  public getTheaters(): Array<Theater> {
+    const sortedTheaters = this.theaters.sort((a, b) => this.compareByName(a, b))
+    return sortedTheaters
+  }
+
+  private compareByName(a: Theater, b: Theater) {
+    if (a.name > b.name) {
+      return 1
+    }
+
+    if (a.name < b.name) {
+      return -1
+    }
+
+    return 0
   }
 
   @action
