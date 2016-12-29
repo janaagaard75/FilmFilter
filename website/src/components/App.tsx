@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { Component } from 'react'
+import { observer } from 'mobx-react'
 import { RouterContext } from 'react-router'
 
 import { FilterForm } from './FilterForm'
-import { ShowingRow } from './ShowingRow'
+import { ShowingsTable } from './ShowingsTable'
 import { Store } from '../model/Store'
 
 interface Props {
@@ -11,26 +12,14 @@ interface Props {
   store: Store
 }
 
+@observer
 export class App extends Component<Props, void> {
   public render() {
     return (
       <div className="container-fluid">
         <h1>Film Filter</h1>
-        <FilterForm setMovieNameFilter={this.props.store.setMovieNameFilter} />
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Navn</th>
-              <th>Biograf</th>
-              <th>Tidspunkt</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.store.matchingShowings.map(showing =>
-              <ShowingRow key={showing.showingUrl} showing={showing}/>
-            )}
-          </tbody>
-        </table>
+        <FilterForm setMovieNameFilter={e => this.props.store.setMovieNameFilter(e)} />
+        <ShowingsTable showings={this.props.store.matchingShowings}/>
       </div>
     )
   }

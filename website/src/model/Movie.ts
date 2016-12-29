@@ -6,9 +6,15 @@ export class Movie {
     this.movieUrl = 'http://www.kino.dk/' + data.movieUrl
     this.originalTitle = data.originalTitle
     this.posterUrl = 'http://www.kino.dk/' + data.posterUrl
+
+    this.lowerCaseTitle = data.originalTitle.toLocaleLowerCase()
+    if (data.danishTitle !== undefined) {
+      this.lowerCaseTitle += ' ' + data.danishTitle.toLocaleLowerCase()
+    }
   }
 
   public readonly danishTitle?: string
+  public readonly lowerCaseTitle: string
   public readonly movieUrl: string
   public readonly originalTitle: string
   public readonly posterUrl: string

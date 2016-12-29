@@ -16,7 +16,7 @@ export class Store {
 
     this.showings = this.data.showings.map(showingData => new Showing(showingData, this))
 
-    this.movieName = ''
+    this.movieNameFilter = ''
   }
 
   private data: Data
@@ -24,7 +24,8 @@ export class Store {
   private showings: Array<Showing>
   private theaters: Map<number, Theater>
 
-  @observable public movieName: string
+  @observable
+  private movieNameFilter: string
 
   @computed
   public get matchingShowings(): Array<Showing> {
@@ -37,8 +38,7 @@ export class Store {
   }
 
   private matchesMovieName(showing: Showing) {
-    const match = showing.movie.originalTitle.indexOf(this.movieName) >= 0
-      || (showing.movie.danishTitle !== undefined && showing.movie.danishTitle.indexOf(this.movieName) >= 0)
+    const match = showing.movie.lowerCaseTitle.indexOf(this.movieNameFilter.toLocaleLowerCase()) >= 0
     return match
   }
 
@@ -68,6 +68,6 @@ export class Store {
 
   @action
   public setMovieNameFilter(movieName: string) {
-    this.movieName = movieName
+    this.movieNameFilter = movieName
   }
 }
