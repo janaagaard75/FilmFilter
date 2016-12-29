@@ -29,7 +29,7 @@ export class FilterForm extends Component<Props, State> {
         <div className="input-group">
           <input type="text" className="form-control" onChange={e => this.handleChange(e)}/>
           <span className="input-group-btn">
-            <button type="submit" className="btn btn-primary">Update</button>
+            <button type="submit" className="btn btn-primary">Filtrér</button>
           </span>
         </div>
       </form>
