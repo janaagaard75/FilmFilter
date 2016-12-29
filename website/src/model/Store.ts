@@ -5,7 +5,7 @@ import { Data } from './Data'
 
 export class Store {
   constructor() {
-    this.data = require<Data>('./data.json')
+    this.data = require<Data>('../data.json')
   }
 
   @observable
