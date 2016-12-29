@@ -6,6 +6,7 @@ import { RouterContext } from 'react-router'
 import { FilterForm } from './FilterForm'
 import { ShowingsTable } from './ShowingsTable'
 import { Store } from '../model/Store'
+import { TheaterForm } from './TheaterForm'
 
 interface Props {
   routerContext: RouterContext.RouterContextProps,
@@ -24,7 +25,7 @@ export class App extends Component<Props, void> {
             <FilterForm setMovieNameFilter={e => this.props.store.setMovieNameFilter(e)} />
           </div>
           <div className="col-sm-6">
-            Biograf
+            <TheaterForm theaters={this.props.store.getTheaters()}/>
           </div>
         </div>
         <br/>
