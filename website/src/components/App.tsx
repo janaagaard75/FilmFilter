@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Component } from 'react'
 import { RouterContext } from 'react-router'
 
+import { FilterForm } from './FilterForm'
 import { ShowingRow } from './ShowingRow'
 import { Store } from '../model/Store'
 
@@ -15,6 +16,7 @@ export class App extends Component<Props, void> {
     return (
       <div className="container-fluid">
         <h1>Film Filter</h1>
+        <FilterForm setMovieNameFilter={this.props.store.setMovieNameFilter} />
         <table className="table">
           <thead>
             <tr>

@@ -65,4 +65,9 @@ export class Store {
 
     return theater
   }
+
+  @action
+  public setMovieNameFilter(movieName: string) {
+    this.movieName = movieName
+  }
 }
