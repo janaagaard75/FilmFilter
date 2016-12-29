@@ -14,10 +14,10 @@ export class Store {
 
   @computed
   public get matchingShowings(): Array<ShowingData> {
-    const first100 = this.data.showings
+    const matching = this.data.showings
       // TODO: Support movies that don't have a separate move page.
       .filter(showing => showing.movieId !== -1)
       .slice(0, 100)
-    return first100
+    return matching
   }
 }
