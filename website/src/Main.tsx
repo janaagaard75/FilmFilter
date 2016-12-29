@@ -1,12 +1,12 @@
-import * as React from "react"
-import { browserHistory } from "react-router"
-import { render } from "react-dom"
-import { Route } from "react-router"
-import { Router } from "react-router"
+import * as React from 'react'
+import { browserHistory } from 'react-router'
+import { render } from 'react-dom'
+import { Route } from 'react-router'
+import { Router } from 'react-router'
 
-import { allRoutes } from "./routes"
+import { allRoutes } from './routes'
 
-import "./main.scss"
+import './main.scss'
 
 render(
   <Router history={browserHistory}>
@@ -14,5 +14,5 @@ render(
       <Route key={route.routePath} component={route.component} path={route.routePath}/>
     )}
   </Router>,
-  document.getElementById("app")
+  document.getElementById('app')
 )
