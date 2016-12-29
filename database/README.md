@@ -56,3 +56,10 @@ Convert the data from the scraper into something that makes more sense for the w
 # Searches
 
 "Showings this Friday in Copenhagen in 2D."
+
+# To Do
+
+* Remove ticketflow/ prefix from showing URLs.
+* Remove film/x/xx/ prefix from movie URLs.
+* Remove k/sites/default/files/imagecache/k_poster_big from poster URLs.
+* Remove biografer/ prefix from theater URLs.
