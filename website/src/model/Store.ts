@@ -33,6 +33,7 @@ export class Store {
       // TODO: Support movies that don't have a separate move page.
       .filter(showing => showing.movie !== undefined)
       .filter(showing => this.matchesMovieName(showing))
+      .sort((showingA, showingB) => showingA.start.diff(showingB.start))
       .slice(0, 100)
     return matching
   }
