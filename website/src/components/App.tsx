@@ -1,7 +1,9 @@
 import * as React from 'react'
 import { Component } from 'react'
 import { RouterContext } from 'react-router'
+import * as moment from 'moment'
 
+import { ShowingRow } from './ShowingRow'
 import { Store } from '../model/Store'
 
 interface Props {
@@ -20,19 +22,11 @@ export class App extends Component<Props, void> {
               <th>Navn</th>
               <th>Biograf</th>
               <th>Tidspunkt</th>
-              <th>Billetter</th>
             </tr>
           </thead>
           <tbody>
-            {this.props.store.first100Showings.map(showing =>
-              <tr key={showing.showingUrl}>
-                <td>{showing.movieId === -1
-                  ? ''
-                  : this.props.store.data.movies[showing.movieId].originalTitle}</td>
-                <td>{this.props.store.data.theaters[showing.theaterId].name}</td>
-                <td>{showing.start}</td>
-                <td><a href={showing.showingUrl}>Billetter</a></td>
-              </tr>
+            {this.props.store.matchingShowings.map(showing =>
+              <ShowingRow key={showing.showingUrl} showing={showing} store={this.props.store}/>
             )}
           </tbody>
         </table>

@@ -13,7 +13,7 @@ export class Store {
   public data: Data
 
   @computed
-  public get first100Showings(): Array<ShowingData> {
+  public get matchingShowings(): Array<ShowingData> {
     const first100 = this.data.showings.slice(0, 100)
     return first100
   }

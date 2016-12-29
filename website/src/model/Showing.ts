@@ -8,7 +8,7 @@ export class Showing {
     this.imax = data.imax
     this.showingUrl = 'http://www.kino.dk/' + data.showingUrl
     this.specialShowing = data.specialShowing
-    this.start = data.start
+    this.start = new Date(data.start)
     this.theaterId = data.theaterId
     this.threeD = data.threeD
 
