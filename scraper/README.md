@@ -58,3 +58,7 @@ At https://jqplay.org/ it's possible to play around with JSON Lines data. This c
 And this command counts them. There are over 200, so the movies scraper is missing 2/3rds of all the movies.
 
     unique_by(.movieUrl) | length
+
+# To Do
+
+* The year isn't corrent around new years.
