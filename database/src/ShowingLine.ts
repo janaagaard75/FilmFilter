@@ -3,6 +3,7 @@ export type VersionFlag = '2D' | '3D' | 'IMAX 2D' | 'IMAX 3D' | 'dansk tale' | '
 
 export interface ShowingLine {
   movieUrl: string
+  seatingInfo: Array<string>
   showingUrl: string
   start: string
   theaterUrl: string
