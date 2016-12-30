@@ -11,6 +11,7 @@
   "license": "ISC",
   "scripts": {
     "build": "rimraf built && tsc",
+    "copy": "cp output/data.json ../website/src/",
     "lint": "tslint *.ts",
     "start": "yarn build && rimraf output && node built/main.js"
   },
