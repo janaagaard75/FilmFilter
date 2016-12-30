@@ -11,8 +11,7 @@ export class Store {
   constructor() {
     this.data = require<Data>('../data.json')
 
-    // TODO: It's probably better to use an array instead of a map.
-    this.movies = new Map()
+    this.movies = this.data.movies.map(movieData => new Movie(movieData))
 
     this.theaters = this.data.theaters
       .map(theaterData => new Theater(theaterData))
@@ -24,7 +23,7 @@ export class Store {
   }
 
   private data: Data
-  private movies: Map<number, Movie>
+  private movies: Array<Movie>
   private showings: Array<Showing>
   public theaters: Array<Theater>
 
@@ -52,17 +51,16 @@ export class Store {
       return Movie.UndefinedMovie
     }
 
-    let movie = this.movies.get(movieId)
+    const movie = this.movies[movieId]
     if (movie === undefined) {
-      movie = new Movie(this.data.movies[movieId])
-      this.movies.set(movieId, movie)
+      return Movie.UndefinedMovie
     }
 
     return movie
   }
 
   public getTheater(theaterId: number): Theater {
-    let theater = this.theaters[theaterId]
+    const theater = this.theaters[theaterId]
 
     if (theater === undefined) {
       return Theater.UndefinedTheater
