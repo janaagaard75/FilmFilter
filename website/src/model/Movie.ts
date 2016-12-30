@@ -1,4 +1,5 @@
 import { MovieData } from './data/MovieData'
+import { Showing } from './Showing'
 
 export class Movie {
   constructor(data: MovieData) {
@@ -6,6 +7,7 @@ export class Movie {
     this.movieUrl = 'http://www.kino.dk/' + data.movieUrl
     this.originalTitle = data.originalTitle
     this.posterUrl = 'http://www.kino.dk/' + data.posterUrl
+    this.showings = []
 
     this.lowerCaseTitle = data.originalTitle.toLocaleLowerCase()
     if (data.danishTitle !== undefined) {
@@ -18,6 +20,7 @@ export class Movie {
   public readonly movieUrl: string
   public readonly originalTitle: string
   public readonly posterUrl: string
+  public readonly showings: Array<Showing>
 
   public static UndefinedMovie: Movie = new Movie({
     movieUrl: '',
@@ -25,8 +28,7 @@ export class Movie {
     posterUrl: ''
   })
 
-  public static isUndefined(movie: Movie) {
-    const notDefined = movie === Movie.UndefinedMovie
-    return notDefined
+  public addShowing(showing: Showing) {
+    this.showings.push(showing)
   }
 }

@@ -16,6 +16,8 @@ export class Showing {
     this.start = moment(data.start)
     this.theater = store.getTheater(data.theaterId)
     this.threeD = data.threeD
+
+    this.movie.addShowing(this)
   }
 
   public readonly dubbed: boolean
