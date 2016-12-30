@@ -30,6 +30,11 @@ export class App extends Component<Props, void> {
         </div>
         <br/>
         <ShowingsTable showings={this.props.store.matchingShowings}/>
+        <ul>
+          {this.props.store.getMoviesByNumberOfShowings().slice(0, 25).map(movie =>
+            <li key={movie.movieUrl}>{movie.originalTitle} ({movie.showings.length})</li>
+          )}
+        </ul>
       </div>
     )
   }

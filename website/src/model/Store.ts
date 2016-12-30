@@ -59,6 +59,11 @@ export class Store {
     return movie
   }
 
+  public getMoviesByNumberOfShowings(): Array<Movie> {
+    const sorted = this.movies.sort((a, b) => b.showings.length - a.showings.length)
+    return sorted
+  }
+
   public getTheater(theaterId: number): Theater {
     const theater = this.theaters[theaterId]
 
