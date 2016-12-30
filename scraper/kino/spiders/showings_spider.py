@@ -71,12 +71,16 @@ class ShowingsSpider(scrapy.Spider):
                     hourAndMinute = showing_cell.xpath('text()').extract_first().split(':')
                     hour = int(hourAndMinute[0])
                     minute = int(hourAndMinute[1])
-                    # TODO: This will only work as long as all movies start this year.
-                    date_obj = datetime(2016, month, day, hour, minute)
+                    #seating_info = showing_cell.xpath('@title').extract_first()[len('<div>'):len('</div>')]
+                    seating_info = showing_cell.xpath('@title').extract_first()[len('<div>'):-len('</div>')].split('</div><div>')
+                    date_obj = datetime(datetime.now().year, month, day, hour, minute)
+                    if date_obj < datetime.now():
+                        date_obj = datetime(datetime.now().year + 1, month, day, hour, minute)
 
                     showing = ShowingItem()
                     showing['movieUrl'] = movie_url
                     showing['theaterUrl'] = theater_url
+                    showing['seatingInfo'] = seating_info
                     showing['showingUrl'] = response.urljoin(showing_cell.xpath('@href').extract_first())
                     showing['start'] = date_obj.strftime('%Y-%m-%dT%H:%M:00')
                     showing['version'] = version
