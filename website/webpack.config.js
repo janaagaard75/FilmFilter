@@ -57,6 +57,7 @@ module.exports = {
     compress: true,
     contentBase: outputDir,
     historyApiFallback: true,
+    host: '192.168.0.20',
     port: 9000
   },
   devtool: 'source-map',
