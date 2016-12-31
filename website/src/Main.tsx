@@ -7,6 +7,8 @@ import { Router } from 'react-router'
 
 import { allRoutes } from './routes'
 
+import 'bootstrap/js/dist/collapse'
+
 import './main.scss'
 
 moment.locale('da')

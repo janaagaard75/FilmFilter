@@ -4,6 +4,7 @@ import { observer } from 'mobx-react'
 import { RouterContext } from 'react-router'
 
 import { FilterForm } from './FilterForm'
+import { MovieCard } from './MovieCard'
 import { ShowingsTable } from './ShowingsTable'
 import { Store } from '../model/Store'
 import { TheaterForm } from './TheaterForm'
@@ -20,6 +21,9 @@ export class App extends Component<Props, void> {
       // TODO: Avoid the br element.
       <div className="container-fluid">
         <h1>Film Filter</h1>
+        <div id="accordion" role="tablist" aria-multiselectable="true">
+          <MovieCard movies={this.props.store.getMoviesByNumberOfShowings().slice(0, 25)}/>
+        </div>
         <div className="row">
           <div className="col-sm-6">
             <FilterForm setMovieNameFilter={e => this.props.store.setMovieNameFilter(e)} />

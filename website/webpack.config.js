@@ -31,6 +31,14 @@ const plugins = [
   }),
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(nodeEnv)
+  }),
+  new webpack.ProvidePlugin({
+    // TODO: Use something slimmer than the full jQuery.
+    $: 'jquery',
+    jquery: 'jquery',
+    jQuery: 'jquery',
+    'window.jQuery': 'jquery',
+    Util: 'exports-loader?Util!bootstrap/js/dist/util'
   })
 ]
 
