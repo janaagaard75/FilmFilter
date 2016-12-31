@@ -6,7 +6,7 @@ export class Movie {
     this.danishTitle = data.danishTitle
     this.movieUrl = 'http://www.kino.dk/' + data.movieUrl
     this.originalTitle = data.originalTitle
-    this.posterUrl = 'http://www.kino.dk/' + data.posterUrl
+    this.posterUrl = data.posterUrl
     this.showings = []
 
     this.lowerCaseTitle = data.originalTitle.toLocaleLowerCase()
