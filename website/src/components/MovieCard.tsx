@@ -7,19 +7,35 @@ interface Props {
   movies: Array<Movie>
 }
 
-export class MovieCard extends Component<Props, void> {
+interface State {
+  expanded: boolean
+}
+
+export class MovieCard extends Component<Props, State> {
+  constructor(props: Props, context?: any) {
+    super(props, context)
+
+    this.state = {
+      expanded: false
+    }
+  }
+
+  private handleToggle() {
+    this.setState({
+      expanded: !this.state.expanded
+    })
+  }
+
   public render() {
     // TODO: Figure out how to avoid the <br> tag
     return (
       <div className="card">
-        <div className="card-header" role="tab" id="headingOne">
+        <div className="card-header" onClick={e => this.handleToggle()}>
           <h5 className="mb-0">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              Vælg film
-            </a>
+            Vælg film
           </h5>
         </div>
-        <div id="collapseOne" className="collapse in" role="tabpanel" aria-labelledby="headingOne">
+        <div className={this.state.expanded ? 'collapse in' : 'collapse'}>
           <div className="card-block">
             <div className="row">
               {this.props.movies.map(movie =>

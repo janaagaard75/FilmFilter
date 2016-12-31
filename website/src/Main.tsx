@@ -7,6 +7,7 @@ import { Router } from 'react-router'
 
 import { allRoutes } from './routes'
 
+// TODO: Remove this and jQuery.
 import 'bootstrap/js/dist/collapse'
 
 import './main.scss'
