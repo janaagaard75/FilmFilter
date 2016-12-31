@@ -5,7 +5,7 @@ export class Movie {
   constructor(line: MovieLine) {
     this.movieUrl = UrlUtil.removeStandardPrefix(line.movieUrl)
     this.originalTitle = line.originalTitle
-    this.posterUrl = UrlUtil.removeStandardPrefix(line.posterUrl)
+    this.posterUrl = line.posterUrl
 
     if (line.danishTitle !== line.originalTitle) {
       this.danishTitle = line.danishTitle
