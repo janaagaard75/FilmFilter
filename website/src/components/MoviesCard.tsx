@@ -37,7 +37,7 @@ export class MoviesCard extends Component<Props, State> {
         <div className="card-header clickable" onClick={() => this.toggleExpanded()}>
           <h5 className="mb-0">
             {this.props.selectedMovies.length === 0
-              ? "Vælg Film"
+              ? "Vælg film"
               : "Film: " + this.props.selectedMovies.map(movie => movie.originalTitle).join(", ")}
           </h5>
         </div>
