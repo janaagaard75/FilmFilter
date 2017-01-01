@@ -1,6 +1,6 @@
+import * as classNames from 'classnames'
 import * as React from 'react'
 import { Component } from 'react'
-import * as classNames from 'classnames'
 
 interface Props {
   expanded: boolean

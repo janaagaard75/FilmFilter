@@ -1,3 +1,4 @@
+import * as moment from 'moment'
 import { action } from 'mobx'
 import { computed } from 'mobx'
 import { observable } from 'mobx'
@@ -22,28 +23,45 @@ export class Store {
     this.movieNameFilter = ''
   }
 
-  private data: Data
-  private movies: Array<Movie>
-  private showings: Array<Showing>
-  public theaters: Array<Theater>
+  private readonly data: Data
+  private readonly movies: Array<Movie>
+  private readonly showings: Array<Showing>
+  public readonly theaters: Array<Theater>
 
   @observable
   private movieNameFilter: string
 
   @computed
   public get matchingShowings(): Array<Showing> {
+    const now = moment()
+
     const matching = this.showings
       // TODO: Support movies that don't have a separate move page.
       .filter(showing => showing.movie !== undefined)
+      .filter(showing => showing.start > now)
+      .filter(showing => this.selectedMovies.length === 0 || showing.movie.selected)
       .filter(showing => this.matchesMovieName(showing))
       .sort((showingA, showingB) => showingA.start.diff(showingB.start))
       .slice(0, 100)
     return matching
   }
 
-  private matchesMovieName(showing: Showing) {
-    const match = showing.movie.lowerCaseTitle.indexOf(this.movieNameFilter.toLocaleLowerCase()) >= 0
-    return match
+  @computed
+  public get selectedMovies(): Array<Movie> {
+    const selectedMovies = this.movies.filter(movie => movie.selected)
+    return selectedMovies
+  }
+
+  private compareByName(a: Theater, b: Theater) {
+    if (a.name > b.name) {
+      return 1
+    }
+
+    if (a.name < b.name) {
+      return -1
+    }
+
+    return 0
   }
 
   public getMovie(movieId: number): Movie {
@@ -74,20 +92,20 @@ export class Store {
     return theater
   }
 
-  private compareByName(a: Theater, b: Theater) {
-    if (a.name > b.name) {
-      return 1
-    }
-
-    if (a.name < b.name) {
-      return -1
-    }
-
-    return 0
+  private matchesMovieName(showing: Showing) {
+    const match = showing.movie.lowerCaseTitle.indexOf(this.movieNameFilter.toLocaleLowerCase()) >= 0
+    return match
   }
 
+  // TODO: Romove the movie name filter. Use it to filter the movies in the selection field instead.
   @action
   public setMovieNameFilter(movieName: string) {
     this.movieNameFilter = movieName
+  }
+
+  // TODO: Is it worth using actions at thus forcing this method?
+  @action
+  public toggleMovieSelection(movie: Movie) {
+    movie.selected = !movie.selected
   }
 }

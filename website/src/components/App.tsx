@@ -22,7 +22,11 @@ export class App extends Component<Props, void> {
       <div className="container-fluid">
         <h1>Film Filter</h1>
         <div id="accordion" role="tablist" aria-multiselectable="true">
-          <MovieCard movies={this.props.store.getMoviesByNumberOfShowings().slice(0, 24)}/>
+          <MovieCard
+            movies={this.props.store.getMoviesByNumberOfShowings().slice(0, 24)}
+            selectedMovies={this.props.store.selectedMovies}
+            toggleMovieSelection={this.props.store.toggleMovieSelection}
+          />
         </div>
         <div className="row">
           <div className="col-sm-6">
