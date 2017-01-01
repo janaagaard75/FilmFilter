@@ -29,7 +29,7 @@ export class App extends Component<Props, void> {
             toggleMovieSelection={this.props.store.toggleMovieSelection}
           />
           <TheatersSelecter
-            theaters={this.props.store.theaters}
+            theaters={this.props.store.getTheatersSortedByName()}
             selectedTheaters={this.props.store.selectedTheaters}
             toggleTheaterSelection={this.props.store.toggleTheaterSelection}
           />

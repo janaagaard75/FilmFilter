@@ -18,7 +18,6 @@ export class Store {
 
     this.theaters = this.data.theaters
       .map(theaterData => new Theater(theaterData))
-      .sort((a, b) => this.compareByName(a, b))
 
     this.showings = this.data.showings.map(showingData => new Showing(showingData, this))
   }
@@ -27,7 +26,7 @@ export class Store {
   public readonly dates: Array<SelectableDate>
   private readonly movies: Array<Movie>
   private readonly showings: Array<Showing>
-  public readonly theaters: Array<Theater>
+  private readonly theaters: Array<Theater>
 
   @computed
   public get matchingShowings(): Array<Showing> {
@@ -112,6 +111,11 @@ export class Store {
     }
 
     return theater
+  }
+
+  public getTheatersSortedByName(): Array<Theater> {
+    const sortedByName = this.theaters.sort(this.compareByName)
+    return sortedByName
   }
 
   @action
