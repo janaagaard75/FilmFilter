@@ -15,8 +15,7 @@ interface State {
   expanded: boolean
 }
 
-// TODO: Rename to MoviesCard
-export class MovieCard extends Component<Props, State> {
+export class MoviesCard extends Component<Props, State> {
   constructor(props: Props, context?: any) {
     super(props, context)
 

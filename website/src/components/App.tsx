@@ -3,7 +3,7 @@ import { Component } from 'react'
 import { observer } from 'mobx-react'
 import { RouterContext } from 'react-router'
 
-import { MovieCard } from './MovieCard'
+import { MoviesCard } from './MoviesCard'
 import { ShowingsTable } from './ShowingsTable'
 import { Store } from '../model/Store'
 import { TheaterForm } from './TheaterForm'
@@ -22,7 +22,7 @@ export class App extends Component<Props, void> {
         <h1>Film Filter</h1>
         <p>Antal matchende visninger: {this.props.store.matchingShowings.length}</p>
         <div id="accordion" role="tablist" aria-multiselectable="true">
-          <MovieCard
+          <MoviesCard
             movies={this.props.store.getMoviesByNumberOfShowings().slice(0, 24)}
             selectedMovies={this.props.store.selectedMovies}
             toggleMovieSelection={this.props.store.toggleMovieSelection}
