@@ -42,7 +42,7 @@
     ],
     "quotemark": [
       true,
-      "single",
+      "double",
       "jsx-double"
     ],
     "semicolon": [
@@ -128,7 +128,7 @@
     "eofline": false,
     "quotemark": [
       true,
-      "single"
+      "double"
     ],
     "semicolon": [
       true,
