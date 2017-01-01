@@ -3,6 +3,7 @@ import { Component } from "react"
 import { observer } from "mobx-react"
 import { RouterContext } from "react-router"
 
+import { DateSelector } from "./DateSelector"
 import { MoviesSelecter } from "./MoviesSelecter"
 import { ShowingsTable } from "./ShowingsTable"
 import { Store } from "../model/Store"
@@ -31,6 +32,11 @@ export class App extends Component<Props, void> {
             theaters={this.props.store.theaters}
             selectedTheaters={this.props.store.selectedTheaters}
             toggleTheaterSelection={this.props.store.toggleTheaterSelection}
+          />
+          <DateSelector
+            dates={this.props.store.dates}
+            selectedDates={this.props.store.selectedDates}
+            toggleDateSelection={this.props.store.toggleDateSelection}
           />
         </div>
         <br/>

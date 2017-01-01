@@ -4,12 +4,15 @@ import { computed } from "mobx"
 
 import { Data } from "./data/Data"
 import { Movie } from "./Movie"
+import { SelectableDate } from "./SelectableDate"
 import { Showing } from "./Showing"
 import { Theater } from "./Theater"
 
 export class Store {
   constructor() {
     this.data = require<Data>("../data.json")
+
+    this.dates = this.getNextTwoWeeks()
 
     this.movies = this.data.movies.map(movieData => new Movie(movieData))
 
@@ -21,6 +24,7 @@ export class Store {
   }
 
   private readonly data: Data
+  public readonly dates: Array<SelectableDate>
   private readonly movies: Array<Movie>
   private readonly showings: Array<Showing>
   public readonly theaters: Array<Theater>
@@ -35,8 +39,16 @@ export class Store {
       .filter(showing => showing.start > now)
       .filter(showing => this.selectedMovies.length === 0 || showing.movie.selected)
       .filter(showing => this.selectedTheaters.length === 0 || showing.theater.selected)
+      // TODO: Each showing should like to a SelectableDate, just like movies and theaters.
+      .filter(showing => this.selectedDates.length === 0 || this.selectedDates.map(d => d.date.dayOfYear()).some(d => d === showing.start.dayOfYear()))
       .sort((showingA, showingB) => showingA.start.diff(showingB.start))
     return matching
+  }
+
+  @computed
+  public get selectedDates(): Array<SelectableDate> {
+    const selectedDates = this.dates.filter(date => date.selected)
+    return selectedDates
   }
 
   @computed
@@ -81,6 +93,17 @@ export class Store {
     return sorted
   }
 
+  private getNextTwoWeeks(): Array<SelectableDate> {
+    const dates: Array<SelectableDate> = []
+    for (let n = 0; n < 14; n++) {
+      const date = moment().startOf("day").add(n, "days")
+      const selectableDate = new SelectableDate(date)
+      dates.push(selectableDate)
+    }
+
+    return dates
+  }
+
   public getTheater(theaterId: number): Theater {
     const theater = this.theaters[theaterId]
 
@@ -89,6 +112,11 @@ export class Store {
     }
 
     return theater
+  }
+
+  @action
+  public toggleDateSelection(date: SelectableDate) {
+    date.selected = !date.selected
   }
 
   // TODO: Is it worth using actions at thus forcing this method?
