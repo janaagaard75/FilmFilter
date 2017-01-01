@@ -9,7 +9,7 @@ interface Props {
   toggleMovieSelection: () => void
 }
 
-export class MovieBox extends Component<Props, void> {
+export class MovieItem extends Component<Props, void> {
   public render() {
     const cssClasses = classNames(
       "col-xs-6 col-sm-4 col-md-3 col-lg-2 clickable",

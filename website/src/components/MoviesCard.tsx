@@ -3,7 +3,7 @@ import { Component } from "react"
 
 import { Collapse } from "./bootstrap/Collapse"
 import { Movie } from "../model/Movie"
-import { MovieBox } from "./MovieBox"
+import { MovieItem } from "./MovieItem"
 
 interface Props {
   movies: Array<Movie>
@@ -44,7 +44,7 @@ export class MoviesCard extends Component<Props, State> {
         <Collapse expanded={this.state.expanded}>
           <div className="row">
             {this.props.movies.map(movie =>
-              <MovieBox
+              <MovieItem
                 key={movie.movieUrl}
                 movie={movie}
                 toggleMovieSelection={() => this.props.toggleMovieSelection(movie)}
