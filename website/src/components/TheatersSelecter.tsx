@@ -31,7 +31,6 @@ export class TheatersSelecter extends Component<Props, State> {
   }
 
   public render() {
-    // TODO: Figure out how to avoid the <br> tag
     return (
       <div className="card">
         <div className="card-header clickable" onClick={() => this.toggleExpanded()}>
