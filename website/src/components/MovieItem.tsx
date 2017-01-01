@@ -14,7 +14,7 @@ export class MovieItem extends Component<Props, void> {
     const cssClasses = classNames(
       "col-xs-6 col-sm-4 col-md-3 col-lg-2 clickable",
       {
-        "selected-box": this.props.movie.selected
+        "selected-item": this.props.movie.selected
       }
     )
 

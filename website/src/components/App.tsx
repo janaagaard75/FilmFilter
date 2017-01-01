@@ -7,6 +7,7 @@ import { MoviesCard } from "./MoviesCard"
 import { ShowingsTable } from "./ShowingsTable"
 import { Store } from "../model/Store"
 import { TheaterForm } from "./TheaterForm"
+import { TheatersSelector } from "./TheatersSelector"
 
 interface Props {
   routerContext: RouterContext.RouterContextProps
@@ -26,6 +27,11 @@ export class App extends Component<Props, void> {
             movies={this.props.store.getMoviesByNumberOfShowings().slice(0, 24)}
             selectedMovies={this.props.store.selectedMovies}
             toggleMovieSelection={this.props.store.toggleMovieSelection}
+          />
+          <TheatersSelector
+            theaters={this.props.store.theaters}
+            selectedTheaters={this.props.store.selectedTheaters}
+            toggleTheaterSelection={this.props.store.toggleTheaterSelection}
           />
         </div>
         <div className="row">
