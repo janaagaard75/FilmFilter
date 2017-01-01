@@ -15,7 +15,7 @@ interface State {
   expanded: boolean
 }
 
-export class DateSelector extends Component<Props, State> {
+export class DateSelecter extends Component<Props, State> {
   constructor(props: Props, context?: any) {
     super(props, context)
 
