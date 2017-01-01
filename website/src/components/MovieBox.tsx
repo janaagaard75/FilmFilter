@@ -19,13 +19,10 @@ export class MovieBox extends Component<Props, void> {
     )
 
     return (
-      // TODO: Consider removing the <br> element, or simply removing the Danish title altogether.
+      // TODO: What about the Danish title?
       <div className={cssClasses} onClick={this.props.toggleMovieSelection}>
         <img src={this.props.movie.posterUrl} alt={this.props.movie.originalTitle} className="img-fluid"/>
         {this.props.movie.originalTitle}
-        {this.props.movie.danishTitle !== undefined
-          ? <span><br/><i>{this.props.movie.danishTitle}</i></span>
-          : ''}
       </div>
     )
   }
