@@ -2,20 +2,20 @@ import * as React from "react"
 import { Component } from "react"
 
 import { Collapse } from "./bootstrap/Collapse"
-import { Theater } from "../model/Theater"
-import { TheaterItem } from "./TheaterItem"
+import { Movie } from "../model/Movie"
+import { MovieItem } from "./MovieItem"
 
 interface Props {
-  theaters: Array<Theater>
-  selectedTheaters: Array<Theater>
-  toggleTheaterSelection: (theater: Theater) => void
+  movies: Array<Movie>
+  selectedMovies: Array<Movie>
+  toggleMovieSelection: (movie: Movie) => void
 }
 
 interface State {
   expanded: boolean
 }
 
-export class TheatersSelector extends Component<Props, State> {
+export class MoviesSelecter extends Component<Props, State> {
   constructor(props: Props, context?: any) {
     super(props, context)
 
@@ -36,18 +36,18 @@ export class TheatersSelector extends Component<Props, State> {
       <div className="card">
         <div className="card-header clickable" onClick={() => this.toggleExpanded()}>
           <h5 className="mb-0">
-            {this.props.selectedTheaters.length === 0
-              ? "Vælg biografer"
-              : "Biografer: " + this.props.selectedTheaters.map(theater => theater.name).join(", ")}
+            {this.props.selectedMovies.length === 0
+              ? "Vælg film"
+              : "Film: " + this.props.selectedMovies.map(movie => movie.originalTitle).join(", ")}
           </h5>
         </div>
         <Collapse expanded={this.state.expanded}>
           <div className="row">
-            {this.props.theaters.map(theater =>
-              <TheaterItem
-                key={theater.theatherUrl}
-                theater={theater}
-                toggleTheaterSelection={() => this.props.toggleTheaterSelection(theater)}
+            {this.props.movies.map(movie =>
+              <MovieItem
+                key={movie.movieUrl}
+                movie={movie}
+                toggleMovieSelection={() => this.props.toggleMovieSelection(movie)}
               />
             )}
           </div>

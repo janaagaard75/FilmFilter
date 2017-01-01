@@ -3,11 +3,11 @@ import { Component } from "react"
 import { observer } from "mobx-react"
 import { RouterContext } from "react-router"
 
-import { MoviesCard } from "./MoviesCard"
+import { MoviesSelecter } from "./MoviesSelecter"
 import { ShowingsTable } from "./ShowingsTable"
 import { Store } from "../model/Store"
 import { TheaterForm } from "./TheaterForm"
-import { TheatersSelector } from "./TheatersSelector"
+import { TheatersSelecter } from "./TheatersSelecter"
 
 interface Props {
   routerContext: RouterContext.RouterContextProps
@@ -23,12 +23,12 @@ export class App extends Component<Props, void> {
         <h1>Film Filter</h1>
         <p>Antal matchende visninger: {this.props.store.matchingShowings.length}</p>
         <div id="accordion" role="tablist" aria-multiselectable="true">
-          <MoviesCard
+          <MoviesSelecter
             movies={this.props.store.getMoviesByNumberOfShowings().slice(0, 24)}
             selectedMovies={this.props.store.selectedMovies}
             toggleMovieSelection={this.props.store.toggleMovieSelection}
           />
-          <TheatersSelector
+          <TheatersSelecter
             theaters={this.props.store.theaters}
             selectedTheaters={this.props.store.selectedTheaters}
             toggleTheaterSelection={this.props.store.toggleTheaterSelection}
