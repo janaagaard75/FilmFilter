@@ -1,8 +1,8 @@
-import * as React from 'react'
-import { Component } from 'react'
+import * as React from "react"
+import { Component } from "react"
 
-import { Showing } from '../model/Showing'
-import { ShowingRow } from './ShowingRow'
+import { Showing } from "../model/Showing"
+import { ShowingRow } from "./ShowingRow"
 
 interface Props {
   showings: Array<Showing>

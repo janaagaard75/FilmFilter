@@ -1,10 +1,10 @@
-import * as moment from 'moment'
-import { Moment } from 'moment'
+import * as moment from "moment"
+import { Moment } from "moment"
 
-import { Movie } from './Movie'
-import { ShowingData } from './data/ShowingData'
-import { Store } from './Store'
-import { Theater } from './Theater'
+import { Movie } from "./Movie"
+import { ShowingData } from "./data/ShowingData"
+import { Store } from "./Store"
+import { Theater } from "./Theater"
 
 export class Showing {
   constructor(data: ShowingData, store: Store) {
@@ -12,7 +12,7 @@ export class Showing {
     this.freeSeats = this.getFreeSeats(data.seatingInfo)
     this.imax = data.imax
     this.movie = store.getMovie(data.movieId)
-    this.showingUrl = 'http://www.kino.dk/' + data.showingUrl
+    this.showingUrl = "http://www.kino.dk/" + data.showingUrl
     this.specialShowing = data.specialShowing
     this.start = moment(data.start)
     this.theater = store.getTheater(data.theaterId)
@@ -34,14 +34,14 @@ export class Showing {
   public readonly totalSeats: number
 
   private getFreeSeats(seatingInfo: Array<string>): number {
-    const freeSeatsLine = seatingInfo.filter(info => info.startsWith('Ledige'))[0]
-    const freeSeats = parseInt(freeSeatsLine.substring('Ledige: '.length), 10)
+    const freeSeatsLine = seatingInfo.filter(info => info.startsWith("Ledige"))[0]
+    const freeSeats = parseInt(freeSeatsLine.substring("Ledige: ".length), 10)
     return freeSeats
   }
 
   private getTotolSeats(seatingInfo: Array<string>): number {
-    const totalSeatsLine = seatingInfo.filter(info => info.startsWith('Sæder'))[0]
-    const totalSeats = parseInt(totalSeatsLine.substring('Sæder: '.length), 10)
+    const totalSeatsLine = seatingInfo.filter(info => info.startsWith("Sæder"))[0]
+    const totalSeats = parseInt(totalSeatsLine.substring("Sæder: ".length), 10)
     return totalSeats
   }
 }

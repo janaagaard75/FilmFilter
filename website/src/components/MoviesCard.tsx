@@ -1,9 +1,9 @@
-import * as React from 'react'
-import { Component } from 'react'
+import * as React from "react"
+import { Component } from "react"
 
-import { Collapse } from './bootstrap/Collapse'
-import { Movie } from '../model/Movie'
-import { MovieBox } from './MovieBox'
+import { Collapse } from "./bootstrap/Collapse"
+import { Movie } from "../model/Movie"
+import { MovieBox } from "./MovieBox"
 
 interface Props {
   movies: Array<Movie>
@@ -37,8 +37,8 @@ export class MoviesCard extends Component<Props, State> {
         <div className="card-header clickable" onClick={() => this.toggleExpanded()}>
           <h5 className="mb-0">
             {this.props.selectedMovies.length === 0
-              ? 'Vælg Film'
-              : 'Film: ' + this.props.selectedMovies.map(movie => movie.originalTitle).join(', ')}
+              ? "Vælg Film"
+              : "Film: " + this.props.selectedMovies.map(movie => movie.originalTitle).join(", ")}
           </h5>
         </div>
         <Collapse expanded={this.state.expanded}>

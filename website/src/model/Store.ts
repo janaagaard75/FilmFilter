@@ -1,15 +1,15 @@
-import * as moment from 'moment'
-import { action } from 'mobx'
-import { computed } from 'mobx'
+import * as moment from "moment"
+import { action } from "mobx"
+import { computed } from "mobx"
 
-import { Data } from './data/Data'
-import { Movie } from './Movie'
-import { Showing } from './Showing'
-import { Theater } from './Theater'
+import { Data } from "./data/Data"
+import { Movie } from "./Movie"
+import { Showing } from "./Showing"
+import { Theater } from "./Theater"
 
 export class Store {
   constructor() {
-    this.data = require<Data>('../data.json')
+    this.data = require<Data>("../data.json")
 
     this.movies = this.data.movies.map(movieData => new Movie(movieData))
 

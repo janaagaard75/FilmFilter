@@ -1,7 +1,7 @@
-import * as React from 'react'
-import { Component } from 'react'
+import * as React from "react"
+import { Component } from "react"
 
-import { Showing } from '../model/Showing'
+import { Showing } from "../model/Showing"
 
 interface Props {
   showing: Showing
@@ -23,7 +23,7 @@ export class ShowingRow extends Component<Props, void> {
         </td>
         <td>
           <a href={this.props.showing.showingUrl}>
-            {this.props.showing.start.format('dd D/M HH:mm')}
+            {this.props.showing.start.format("dd D/M HH:mm")}
           </a>
         </td>
       </tr>

@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { Component } from 'react'
+import * as React from "react"
+import { Component } from "react"
 
 interface Props {
   setMovieNameFilter: (text: string) => void
@@ -14,7 +14,7 @@ export class FilterForm extends Component<Props, State> {
     super(props, context)
 
     this.state = {
-      text: ''
+      text: ""
     }
   }
 

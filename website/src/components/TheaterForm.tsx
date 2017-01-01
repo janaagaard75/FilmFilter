@@ -1,7 +1,7 @@
-import * as React from 'react'
-import { Component } from 'react'
+import * as React from "react"
+import { Component } from "react"
 
-import { Theater } from '../model/Theater'
+import { Theater } from "../model/Theater"
 
 interface Props {
   theaters: Array<Theater>
@@ -10,13 +10,13 @@ interface Props {
 export class TheaterForm extends Component<Props, void> {
   public render() {
     return (
-      <div style={{ height: '10em', overflowY: 'scroll' }}>
+      <div style={{ height: "10em", overflowY: "scroll" }}>
         <div>
           {this.props.theaters.map(theater =>
             <div className="form-check" key={theater.theatherUrl}>
               <label className="form-check-label">
                 <input type="checkbox" className="form-check-input" value=""/>
-                {' ' + theater.name}
+                {" " + theater.name}
               </label>
             </div>
           )}

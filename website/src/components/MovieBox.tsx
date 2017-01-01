@@ -1,8 +1,8 @@
-import * as classNames from 'classnames'
-import * as React from 'react'
-import { Component } from 'react'
+import * as classNames from "classnames"
+import * as React from "react"
+import { Component } from "react"
 
-import { Movie } from '../model/Movie'
+import { Movie } from "../model/Movie"
 
 interface Props {
   movie: Movie
@@ -12,9 +12,9 @@ interface Props {
 export class MovieBox extends Component<Props, void> {
   public render() {
     const cssClasses = classNames(
-      'col-xs-6 col-sm-4 col-md-3 col-lg-2 clickable',
+      "col-xs-6 col-sm-4 col-md-3 col-lg-2 clickable",
       {
-        'selected-box': this.props.movie.selected
+        "selected-box": this.props.movie.selected
       }
     )
 

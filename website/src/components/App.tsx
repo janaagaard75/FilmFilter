@@ -1,12 +1,12 @@
-import * as React from 'react'
-import { Component } from 'react'
-import { observer } from 'mobx-react'
-import { RouterContext } from 'react-router'
+import * as React from "react"
+import { Component } from "react"
+import { observer } from "mobx-react"
+import { RouterContext } from "react-router"
 
-import { MoviesCard } from './MoviesCard'
-import { ShowingsTable } from './ShowingsTable'
-import { Store } from '../model/Store'
-import { TheaterForm } from './TheaterForm'
+import { MoviesCard } from "./MoviesCard"
+import { ShowingsTable } from "./ShowingsTable"
+import { Store } from "../model/Store"
+import { TheaterForm } from "./TheaterForm"
 
 interface Props {
   routerContext: RouterContext.RouterContextProps
