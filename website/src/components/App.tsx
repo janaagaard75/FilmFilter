@@ -20,6 +20,7 @@ export class App extends Component<Props, void> {
       // TODO: Avoid the br element.
       <div className="container-fluid">
         <h1>Film Filter</h1>
+        <p>Antal matchende visninger: {this.props.store.matchingShowings.length}</p>
         <div id="accordion" role="tablist" aria-multiselectable="true">
           <MovieCard
             movies={this.props.store.getMoviesByNumberOfShowings().slice(0, 24)}
@@ -33,7 +34,7 @@ export class App extends Component<Props, void> {
           </div>
         </div>
         <br/>
-        <ShowingsTable showings={this.props.store.matchingShowings}/>
+        <ShowingsTable showings={this.props.store.matchingShowings.slice(0, 100)}/>
       </div>
     )
   }

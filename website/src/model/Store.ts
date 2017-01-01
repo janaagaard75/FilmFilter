@@ -35,7 +35,6 @@ export class Store {
       .filter(showing => showing.start > now)
       .filter(showing => this.selectedMovies.length === 0 || showing.movie.selected)
       .sort((showingA, showingB) => showingA.start.diff(showingB.start))
-      .slice(0, 100)
     return matching
   }
 
