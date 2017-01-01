@@ -10,7 +10,7 @@ import { Store } from '../model/Store'
 import { TheaterForm } from './TheaterForm'
 
 interface Props {
-  routerContext: RouterContext.RouterContextProps,
+  routerContext: RouterContext.RouterContextProps
   store: Store
 }
 
