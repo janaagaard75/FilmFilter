@@ -31,7 +31,7 @@ export class MovieCard extends Component<Props, State> {
     // TODO: Figure out how to avoid the <br> tag
     return (
       <div className="card">
-        <div className="card-header clickable" onClick={e => this.handleToggle()}>
+        <div className="card-header clickable" onClick={() => this.handleToggle()}>
           <h5 className="mb-0">
             Vælg film
           </h5>
