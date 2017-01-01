@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Component } from 'react'
 
+import { Collapse } from './bootstrap/Collapse'
 import { Movie } from '../model/Movie'
 
 interface Props {
@@ -30,26 +31,24 @@ export class MovieCard extends Component<Props, State> {
     // TODO: Figure out how to avoid the <br> tag
     return (
       <div className="card">
-        <div className="card-header" onClick={e => this.handleToggle()}>
+        <div className="card-header clickable" onClick={e => this.handleToggle()}>
           <h5 className="mb-0">
             Vælg film
           </h5>
         </div>
-        <div className={this.state.expanded ? 'collapse in' : 'collapse'}>
-          <div className="card-block">
-            <div className="row">
-              {this.props.movies.map(movie =>
-                <div className="col-xs-6 col-sm-4 col-md-3 col-lg-2" key={movie.movieUrl}>
-                  <img src={movie.posterUrl} alt={movie.originalTitle} className="img-fluid"/>
-                  {movie.originalTitle}
-                  {movie.danishTitle !== undefined
-                    ? <i><br/>{movie.danishTitle}</i>
-                    : ''}
-                </div>
-              )}
-            </div>
+        <Collapse expanded={this.state.expanded}>
+          <div className="row">
+            {this.props.movies.map(movie =>
+              <div className="col-xs-6 col-sm-4 col-md-3 col-lg-2" key={movie.movieUrl}>
+                <img src={movie.posterUrl} alt={movie.originalTitle} className="img-fluid"/>
+                {movie.originalTitle}
+                {movie.danishTitle !== undefined
+                  ? <i><br/>{movie.danishTitle}</i>
+                  : ''}
+              </div>
+            )}
           </div>
-        </div>
+        </Collapse>
       </div>
     )
   }
