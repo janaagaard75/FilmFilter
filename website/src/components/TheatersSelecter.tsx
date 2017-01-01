@@ -15,6 +15,7 @@ interface State {
   expanded: boolean
 }
 
+// TODO: Fix the theater selecter. Selecting Café Biografen Odense filters in the showings in Tycho Brahe Planetarium.
 export class TheatersSelecter extends Component<Props, State> {
   constructor(props: Props, context?: any) {
     super(props, context)
