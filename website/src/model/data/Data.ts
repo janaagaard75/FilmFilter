@@ -1,6 +1,6 @@
-import { MovieData } from './MovieData'
-import { ShowingData } from './ShowingData'
-import { TheaterData } from './TheaterData'
+import { MovieData } from "./MovieData"
+import { ShowingData } from "./ShowingData"
+import { TheaterData } from "./TheaterData"
 
 export interface Data {
   movies: Array<MovieData>
