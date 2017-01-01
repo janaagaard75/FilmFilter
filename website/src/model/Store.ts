@@ -44,6 +44,12 @@ export class Store {
     return selectedMovies
   }
 
+  @computed
+  public get selectedTheaters(): Array<Theater> {
+    const selectedTheaters = this.theaters.filter(theater => theater.selected)
+    return selectedTheaters
+  }
+
   private compareByName(a: Theater, b: Theater) {
     if (a.name > b.name) {
       return 1
@@ -88,5 +94,10 @@ export class Store {
   @action
   public toggleMovieSelection(movie: Movie) {
     movie.selected = !movie.selected
+  }
+
+  @action
+  public toggleTheaterSelection(theater: Theater) {
+    theater.selected = !theater.selected
   }
 }
