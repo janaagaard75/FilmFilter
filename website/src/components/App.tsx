@@ -6,7 +6,6 @@ import { RouterContext } from "react-router"
 import { MoviesSelecter } from "./MoviesSelecter"
 import { ShowingsTable } from "./ShowingsTable"
 import { Store } from "../model/Store"
-import { TheaterForm } from "./TheaterForm"
 import { TheatersSelecter } from "./TheatersSelecter"
 
 interface Props {
@@ -33,11 +32,6 @@ export class App extends Component<Props, void> {
             selectedTheaters={this.props.store.selectedTheaters}
             toggleTheaterSelection={this.props.store.toggleTheaterSelection}
           />
-        </div>
-        <div className="row">
-          <div className="col-xs-12">
-            <TheaterForm theaters={this.props.store.theaters}/>
-          </div>
         </div>
         <br/>
         <ShowingsTable showings={this.props.store.matchingShowings.slice(0, 100)}/>

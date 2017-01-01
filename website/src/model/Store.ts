@@ -34,6 +34,7 @@ export class Store {
       .filter(showing => showing.movie !== undefined)
       .filter(showing => showing.start > now)
       .filter(showing => this.selectedMovies.length === 0 || showing.movie.selected)
+      .filter(showing => this.selectedTheaters.length === 0 || showing.theater.selected)
       .sort((showingA, showingB) => showingA.start.diff(showingB.start))
     return matching
   }

@@ -37,8 +37,8 @@ export class TheatersSelecter extends Component<Props, State> {
         <div className="card-header clickable" onClick={() => this.toggleExpanded()}>
           <h5 className="mb-0">
             {this.props.selectedTheaters.length === 0
-              ? "Vælg biografer"
-              : "Biografer: " + this.props.selectedTheaters.map(theater => theater.name).join(", ")}
+              ? "Vælg biograf"
+              : "Biograf: " + this.props.selectedTheaters.map(theater => theater.name).join(", ")}
           </h5>
         </div>
         <Collapse expanded={this.state.expanded}>

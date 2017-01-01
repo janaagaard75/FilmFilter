@@ -14,7 +14,7 @@ export class ShowingsTable extends Component<Props, void> {
       <table className="table">
         <thead>
           <tr>
-            <th>Navn</th>
+            <th>Film</th>
             <th>Biograf</th>
             <th>Tidspunkt</th>
           </tr>
