@@ -39,7 +39,7 @@ export class MovieCard extends Component<Props, State> {
           <h5 className="mb-0">
             {this.props.selectedMovies.length === 0
               ? 'Vælg Film'
-              : 'Film: TODO: List selected movies'}
+              : 'Film: ' + this.props.selectedMovies.map(movie => movie.originalTitle).join(', ')}
           </h5>
         </div>
         <Collapse expanded={this.state.expanded}>
