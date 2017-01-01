@@ -1,7 +1,6 @@
 import * as moment from 'moment'
 import { action } from 'mobx'
 import { computed } from 'mobx'
-import { observable } from 'mobx'
 
 import { Data } from './data/Data'
 import { Movie } from './Movie'
@@ -19,17 +18,12 @@ export class Store {
       .sort((a, b) => this.compareByName(a, b))
 
     this.showings = this.data.showings.map(showingData => new Showing(showingData, this))
-
-    this.movieNameFilter = ''
   }
 
   private readonly data: Data
   private readonly movies: Array<Movie>
   private readonly showings: Array<Showing>
   public readonly theaters: Array<Theater>
-
-  @observable
-  private movieNameFilter: string
 
   @computed
   public get matchingShowings(): Array<Showing> {
@@ -40,7 +34,6 @@ export class Store {
       .filter(showing => showing.movie !== undefined)
       .filter(showing => showing.start > now)
       .filter(showing => this.selectedMovies.length === 0 || showing.movie.selected)
-      .filter(showing => this.matchesMovieName(showing))
       .sort((showingA, showingB) => showingA.start.diff(showingB.start))
       .slice(0, 100)
     return matching
@@ -90,17 +83,6 @@ export class Store {
     }
 
     return theater
-  }
-
-  private matchesMovieName(showing: Showing) {
-    const match = showing.movie.lowerCaseTitle.indexOf(this.movieNameFilter.toLocaleLowerCase()) >= 0
-    return match
-  }
-
-  // TODO: Romove the movie name filter. Use it to filter the movies in the selection field instead.
-  @action
-  public setMovieNameFilter(movieName: string) {
-    this.movieNameFilter = movieName
   }
 
   // TODO: Is it worth using actions at thus forcing this method?

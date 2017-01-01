@@ -3,7 +3,6 @@ import { Component } from 'react'
 import { observer } from 'mobx-react'
 import { RouterContext } from 'react-router'
 
-import { FilterForm } from './FilterForm'
 import { MovieCard } from './MovieCard'
 import { ShowingsTable } from './ShowingsTable'
 import { Store } from '../model/Store'
@@ -29,10 +28,7 @@ export class App extends Component<Props, void> {
           />
         </div>
         <div className="row">
-          <div className="col-sm-6">
-            <FilterForm setMovieNameFilter={e => this.props.store.setMovieNameFilter(e)} />
-          </div>
-          <div className="col-sm-6">
+          <div className="col-xs-12">
             <TheaterForm theaters={this.props.store.theaters}/>
           </div>
         </div>
