@@ -10,9 +10,9 @@
   version "2.0.42"
   resolved "https://registry.yarnpkg.com/@types/history/-/history-2.0.42.tgz#6ddb556f1a3b870e2e4fde131f1b13cbf3a99c4d"
 
-"@types/react-dom@0.14.19":
-  version "0.14.19"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-0.14.19.tgz#698a14335e32fb1bc61db65f5647c9668a7fc2eb"
+"@types/react-dom@0.14.20":
+  version "0.14.20"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-0.14.20.tgz#6e30d66148e78b29ef593fa91ba30d0175190604"
   dependencies:
     "@types/react" "*"
 
@@ -1843,9 +1843,9 @@ html-minifier@^3.1.0:
     relateurl "0.2.x"
     uglify-js "2.7.x"
 
-html-webpack-plugin@2.24.1:
-  version "2.24.1"
-  resolved "https://registry.yarnpkg.com/html-webpack-plugin/-/html-webpack-plugin-2.24.1.tgz#7f45fc678f66eac2d433f22336b4399da023b57e"
+html-webpack-plugin@2.25.0:
+  version "2.25.0"
+  resolved "https://registry.yarnpkg.com/html-webpack-plugin/-/html-webpack-plugin-2.25.0.tgz#945c860c9bf413d725a09f773d09cfeca72e8f8a"
   dependencies:
     bluebird "^3.4.6"
     html-minifier "^3.1.0"
@@ -2303,8 +2303,8 @@ lodash.some@^4.6.0:
   resolved "https://registry.yarnpkg.com/lodash.some/-/lodash.some-4.6.0.tgz#1bb9f314ef6b8baded13b549169b2a945eb68e4d"
 
 lodash@^4.0.0, lodash@^4.14.0, lodash@^4.16.4, lodash@^4.17.2, lodash@^4.2.0, lodash@^4.3.0:
-  version "4.17.3"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.3.tgz#557ed7d2a9438cac5fd5a43043ca60cb455e01f7"
+  version "4.17.4"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
 lodash@~4.16.4:
   version "4.16.6"
@@ -2464,9 +2464,9 @@ mobx-react-devtools@4.2.10:
   version "4.2.10"
   resolved "https://registry.yarnpkg.com/mobx-react-devtools/-/mobx-react-devtools-4.2.10.tgz#79274bd8d44ba04d950728738a144541fa2a6012"
 
-mobx-react-router@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/mobx-react-router/-/mobx-react-router-3.0.0.tgz#3d1f1380d302c1d55e2c4c68ffe56bc3b331cce6"
+mobx-react-router@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/mobx-react-router/-/mobx-react-router-3.1.0.tgz#1f188abe149fdd363a742d91f5a6edf6bb6056a9"
 
 mobx-react@4.0.4:
   version "4.0.4"
@@ -2980,8 +2980,8 @@ postcss-minify-params@^1.0.4:
     uniqs "^2.0.0"
 
 postcss-minify-selectors@^2.0.4:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/postcss-minify-selectors/-/postcss-minify-selectors-2.1.0.tgz#d08c37fd15f9d543e20e2c87dcb493844ccd8f6d"
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/postcss-minify-selectors/-/postcss-minify-selectors-2.1.1.tgz#b2c6a98c0072cf91b932d1a496508114311735bf"
   dependencies:
     alphanum-sort "^1.0.2"
     has "^1.0.1"
