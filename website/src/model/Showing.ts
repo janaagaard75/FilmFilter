@@ -2,6 +2,7 @@ import * as moment from "moment"
 import { Moment } from "moment"
 
 import { Movie } from "./Movie"
+import { SelectableDate } from "./SelectableDate"
 import { ShowingData } from "./data/ShowingData"
 import { Store } from "./Store"
 import { Theater } from "./Theater"
@@ -19,9 +20,12 @@ export class Showing {
     this.threeD = data.threeD
     this.totalSeats = this.getTotolSeats(data.seatingInfo)
 
+    this.date = store.getSelectableDate(this.start)
+
     this.movie.addShowing(this)
   }
 
+  public readonly date: SelectableDate
   public readonly dubbed: boolean
   public readonly freeSeats: number
   public readonly imax: boolean

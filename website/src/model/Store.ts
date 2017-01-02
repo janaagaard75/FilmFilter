@@ -1,6 +1,7 @@
 import * as moment from "moment"
 import { action } from "mobx"
 import { computed } from "mobx"
+import { Moment } from "moment"
 
 import { Data } from "./data/Data"
 import { Movie } from "./Movie"
@@ -12,13 +13,9 @@ export class Store {
   constructor() {
     this.data = require<Data>("../data.json")
 
-    this.dates = this.getNextTwoWeeks()
-
+    this.dates = []
     this.movies = this.data.movies.map(movieData => new Movie(movieData))
-
-    this.theaters = this.data.theaters
-      .map(theaterData => new Theater(theaterData))
-
+    this.theaters = this.data.theaters.map(theaterData => new Theater(theaterData))
     this.showings = this.data.showings.map(showingData => new Showing(showingData, this))
   }
 
@@ -92,15 +89,17 @@ export class Store {
     return sorted
   }
 
-  private getNextTwoWeeks(): Array<SelectableDate> {
-    const dates: Array<SelectableDate> = []
-    for (let n = 0; n < 14; n++) {
-      const date = moment().startOf("day").add(n, "days")
-      const selectableDate = new SelectableDate(date)
-      dates.push(selectableDate)
+  public getSelectableDate(date: Moment): SelectableDate {
+    const newSelectableDate = new SelectableDate(date)
+    const existingSelectableDate = this.dates.find(selectableDate => selectableDate.date.unix() === newSelectableDate.date.unix())
+
+    if (existingSelectableDate === undefined) {
+      this.dates.push(newSelectableDate)
+      this.dates.sort((a, b) => a.date.unix() - b.date.unix())
+      return newSelectableDate
     }
 
-    return dates
+    return existingSelectableDate
   }
 
   public getTheater(theaterId: number): Theater {
