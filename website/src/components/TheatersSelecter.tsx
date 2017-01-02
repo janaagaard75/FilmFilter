@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Component } from "react"
 
-import { Collapse } from "./bootstrap/Collapse"
+import { CollapsibleCard } from "./CollapsibleCard"
 import { Theater } from "../model/Theater"
 import { TheaterItem } from "./TheaterItem"
 
@@ -24,34 +24,21 @@ export class TheatersSelecter extends Component<Props, State> {
     }
   }
 
-  private toggleExpanded() {
-    this.setState({
-      expanded: !this.state.expanded
-    })
-  }
-
   public render() {
+    const header = this.props.selectedTheaters.length === 0
+      ? "Vælg biograf"
+      : "Biograf: " + this.props.selectedTheaters.map(theater => theater.name).join(", ")
+
     return (
-      <div className="card">
-        <div className="card-header clickable" onClick={() => this.toggleExpanded()}>
-          <h5 className="mb-0">
-            {this.props.selectedTheaters.length === 0
-              ? "Vælg biograf"
-              : "Biograf: " + this.props.selectedTheaters.map(theater => theater.name).join(", ")}
-          </h5>
-        </div>
-        <Collapse expanded={this.state.expanded}>
-          <div className="row">
-            {this.props.theaters.map(theater =>
-              <TheaterItem
-                key={theater.theatherUrl}
-                theater={theater}
-                toggleTheaterSelection={() => this.props.toggleTheaterSelection(theater)}
-              />
-            )}
-          </div>
-        </Collapse>
-      </div>
+      <CollapsibleCard header={header}>
+        {this.props.theaters.map(theater =>
+          <TheaterItem
+            key={theater.theatherUrl}
+            theater={theater}
+            toggleTheaterSelection={() => this.props.toggleTheaterSelection(theater)}
+          />
+        )}
+      </CollapsibleCard>
     )
   }
 }

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Component } from "react"
 
-import { Collapse } from "./bootstrap/Collapse"
+import { CollapsibleCard } from "./CollapsibleCard"
 import { DateItem } from "./DateItem"
 import { SelectableDate } from "../model/SelectableDate"
 
@@ -24,35 +24,21 @@ export class DateSelecter extends Component<Props, State> {
     }
   }
 
-  private toggleExpanded() {
-    this.setState({
-      expanded: !this.state.expanded
-    })
-  }
-
   public render() {
-    // TODO: Figure out how to avoid the <br> tag
+    const header = this.props.selectedDates.length === 0
+      ? "Vælg dato"
+      : "Dato: " + this.props.selectedDates.map(date => date.label).join(", ")
+
     return (
-      <div className="card">
-        <div className="card-header clickable" onClick={() => this.toggleExpanded()}>
-          <h5 className="mb-0">
-            {this.props.selectedDates.length === 0
-              ? "Vælg dato"
-              : "Dato: " + this.props.selectedDates.map(date => date.label).join(", ")}
-          </h5>
-        </div>
-        <Collapse expanded={this.state.expanded}>
-          <div className="row">
-            {this.props.dates.map(date =>
-              <DateItem
-                key={date.label}
-                date={date}
-                toggleDateSelection={() => this.props.toggleDateSelection(date)}
-              />
-            )}
-          </div>
-        </Collapse>
-      </div>
+      <CollapsibleCard header={header}>
+        {this.props.dates.map(date =>
+          <DateItem
+            key={date.label}
+            date={date}
+            toggleDateSelection={() => this.props.toggleDateSelection(date)}
+          />
+        )}
+      </CollapsibleCard>
     )
   }
 }
