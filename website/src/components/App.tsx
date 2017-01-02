@@ -4,8 +4,8 @@ import { observer } from "mobx-react"
 import { RouterContext } from "react-router"
 
 import { DateSelecter } from "./DateSelecter"
+import { MatchingShowings } from "./MatchingShowings"
 import { MoviesSelecter } from "./MoviesSelecter"
-import { ShowingsTable } from "./ShowingsTable"
 import { Store } from "../model/Store"
 import { TheatersSelecter } from "./TheatersSelecter"
 
@@ -18,10 +18,9 @@ interface Props {
 export class App extends Component<Props, void> {
   public render() {
     return (
-      // TODO: Avoid the br element.
       <div className="container-fluid">
         <h1>Film Filter</h1>
-        <p>Antal matchende visninger: {this.props.store.matchingShowings.length}</p>
+        <MatchingShowings matchingShowings={this.props.store.matchingShowings}/>
         <div id="accordion" role="tablist" aria-multiselectable="true">
           <MoviesSelecter
             movies={this.props.store.getMoviesByNumberOfShowings().slice(0, 24)}
@@ -39,8 +38,6 @@ export class App extends Component<Props, void> {
             toggleDateSelection={this.props.store.toggleDateSelection}
           />
         </div>
-        <br/>
-        <ShowingsTable showings={this.props.store.matchingShowings.slice(0, 100)}/>
       </div>
     )
   }
