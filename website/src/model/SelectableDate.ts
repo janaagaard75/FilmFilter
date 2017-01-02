@@ -3,7 +3,7 @@ import { observable } from "mobx"
 
 export class SelectableDate {
   constructor(date: Moment) {
-    this.date = date
+    this.date = date.startOf("day")
     this.selected = false
   }
 
