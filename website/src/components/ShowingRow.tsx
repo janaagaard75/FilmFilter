@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Component } from "react"
+import { observer } from "mobx-react"
 
 import { Showing } from "../model/Showing"
 
@@ -7,6 +8,7 @@ interface Props {
   showing: Showing
 }
 
+@observer
 export class ShowingRow extends Component<Props, void> {
   public render() {
     return (

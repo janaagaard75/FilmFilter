@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Component } from "react"
+import { observer } from "mobx-react"
 
 import { CollapsibleCard } from "./CollapsibleCard"
 import { Movie } from "../model/Movie"
@@ -11,6 +12,7 @@ interface Props {
   toggleMovieSelection: (movie: Movie) => void
 }
 
+@observer
 export class MoviesSelecter extends Component<Props, void> {
   public render() {
     const header: string = this.props.selectedMovies.length === 0

@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Component } from "react"
+import { observer } from "mobx-react"
 
 import { Collapse } from "./bootstrap/Collapse"
 
@@ -11,6 +12,7 @@ interface State {
   expanded: boolean
 }
 
+@observer
 export class CollapsibleCard extends Component<Props, State> {
   constructor(props: Props, context?: any) {
     super(props, context)

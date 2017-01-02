@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Component } from "react"
+import { observer } from "mobx-react"
 
 import { CollapsibleCard } from "./CollapsibleCard"
 import { DateItem } from "./DateItem"
@@ -11,6 +12,7 @@ interface Props {
   toggleDateSelection: (date: SelectableDate) => void
 }
 
+@observer
 export class DateSelecter extends Component<Props, void> {
   public render() {
     const header = this.props.selectedDates.length === 0

@@ -1,6 +1,7 @@
 import * as classNames from "classnames"
 import * as React from "react"
 import { Component } from "react"
+import { observer } from "mobx-react"
 
 import { Movie } from "../model/Movie"
 
@@ -9,6 +10,7 @@ interface Props {
   toggleMovieSelection: () => void
 }
 
+@observer
 export class MovieItem extends Component<Props, void> {
   public render() {
     const cssClasses = classNames(

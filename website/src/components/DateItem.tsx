@@ -1,6 +1,8 @@
 import * as classNames from "classnames"
 import * as React from "react"
 import { Component } from "react"
+import { observer } from "mobx-react"
+
 import { SelectableDate } from "../model/SelectableDate"
 
 interface Props {
@@ -8,6 +10,7 @@ interface Props {
   toggleDateSelection: () => void
 }
 
+@observer
 export class DateItem extends Component<Props, void> {
   public render() {
     const cssClasses = classNames(
