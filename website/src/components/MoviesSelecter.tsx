@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Component } from "react"
 
-import { Collapse } from "./bootstrap/Collapse"
+import { CollapsibleCard } from "./CollapsibleCard"
 import { Movie } from "../model/Movie"
 import { MovieItem } from "./MovieItem"
 
@@ -24,35 +24,21 @@ export class MoviesSelecter extends Component<Props, State> {
     }
   }
 
-  private toggleExpanded() {
-    this.setState({
-      expanded: !this.state.expanded
-    })
-  }
-
   public render() {
-    // TODO: Figure out how to avoid the <br> tag
+    const header: string = this.props.selectedMovies.length === 0
+      ? "Vælg film"
+      : "Film: " + this.props.selectedMovies.map(movie => movie.originalTitle).join(", ")
+
     return (
-      <div className="card">
-        <div className="card-header clickable" onClick={() => this.toggleExpanded()}>
-          <h5 className="mb-0">
-            {this.props.selectedMovies.length === 0
-              ? "Vælg film"
-              : "Film: " + this.props.selectedMovies.map(movie => movie.originalTitle).join(", ")}
-          </h5>
-        </div>
-        <Collapse expanded={this.state.expanded}>
-          <div className="row">
-            {this.props.movies.map(movie =>
-              <MovieItem
-                key={movie.movieUrl}
-                movie={movie}
-                toggleMovieSelection={() => this.props.toggleMovieSelection(movie)}
-              />
-            )}
-          </div>
-        </Collapse>
-      </div>
+      <CollapsibleCard header={header}>
+        {this.props.movies.map(movie =>
+          <MovieItem
+            key={movie.movieUrl}
+            movie={movie}
+            toggleMovieSelection={() => this.props.toggleMovieSelection(movie)}
+          />
+        )}
+      </CollapsibleCard>
     )
   }
 }
