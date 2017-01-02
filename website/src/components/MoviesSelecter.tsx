@@ -11,19 +11,7 @@ interface Props {
   toggleMovieSelection: (movie: Movie) => void
 }
 
-interface State {
-  expanded: boolean
-}
-
-export class MoviesSelecter extends Component<Props, State> {
-  constructor(props: Props, context?: any) {
-    super(props, context)
-
-    this.state = {
-      expanded: false
-    }
-  }
-
+export class MoviesSelecter extends Component<Props, void> {
   public render() {
     const header: string = this.props.selectedMovies.length === 0
       ? "Vælg film"

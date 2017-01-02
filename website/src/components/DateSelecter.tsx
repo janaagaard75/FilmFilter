@@ -11,19 +11,7 @@ interface Props {
   toggleDateSelection: (date: SelectableDate) => void
 }
 
-interface State {
-  expanded: boolean
-}
-
-export class DateSelecter extends Component<Props, State> {
-  constructor(props: Props, context?: any) {
-    super(props, context)
-
-    this.state = {
-      expanded: false
-    }
-  }
-
+export class DateSelecter extends Component<Props, void> {
   public render() {
     const header = this.props.selectedDates.length === 0
       ? "Vælg dato"
