@@ -1,9 +1,9 @@
 import * as moment from "moment"
 import { action } from "mobx"
 import { computed } from "mobx"
-import { Moment } from "moment"
 
 import { Data } from "./data/Data"
+import { ImmutableMoment } from "./ImmutableMoment"
 import { Movie } from "./Movie"
 import { SelectableDate } from "./SelectableDate"
 import { Showing } from "./Showing"
@@ -21,6 +21,7 @@ export class Store {
     this.showings = this.data.showings
       .filter(showingData => moment.parseZone(showingData.start) >= now)
       .map(showingData => new Showing(showingData, this))
+      .sort((showingA, showingB) => showingA.start.diff(showingB.start))
   }
 
   private readonly data: Data
@@ -37,7 +38,7 @@ export class Store {
       .filter(showing => this.selectedMovies.length === 0 || showing.movie.selected)
       .filter(showing => this.selectedTheaters.length === 0 || showing.theater.selected)
       .filter(showing => this.selectedDates.length === 0 || showing.date.selected)
-      .sort((showingA, showingB) => showingA.start.diff(showingB.start))
+
     return matching
   }
 
@@ -89,13 +90,13 @@ export class Store {
     return sorted
   }
 
-  public getSelectableDate(date: Moment): SelectableDate {
+  public getSelectableDate(date: ImmutableMoment): SelectableDate {
     const newSelectableDate = new SelectableDate(date)
-    const existingSelectableDate = this.dates.find(selectableDate => selectableDate.date.unix() === newSelectableDate.date.unix())
+    const existingSelectableDate = this.dates.find(selectableDate => selectableDate.date.equals(newSelectableDate.date))
 
     if (existingSelectableDate === undefined) {
       this.dates.push(newSelectableDate)
-      this.dates.sort((a, b) => a.date.unix() - b.date.unix())
+      this.dates.sort((a, b) => a.date.diff(b.date))
       return newSelectableDate
     }
 
