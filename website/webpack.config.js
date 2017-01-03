@@ -38,7 +38,8 @@ if (isProduction) {
   plugins.push(
     new BabiliPlugin()
   )
-} else {
+}
+else {
   plugins.push(
     new webpack.HotModuleReplacementPlugin()
   )

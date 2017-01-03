@@ -126,6 +126,10 @@
       false
     ],
     "eofline": false,
+    "one-line": [
+      true,
+      "check-open-brace"
+    ],
     "quotemark": [
       true,
       "double"
