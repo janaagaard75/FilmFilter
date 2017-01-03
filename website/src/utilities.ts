@@ -1,7 +1,9 @@
 export const isNumber = (x: any): x is number => {
-  return typeof x === "number"
+  const isANumber = typeof x === "number"
+  return isANumber
 }
 
 export const isString = (x: any): x is string => {
-  return typeof x === "string"
+  const isAString = typeof x === "string"
+  return isAString
 }
