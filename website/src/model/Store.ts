@@ -35,8 +35,7 @@ export class Store {
       .filter(showing => showing.start > now)
       .filter(showing => this.selectedMovies.length === 0 || showing.movie.selected)
       .filter(showing => this.selectedTheaters.length === 0 || showing.theater.selected)
-      // TODO: Each showing should like to a SelectableDate, just like movies and theaters.
-      .filter(showing => this.selectedDates.length === 0 || this.selectedDates.map(d => d.date.dayOfYear()).some(d => d === showing.start.dayOfYear()))
+      .filter(showing => this.selectedDates.length === 0 || showing.date.selected)
       .sort((showingA, showingB) => showingA.start.diff(showingB.start))
     return matching
   }
