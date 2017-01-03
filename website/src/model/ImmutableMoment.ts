@@ -6,7 +6,7 @@ import { isString } from "../utilities"
 export class ImmutableMoment {
   constructor(dateTime: string | Moment) {
     if (isString(dateTime)) {
-      this.moment = moment.parseZone(dateTime)
+      this.moment = moment(this.parseAsLocalDateTime(dateTime))
     }
     else {
       this.moment = moment(dateTime)
@@ -28,6 +28,19 @@ export class ImmutableMoment {
   public format(format: string): string {
     const formatted = this.moment.format(format)
     return formatted
+  }
+
+  private parseAsLocalDateTime(dateString: string): Date {
+    const numbers = dateString.split(/\D/)
+    const dateTime = new Date(
+      parseInt(numbers[0], 10),
+      parseInt(numbers[1], 10) - 1,
+      parseInt(numbers[2], 10),
+      parseInt(numbers[3], 10),
+      parseInt(numbers[4], 10),
+      parseInt(numbers[5], 10))
+
+    return dateTime
   }
 
   /** Return a new ImmutableMoment where the hours have been stripped. */
