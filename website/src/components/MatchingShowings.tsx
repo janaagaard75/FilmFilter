@@ -19,9 +19,7 @@ export class MatchingShowings extends Component<Props, void> {
 
     return (
       <CollapsibleCard header={header}>
-        <div className="col-xs-12">
-          <ShowingsTable showings={this.props.matchingShowings.slice(0, 25)}/>
-        </div>
+        <ShowingsTable showings={this.props.matchingShowings.slice(0, 25)}/>
       </CollapsibleCard>
     )
   }

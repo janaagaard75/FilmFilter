@@ -37,9 +37,7 @@ export class CollapsibleCard extends Component<Props, State> {
           </h5>
         </div>
         <Collapse expanded={this.state.expanded}>
-          <div className="row">
-            {this.props.children}
-          </div>
+          {this.props.children}
         </Collapse>
       </div>
     )

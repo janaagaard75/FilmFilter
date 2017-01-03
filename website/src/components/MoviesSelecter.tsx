@@ -21,13 +21,15 @@ export class MoviesSelecter extends Component<Props, void> {
 
     return (
       <CollapsibleCard header={header}>
-        {this.props.movies.map(movie =>
-          <MovieItem
-            key={movie.movieUrl}
-            movie={movie}
-            toggleMovieSelection={() => this.props.toggleMovieSelection(movie)}
-          />
-        )}
+        <div className="row">
+          {this.props.movies.map(movie =>
+            <MovieItem
+              key={movie.movieUrl}
+              movie={movie}
+              toggleMovieSelection={() => this.props.toggleMovieSelection(movie)}
+            />
+          )}
+        </div>
       </CollapsibleCard>
     )
   }

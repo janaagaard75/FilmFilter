@@ -21,13 +21,15 @@ export class TheatersSelecter extends Component<Props, void> {
 
     return (
       <CollapsibleCard header={header}>
-        {this.props.theaters.map(theater =>
-          <TheaterItem
-            key={theater.theatherUrl}
-            theater={theater}
-            toggleTheaterSelection={() => this.props.toggleTheaterSelection(theater)}
-          />
-        )}
+        <div className="row">
+          {this.props.theaters.map(theater =>
+            <TheaterItem
+              key={theater.theatherUrl}
+              theater={theater}
+              toggleTheaterSelection={() => this.props.toggleTheaterSelection(theater)}
+            />
+          )}
+        </div>
       </CollapsibleCard>
     )
   }
