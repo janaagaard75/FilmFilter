@@ -11,6 +11,8 @@ interface Props {
 @observer
 export class ShowingRow extends Component<Props, void> {
   public render() {
+    const startLabel = this.props.showing.start.format("dd D/M HH:mm")
+
     return (
       <tr>
         <td>
@@ -25,7 +27,7 @@ export class ShowingRow extends Component<Props, void> {
         </td>
         <td>
           <a href={this.props.showing.showingUrl}>
-            {this.props.showing.start.format("dd D/M HH:mm")}
+            {startLabel}
           </a>
         </td>
       </tr>
