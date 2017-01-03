@@ -32,6 +32,7 @@ export class ImmutableMoment {
 
   /** Return a new ImmutableMoment where the hours have been stripped. */
   public toDate(): ImmutableMoment {
+    // TODO: Use year, month and day to construct a new date instead of startOf.
     const date = new ImmutableMoment(this.moment.clone().startOf("day"))
     return date
   }
