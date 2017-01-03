@@ -16,7 +16,11 @@ export class Store {
     this.dates = []
     this.movies = this.data.movies.map(movieData => new Movie(movieData))
     this.theaters = this.data.theaters.map(theaterData => new Theater(theaterData))
-    this.showings = this.data.showings.map(showingData => new Showing(showingData, this))
+
+    const now = moment()
+    this.showings = this.data.showings
+      .filter(showingData => moment.parseZone(showingData.start) >= now)
+      .map(showingData => new Showing(showingData, this))
   }
 
   private readonly data: Data
@@ -27,12 +31,9 @@ export class Store {
 
   @computed
   public get matchingShowings(): Array<Showing> {
-    const now = moment()
-
     const matching = this.showings
       // TODO: Support movies that don't have a separate move page.
       .filter(showing => showing.movie !== undefined)
-      .filter(showing => showing.start > now)
       .filter(showing => this.selectedMovies.length === 0 || showing.movie.selected)
       .filter(showing => this.selectedTheaters.length === 0 || showing.theater.selected)
       .filter(showing => this.selectedDates.length === 0 || showing.date.selected)
