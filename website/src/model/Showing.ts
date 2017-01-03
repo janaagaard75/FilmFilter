@@ -15,7 +15,7 @@ export class Showing {
     this.movie = store.getMovie(data.movieId)
     this.showingUrl = "http://www.kino.dk/" + data.showingUrl
     this.specialShowing = data.specialShowing
-    this.start = moment(data.start)
+    this.start = moment.parseZone(data.start)
     this.theater = store.getTheater(data.theaterId)
     this.threeD = data.threeD
     this.totalSeats = this.getTotolSeats(data.seatingInfo)
