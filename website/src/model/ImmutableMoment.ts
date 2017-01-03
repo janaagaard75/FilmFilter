@@ -4,7 +4,9 @@ import { Moment } from "moment"
 import { isString } from "../utilities"
 
 export class ImmutableMoment {
-  constructor(dateTime: string | Moment) {
+  constructor(dateTime: string | Moment | undefined) {
+    // TODO: Add undefined.
+
     if (isString(dateTime)) {
       this.moment = moment(this.parseAsLocalDateTime(dateTime))
     }
