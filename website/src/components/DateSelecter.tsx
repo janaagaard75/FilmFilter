@@ -21,13 +21,15 @@ export class DateSelecter extends Component<Props, void> {
 
     return (
       <CollapsibleCard header={header}>
-        {this.props.dates.map(date =>
-          <DateItem
-            key={date.label}
-            date={date}
-            toggleDateSelection={() => this.props.toggleDateSelection(date)}
-          />
-        )}
+        <div className="row">
+          {this.props.dates.map(date =>
+            <DateItem
+              key={date.label}
+              date={date}
+              toggleDateSelection={() => this.props.toggleDateSelection(date)}
+            />
+          )}
+        </div>
       </CollapsibleCard>
     )
   }

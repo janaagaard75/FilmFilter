@@ -20,9 +20,7 @@ export class Collapse extends Component<Props, void> {
     return (
       <div className={cssClasses}>
         <div className="card-block">
-          <div className="row">
-            {this.props.children}
-          </div>
+          {this.props.children}
         </div>
       </div>
     )
