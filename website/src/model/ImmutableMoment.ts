@@ -49,4 +49,11 @@ export class ImmutableMoment {
 
     return date
   }
+
+  public static UndefinedImmutableMoment = new ImmutableMoment(/* Something */)
+
+  public weekday(): number {
+    const weekday = this.moment.weekday()
+    return weekday
+  }
 }
