@@ -4,6 +4,7 @@ import { computed } from "mobx"
 import { Data } from "./data/Data"
 import { ImmutableMoment } from "./ImmutableMoment"
 import { Movie } from "./Movie"
+import { parseAsLocalDateTime } from "../utilities"
 import { SelectableDate } from "./SelectableDate"
 import { Showing } from "./Showing"
 import { Theater } from "./Theater"
@@ -16,10 +17,11 @@ export class Store {
     this.movies = this.data.movies.map(movieData => new Movie(movieData))
     this.theaters = this.data.theaters.map(theaterData => new Theater(theaterData))
 
-    const now = new ImmutableMoment()
+    // TODO: The date strings are now being parsed twice, both in here and in the ImmutableMoment constructor. Consider fixing this by adding an intermediate model where start is a date.
+    const now = Date.now()
     this.showings = this.data.showings
+      .filter(showingData => parseAsLocalDateTime(showingData.start).valueOf() >= now)
       .map(showingData => new Showing(showingData, this))
-      .filter(showing => showing.start.isAfter(now))
       .sort((showingA, showingB) => showingA.start.diff(showingB.start))
   }
 
