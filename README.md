@@ -6,6 +6,10 @@ A side project, about testing how a filtering approach could work, when selectin
 
 See README in the scraper folder.
 
+## Database
+
+See README in the database folder.
+
 ## Website
 
 See README in the website folder.
