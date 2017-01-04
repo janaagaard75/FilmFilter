@@ -17,10 +17,10 @@ export class Store {
     this.movies = this.data.movies.map(movieData => new Movie(movieData))
     this.theaters = this.data.theaters.map(theaterData => new Theater(theaterData))
 
-    const now = moment() // TODO: Should be an ImmutableMoment.
+    const now = new ImmutableMoment()
     this.showings = this.data.showings
       .map(showingData => new Showing(showingData, this))
-      .filter(showing => showing.start >= now)
+      .filter(showing => showing.start.isAfter(now))
       .sort((showingA, showingB) => showingA.start.diff(showingB.start))
   }
 

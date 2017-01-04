@@ -4,10 +4,11 @@ import { Moment } from "moment"
 import { isString } from "../utilities"
 
 export class ImmutableMoment {
-  constructor(dateTime: string | Moment | undefined) {
-    // TODO: Add undefined.
-
-    if (isString(dateTime)) {
+  constructor(dateTime?: string | Moment) {
+    if (dateTime === undefined) {
+      this.moment = moment()
+    }
+    else if (isString(dateTime)) {
       this.moment = moment(this.parseAsLocalDateTime(dateTime))
     }
     else {
@@ -30,6 +31,11 @@ export class ImmutableMoment {
   public format(format: string): string {
     const formatted = this.moment.format(format)
     return formatted
+  }
+
+  public isAfter(other: ImmutableMoment) {
+    const isAfter = this.moment.isAfter(other.moment)
+    return isAfter
   }
 
   private parseAsLocalDateTime(dateString: string): Date {
