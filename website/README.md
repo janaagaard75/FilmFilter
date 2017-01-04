@@ -13,3 +13,14 @@
 * IMAX: Two checkboxes or three radio buttons.
 * Special showing: Ditto.
 * Language: Ditto.
+
+## To Do
+
+* Movies sometimes shuffle around when being selected. Maybe they should also be sorted by name.
+* Add a reset button?
+* Make it easy to select a group of cinemas.
+* Remember selected cinemas?
+* Make a list of favorite cinemas?
+* Better presentation of showings.
+* Better presentation of dates. Use a calendar grid?
+* Automatically close movie collapsible when selecting a movie?
