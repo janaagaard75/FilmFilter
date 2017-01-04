@@ -1,4 +1,3 @@
-import * as moment from "moment"
 import { action } from "mobx"
 import { computed } from "mobx"
 
