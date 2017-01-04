@@ -2,6 +2,7 @@ import * as moment from "moment"
 import { Moment } from "moment"
 
 import { isString } from "../utilities"
+import { parseAsLocalDateTime } from "../utilities"
 
 export class ImmutableMoment {
   constructor(dateTime?: string | Moment) {
@@ -9,7 +10,7 @@ export class ImmutableMoment {
       this.moment = moment()
     }
     else if (isString(dateTime)) {
-      this.moment = moment(this.parseAsLocalDateTime(dateTime))
+      this.moment = moment(parseAsLocalDateTime(dateTime))
     }
     else {
       this.moment = moment(dateTime)
@@ -36,19 +37,6 @@ export class ImmutableMoment {
   public isAfter(other: ImmutableMoment) {
     const isAfter = this.moment.isAfter(other.moment)
     return isAfter
-  }
-
-  private parseAsLocalDateTime(dateString: string): Date {
-    const numbers = dateString.split(/\D/)
-    const dateTime = new Date(
-      parseInt(numbers[0], 10),
-      parseInt(numbers[1], 10) - 1,
-      parseInt(numbers[2], 10),
-      parseInt(numbers[3], 10),
-      parseInt(numbers[4], 10),
-      parseInt(numbers[5], 10))
-
-    return dateTime
   }
 
   /** Return a new ImmutableMoment where the hours have been stripped. */
