@@ -34,11 +34,6 @@ export class ImmutableMoment {
     return formatted
   }
 
-  public isAfter(other: ImmutableMoment) {
-    const isAfter = this.moment.isAfter(other.moment)
-    return isAfter
-  }
-
   /** Return a new ImmutableMoment where the hours have been stripped. */
   public toDate(): ImmutableMoment {
     const date = new ImmutableMoment(moment(new Date(
@@ -49,8 +44,6 @@ export class ImmutableMoment {
 
     return date
   }
-
-  public static UndefinedImmutableMoment = new ImmutableMoment(/* Something */)
 
   public weekday(): number {
     const weekday = this.moment.weekday()
