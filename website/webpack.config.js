@@ -95,7 +95,7 @@ module.exports = {
     path: outputDir
   },
   performance: {
-    hints: isProduction
+    hints: isProduction ? "warning" : false
   },
   plugins: plugins,
   resolve: {
