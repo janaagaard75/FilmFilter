@@ -7,7 +7,7 @@ import { Router } from "react-router"
 
 import { allRoutes } from "./routes"
 
-import "./main.scss"
+import "./styles/main.scss"
 
 moment.locale("da")
 
