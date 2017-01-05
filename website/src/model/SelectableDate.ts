@@ -1,3 +1,4 @@
+import * as moment from "moment"
 import { observable } from "mobx"
 
 import { ImmutableMoment } from "./ImmutableMoment"
@@ -16,4 +17,8 @@ export class SelectableDate {
     const label = this.date.format("dd D/M")
     return label
   }
+
+  public static UndefinedSelectableDate = new SelectableDate(
+    new ImmutableMoment(moment(new Date(2000, 0, 1)))
+  )
 }

@@ -19,16 +19,14 @@ export class DateSelecter extends Component<Props, void> {
       ? "Vælg dato"
       : "Dato: " + this.props.selectedDates.map(date => date.label).join(", ")
 
-    const emptyItems: Array<ImmutableMoment> = []
-    for (let i = 0; i < this.props.dates[0].date.weekday(); i++) {
-      // TODO: Need an empty
-    }
-    const dates = this.props.dates.concat
+    const undefinedDates: Array<SelectableDate> = new Array(this.props.dates[0].date.weekday())
+      .map(() => SelectableDate.UndefinedSelectableDate)
+    const dates = undefinedDates.concat(this.props.dates)
 
     return (
       <CollapsibleCard header={header}>
         <div className="row">
-          {this.props.dates.map(date =>
+          {dates.map(date =>
             <DateItem
               key={date.label}
               date={date}
