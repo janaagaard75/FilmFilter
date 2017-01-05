@@ -4,15 +4,3 @@
 // TODO: Test this extension https://marketplace.visualstudio.com/items?itemName=glen-84.sass-lint
 
 $enable-flex: true;
-
-.col-xs-1-of-7 {
-  min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px;
-  position: relative;
-  width: 100&;
-
-  // TODO: Use Bootstrap's mixins.
-  flex: 0 0 percentage(1/7);
-  max-width: percentage(1/7);
-}
