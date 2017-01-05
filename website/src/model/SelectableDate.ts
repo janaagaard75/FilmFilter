@@ -18,6 +18,11 @@ export class SelectableDate {
     return label
   }
 
+  public get key(): string {
+    const key = this.date.format("YYYYMMDD")
+    return key
+  }
+
   public static UndefinedSelectableDate = new SelectableDate(
     new ImmutableMoment(moment(new Date(2000, 0, 1)))
   )

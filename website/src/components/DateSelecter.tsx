@@ -19,16 +19,18 @@ export class DateSelecter extends Component<Props, void> {
       ? "Vælg dato"
       : "Dato: " + this.props.selectedDates.map(date => date.label).join(", ")
 
-    const undefinedDates: Array<SelectableDate> = new Array(this.props.dates[0].date.weekday())
-      .map(() => SelectableDate.UndefinedSelectableDate)
-    const dates = undefinedDates.concat(this.props.dates)
+    // TODO: It's not sure that there will be a showing on a given date. DateItem should receive a date, and then render something, possibly depending on there being a show on that date or not.
+    const emptyDates = this.props.dates[0].date.weekday()
 
     return (
       <CollapsibleCard header={header}>
         <div className="row">
-          {dates.map(date =>
+          {[...Array(emptyDates)].map((x, index) =>
+            <div className="col-xs-1-of-7" key={index}/>
+          )}
+          {this.props.dates.map(date =>
             <DateItem
-              key={date.label}
+              key={date.key}
               date={date}
               toggleDateSelection={() => this.props.toggleDateSelection(date)}
             />
