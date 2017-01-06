@@ -2,7 +2,7 @@ import * as React from "react"
 import { Component } from "react"
 import { observer } from "mobx-react"
 
-import { CollapsibleCard } from "./CollapsibleCard"
+import { CollapsibleCard } from "./bootstrap/CollapsibleCard"
 import { DateItem } from "./DateItem"
 import { SelectableDate } from "../model/SelectableDate"
 
