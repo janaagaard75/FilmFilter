@@ -34,3 +34,5 @@ export class MoviesSelecter extends Component<Props, void> {
     )
   }
 }
+
+// TODO: Selecting a movie should close the collapsible.
