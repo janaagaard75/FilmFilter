@@ -28,7 +28,7 @@ export class DateSelecter extends Component<Props, void> {
           {
             // tslint:disable-next-line no-unused-variable
             [...Array(emptyDates)].map((x, index) =>
-            <div className="col-xs-1-of-7" key={index}/>
+            <div className="col-1-of-7" key={index}/>
           )}
           {this.props.dates.map(date =>
             <DateItem

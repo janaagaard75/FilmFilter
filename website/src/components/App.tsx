@@ -21,7 +21,7 @@ export class App extends Component<Props, void> {
       <div className="container-fluid">
         <h1>Film Filter</h1>
         <div className="row">
-          <div className="col-xs-7">
+          <div className="col-7">
             <MoviesSelecter
               movies={this.props.store.getMoviesByNumberOfShowings().slice(0, 24)}
               selectedMovies={this.props.store.selectedMovies}
@@ -38,7 +38,7 @@ export class App extends Component<Props, void> {
               toggleDateSelection={this.props.store.toggleDateSelection}
             />
           </div>
-          <div className="col-xs-5">
+          <div className="col-5">
             <MatchingShowings matchingShowings={this.props.store.matchingShowings}/>
           </div>
         </div>

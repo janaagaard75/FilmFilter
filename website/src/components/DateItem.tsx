@@ -17,8 +17,8 @@ export class DateItem extends Component<Props, void> {
       // TODO: Clean up.
       // TODO: Make this work on small screens.
       // TODO: Have Monday in the left most column.
-      // "col-xs-6 col-sm-4 col-md-3 col-lg-2 clickable",
-      "col-xs-1-of-7 clickable",
+      // "col-6 col-sm-4 col-md-3 col-lg-2 clickable",
+      "col-1-of-7 clickable",
       {
         "selected-item": this.props.date.selected
       }

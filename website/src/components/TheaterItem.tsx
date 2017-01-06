@@ -14,7 +14,7 @@ interface Props {
 export class TheaterItem extends Component<Props, void> {
   public render() {
     const cssClasses = classNames(
-      "col-xs-12 col-md-6 col-lg-4",
+      "col-12 col-md-6 col-lg-4",
       {
         "selected-item": this.props.theater.selected
       }
