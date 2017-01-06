@@ -14,8 +14,8 @@ interface Props {
 export class MatchingShowings extends Component<Props, void> {
   public render() {
     const header: string = this.props.matchingShowings.length === 0
-      ? "Ingen matchende visninger"
-      : "Matchende visninger: " + this.props.matchingShowings.length
+      ? "Ingen matchende forestillinger"
+      : "Matchende forestillinger: " + this.props.matchingShowings.length
 
     return (
       <Card header={header}>
