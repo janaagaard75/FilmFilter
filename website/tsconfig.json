@@ -4,7 +4,6 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-    "inlineSources": true,
     "jsx": "react",
     "module": "es2015",
     "moduleResolution": "node",

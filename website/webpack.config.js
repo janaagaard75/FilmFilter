@@ -1,4 +1,5 @@
 // tslint:disable object-literal-sort-keys
+const BabiliPlugin = require("babili-webpack-plugin")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
@@ -35,11 +36,7 @@ const plugins = [
 
 if (isProduction) {
   plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: true
-      }
-    })
+    new BabiliPlugin()
   )
 }
 else {
@@ -56,8 +53,7 @@ module.exports = {
     host: "0.0.0.0",
     port: 9000
   },
-  // TODO: Use "source-map" in production.
-  devtool: "eval-source-map",
+  devtool: isProduction ? "source-map" : "eval-source-map",
   entry: {
     "client": "./src/Main.tsx"
   },
