@@ -35,9 +35,10 @@ const plugins = [
 ]
 
 if (isProduction) {
-  plugins.push(
-    new BabiliPlugin()
-  )
+  // TODO: Babili breaks the production plugin. Remove data.json from the bundle to investigate why.
+  // plugins.push(
+  //   new BabiliPlugin()
+  // )
 }
 else {
   plugins.push(
