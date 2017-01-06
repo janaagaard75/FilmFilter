@@ -2,7 +2,7 @@ import * as React from "react"
 import { Component } from "react"
 import { observer } from "mobx-react"
 
-import { Collapse } from "./bootstrap/Collapse"
+import { Collapse } from "./Collapse"
 
 interface Props {
   header: string
