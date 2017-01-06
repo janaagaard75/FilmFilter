@@ -1,5 +1,4 @@
 // tslint:disable object-literal-sort-keys
-const BabiliPlugin = require("babili-webpack-plugin")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
@@ -35,10 +34,13 @@ const plugins = [
 ]
 
 if (isProduction) {
-  // TODO: Babili breaks the production plugin. Remove data.json from the bundle to investigate why.
-  // plugins.push(
-  //   new BabiliPlugin()
-  // )
+  plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: true
+      }
+    })
+  )
 }
 else {
   plugins.push(
