@@ -22,27 +22,25 @@ export class App extends Component<Props, void> {
         <h1>Film Filter</h1>
         <div className="row">
           <div className="col-7">
-            <p>
-              <MoviesSelecter
-                movies={this.props.store.getMoviesByNumberOfShowings().slice(0, 24)}
-                selectedMovies={this.props.store.selectedMovies}
-                toggleMovieSelection={this.props.store.toggleMovieSelection}
-              />
-            </p>
-            <p>
+            <MoviesSelecter
+              movies={this.props.store.getMoviesByNumberOfShowings().slice(0, 24)}
+              selectedMovies={this.props.store.selectedMovies}
+              toggleMovieSelection={this.props.store.toggleMovieSelection}
+            />
+            <div className="mt-3">
               <TheatersSelecter
                 theaters={this.props.store.getTheatersSortedByName()}
                 selectedTheaters={this.props.store.selectedTheaters}
                 toggleTheaterSelection={this.props.store.toggleTheaterSelection}
               />
-            </p>
-            <p>
+            </div>
+            <div className="mt-3">
               <DateSelecter
                 dates={this.props.store.dates}
                 selectedDates={this.props.store.selectedDates}
                 toggleDateSelection={this.props.store.toggleDateSelection}
               />
-            </p>
+            </div>
           </div>
           <div className="col-5">
             <MatchingShowings matchingShowings={this.props.store.matchingShowings}/>
