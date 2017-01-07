@@ -10,10 +10,12 @@ interface Props {
 @observer
 export class Collapse extends Component<Props, void> {
   public render() {
-    const cssClasses = classNames({
-      collapse: true,
-      in: this.props.expanded
-    })
+    const cssClasses = classNames(
+      "collapse",
+      {
+        show: this.props.expanded
+      }
+    )
 
     return (
       <div className={cssClasses}>

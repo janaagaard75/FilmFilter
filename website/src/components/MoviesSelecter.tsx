@@ -2,7 +2,7 @@ import * as React from "react"
 import { Component } from "react"
 import { observer } from "mobx-react"
 
-import { CollapsibleCard } from "./CollapsibleCard"
+import { CollapsibleCard } from "./bootstrap/CollapsibleCard"
 import { Movie } from "../model/Movie"
 import { MovieItem } from "./MovieItem"
 
@@ -34,3 +34,5 @@ export class MoviesSelecter extends Component<Props, void> {
     )
   }
 }
+
+// TODO: Selecting a movie should close the collapsible.

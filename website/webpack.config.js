@@ -53,8 +53,7 @@ module.exports = {
     host: "0.0.0.0",
     port: 9000
   },
-  // TODO: Use "source-map" in production.
-  devtool: "eval-source-map",
+  devtool: isProduction ? "source-map" : "eval-source-map",
   entry: {
     "client": "./src/Main.tsx"
   },
@@ -95,7 +94,7 @@ module.exports = {
     path: outputDir
   },
   performance: {
-    hints: isProduction
+    hints: isProduction ? "warning" : false
   },
   plugins: plugins,
   resolve: {
