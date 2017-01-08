@@ -20,11 +20,11 @@ Consider installing `firebase-tools` as a global npm package.
 
 ## To Do
 
+* Make the XS layout work together with SM+.
 * Movies sometimes shuffle around when being selected. Maybe they should also be sorted by name.
 * Add a reset button?
 * Make it easy to select a group of cinemas.
-* Remember selected cinemas?
-* Make a list of favorite cinemas?
+* Remember selected cinemas.
 * Better presentation of showings.
 * Better presentation of dates. Use a calendar grid?
 * Automatically close movie collapsible when selecting a movie?
