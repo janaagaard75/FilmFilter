@@ -1,11 +1,14 @@
+# shub build output.
+/build/
+
 # Node modules.
 /node_modules/
 
 # Output files.
 /output/**
 
-# Python byte code files.
-*.pyc
-
 # Scrapy's cache.
 /.scrapy/**
+
+# Python byte code files.
+*.pyc
