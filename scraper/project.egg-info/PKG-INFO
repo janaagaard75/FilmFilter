@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: project
+Version: 1.0
+Summary: Collects showing informations from www.kino.dk.
+Home-page: https://github.com/janaagaard75/film-filter/tree/master/scraper
+Author: Jan Aagaard
+Author-email: jan@aagaard.net
+License: ISC
+Description: A scraper for www.kino.dk.
+Platform: UNKNOWN

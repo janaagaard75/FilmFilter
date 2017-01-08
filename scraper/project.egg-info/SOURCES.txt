@@ -1,0 +1,15 @@
+setup.py
+kino/__init__.py
+kino/filters.py
+kino/items.py
+kino/pipelines.py
+kino/settings.py
+kino/spiders/__init__.py
+kino/spiders/movies_spider.py
+kino/spiders/showings_spider.py
+kino/spiders/theaters_spider.py
+project.egg-info/PKG-INFO
+project.egg-info/SOURCES.txt
+project.egg-info/dependency_links.txt
+project.egg-info/entry_points.txt
+project.egg-info/top_level.txt
