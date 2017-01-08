@@ -21,10 +21,10 @@ export class App extends Component<Props, void> {
       <div className="container-fluid">
         <h1>Film Filter</h1>
         <div className="row">
-          <div className="col-sm-5 mb-3">
+          <div className="col-md-5 flex-last mb-3">
             <MatchingShowings matchingShowings={this.props.store.matchingShowings}/>
           </div>
-          <div className="col-sm-7">
+          <div className="col-md-7">
             <MoviesSelecter
               movies={this.props.store.getMoviesByNumberOfShowings().slice(0, 24)}
               selectedMovies={this.props.store.selectedMovies}
