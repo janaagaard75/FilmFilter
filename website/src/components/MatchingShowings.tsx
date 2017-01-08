@@ -19,7 +19,7 @@ export class MatchingShowings extends Component<Props, void> {
 
     return (
       <Card header={header}>
-        <ShowingsTable showings={this.props.matchingShowings.slice(0, 25)}/>
+        <ShowingsTable showings={this.props.matchingShowings.slice(0, 10)}/>
       </Card>
     )
   }
