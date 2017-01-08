@@ -1,5 +1,9 @@
 # Film Filter Website
 
+## Set Up
+
+Consider installing `firebase-tools` as a global npm package.
+
 ## Interface
 
 * list of matching showings.
