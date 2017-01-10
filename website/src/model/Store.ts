@@ -1,6 +1,7 @@
 import { action } from "mobx"
 import { computed } from "mobx"
 
+import { compareByName } from "../utilities"
 import { Data } from "./data/Data"
 import { ImmutableMoment } from "./ImmutableMoment"
 import { Movie } from "./Movie"
@@ -61,18 +62,6 @@ export class Store {
     return selectedTheaters
   }
 
-  private compareByName(a: Theater, b: Theater) {
-    if (a.name > b.name) {
-      return 1
-    }
-
-    if (a.name < b.name) {
-      return -1
-    }
-
-    return 0
-  }
-
   public getMovie(movieId: number): Movie {
     if (movieId === -1) {
       return Movie.UndefinedMovie
@@ -115,7 +104,7 @@ export class Store {
   }
 
   public getTheatersSortedByName(): Array<Theater> {
-    const sortedByName = this.theaters.sort(this.compareByName)
+    const sortedByName = this.theaters.sort(compareByName)
     return sortedByName
   }
 

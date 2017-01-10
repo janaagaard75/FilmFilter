@@ -1,3 +1,19 @@
+interface HasName {
+  name: string
+}
+
+export const compareByName = (a: HasName, b: HasName) => {
+  if (a.name > b.name) {
+    return 1
+  }
+
+  if (a.name < b.name) {
+    return -1
+  }
+
+  return 0
+}
+
 export const isNumber = (x: any): x is number => {
   const isANumber = typeof x === "number"
   return isANumber
