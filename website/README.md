@@ -31,3 +31,4 @@ Consider installing `firebase-tools` as a global npm package.
 * Shorter names for the cinemas.
 * Possible to select a start time interval.
 * Save the data in local storage, and only update if outdated.
+* Add routes to the app, so that it's possible to share links.
