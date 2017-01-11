@@ -12,21 +12,50 @@ interface Props {
   toggleMovieSelection: (movie: Movie) => void
 }
 
+interface State {
+  expanded: boolean
+}
+
 @observer
-export class MoviesSelecter extends Component<Props, void> {
+export class MoviesSelecter extends Component<Props, State> {
+  constructor(props: Props, context?: any) {
+    super(props, context)
+
+    this.state = {
+      expanded: false
+    }
+  }
+
+  private handleToggleExpanded() {
+    this.setState({
+      expanded: !this.state.expanded
+    })
+  }
+
+  private handleToggleMovieSelection(movie: Movie) {
+    this.props.toggleMovieSelection(movie)
+
+    // TODO: This closes the collapsible when going from zero to one selected movie, but not when going from two to one. How come?
+    if (this.props.selectedMovies.length === 0) {
+      this.setState({
+        expanded: false
+      })
+    }
+  }
+
   public render() {
     const header: string = this.props.selectedMovies.length === 0
       ? "Vælg film"
       : "Film: " + this.props.selectedMovies.map(movie => movie.originalTitle).join(", ")
 
     return (
-      <CollapsibleCard header={header}>
+      <CollapsibleCard header={header} expanded={this.state.expanded} onToggleExpanded={() => this.handleToggleExpanded()}>
         <div className="row">
           {this.props.movies.map(movie =>
             <MovieItem
               key={movie.movieUrl}
               movie={movie}
-              toggleMovieSelection={() => this.props.toggleMovieSelection(movie)}
+              toggleMovieSelection={() => this.handleToggleMovieSelection(movie)}
             />
           )}
         </div>

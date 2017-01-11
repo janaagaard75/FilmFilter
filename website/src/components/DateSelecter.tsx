@@ -12,8 +12,26 @@ interface Props {
   toggleDateSelection: (date: SelectableDate) => void
 }
 
+interface State {
+  expanded: boolean
+}
+
 @observer
-export class DateSelecter extends Component<Props, void> {
+export class DateSelecter extends Component<Props, State> {
+  constructor(props: Props, context?: any) {
+    super(props, context)
+
+    this.state = {
+      expanded: false
+    }
+  }
+
+  private handleToggleExpanded() {
+    this.setState({
+      expanded: !this.state.expanded
+    })
+  }
+
   public render() {
     const header = this.props.selectedDates.length === 0
       ? "Vælg dato"
@@ -23,7 +41,7 @@ export class DateSelecter extends Component<Props, void> {
     const emptyDates = this.props.dates[0].date.weekday()
 
     return (
-      <CollapsibleCard header={header}>
+    <CollapsibleCard header={header} expanded={this.state.expanded} onToggleExpanded={() => this.handleToggleExpanded()}>
         <div className="row">
           {
             // tslint:disable-next-line no-unused-variable
