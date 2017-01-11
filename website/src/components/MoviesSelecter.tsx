@@ -35,7 +35,7 @@ export class MoviesSelecter extends Component<Props, State> {
   private handleToggleMovieSelection(movie: Movie) {
     this.props.toggleMovieSelection(movie)
 
-    // TODO: This closes the collapsible when going from zero to one selected movie, but not when going from two to one. How come?
+    // TODO: This works as intented, but unintentionally. The selectedMovies array isn't up to date when making the comparison. The length should have been compared to 1.
     if (this.props.selectedMovies.length === 0) {
       this.setState({
         expanded: false
