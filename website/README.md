@@ -27,7 +27,6 @@ Consider installing `firebase-tools` as a global npm package.
 * Better presentation of showings.
   * If a single movie has been selected, it's not necessary to show the name of the movie in the showings list.
 * Better presentation of dates. Use a calendar grid?
-* Automatically close movie collapsible when selecting a movie?
 * Shorter names for the cinemas.
 * Possible to select a start time interval.
 * Save the data in local storage, and only update if outdated.
