@@ -1,0 +1,14 @@
+{
+  "name": "shub-docker",
+  "version": "0.0.0",
+  "description": "Node.js on Docker",
+  "author": "Jan Aagaard <jan@aagaard.net>",
+  "main": "server.js",
+  "license": "ISC",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "4.14.0"
+  }
+}
