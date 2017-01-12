@@ -49,7 +49,11 @@ export class MoviesSelecter extends Component<Props, State> {
       : "Film: " + this.props.selectedMovies.map(movie => movie.originalTitle).join(", ")
 
     return (
-      <ToggleableCollapsibleCard header={header} expanded={this.state.expanded} onToggleExpanded={() => this.handleToggleExpanded()}>
+      <ToggleableCollapsibleCard
+        expanded={this.state.expanded}
+        header={header}
+        onToggleExpanded={() => this.handleToggleExpanded()}
+      >
         <div className="row">
           {this.props.movies.map(movie =>
             <MovieItem

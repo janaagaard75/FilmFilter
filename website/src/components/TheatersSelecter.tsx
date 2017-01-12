@@ -2,9 +2,9 @@ import * as React from "react"
 import { Component } from "react"
 import { observer } from "mobx-react"
 
+import { CollapsibleCard } from "./bootstrap/CollapsibleCard"
 import { Theater } from "../model/Theater"
 import { TheaterItem } from "./TheaterItem"
-import { ToggleableCollapsibleCard } from "./bootstrap/ToggleableCollapsibleCard"
 
 interface Props {
   theaters: Array<Theater>
@@ -12,33 +12,15 @@ interface Props {
   toggleTheaterSelection: (theater: Theater) => void
 }
 
-interface State {
-  expanded: boolean
-}
-
 @observer
-export class TheatersSelecter extends Component<Props, State> {
-  constructor(props: Props, context?: any) {
-    super(props, context)
-
-    this.state = {
-      expanded: false
-    }
-  }
-
-  private handleToggleExpanded() {
-    this.setState({
-      expanded: !this.state.expanded
-    })
-  }
-
+export class TheatersSelecter extends Component<Props, void> {
   public render() {
     const header = this.props.selectedTheaters.length === 0
       ? "Vælg biograf"
       : "Biograf: " + this.props.selectedTheaters.map(theater => theater.name).join(", ")
 
     return (
-    <ToggleableCollapsibleCard header={header} expanded={this.state.expanded} onToggleExpanded={() => this.handleToggleExpanded()}>
+    <CollapsibleCard header={header}>
         <div className="row">
           {this.props.theaters.map(theater =>
             <TheaterItem
@@ -48,7 +30,7 @@ export class TheatersSelecter extends Component<Props, State> {
             />
           )}
         </div>
-      </ToggleableCollapsibleCard>
+      </CollapsibleCard>
     )
   }
 }

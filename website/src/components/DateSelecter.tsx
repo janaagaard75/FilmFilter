@@ -2,9 +2,9 @@ import * as React from "react"
 import { Component } from "react"
 import { observer } from "mobx-react"
 
+import { CollapsibleCard } from "./bootstrap/CollapsibleCard"
 import { DateItem } from "./DateItem"
 import { SelectableDate } from "../model/SelectableDate"
-import { ToggleableCollapsibleCard } from "./bootstrap/ToggleableCollapsibleCard"
 
 interface Props {
   dates: Array<SelectableDate>
@@ -12,26 +12,8 @@ interface Props {
   toggleDateSelection: (date: SelectableDate) => void
 }
 
-interface State {
-  expanded: boolean
-}
-
 @observer
-export class DateSelecter extends Component<Props, State> {
-  constructor(props: Props, context?: any) {
-    super(props, context)
-
-    this.state = {
-      expanded: false
-    }
-  }
-
-  private handleToggleExpanded() {
-    this.setState({
-      expanded: !this.state.expanded
-    })
-  }
-
+export class DateSelecter extends Component<Props, void> {
   public render() {
     const header = this.props.selectedDates.length === 0
       ? "Vælg dato"
@@ -41,7 +23,7 @@ export class DateSelecter extends Component<Props, State> {
     const emptyDates = this.props.dates[0].date.weekday()
 
     return (
-    <ToggleableCollapsibleCard header={header} expanded={this.state.expanded} onToggleExpanded={() => this.handleToggleExpanded()}>
+    <CollapsibleCard header={header}>
         <div className="row">
           {
             // tslint:disable-next-line no-unused-variable
@@ -56,7 +38,7 @@ export class DateSelecter extends Component<Props, State> {
             />
           )}
         </div>
-      </ToggleableCollapsibleCard>
+      </CollapsibleCard>
     )
   }
 }
