@@ -2,9 +2,9 @@ import * as React from "react"
 import { Component } from "react"
 import { observer } from "mobx-react"
 
-import { CollapsibleCard } from "./bootstrap/CollapsibleCard"
 import { Movie } from "../model/Movie"
 import { MovieItem } from "./MovieItem"
+import { ToggleableCollapsibleCard } from "./bootstrap/ToggleableCollapsibleCard"
 
 interface Props {
   movies: Array<Movie>
@@ -49,7 +49,7 @@ export class MoviesSelecter extends Component<Props, State> {
       : "Film: " + this.props.selectedMovies.map(movie => movie.originalTitle).join(", ")
 
     return (
-      <CollapsibleCard header={header} expanded={this.state.expanded} onToggleExpanded={() => this.handleToggleExpanded()}>
+      <ToggleableCollapsibleCard header={header} expanded={this.state.expanded} onToggleExpanded={() => this.handleToggleExpanded()}>
         <div className="row">
           {this.props.movies.map(movie =>
             <MovieItem
@@ -59,7 +59,7 @@ export class MoviesSelecter extends Component<Props, State> {
             />
           )}
         </div>
-      </CollapsibleCard>
+      </ToggleableCollapsibleCard>
     )
   }
 }

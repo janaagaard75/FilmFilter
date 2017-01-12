@@ -10,9 +10,8 @@ interface Props {
   onToggleExpanded: () => void
 }
 
-// TODO: Consider reintroducing the old version of this control, that keeps the expanded state internal.
 @observer
-export class CollapsibleCard extends Component<Props, void> {
+export class ToggleableCollapsibleCard extends Component<Props, void> {
   public render() {
     return (
       <div className="card">
