@@ -6,6 +6,8 @@
   "main": "server.js",
   "license": "ISC",
   "scripts": {
+    "build": "./build.sh",
+    "push": "docker push janaagaard/film-filter-data",
     "start": "node server.js"
   },
   "dependencies": {
