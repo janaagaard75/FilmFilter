@@ -7,9 +7,16 @@
   "author": "Jan Aagaard <jan@aagaard.net>",
   "license": "ISC",
   "scripts": {
-    "build": "tsc *.ts"
+    "build": "tsc",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@types/node-fetch": "1.6.7",
+    "express": "4.14.0",
+    "node-fetch": "1.6.3"
   },
   "devDependencies": {
+    "@types/express": "4.0.35",
     "typescript": "2.1.5"
   }
 }
