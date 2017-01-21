@@ -6,8 +6,8 @@
   "repository": "https://github.com/janaagaard75/film-filter.git",
   "author": "Jan Aagaard <jan@aagaard.net>",
   "license": "ISC",
-  "script": {
-    "build": "tsc"
+  "scripts": {
+    "build": "tsc *.ts"
   },
   "devDependencies": {
     "typescript": "2.1.5"
