@@ -1,5 +1,3 @@
-import * as fs from 'fs'
-
 export class JsonlParser {
   public static parseLines<TLine>(lines: string): Array<TLine> {
     const parsed = lines

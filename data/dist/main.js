@@ -2,6 +2,7 @@
 const express = require("express");
 const node_fetch_1 = require("node-fetch");
 const fs = require("fs");
+const JsonlParser_1 = require("./JsonlParser");
 const app = express();
 const apiKey = "a706cc2fdb8e4ce89f00aed30a6fc2a0";
 const host = "storage.scrapinghub.com";
@@ -25,25 +26,35 @@ node_fetch_1.default(`https://${apiKey}:@${host}/jobq/${jobId}/list`)
         return node_fetch_1.default(itemsUrl)
             .then(itemsResponse => itemsResponse.text())
             .then(itemLines => {
-            const dataLines = {
+            const typedLines = {
                 lines: itemLines,
                 type: jobInfo.spider
             };
-            return dataLines;
-            // switch (jobInfo.spider) {
-            //   case "movies":
-            //     return JsonlParser.parseLines<MovieLine>(itemLines)
-            //   case "showings":
-            //     return JsonlParser.parseLines<ShowingLine>(itemLines)
-            //   case "theaters":
-            //     return JsonlParser.parseLines<TheaterLine>(itemLines)
-            // }
+            return typedLines;
         });
     });
     return Promise.all(fetchDataPromises);
 })
-    .then(dataLinesArray => {
-    console.log("First data length: " + dataLinesArray[0].lines.length);
-    console.log("Second data length: " + dataLinesArray[1].lines.length);
-    console.log("Thrid data length: " + dataLinesArray[2].lines.length);
+    .then(typedLinesArray => {
+    const inputData = {
+        movieLines: [],
+        showingLines: [],
+        theaterLines: []
+    };
+    typedLinesArray.forEach(typedLines => {
+        switch (typedLines.type) {
+            case "movies":
+                inputData.movieLines = JsonlParser_1.JsonlParser.parseLines(typedLines.lines);
+                break;
+            case "showings":
+                inputData.showingLines = JsonlParser_1.JsonlParser.parseLines(typedLines.lines);
+                break;
+            case "theaters":
+                inputData.theaterLines = JsonlParser_1.JsonlParser.parseLines(typedLines.lines);
+                break;
+        }
+    });
+    console.log("Movies: " + inputData.movieLines.length);
+    console.log("Showings: " + inputData.showingLines.length);
+    console.log("Theaters: " + inputData.theaterLines.length);
 });

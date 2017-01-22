@@ -3,7 +3,7 @@ import fetch from "node-fetch"
 import * as fs from "fs"
 
 import { JobInfo } from "./JobInfo"
-import { JsonlParser } from './JsonlParser';
+import { JsonlParser } from "./JsonlParser"
 import { MovieLine } from "./MovieLine"
 import { ShowingLine } from "./ShowingLine"
 import { TheaterLine } from "./TheaterLine"
@@ -23,7 +23,7 @@ if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir)
 }
 
-interface DataLines {
+interface TypedLines {
   lines: string
   type: "movies" | "showings" | "theaters"
 }
@@ -46,28 +46,41 @@ fetch(`https://${apiKey}:@${host}/jobq/${jobId}/list`)
         return fetch(itemsUrl)
           .then(itemsResponse => itemsResponse.text())
           .then(itemLines => {
-            const dataLines: DataLines = {
+            const typedLines: TypedLines = {
               lines: itemLines,
               type: jobInfo.spider
             }
-            return dataLines
-            // switch (jobInfo.spider) {
-            //   case "movies":
-            //     return JsonlParser.parseLines<MovieLine>(itemLines)
 
-            //   case "showings":
-            //     return JsonlParser.parseLines<ShowingLine>(itemLines)
-
-            //   case "theaters":
-            //     return JsonlParser.parseLines<TheaterLine>(itemLines)
-            // }
+            return typedLines
           })
       })
 
-      return Promise.all(fetchDataPromises)
+    return Promise.all(fetchDataPromises)
   })
-  .then(dataLinesArray => {
-    console.log("First data length: " + dataLinesArray[0].lines.length)
-    console.log("Second data length: " + dataLinesArray[1].lines.length)
-    console.log("Third data length: " + dataLinesArray[2].lines.length)
+  .then(typedLinesArray => {
+    const inputData: InputData = {
+      movieLines: [],
+      showingLines: [],
+      theaterLines: []
+    }
+
+    typedLinesArray.forEach(typedLines => {
+      switch (typedLines.type) {
+        case "movies":
+          inputData.movieLines = JsonlParser.parseLines<MovieLine>(typedLines.lines)
+          break
+
+        case "showings":
+          inputData.showingLines = JsonlParser.parseLines<ShowingLine>(typedLines.lines)
+          break
+
+        case "theaters":
+          inputData.theaterLines = JsonlParser.parseLines<TheaterLine>(typedLines.lines)
+          break
+      }
+    })
+
+    console.log("Movies: " + inputData.movieLines.length)
+    console.log("Showings: " + inputData.showingLines.length)
+    console.log("Theaters: " + inputData.theaterLines.length)
   })
