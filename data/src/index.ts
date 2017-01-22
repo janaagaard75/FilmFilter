@@ -1,16 +1,16 @@
-import * as express from 'express'
-import fetch from 'node-fetch'
-import * as fs from 'fs'
+import * as express from "express"
+import fetch from "node-fetch"
+import * as fs from "fs"
 
 const app = express()
 
-app.set('port', (process.env.PORT || 5000))
-app.use(express.static(__dirname + '/public'))
+app.set("port", (process.env.PORT || 5000))
+app.use(express.static(__dirname + "/public"))
 
-const apiKey = 'a706cc2fdb8e4ce89f00aed30a6fc2a0'
-const host = 'storage.scrapinghub.com'
+const apiKey = "a706cc2fdb8e4ce89f00aed30a6fc2a0"
+const host = "storage.scrapinghub.com"
 const jobId = 142200
-const outputDir = 'output'
+const outputDir = "output"
 
 interface JobInfo {
   close_reason: string,
@@ -35,7 +35,7 @@ if (!fs.existsSync(outputDir)) {
 fetch(`https://${apiKey}:@${host}/jobq/${jobId}/list`)
   .then(jobsResponse => jobsResponse.text())
   .then(jobList => {
-    jobList.split('\n')
+    jobList.split("\n")
       .slice(0, 3) // TODO: This is only correct if the three jobs are all done.
       .forEach(jobInfoString => {
         const jobInfo = JSON.parse(jobInfoString) as JobInfo
@@ -45,5 +45,5 @@ fetch(`https://${apiKey}:@${host}/jobq/${jobId}/list`)
           .then(itemLines => {
             fs.writeFileSync(`${outputDir}/${jobInfo.spider}.jsonl`, itemLines)
           })
-    })
+      })
   })
