@@ -2,31 +2,18 @@ import * as express from "express"
 import fetch from "node-fetch"
 import * as fs from "fs"
 
-const app = express()
+import { JobInfo } from "./JobInfo"
 
-app.set("port", (process.env.PORT || 5000))
-app.use(express.static(__dirname + "/public"))
+const app = express()
 
 const apiKey = "a706cc2fdb8e4ce89f00aed30a6fc2a0"
 const host = "storage.scrapinghub.com"
 const jobId = 142200
 const outputDir = "output"
+const port = 5000
 
-interface JobInfo {
-  close_reason: string,
-  elapsed: number,
-  finished_time: number,
-  items: number,
-  key: string,
-  logs: number,
-  pages: number,
-  pending_time: number,
-  running_time: number,
-  spider: string,
-  state: string,
-  ts: number,
-  version: string
-}
+app.set("port", (process.env.PORT || port))
+app.use(express.static(__dirname + "/public"))
 
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir)
