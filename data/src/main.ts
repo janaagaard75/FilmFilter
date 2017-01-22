@@ -23,6 +23,11 @@ if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir)
 }
 
+interface DataLines {
+  lines: string
+  type: "movies" | "showings" | "theaters"
+}
+
 interface InputData {
   movieLines: Array<MovieLine>,
   showingLines: Array<ShowingLine>,
@@ -41,23 +46,28 @@ fetch(`https://${apiKey}:@${host}/jobq/${jobId}/list`)
         return fetch(itemsUrl)
           .then(itemsResponse => itemsResponse.text())
           .then(itemLines => {
-            switch (jobInfo.spider) {
-              case "movies":
-                return JsonlParser.parseLines<MovieLine>(itemLines)
-
-              case "showings":
-                return JsonlParser.parseLines<ShowingLine>(itemLines)
-
-              case "theaters":
-                return JsonlParser.parseLines<TheaterLine>(itemLines)
+            const dataLines: DataLines = {
+              lines: itemLines,
+              type: jobInfo.spider
             }
+            return dataLines
+            // switch (jobInfo.spider) {
+            //   case "movies":
+            //     return JsonlParser.parseLines<MovieLine>(itemLines)
+
+            //   case "showings":
+            //     return JsonlParser.parseLines<ShowingLine>(itemLines)
+
+            //   case "theaters":
+            //     return JsonlParser.parseLines<TheaterLine>(itemLines)
+            // }
           })
       })
 
       return Promise.all(fetchDataPromises)
   })
-  .then(inputData => {
-    console.log("First array length: " + inputData[0].length)
-    console.log("Second array length: " + inputData[1].length)
-    console.log("Thrid array length: " + inputData[2].length)
+  .then(dataLinesArray => {
+    console.log("First data length: " + dataLinesArray[0].lines.length)
+    console.log("Second data length: " + dataLinesArray[1].lines.length)
+    console.log("Third data length: " + dataLinesArray[2].lines.length)
   })
