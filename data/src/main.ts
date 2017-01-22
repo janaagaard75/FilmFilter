@@ -4,8 +4,11 @@ import * as fs from "fs"
 
 import { JobInfo } from "./JobInfo"
 import { JsonlParser } from "./JsonlParser"
+import { Movie } from './Movie'
 import { MovieLine } from "./MovieLine"
+import { Showing } from './Showing'
 import { ShowingLine } from "./ShowingLine"
+import { Theater } from './Theater'
 import { TheaterLine } from "./TheaterLine"
 
 const app = express()
@@ -32,6 +35,12 @@ interface InputData {
   movieLines: Array<MovieLine>,
   showingLines: Array<ShowingLine>,
   theaterLines: Array<TheaterLine>
+}
+
+interface OutputData {
+  movies: Array<Movie>
+  showings: Array<Showing>
+  theaters: Array<Theater>
 }
 
 fetch(`https://${apiKey}:@${host}/jobq/${jobId}/list`)
