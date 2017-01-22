@@ -8,7 +8,7 @@ export interface JobInfo {
   pages: number,
   pending_time: number,
   running_time: number,
-  spider: string,
+  spider: "movies" | "showings" | "theaters",
   state: string,
   ts: number,
   version: string
