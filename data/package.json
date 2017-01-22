@@ -4,7 +4,10 @@
   "description": "Data services for Film Filter.",
   "main": "dist/main.js",
   "repository": "https://github.com/janaagaard75/film-filter.git",
-  "author": "Jan Aagaard <jan@aagaard.net>",
+  "author": {
+    "name": "Jan Aagaard",
+    "email": "jan@aagaard.net"
+  },
   "license": "ISC",
   "scripts": {
     "build": "rimraf dist && tsc",
