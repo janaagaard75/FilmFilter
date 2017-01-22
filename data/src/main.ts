@@ -3,6 +3,10 @@ import fetch from "node-fetch"
 import * as fs from "fs"
 
 import { JobInfo } from "./JobInfo"
+import { JsonlParser } from './JsonlParser';
+import { MovieLine } from "./MovieLine"
+import { ShowingLine } from "./ShowingLine"
+import { TheaterLine } from "./TheaterLine"
 
 const app = express()
 
@@ -19,18 +23,47 @@ if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir)
 }
 
+interface InputData {
+  movieLines: Array<MovieLine>,
+  showingLines: Array<ShowingLine>,
+  theaterLines: Array<TheaterLine>
+}
+
 fetch(`https://${apiKey}:@${host}/jobq/${jobId}/list`)
   .then(jobsResponse => jobsResponse.text())
   .then(jobList => {
+    const inputData: InputData = {
+      movieLines: [],
+      showingLines: [],
+      theaterLines: []
+    }
+
     jobList.split("\n")
-      .slice(0, 3) // TODO: This is only correct if the three jobs are all done.
+      .slice(0, 3) // TODO: This might not be correct if the jobs are currently running.
       .forEach(jobInfoString => {
         const jobInfo = JSON.parse(jobInfoString) as JobInfo
         const itemsUrl = `https://${apiKey}:@${host}/items/${jobInfo.key}`
         fetch(itemsUrl)
           .then(itemsResponse => itemsResponse.text())
           .then(itemLines => {
-            fs.writeFileSync(`${outputDir}/${jobInfo.spider}.jsonl`, itemLines)
+            switch (jobInfo.spider) {
+              case "movies":
+                inputData.movieLines = JsonlParser.parseLines<MovieLine>(itemLines)
+                break
+
+              case "showings":
+                inputData.showingLines = JsonlParser.parseLines<ShowingLine>(itemLines)
+                break
+
+              case "theaters":
+                inputData.theaterLines = JsonlParser.parseLines<TheaterLine>(itemLines)
+                break
+            }
           })
       })
+
+      return inputData
+  })
+  .then(InputData => {
+    console.log("Movies: " + InputData.movieLines.length)
   })
