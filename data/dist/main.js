@@ -17,34 +17,29 @@ if (!fs.existsSync(outputDir)) {
 node_fetch_1.default(`https://${apiKey}:@${host}/jobq/${jobId}/list`)
     .then(jobsResponse => jobsResponse.text())
     .then(jobList => {
-    const inputData = {
-        movieLines: [],
-        showingLines: [],
-        theaterLines: []
-    };
-    jobList.split("\n")
+    const fetchDataPromises = jobList
+        .split("\n")
         .slice(0, 3) // TODO: This might not be correct if the jobs are currently running.
-        .forEach(jobInfoString => {
+        .map(jobInfoString => {
         const jobInfo = JSON.parse(jobInfoString);
         const itemsUrl = `https://${apiKey}:@${host}/items/${jobInfo.key}`;
-        node_fetch_1.default(itemsUrl)
+        return node_fetch_1.default(itemsUrl)
             .then(itemsResponse => itemsResponse.text())
             .then(itemLines => {
             switch (jobInfo.spider) {
                 case "movies":
-                    inputData.movieLines = JsonlParser_1.JsonlParser.parseLines(itemLines);
-                    break;
+                    return JsonlParser_1.JsonlParser.parseLines(itemLines);
                 case "showings":
-                    inputData.showingLines = JsonlParser_1.JsonlParser.parseLines(itemLines);
-                    break;
+                    return JsonlParser_1.JsonlParser.parseLines(itemLines);
                 case "theaters":
-                    inputData.theaterLines = JsonlParser_1.JsonlParser.parseLines(itemLines);
-                    break;
+                    return JsonlParser_1.JsonlParser.parseLines(itemLines);
             }
         });
     });
-    return inputData;
+    return Promise.all(fetchDataPromises);
 })
-    .then(InputData => {
-    console.log("Movies: " + InputData.movieLines.length);
+    .then(inputData => {
+    console.log("First array length: " + inputData[0].length);
+    console.log("Second array length: " + inputData[1].length);
+    console.log("Thrid array length: " + inputData[2].length);
 });

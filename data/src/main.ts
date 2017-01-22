@@ -32,38 +32,32 @@ interface InputData {
 fetch(`https://${apiKey}:@${host}/jobq/${jobId}/list`)
   .then(jobsResponse => jobsResponse.text())
   .then(jobList => {
-    const inputData: InputData = {
-      movieLines: [],
-      showingLines: [],
-      theaterLines: []
-    }
-
-    jobList.split("\n")
+    const fetchDataPromises = jobList
+      .split("\n")
       .slice(0, 3) // TODO: This might not be correct if the jobs are currently running.
-      .forEach(jobInfoString => {
+      .map(jobInfoString => {
         const jobInfo = JSON.parse(jobInfoString) as JobInfo
         const itemsUrl = `https://${apiKey}:@${host}/items/${jobInfo.key}`
-        fetch(itemsUrl)
+        return fetch(itemsUrl)
           .then(itemsResponse => itemsResponse.text())
           .then(itemLines => {
             switch (jobInfo.spider) {
               case "movies":
-                inputData.movieLines = JsonlParser.parseLines<MovieLine>(itemLines)
-                break
+                return JsonlParser.parseLines<MovieLine>(itemLines)
 
               case "showings":
-                inputData.showingLines = JsonlParser.parseLines<ShowingLine>(itemLines)
-                break
+                return JsonlParser.parseLines<ShowingLine>(itemLines)
 
               case "theaters":
-                inputData.theaterLines = JsonlParser.parseLines<TheaterLine>(itemLines)
-                break
+                return JsonlParser.parseLines<TheaterLine>(itemLines)
             }
           })
       })
 
-      return inputData
+      return Promise.all(fetchDataPromises)
   })
-  .then(InputData => {
-    console.log("Movies: " + InputData.movieLines.length)
+  .then(inputData => {
+    console.log("First array length: " + inputData[0].length)
+    console.log("Second array length: " + inputData[1].length)
+    console.log("Thrid array length: " + inputData[2].length)
   })
