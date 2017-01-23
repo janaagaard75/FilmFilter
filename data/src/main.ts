@@ -4,11 +4,11 @@ import * as fs from "fs"
 
 import { JobInfo } from "./JobInfo"
 import { JsonlParser } from "./JsonlParser"
-import { Movie } from './Movie'
-import { MovieLine } from "./MovieLine"
-import { Showing } from './Showing'
+import { Movie } from "./Movie"
+import { MovieLine } from './MovieLine';
+import { Showing } from "./Showing"
 import { ShowingLine } from "./ShowingLine"
-import { Theater } from './Theater'
+import { Theater } from "./Theater"
 import { TheaterLine } from "./TheaterLine"
 
 const app = express()
@@ -27,7 +27,7 @@ if (!fs.existsSync(outputDir)) {
 }
 
 interface TypedLines {
-  lines: Array<string>
+  lines: string
   type: "movies" | "showings" | "theaters"
 }
 
@@ -50,7 +50,7 @@ fetch(`https://${apiKey}:@${host}/jobq/${jobId}/list`)
           .then(itemsResponse => itemsResponse.text())
           .then(itemLines => {
             const typedLines: TypedLines = {
-              lines: itemLines.trim().split("\n"),
+              lines: itemLines,
               type: jobInfo.spider
             }
 
@@ -61,17 +61,9 @@ fetch(`https://${apiKey}:@${host}/jobq/${jobId}/list`)
     return Promise.all(fetchDataPromises)
   })
   .then(typedLinesArray => {
-    const movieLines = typedLinesArray
-      .find(tl => tl.type === "movies").lines
-      .map(line => JSON.parse(line) as MovieLine)
-
-    const showingLines = typedLinesArray
-      .find(tl => tl.type === "showings").lines
-      .map(line => JSON.parse(line) as ShowingLine)
-
-    const theaterLines = typedLinesArray
-      .find(tl => tl.type === "theaters").lines
-      .map(line => JSON.parse(line) as TheaterLine)
+    const movieLines = JsonlParser.parseLines<MovieLine>(typedLinesArray.find(tl => tl.type === "movies").lines)
+    const showingLines = JsonlParser.parseLines<ShowingLine>(typedLinesArray.find(tl => tl.type === "showings").lines)
+    const theaterLines = JsonlParser.parseLines<TheaterLine>(typedLinesArray.find(tl => tl.type === "theaters").lines)
 
     const movies: Array<Movie> = movieLines.map(line => new Movie(line))
     const theaters: Array<Theater> = theaterLines.map(line => new Theater(line))
