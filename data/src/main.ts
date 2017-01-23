@@ -5,11 +5,13 @@ import * as fs from "fs"
 import { JobInfo } from "./JobInfo"
 import { JsonlParser } from "./JsonlParser"
 import { Movie } from "./Movie"
-import { MovieLine } from './MovieLine';
+import { MovieLine } from "./MovieLine";
+import { OutputData } from "./OutputData"
 import { Showing } from "./Showing"
 import { ShowingLine } from "./ShowingLine"
 import { Theater } from "./Theater"
 import { TheaterLine } from "./TheaterLine"
+import { TypedLines } from "./TypedLines"
 
 const app = express()
 
@@ -24,17 +26,6 @@ app.use(express.static(__dirname + "/public"))
 
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir)
-}
-
-interface TypedLines {
-  lines: string
-  type: "movies" | "showings" | "theaters"
-}
-
-interface OutputData {
-  movies: Array<Movie>
-  showings: Array<Showing>
-  theaters: Array<Theater>
 }
 
 fetch(`https://${apiKey}:@${host}/jobq/${jobId}/list`)
