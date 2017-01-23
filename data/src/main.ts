@@ -27,14 +27,8 @@ if (!fs.existsSync(outputDir)) {
 }
 
 interface TypedLines {
-  lines: string
+  lines: Array<string>
   type: "movies" | "showings" | "theaters"
-}
-
-interface InputData {
-  movieLines: Array<MovieLine>,
-  showingLines: Array<ShowingLine>,
-  theaterLines: Array<TheaterLine>
 }
 
 interface OutputData {
@@ -56,7 +50,7 @@ fetch(`https://${apiKey}:@${host}/jobq/${jobId}/list`)
           .then(itemsResponse => itemsResponse.text())
           .then(itemLines => {
             const typedLines: TypedLines = {
-              lines: itemLines,
+              lines: itemLines.trim().split("\n"),
               type: jobInfo.spider
             }
 
@@ -67,29 +61,32 @@ fetch(`https://${apiKey}:@${host}/jobq/${jobId}/list`)
     return Promise.all(fetchDataPromises)
   })
   .then(typedLinesArray => {
-    const inputData: InputData = {
-      movieLines: [],
-      showingLines: [],
-      theaterLines: []
+    const movieLines = typedLinesArray
+      .find(tl => tl.type === "movies").lines
+      .map(line => JSON.parse(line) as MovieLine)
+
+    const showingLines = typedLinesArray
+      .find(tl => tl.type === "showings").lines
+      .map(line => JSON.parse(line) as ShowingLine)
+
+    const theaterLines = typedLinesArray
+      .find(tl => tl.type === "theaters").lines
+      .map(line => JSON.parse(line) as TheaterLine)
+
+    const movies: Array<Movie> = movieLines.map(line => new Movie(line))
+    const theaters: Array<Theater> = theaterLines.map(line => new Theater(line))
+
+    const showings = showingLines.map((line, index) => new Showing(line, index, movies, theaters))
+
+    const data: OutputData = {
+      movies: movies,
+      showings: showings,
+      theaters: theaters
     }
 
-    typedLinesArray.forEach(typedLines => {
-      switch (typedLines.type) {
-        case "movies":
-          inputData.movieLines = JsonlParser.parseLines<MovieLine>(typedLines.lines)
-          break
+    console.log("Movies: " + data.movies.length)
+    console.log("Showings: " + data.showings.length)
+    console.log("Theaters: " + data.theaters.length)
 
-        case "showings":
-          inputData.showingLines = JsonlParser.parseLines<ShowingLine>(typedLines.lines)
-          break
-
-        case "theaters":
-          inputData.theaterLines = JsonlParser.parseLines<TheaterLine>(typedLines.lines)
-          break
-      }
-    })
-
-    console.log("Movies: " + inputData.movieLines.length)
-    console.log("Showings: " + inputData.showingLines.length)
-    console.log("Theaters: " + inputData.theaterLines.length)
+    return data
   })
