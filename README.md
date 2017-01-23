@@ -4,12 +4,12 @@ A side project, about testing how a filtering approach could work, when selectin
 
 ## Scraper
 
-See README in the scraper folder.
+See [readme in the scraper folder](scraper/README.md).
 
-## Database
+## Data
 
-See README in the database folder.
+See [readme in the data folder](data/README.md).
 
 ## Website
 
-See README in the website folder.
+See [readme in the website folder](website/README.md).
