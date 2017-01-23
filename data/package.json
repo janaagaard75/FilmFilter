@@ -12,11 +12,13 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "lint": "tslint src/**/*.ts",
-    "start": "yarn build && node dist/main.js"
+    "start-js": "yarn build && node dist/main.js",
+    "start": "ts-node src/main.ts"
   },
   "dependencies": {
     "express": "4.14.0",
-    "node-fetch": "1.6.3"
+    "node-fetch": "1.6.3",
+    "ts-node": "2.0.0"
   },
   "devDependencies": {
     "@types/express": "4.0.35",
