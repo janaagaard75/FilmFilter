@@ -1,5 +1,4 @@
-// TODO: Possibly use 'S\u00e6rvisning' instead.
-export type VersionFlag = '2D' | '3D' | 'IMAX 2D' | 'IMAX 3D' | 'dansk tale' | 'Særvisning'
+import { VersionFlag } from "./VersionFlag"
 
 export interface ShowingLine {
   movieUrl: string

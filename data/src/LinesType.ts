@@ -1,0 +1,1 @@
+export type LinesType = "movies" | "showings" | "theaters"

@@ -1,5 +1,5 @@
-import { MovieLine } from './MovieLine'
-import { UrlUtil } from './UrlUtil'
+import { MovieLine } from "./MovieLine"
+import { UrlUtil } from "./UrlUtil"
 
 export class Movie {
   constructor(line: MovieLine) {

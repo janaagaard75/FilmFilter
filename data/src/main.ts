@@ -5,7 +5,7 @@ import * as fs from "fs"
 import { JobInfo } from "./JobInfo"
 import { JsonlParser } from "./JsonlParser"
 import { Movie } from "./Movie"
-import { MovieLine } from "./MovieLine";
+import { MovieLine } from "./MovieLine"
 import { OutputData } from "./OutputData"
 import { Showing } from "./Showing"
 import { ShowingLine } from "./ShowingLine"
@@ -52,9 +52,9 @@ fetch(`https://${apiKey}:@${host}/jobq/${jobId}/list`)
     return Promise.all(fetchDataPromises)
   })
   .then(typedLinesArray => {
-    const movieLines = JsonlParser.parseLines<MovieLine>(typedLinesArray.find(tl => tl.type === "movies").lines)
-    const showingLines = JsonlParser.parseLines<ShowingLine>(typedLinesArray.find(tl => tl.type === "showings").lines)
-    const theaterLines = JsonlParser.parseLines<TheaterLine>(typedLinesArray.find(tl => tl.type === "theaters").lines)
+    const movieLines = JsonlParser.parseLines<MovieLine>(typedLinesArray, "movies")
+    const showingLines = JsonlParser.parseLines<ShowingLine>(typedLinesArray, "showings")
+    const theaterLines = JsonlParser.parseLines<TheaterLine>(typedLinesArray, "theaters")
 
     const movies: Array<Movie> = movieLines.map(line => new Movie(line))
     const theaters: Array<Theater> = theaterLines.map(line => new Theater(line))

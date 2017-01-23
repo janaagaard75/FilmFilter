@@ -1,7 +1,7 @@
-import { Movie } from './Movie'
-import { ShowingLine } from './ShowingLine'
-import { Theater } from './Theater'
-import { UrlUtil } from './UrlUtil'
+import { Movie } from "./Movie"
+import { ShowingLine } from "./ShowingLine"
+import { Theater } from "./Theater"
+import { UrlUtil } from "./UrlUtil"
 
 export class Showing {
   constructor(
@@ -10,11 +10,11 @@ export class Showing {
     movies: Array<Movie>,
     theaters: Array<Theater>
   ) {
-    this.dubbed = (line.version.find(flag => flag === 'dansk tale') !== undefined)
+    this.dubbed = (line.version.find(flag => flag === "dansk tale") !== undefined)
 
-    this.imax = (line.version.find(flag => flag === 'IMAX 2D' || flag === 'IMAX 3D') !== undefined)
+    this.imax = (line.version.find(flag => flag === "IMAX 2D" || flag === "IMAX 3D") !== undefined)
 
-    if (line.movieUrl === 'NO_MOVIE_URL') {
+    if (line.movieUrl === "NO_MOVIE_URL") {
       this.movieId = -1
     }
     else {
@@ -32,7 +32,7 @@ export class Showing {
 
     this.showingUrl = UrlUtil.removeStandardPrefix(line.showingUrl)
 
-    this.specialShowing = (line.version.find(flag => flag === 'Særvisning') !== undefined)
+    this.specialShowing = (line.version.find(flag => flag === "Særvisning") !== undefined)
 
     this.start = line.start
 
@@ -46,7 +46,7 @@ export class Showing {
       this.theaterId = theaters.indexOf(theater)
     }
 
-    this.threeD = (line.version.find(flag => flag === '3D' || flag === 'IMAX 3D') !== undefined)
+    this.threeD = (line.version.find(flag => flag === "3D" || flag === "IMAX 3D") !== undefined)
   }
 
   public readonly dubbed: boolean
