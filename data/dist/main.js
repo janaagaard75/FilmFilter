@@ -2,7 +2,9 @@
 const express = require("express");
 const node_fetch_1 = require("node-fetch");
 const fs = require("fs");
-const JsonlParser_1 = require("./JsonlParser");
+const Movie_1 = require("./Movie");
+const Showing_1 = require("./Showing");
+const Theater_1 = require("./Theater");
 const app = express();
 const apiKey = "a706cc2fdb8e4ce89f00aed30a6fc2a0";
 const host = "storage.scrapinghub.com";
@@ -27,7 +29,7 @@ node_fetch_1.default(`https://${apiKey}:@${host}/jobq/${jobId}/list`)
             .then(itemsResponse => itemsResponse.text())
             .then(itemLines => {
             const typedLines = {
-                lines: itemLines,
+                lines: itemLines.trim().split("\n"),
                 type: jobInfo.spider
             };
             return typedLines;
@@ -36,25 +38,26 @@ node_fetch_1.default(`https://${apiKey}:@${host}/jobq/${jobId}/list`)
     return Promise.all(fetchDataPromises);
 })
     .then(typedLinesArray => {
-    const inputData = {
-        movieLines: [],
-        showingLines: [],
-        theaterLines: []
+    const movieLines = typedLinesArray
+        .find(tl => tl.type === "movies").lines
+        .map(line => JSON.parse(line));
+    const showingLines = typedLinesArray
+        .find(tl => tl.type === "showings").lines
+        .map(line => JSON.parse(line));
+    const theaterLines = typedLinesArray
+        .find(tl => tl.type === "theaters").lines
+        .map(line => JSON.parse(line));
+    const movies = movieLines.map(line => new Movie_1.Movie(line));
+    const theaters = theaterLines.map(line => new Theater_1.Theater(line));
+    const showings = showingLines.map((line, index) => new Showing_1.Showing(line, index, movies, theaters));
+    const data = {
+        movies: movies,
+        showings: showings,
+        theaters: theaters
     };
-    typedLinesArray.forEach(typedLines => {
-        switch (typedLines.type) {
-            case "movies":
-                inputData.movieLines = JsonlParser_1.JsonlParser.parseLines(typedLines.lines);
-                break;
-            case "showings":
-                inputData.showingLines = JsonlParser_1.JsonlParser.parseLines(typedLines.lines);
-                break;
-            case "theaters":
-                inputData.theaterLines = JsonlParser_1.JsonlParser.parseLines(typedLines.lines);
-                break;
-        }
-    });
-    console.log("Movies: " + inputData.movieLines.length);
-    console.log("Showings: " + inputData.showingLines.length);
-    console.log("Theaters: " + inputData.theaterLines.length);
+    console.log("Movies: " + data.movies.length);
+    console.log("Showings: " + data.showings.length);
+    console.log("Theaters: " + data.theaters.length);
+    return data;
 });
+//# sourceMappingURL=main.js.map

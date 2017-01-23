@@ -9,3 +9,4 @@ class JsonlParser {
     }
 }
 exports.JsonlParser = JsonlParser;
+//# sourceMappingURL=JsonlParser.js.map
