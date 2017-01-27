@@ -14,15 +14,13 @@ app.set("port", (process.env.PORT || port))
 app.use(express.static(__dirname + "/public"))
 
 // tslint:disable-next-line no-unused-variable
-app.get("/", (request, response) => {
+app.get("/", async (request, response) => {
   console.info("Fetching and parting data.")
 
-  DataUpdater.getData(apiKey, host, jobId)
-    .then(data => {
-      console.info("Done fetching and parsing. Responding.")
-      // TODO: Set the correct content type.
-      response.send(data)
-    })
+  const data = await DataUpdater.getData(apiKey, host, jobId)
+  console.info("Done fetching and parsing. Responding.")
+  // TODO: Set the correct content type.
+  response.send(data)
 })
 
 app.listen(app.get("port"), () => {

@@ -12,40 +12,39 @@ import { TheaterLine } from "./model/TheaterLine"
 import { TypedJsonl } from "./model/TypedJsonl"
 
 export class DataUpdater {
-  public static getData(apiKey: string, host: string, jobId: number): Promise<OutputData> {
+  public static async getData(apiKey: string, host: string, jobId: number): Promise<OutputData> {
     const protocolKeyAndHost = `https://${apiKey}:@${host}/`
-
-    return DataUpdater.fetchJobInfos(protocolKeyAndHost, jobId)
-      .then(jobInfos => DataUpdater.fetchJsonls(protocolKeyAndHost, jobInfos))
-      .then(typedJsonls => DataUpdater.parseAndMergeJsonl(typedJsonls))
+    const jobInfos = await DataUpdater.fetchJobInfos(protocolKeyAndHost, jobId)
+    const typedJsonls = await DataUpdater.fetchJsonls(protocolKeyAndHost, jobInfos)
+    const data = DataUpdater.parseAndMergeJsonl(typedJsonls)
+    return data
   }
 
-  private static fetchJobInfos(protocolKeyAndHost: string, jobId: number): Promise<Array<JobInfo>> {
-    return fetch(`${protocolKeyAndHost}jobq/${jobId}/list`)
-      .then(jobsResponse => jobsResponse.text())
-      .then(jobList => jobList
-          .split("\n")
-          .slice(0, 3) // TODO: This will probably not be correct if the jobs are currently running.
-          .map(jobInfoString => {
-            const jobInfo = JSON.parse(jobInfoString) as JobInfo
-            return jobInfo
-          })
-      )
+  private static async fetchJobInfos(protocolKeyAndHost: string, jobId: number): Promise<Array<JobInfo>> {
+    const jobsResponse = await fetch(`${protocolKeyAndHost}jobq/${jobId}/list`)
+    const jobList = await jobsResponse.text()
+    const jobInfos = jobList
+      .split("\n")
+      .slice(0, 3) // TODO: This will probably not be correct if the jobs are currently running.
+      .map(jobInfoString => {
+        const jobInfo = JSON.parse(jobInfoString) as JobInfo
+        return jobInfo
+      })
+
+    return jobInfos
   }
 
   private static fetchJsonls(protocolKeyAndHost: string, jobInfos: Array<JobInfo>): Promise<Array<TypedJsonl>> {
-    const dataFetchers = jobInfos.map(jobInfo => {
+    const dataFetchers = jobInfos.map(async jobInfo => {
       const itemsUrl = `${protocolKeyAndHost}items/${jobInfo.key}`
-      return fetch(itemsUrl)
-        .then(itemsResponse => itemsResponse.text())
-        .then(itemLines => {
-          const typedLines: TypedJsonl = {
-            lines: itemLines,
-            type: jobInfo.spider
-          }
+      const itemsResponse = await fetch(itemsUrl)
+      const itemLines = await itemsResponse.text()
+      const typedJsonl: TypedJsonl = {
+        lines: itemLines,
+        type: jobInfo.spider
+      }
 
-          return typedLines
-        })
+      return typedJsonl
     })
 
     return Promise.all(dataFetchers)
@@ -69,9 +68,15 @@ export class DataUpdater {
     return data
   }
 
-  private static parseLines<TLine>(typedLinesArray: Array<TypedJsonl>, type: JsonlType): Array<TLine> {
-    const parsed = typedLinesArray
+  private static parseLines<TLine>(typedJsonl: Array<TypedJsonl>, type: JsonlType): Array<TLine> {
+    const matchingTypedJsonl = typedJsonl
       .find(tl => tl.type === type)
+
+    if (matchingTypedJsonl === undefined) {
+      throw new Error(`Did not find a typed JSONL with the type ${type}.`)
+    }
+
+    const parsed = matchingTypedJsonl
       .lines
       .trim()
       .split("\n")
