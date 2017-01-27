@@ -11,17 +11,11 @@ import { Theater } from "./model/Theater"
 import { TheaterLine } from "./model/TheaterLine"
 import { TypedJsonl } from "./model/TypedJsonl"
 
-interface UpdateDataOptions {
-  apiKey: string,
-  host: string,
-  jobId: number
-}
-
 export class DataUpdater {
-  public static getData(options: UpdateDataOptions): Promise<OutputData> {
-    const protocolKeyAndHost = `https://${options.apiKey}:@${options.host}/`
+  public static getData(apiKey: string, host: string, jobId: number): Promise<OutputData> {
+    const protocolKeyAndHost = `https://${apiKey}:@${host}/`
 
-    return DataUpdater.fetchJobInfos(protocolKeyAndHost, options.jobId)
+    return DataUpdater.fetchJobInfos(protocolKeyAndHost, jobId)
       .then(jobInfos => DataUpdater.fetchJsonls(protocolKeyAndHost, jobInfos))
       .then(typedJsonls => DataUpdater.parseAndMergeJsonl(typedJsonls))
   }

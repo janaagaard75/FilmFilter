@@ -17,11 +17,7 @@ app.use(express.static(__dirname + "/public"))
 app.get("/", (request, response) => {
   console.info("Fetching and parting data.")
 
-  DataUpdater.getData({
-    apiKey: apiKey,
-    host: host,
-    jobId: jobId
-  })
+  DataUpdater.getData(apiKey, host, jobId)
     .then(data => {
       console.info("Done fetching and parsing. Responding.")
       // TODO: Set the correct content type.
