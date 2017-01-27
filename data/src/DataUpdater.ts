@@ -18,6 +18,14 @@ interface UpdateDataOptions {
 }
 
 export class DataUpdater {
+  public static getData(options: UpdateDataOptions): Promise<OutputData> {
+    const protocolKeyAndHost = `https://${options.apiKey}:@${options.host}/`
+
+    return DataUpdater.fetchJobInfos(protocolKeyAndHost, options.jobId)
+      .then(jobInfos => DataUpdater.fetchJsonls(protocolKeyAndHost, jobInfos))
+      .then(typedJsonls => DataUpdater.parseAndMergeJsonl(typedJsonls))
+  }
+
   private static fetchJobInfos(protocolKeyAndHost: string, jobId: number): Promise<Array<JobInfo>> {
     return fetch(`${protocolKeyAndHost}jobq/${jobId}/list`)
       .then(jobsResponse => jobsResponse.text())
@@ -65,13 +73,5 @@ export class DataUpdater {
     }
 
     return data
-  }
-
-  public static getData(options: UpdateDataOptions): Promise<OutputData> {
-    const protocolKeyAndHost = `https://${options.apiKey}:@${options.host}/`
-
-    return DataUpdater.fetchJobInfos(protocolKeyAndHost, options.jobId)
-      .then(jobInfos => DataUpdater.fetchJsonls(protocolKeyAndHost, jobInfos))
-      .then(typedJsonls => DataUpdater.parseAndMergeJsonl(typedJsonls))
   }
 }
