@@ -21,29 +21,37 @@ interface UpdateDataOptions {
 }
 
 export class DataUpdater {
+  private static fetchJobInfos(protocolKeyAndHost: string, jobId: number): Promise<Array<JobInfo>> {
+    return fetch(`${protocolKeyAndHost}jobq/${jobId}/list`)
+      .then(jobsResponse => jobsResponse.text())
+      .then(jobList => jobList
+          .split("\n")
+          .slice(0, 3) // TODO: This will probably not be correct if the jobs are currently running.
+          .map(jobInfoString => {
+            const jobInfo = JSON.parse(jobInfoString) as JobInfo
+            return jobInfo
+          })
+      )
+  }
+
   public static updateDataFile(options: UpdateDataOptions): Promise<void> {
     const protocolKeyAndHost = `https://${options.apiKey}:@${options.host}/`
 
-    return fetch(`${protocolKeyAndHost}jobq/${options.jobId}/list`)
-      .then(jobsResponse => jobsResponse.text())
-      .then(jobList => {
-        const dataFetchers = jobList
-          .split("\n")
-          .slice(0, 3) // TODO: This might not be correct if the jobs are currently running.
-          .map(jobInfoString => {
-            const jobInfo = JSON.parse(jobInfoString) as JobInfo
-            const itemsUrl = `${protocolKeyAndHost}items/${jobInfo.key}`
-            return fetch(itemsUrl)
-              .then(itemsResponse => itemsResponse.text())
-              .then(itemLines => {
-                const typedLines: TypedLines = {
-                  lines: itemLines,
-                  type: jobInfo.spider
-                }
+    return DataUpdater.fetchJobInfos(protocolKeyAndHost, options.jobId)
+      .then(jobInfos => {
+        const dataFetchers = jobInfos.map(jobInfo => {
+          const itemsUrl = `${protocolKeyAndHost}items/${jobInfo.key}`
+          return fetch(itemsUrl)
+            .then(itemsResponse => itemsResponse.text())
+            .then(itemLines => {
+              const typedLines: TypedLines = {
+                lines: itemLines,
+                type: jobInfo.spider
+              }
 
-                return typedLines
-              })
-          })
+              return typedLines
+            })
+        })
 
         return Promise.all(dataFetchers)
       })

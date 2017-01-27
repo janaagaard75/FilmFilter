@@ -1,6 +1,6 @@
-import { LinesType } from "./LinesType"
+import { JsonlType } from "./LinesType"
 
 export interface TypedLines {
   lines: string
-  type: LinesType
+  type: JsonlType
 }

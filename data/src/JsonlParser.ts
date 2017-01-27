@@ -1,8 +1,8 @@
-import { LinesType } from "./model/LinesType"
+import { JsonlType } from "./model/LinesType"
 import { TypedLines } from "./model/TypedLines"
 
 export class JsonlParser {
-  public static parseLines<TLine>(typedLinesArray: Array<TypedLines>, type: LinesType): Array<TLine> {
+  public static parseLines<TLine>(typedLinesArray: Array<TypedLines>, type: JsonlType): Array<TLine> {
     const parsed = typedLinesArray
       .find(tl => tl.type === type)
       .lines

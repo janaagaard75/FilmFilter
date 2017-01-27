@@ -1,1 +1,1 @@
-export type LinesType = "movies" | "showings" | "theaters"
+export type JsonlType = "movies" | "showings" | "theaters"
