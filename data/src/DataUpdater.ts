@@ -31,43 +31,47 @@ export class DataUpdater {
       )
   }
 
+  private static fetchJsonls(protocolKeyAndHost: string, jobInfos: Array<JobInfo>): Promise<Array<TypedJsonl>> {
+    const dataFetchers = jobInfos.map(jobInfo => {
+      const itemsUrl = `${protocolKeyAndHost}items/${jobInfo.key}`
+      return fetch(itemsUrl)
+        .then(itemsResponse => itemsResponse.text())
+        .then(itemLines => {
+          const typedLines: TypedJsonl = {
+            lines: itemLines,
+            type: jobInfo.spider
+          }
+
+          return typedLines
+        })
+    })
+
+    return Promise.all(dataFetchers)
+  }
+
+  private static parseAndMergeJsonl(typedJsonls: Array<TypedJsonl>): OutputData {
+    const movieLines = JsonlParser.parseLines<MovieLine>(typedJsonls, "movies")
+    const showingLines = JsonlParser.parseLines<ShowingLine>(typedJsonls, "showings")
+    const theaterLines = JsonlParser.parseLines<TheaterLine>(typedJsonls, "theaters")
+
+    const movies = movieLines.map(line => new Movie(line))
+    const theaters = theaterLines.map(line => new Theater(line))
+    const showings = showingLines.map((line, index) => new Showing(line, index, movies, theaters))
+
+    const data: OutputData = {
+      movies: movies,
+      showings: showings,
+      theaters: theaters
+    }
+
+    return data
+  }
+
   public static getData(options: UpdateDataOptions): Promise<OutputData> {
     const protocolKeyAndHost = `https://${options.apiKey}:@${options.host}/`
 
     return DataUpdater.fetchJobInfos(protocolKeyAndHost, options.jobId)
-      .then(jobInfos => {
-        const dataFetchers = jobInfos.map(jobInfo => {
-          const itemsUrl = `${protocolKeyAndHost}items/${jobInfo.key}`
-          return fetch(itemsUrl)
-            .then(itemsResponse => itemsResponse.text())
-            .then(itemLines => {
-              const typedLines: TypedJsonl = {
-                lines: itemLines,
-                type: jobInfo.spider
-              }
-
-              return typedLines
-            })
-        })
-
-        return Promise.all(dataFetchers)
-      })
-      .then(typedLinesArray => {
-        const movieLines = JsonlParser.parseLines<MovieLine>(typedLinesArray, "movies")
-        const showingLines = JsonlParser.parseLines<ShowingLine>(typedLinesArray, "showings")
-        const theaterLines = JsonlParser.parseLines<TheaterLine>(typedLinesArray, "theaters")
-
-        const movies = movieLines.map(line => new Movie(line))
-        const theaters = theaterLines.map(line => new Theater(line))
-        const showings = showingLines.map((line, index) => new Showing(line, index, movies, theaters))
-
-        const data: OutputData = {
-          movies: movies,
-          showings: showings,
-          theaters: theaters
-        }
-
-        return data
-      })
+      .then(jobInfos => DataUpdater.fetchJsonls(protocolKeyAndHost, jobInfos))
+      .then(typedJsonls => DataUpdater.parseAndMergeJsonl(typedJsonls))
   }
 }
