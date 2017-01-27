@@ -1,16 +1,16 @@
 import * as fs from "fs"
 import fetch from "node-fetch"
 
-import { JobInfo } from "./JobInfo"
+import { JobInfo } from "./model/JobInfo"
 import { JsonlParser } from "./JsonlParser"
-import { Movie } from "./Movie"
-import { MovieLine } from "./MovieLine"
-import { OutputData } from "./OutputData"
-import { Showing } from "./Showing"
-import { ShowingLine } from "./ShowingLine"
-import { Theater } from "./Theater"
-import { TheaterLine } from "./TheaterLine"
-import { TypedLines } from "./TypedLines"
+import { Movie } from "./model/Movie"
+import { MovieLine } from "./model/MovieLine"
+import { OutputData } from "./model/OutputData"
+import { Showing } from "./model/Showing"
+import { ShowingLine } from "./model/ShowingLine"
+import { Theater } from "./model/Theater"
+import { TheaterLine } from "./model/TheaterLine"
+import { TypedLines } from "./model/TypedLines"
 
 interface UpdateDataOptions {
   apiKey: string,
