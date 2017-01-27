@@ -2,12 +2,13 @@
   "compilerOptions": {
     "alwaysStrict": true,
     "lib": [
-      "es6"
+      "es2015"
     ],
-    "noImplicitAny": true,
     "module": "commonjs",
+    "noImplicitAny": true,
     "outDir": "dist",
     "sourceMap": true,
+    "strictNullChecks": true,
     "target": "es2015"
   },
   "files": [
