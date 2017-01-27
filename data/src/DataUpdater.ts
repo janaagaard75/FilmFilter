@@ -1,7 +1,7 @@
 import fetch from "node-fetch"
 
 import { JobInfo } from "./model/JobInfo"
-import { JsonlParser } from "./JsonlParser"
+import { JsonlType } from "./model/JsonlType"
 import { Movie } from "./model/Movie"
 import { MovieLine } from "./model/MovieLine"
 import { OutputData } from "./model/OutputData"
@@ -52,9 +52,9 @@ export class DataUpdater {
   }
 
   private static parseAndMergeJsonl(typedJsonls: Array<TypedJsonl>): OutputData {
-    const movieLines = JsonlParser.parseLines<MovieLine>(typedJsonls, "movies")
-    const showingLines = JsonlParser.parseLines<ShowingLine>(typedJsonls, "showings")
-    const theaterLines = JsonlParser.parseLines<TheaterLine>(typedJsonls, "theaters")
+    const movieLines = DataUpdater.parseLines<MovieLine>(typedJsonls, "movies")
+    const showingLines = DataUpdater.parseLines<ShowingLine>(typedJsonls, "showings")
+    const theaterLines = DataUpdater.parseLines<TheaterLine>(typedJsonls, "theaters")
 
     const movies = movieLines.map(line => new Movie(line))
     const theaters = theaterLines.map(line => new Theater(line))
@@ -67,5 +67,17 @@ export class DataUpdater {
     }
 
     return data
+  }
+
+  private static parseLines<TLine>(typedLinesArray: Array<TypedJsonl>, type: JsonlType): Array<TLine> {
+    const parsed = typedLinesArray
+      .find(tl => tl.type === type)
+      .lines
+      .trim()
+      .split("\n")
+      .filter(line => line.length >= 1)
+      .map(line => JSON.parse(line) as TLine)
+
+    return parsed
   }
 }
