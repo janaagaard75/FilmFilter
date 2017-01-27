@@ -1,4 +1,4 @@
-import { JsonlType } from "./LinesType"
+import { JsonlType } from "./JsonlType"
 
 export interface TypedLines {
   lines: string

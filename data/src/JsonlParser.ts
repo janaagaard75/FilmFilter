@@ -1,4 +1,4 @@
-import { JsonlType } from "./model/LinesType"
+import { JsonlType } from "./model/JsonlType"
 import { TypedLines } from "./model/TypedLines"
 
 export class JsonlParser {
