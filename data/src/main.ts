@@ -1,3 +1,4 @@
+// tslint:disable no-console
 import * as express from "express"
 
 import { DataUpdater } from "./DataUpdater"
