@@ -10,7 +10,7 @@ import { Showing } from "./model/Showing"
 import { ShowingLine } from "./model/ShowingLine"
 import { Theater } from "./model/Theater"
 import { TheaterLine } from "./model/TheaterLine"
-import { TypedLines } from "./model/TypedLines"
+import { TypedJsonl } from "./model/TypedLines"
 
 interface UpdateDataOptions {
   apiKey: string,
@@ -44,7 +44,7 @@ export class DataUpdater {
           return fetch(itemsUrl)
             .then(itemsResponse => itemsResponse.text())
             .then(itemLines => {
-              const typedLines: TypedLines = {
+              const typedLines: TypedJsonl = {
                 lines: itemLines,
                 type: jobInfo.spider
               }
