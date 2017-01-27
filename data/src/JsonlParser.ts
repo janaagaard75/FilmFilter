@@ -1,5 +1,5 @@
 import { JsonlType } from "./model/JsonlType"
-import { TypedJsonl } from "./model/TypedLines"
+import { TypedJsonl } from "./model/TypedJsonl"
 
 export class JsonlParser {
   public static parseLines<TLine>(typedLinesArray: Array<TypedJsonl>, type: JsonlType): Array<TLine> {

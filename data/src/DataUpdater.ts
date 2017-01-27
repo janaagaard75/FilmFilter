@@ -10,7 +10,7 @@ import { Showing } from "./model/Showing"
 import { ShowingLine } from "./model/ShowingLine"
 import { Theater } from "./model/Theater"
 import { TheaterLine } from "./model/TheaterLine"
-import { TypedJsonl } from "./model/TypedLines"
+import { TypedJsonl } from "./model/TypedJsonl"
 
 interface UpdateDataOptions {
   apiKey: string,
