@@ -7,8 +7,6 @@ const app = express()
 const apiKey = "a706cc2fdb8e4ce89f00aed30a6fc2a0"
 const host = "storage.scrapinghub.com"
 const jobId = 142200
-const outputDir = "output"
-const outputFileName = "data.json"
 const port = 5000
 
 app.set("port", (process.env.PORT || port))
@@ -21,9 +19,7 @@ app.get("/", (request, response) => {
   DataUpdater.getData({
     apiKey: apiKey,
     host: host,
-    jobId: jobId,
-    outputDir: outputDir,
-    outputFileName: outputFileName
+    jobId: jobId
   })
     .then(data => {
       console.info("Done fetching and parsing. Responding.")

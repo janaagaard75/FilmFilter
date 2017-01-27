@@ -1,4 +1,3 @@
-import * as fs from "fs"
 import fetch from "node-fetch"
 
 import { JobInfo } from "./model/JobInfo"
@@ -15,9 +14,7 @@ import { TypedJsonl } from "./model/TypedJsonl"
 interface UpdateDataOptions {
   apiKey: string,
   host: string,
-  jobId: number,
-  outputDir: string,
-  outputFileName: string
+  jobId: number
 }
 
 export class DataUpdater {
@@ -72,13 +69,5 @@ export class DataUpdater {
 
         return data
       })
-  }
-
-  public static writeDataFile(data: OutputData, outputDir: string, outputFileName: string) {
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir)
-    }
-
-    fs.writeFileSync(`${outputDir}/${outputFileName}`, JSON.stringify(data))
   }
 }
