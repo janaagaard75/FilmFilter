@@ -12,6 +12,7 @@
   "scripts": {
     "build-and-start": "yarn build && node dist/main.js",
     "build": "rimraf dist && tsc",
+    "deploy": "git push heroku master",
     "lint": "tslint src/**/*.ts",
     "start": "ts-node src/main.ts"
   },
@@ -28,5 +29,8 @@
     "tslint-eslint-rules": "3.2.3",
     "tslint-react": "2.3.0",
     "typescript": "2.1.5"
+  },
+  "engines": {
+    "node": "6.9.4"
   }
 }
