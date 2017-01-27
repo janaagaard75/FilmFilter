@@ -14,7 +14,7 @@ app.set("port", (process.env.PORT || port))
 app.use(express.static(__dirname + "/public"))
 
 // tslint:disable-next-line no-unused-variable
-app.get("/", async (request, response) => {
+app.get("/", async(request, response) => {
   console.info("Fetching and parting data.")
 
   const data = await DataUpdater.getData(apiKey, host, jobId)
