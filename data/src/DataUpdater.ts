@@ -34,7 +34,7 @@ export class DataUpdater {
       )
   }
 
-  public static updateDataFile(options: UpdateDataOptions): Promise<void> {
+  public static getData(options: UpdateDataOptions): Promise<OutputData> {
     const protocolKeyAndHost = `https://${options.apiKey}:@${options.host}/`
 
     return DataUpdater.fetchJobInfos(protocolKeyAndHost, options.jobId)
@@ -72,12 +72,13 @@ export class DataUpdater {
 
         return data
       })
-      .then(data => {
-        if (!fs.existsSync(options.outputDir)) {
-          fs.mkdirSync(options.outputDir)
-        }
+  }
 
-        fs.writeFileSync(`${options.outputDir}/${options.outputFileName}`, JSON.stringify(data))
-      })
+  public static writeDataFile(data: OutputData, outputDir: string, outputFileName: string) {
+    if (!fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir)
+    }
+
+    fs.writeFileSync(`${outputDir}/${outputFileName}`, JSON.stringify(data))
   }
 }

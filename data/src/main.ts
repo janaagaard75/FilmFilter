@@ -1,5 +1,4 @@
 import * as express from "express"
-import * as fs from "fs"
 
 import { DataUpdater } from "./DataUpdater"
 
@@ -15,25 +14,21 @@ const port = 5000
 app.set("port", (process.env.PORT || port))
 app.use(express.static(__dirname + "/public"))
 
+// tslint:disable-next-line no-unused-variable
 app.get("/", (request, response) => {
-  const data = JSON.parse(fs.readFileSync(`${outputDir}/${outputFileName}`, "utf8"))
-  // TODO: Set the correct content type.
-  response.send(data)
-})
+  console.info("Fetching and parting data.")
 
-// TODO: Make the system update data automatically based on how old data.json is.
-app.get("/update", (request, response) => {
-  console.info(`Fetching and saving data...`)
-
-  DataUpdater.updateDataFile({
+  DataUpdater.getData({
     apiKey: apiKey,
     host: host,
     jobId: jobId,
     outputDir: outputDir,
     outputFileName: outputFileName
   })
-    .then(() => {
-      console.info(`Data fetched and saved.`)
+    .then(data => {
+      console.info("Done fetching and parsing. Responding.")
+      // TODO: Set the correct content type.
+      response.send(data)
     })
 })
 
