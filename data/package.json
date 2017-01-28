@@ -12,7 +12,7 @@
   "scripts": {
     "build-and-start": "yarn build && node dist/main.js",
     "build": "rimraf dist && tsc",
-    "deploy": "git push heroku master",
+    "deploy": "echo run 'git subtree push --prefix ../data heroku master' from the parent folder",
     "lint": "tslint src/**/*.ts",
     "start": "ts-node src/main.ts"
   },
