@@ -26,22 +26,6 @@ export class Store {
   @observable private showings: Array<Showing>
   @observable private theaters: Array<Theater>
 
-  @action
-  public setData(data: Data) {
-    this.data = data
-
-    this.dates = []
-    this.movies = this.data.movies.map(movieData => new Movie(movieData))
-    this.theaters = this.data.theaters.map(theaterData => new Theater(theaterData))
-
-    // TODO: The date strings are now being parsed twice, both in here and in the ImmutableMoment constructor. Consider fixing this by adding an intermediate model where start is a date.
-    const now = Date.now()
-    this.showings = this.data.showings
-      .filter(showingData => parseAsLocalDateTime(showingData.start).valueOf() >= now)
-      .map(showingData => new Showing(showingData, this))
-      .sort((showingA, showingB) => showingA.start.diff(showingB.start))
-  }
-
   @computed
   public get matchingShowings(): Array<Showing> {
     const matching = this.showings
@@ -116,6 +100,22 @@ export class Store {
   public getTheatersSortedByName(): Array<Theater> {
     const sortedByName = this.theaters.sort(compareByName)
     return sortedByName
+  }
+
+  @action
+  public setData(data: Data) {
+    this.data = data
+
+    this.dates = []
+    this.movies = this.data.movies.map(movieData => new Movie(movieData))
+    this.theaters = this.data.theaters.map(theaterData => new Theater(theaterData))
+
+    // TODO: The date strings are now being parsed twice, both in here and in the ImmutableMoment constructor. Consider fixing this by adding an intermediate model where start is a date.
+    const now = Date.now()
+    this.showings = this.data.showings
+      .filter(showingData => parseAsLocalDateTime(showingData.start).valueOf() >= now)
+      .map(showingData => new Showing(showingData, this))
+      .sort((showingA, showingB) => showingA.start.diff(showingB.start))
   }
 
   @action
