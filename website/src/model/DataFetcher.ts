@@ -7,8 +7,9 @@ export class DataFetcher {
 
   public static async fetchData(): Promise<Data | undefined> {
     try {
-      const response = await window.fetch(this.dataUrl)
-      const data = await response.json() as Data
+      const response = await window.fetch(this.dataUrl, { mode: "cors" })
+      const dataString = await response.text()
+      const data = JSON.parse(dataString) as Data
       return data
     }
     catch (error) {

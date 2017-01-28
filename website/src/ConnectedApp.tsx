@@ -18,10 +18,11 @@ export class ConnectedApp extends RouteComponent<void> {
 
     useStrict(true)
 
+    this.store = new Store()
+
     DataGetter.getData()
       .then(data => {
-        // TODO: Will this work, or is there an issue because the reference to the store isn't defined when render() is called?
-        this.store = new Store(data)
+        this.store.initialize(data)
       })
   }
 

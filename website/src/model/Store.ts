@@ -1,5 +1,6 @@
 import { action } from "mobx"
 import { computed } from "mobx"
+import { observable } from "mobx"
 
 import { compareByName } from "../utilities"
 import { Data } from "./data/Data"
@@ -11,7 +12,22 @@ import { Showing } from "./Showing"
 import { Theater } from "./Theater"
 
 export class Store {
-  constructor(data: Data) {
+  constructor() {
+    this.dates = []
+    this.movies = []
+    this.showings = []
+    this.theaters = []
+  }
+
+  // TODO: Add a loading state to the store.
+  @observable private data: Data | undefined
+  @observable public dates: Array<SelectableDate>
+  @observable private movies: Array<Movie>
+  @observable private showings: Array<Showing>
+  @observable private theaters: Array<Theater>
+
+  @action
+  public initialize(data: Data) {
     this.data = data
 
     this.dates = []
@@ -25,12 +41,6 @@ export class Store {
       .map(showingData => new Showing(showingData, this))
       .sort((showingA, showingB) => showingA.start.diff(showingB.start))
   }
-
-  private readonly data: Data
-  public readonly dates: Array<SelectableDate>
-  private readonly movies: Array<Movie>
-  private readonly showings: Array<Showing>
-  private readonly theaters: Array<Theater>
 
   @computed
   public get matchingShowings(): Array<Showing> {

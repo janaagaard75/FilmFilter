@@ -20,7 +20,9 @@ export class DateSelecter extends Component<Props, void> {
       : "Dato: " + this.props.selectedDates.map(date => date.label).join(", ")
 
     // TODO: It's not sure that there will be a showing on a given date. DateItem should receive a date, and then render something, possibly depending on there being a show on that date or not.
-    const emptyDates = this.props.dates[0].date.weekday()
+    const emptyDates: number = this.props.dates.length >= 1
+      ? this.props.dates[0].date.weekday()
+      : 0
 
     return (
     <CollapsibleCard header={header}>
