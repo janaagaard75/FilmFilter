@@ -4,6 +4,7 @@ import DevTools from "mobx-react-devtools"
 import { useStrict } from "mobx"
 
 import { App } from "./components/App"
+import { DataGetter } from "./model/DataGetter"
 import { RouteComponent } from "./model/RouteComponent"
 import { Store } from "./model/Store"
 
@@ -16,7 +17,12 @@ export class ConnectedApp extends RouteComponent<void> {
     this.includeDevTools = process.env.NODE_ENV === "development"
 
     useStrict(true)
-    this.store = new Store()
+
+    DataGetter.getData()
+      .then(data => {
+        // TODO: Will this work, or is there an issue because the reference to the store isn't defined when render() is called?
+        this.store = new Store(data)
+      })
   }
 
   private includeDevTools: boolean

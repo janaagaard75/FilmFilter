@@ -11,8 +11,8 @@ import { Showing } from "./Showing"
 import { Theater } from "./Theater"
 
 export class Store {
-  constructor() {
-    this.data = require<Data>("../data.json")
+  constructor(data: Data) {
+    this.data = data
 
     this.dates = []
     this.movies = this.data.movies.map(movieData => new Movie(movieData))
