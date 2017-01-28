@@ -1,5 +1,6 @@
 // tslint:disable no-console
 import * as express from "express"
+import * as cors from "cors"
 
 import { DataUpdater } from "./DataUpdater"
 
@@ -11,7 +12,8 @@ const jobId = 142200
 const port = 5000
 
 app.set("port", (process.env.PORT || port))
-app.use(express.static(__dirname + "/public"))
+// app.use(express.static(__dirname + "/public"))
+app.use(cors())
 
 // tslint:disable-next-line no-unused-variable
 app.get("/", async(request, response) => {
@@ -19,8 +21,7 @@ app.get("/", async(request, response) => {
 
   const data = await DataUpdater.getData(apiKey, host, jobId)
   console.info("Done fetching and parsing. Responding.")
-  // TODO: Set the correct content type.
-  response.send(data)
+  response.json(data)
 })
 
 app.listen(app.get("port"), () => {

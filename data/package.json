@@ -12,16 +12,18 @@
   "scripts": {
     "build-and-start": "yarn build && node dist/main.js",
     "build": "rimraf dist && tsc",
-    "deploy": "echo run 'git subtree push --prefix ../data heroku master' from the parent folder",
+    "deploy": "echo Run \"git subtree push --prefix data heroku master\" from the parent folder.",
     "lint": "tslint src/**/*.ts",
     "start": "ts-node src/main.ts"
   },
   "dependencies": {
+    "cors": "2.8.1",
     "express": "4.14.0",
     "node-fetch": "1.6.3",
     "ts-node": "2.0.0"
   },
   "devDependencies": {
+    "@types/cors": "2.8.0",
     "@types/express": "4.0.35",
     "@types/node-fetch": "1.6.7",
     "rimraf": "2.5.4",

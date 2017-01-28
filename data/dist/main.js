@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 // tslint:disable no-console
 const express = require("express");
+const cors = require("cors");
 const DataUpdater_1 = require("./DataUpdater");
 const app = express();
 const apiKey = "a706cc2fdb8e4ce89f00aed30a6fc2a0";
@@ -16,14 +17,14 @@ const host = "storage.scrapinghub.com";
 const jobId = 142200;
 const port = 5000;
 app.set("port", (process.env.PORT || port));
-app.use(express.static(__dirname + "/public"));
+// app.use(express.static(__dirname + "/public"))
+app.use(cors());
 // tslint:disable-next-line no-unused-variable
 app.get("/", (request, response) => __awaiter(this, void 0, void 0, function* () {
     console.info("Fetching and parting data.");
     const data = yield DataUpdater_1.DataUpdater.getData(apiKey, host, jobId);
     console.info("Done fetching and parsing. Responding.");
-    // TODO: Set the correct content type.
-    response.send(data);
+    response.json(data);
 }));
 app.listen(app.get("port"), () => {
     console.info(`Node app is running on port ${app.get("port")}.`);
