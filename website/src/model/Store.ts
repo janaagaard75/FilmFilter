@@ -27,7 +27,7 @@ export class Store {
   @observable private theaters: Array<Theater>
 
   @action
-  public initialize(data: Data) {
+  public setData(data: Data) {
     this.data = data
 
     this.dates = []

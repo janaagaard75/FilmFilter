@@ -8,6 +8,7 @@ import { MatchingShowings } from "./MatchingShowings"
 import { MoviesSelecter } from "./MoviesSelecter"
 import { Store } from "../model/Store"
 import { TheatersSelecter } from "./TheatersSelecter"
+import { DataGetter } from "../model/DataGetter"
 
 interface Props {
   routerContext: RouterContext.RouterContextProps
@@ -16,6 +17,11 @@ interface Props {
 
 @observer
 export class App extends Component<Props, void> {
+  private async handleUpateData() {
+    const fetchedData = await DataGetter.fetchAndUpdateStoredData()
+    this.props.store.setData(fetchedData)
+  }
+
   public render() {
     return (
       <div className="container-fluid">
@@ -46,6 +52,7 @@ export class App extends Component<Props, void> {
                 toggleDateSelection={this.props.store.toggleDateSelection}
               />
             </div>
+            <button className="btn btn-secondary" onClick={() => this.handleUpateData()}>Update data</button>
           </div>
         </div>
       </div>

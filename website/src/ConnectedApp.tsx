@@ -22,7 +22,7 @@ export class ConnectedApp extends RouteComponent<void> {
 
     DataGetter.getData()
       .then(data => {
-        this.store.initialize(data)
+        this.store.setData(data)
       })
   }
 
