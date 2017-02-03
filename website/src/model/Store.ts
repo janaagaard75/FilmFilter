@@ -69,7 +69,7 @@ export class Store {
     return movie
   }
 
-  public getMoviesByNumberOfShowings(): Array<Movie> {
+  public getMoviesSortedByNumberOfShowings(): Array<Movie> {
     const sorted = this.movies.sort((a, b) => b.showings.length - a.showings.length)
     return sorted
   }
