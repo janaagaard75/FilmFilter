@@ -14,29 +14,16 @@ interface Props {
 export class DateItem extends Component<Props, void> {
   public render() {
     const cssClasses = classNames(
-      // TODO: Clean up.
-      // TODO: Make this work on small screens.
-      // TODO: Have Monday in the left most column.
-      // "col-6 col-sm-4 col-md-3 col-lg-2 clickable",
-      "col-1-of-7 clickable",
+      // TODO: Remove col-1-of-7 since it's no longer used.
+      "clickable",
       {
         "selected-item": this.props.date.selected
       }
     )
 
     return (
-      <div className={cssClasses}>
-        <div className="form-check">
-          <label className="form-check-label">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              defaultChecked={this.props.date.selected}
-              onChange={this.props.toggleDateSelection}
-            />
-            {" " + this.props.date.label}
-          </label>
-        </div>
+      <div className={cssClasses} onClick={this.props.toggleDateSelection}>
+        {this.props.date.label}
       </div>
     )
   }

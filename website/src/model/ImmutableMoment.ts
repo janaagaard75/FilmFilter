@@ -1,5 +1,6 @@
 import * as moment from "moment"
 import { Moment } from "moment"
+import { DurationInputArg2 } from "moment"
 
 import { isString } from "../utilities"
 import { parseAsLocalDateTime } from "../utilities"
@@ -19,6 +20,12 @@ export class ImmutableMoment {
 
   private moment: Moment
 
+  public add(amount: number, unit?: DurationInputArg2): ImmutableMoment {
+    const clone = this.moment.clone()
+    clone.add(amount, unit)
+    return new ImmutableMoment(clone)
+  }
+
   public diff(other: ImmutableMoment): number {
     const diff = this.moment.diff(other.moment)
     return diff
@@ -32,6 +39,12 @@ export class ImmutableMoment {
   public format(format: string): string {
     const formatted = this.moment.format(format)
     return formatted
+  }
+
+  public subtract(amount: number, unit?: DurationInputArg2): ImmutableMoment {
+    const clone = this.moment.clone()
+    clone.subtract(amount, unit)
+    return new ImmutableMoment(clone)
   }
 
   /** Return a new ImmutableMoment where the hours have been stripped. */

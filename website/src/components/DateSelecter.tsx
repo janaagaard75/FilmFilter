@@ -19,13 +19,28 @@ export class DateSelecter extends Component<Props, void> {
       ? "Vælg dato"
       : "Dato: " + this.props.selectedDates.map(date => date.label).join(", ")
 
-    // TODO: It's not sure that there will be a showing on a given date. DateItem should receive a date, and then render something, possibly depending on there being a show on that date or not.
+    const firstSelectableDate = this.props.dates[0].date
+    const lastSelectableDate = this.props.dates[this.props.dates.length - 1].date
+
+
     const emptyDates: number = this.props.dates.length >= 1
       ? this.props.dates[0].date.weekday()
       : 0
 
     return (
     <CollapsibleCard header={header}>
+        <table className="table">
+          <tr>
+            <td>Ma</td>
+            <td>Ti</td>
+            <td>On</td>
+            <td>To</td>
+            <td>Fr</td>
+            <td>Lø</td>
+            <td>Sø</td>
+          </tr>
+
+        </table>
         <div className="row">
           {
             // tslint:disable-next-line no-unused-variable
