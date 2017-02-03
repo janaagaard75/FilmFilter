@@ -16,7 +16,7 @@ export class Showing {
     this.start = new ImmutableMoment(data.start)
     this.theater = store.getTheater(data.theaterId)
     this.threeD = data.threeD
-    this.totalSeats = this.getTotolSeats(data.seatingInfo)
+    this.totalSeats = this.getTotalSeats(data.seatingInfo)
 
     this.date = store.getSelectableDate(this.start)
 
@@ -41,7 +41,7 @@ export class Showing {
     return freeSeats
   }
 
-  private getTotolSeats(seatingInfo: Array<string>): number {
+  private getTotalSeats(seatingInfo: Array<string>): number {
     const totalSeatsLine = seatingInfo.filter(info => info.startsWith("Sæder"))[0]
     const totalSeats = parseInt(totalSeatsLine.substring("Sæder: ".length), 10)
     return totalSeats
