@@ -4,7 +4,7 @@ import { TheaterData } from "./data/TheaterData"
 
 export class Theater {
   constructor(data: TheaterData) {
-    this.name = data.name
+    this.name = Theater.cleanUpTheaterName(data.name)
     this.selected = false
     this.theatherUrl = "http://www.kino.dk/" + data.theatherUrl
   }
@@ -17,4 +17,9 @@ export class Theater {
     name: "",
     theatherUrl: ""
   })
+
+  private static cleanUpTheaterName(originalName: string) {
+    const cleanedUpName = originalName.replace("Nordisk Film Biografer ", "")
+    return cleanedUpName
+  }
 }
