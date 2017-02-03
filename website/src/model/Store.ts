@@ -19,12 +19,12 @@ export class Store {
     this.theaters = []
   }
 
-  // TODO: Add a loading state to the store.
   @observable private data: Data | undefined
   @observable public dates: Array<SelectableDate>
   @observable private movies: Array<Movie>
   @observable private showings: Array<Showing>
   @observable private theaters: Array<Theater>
+  // TODO: Add an 'updating' state to the store.
 
   @computed
   public get matchingShowings(): Array<Showing> {
