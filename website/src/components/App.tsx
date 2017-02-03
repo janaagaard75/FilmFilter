@@ -52,7 +52,9 @@ export class App extends Component<Props, void> {
                 toggleDateSelection={this.props.store.toggleDateSelection}
               />
             </div>
+            <div className="mb-3">
               <button className="btn btn-secondary" onClick={() => this.handleUpateData()}>Opdater data</button>
+            </div>
           </div>
         </div>
       </div>
