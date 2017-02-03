@@ -35,9 +35,10 @@ const plugins = [
 ]
 
 if (isProduction) {
-  plugins.push(
-    new BabiliPlugin()
-  )
+  // Disabled because it breaks the code.
+  // plugins.push(
+  //   new BabiliPlugin()
+  // )
 }
 else {
   plugins.push(
