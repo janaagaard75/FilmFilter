@@ -36,7 +36,9 @@ const plugins = [
 
 if (isProduction) {
   plugins.push(
-    new UglifyJSPlugin()
+    new UglifyJSPlugin({
+      sourceMap: true
+    })
   )
 }
 else {
