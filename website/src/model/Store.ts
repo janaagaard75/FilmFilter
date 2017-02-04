@@ -75,16 +75,22 @@ export class Store {
   }
 
   public getSelectableDate(date: ImmutableMoment): SelectableDate {
-    const newSelectableDate = new SelectableDate(date)
-    const existingSelectableDate = this.dates.find(selectableDate => selectableDate.date.equals(newSelectableDate.date))
-
-    if (existingSelectableDate === undefined) {
-      this.dates.push(newSelectableDate)
-      this.dates.sort((a, b) => a.date.diff(b.date))
-      return newSelectableDate
+    const existingSelectableDate = this.dates.find(selectableDate => selectableDate.date.equals(date))
+    if (existingSelectableDate !== undefined) {
+      return existingSelectableDate
     }
 
-    return existingSelectableDate
+    const newWeek = this.getWeek(date)
+    const newSelectableDate = newWeek[date.weekday()]
+    this.dates = this.dates.concat(newWeek)
+    this.dates.sort((a, b) => a.date.diff(b.date))
+    return newSelectableDate
+  }
+
+  private getWeek(date: ImmutableMoment): Array<SelectableDate> {
+    const mondayOfWeek = date.subtract(date.weekday(), "days")
+    const week = [0, 1, 2, 3, 4, 5, 6].map(i => new SelectableDate(mondayOfWeek.add(i, "days")))
+    return week
   }
 
   public getTheater(theaterId: number): Theater {
