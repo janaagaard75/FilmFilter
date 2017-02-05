@@ -49,7 +49,6 @@ export class App extends Component<Props, void> {
               <DateSelecter
                 dates={this.props.store.dates}
                 selectedDates={this.props.store.selectedDates}
-                toggleDateSelection={this.props.store.toggleDateSelection}
               />
             </div>
             <div className="mb-3">
