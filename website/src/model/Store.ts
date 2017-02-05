@@ -126,10 +126,6 @@ export class Store {
   }
 
   // TODO: Is it worth using actions at thus forcing this method?
-  @action
-  public toggleMovieSelection(movie: Movie) {
-    movie.selected = !movie.selected
-  }
 
   @action
   public toggleTheaterSelection(theater: Theater) {

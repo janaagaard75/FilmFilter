@@ -9,7 +9,6 @@ import { ToggleableCollapsibleCard } from "./bootstrap/ToggleableCollapsibleCard
 interface Props {
   movies: Array<Movie>
   selectedMovies: Array<Movie>
-  toggleMovieSelection: (movie: Movie) => void
 }
 
 interface State {
@@ -33,7 +32,7 @@ export class MoviesSelecter extends Component<Props, State> {
   }
 
   private handleToggleMovieSelection(movie: Movie) {
-    this.props.toggleMovieSelection(movie)
+    movie.toggleSelection()
 
     // TODO: This works as intented, but unintentionally. The selectedMovies array isn't up to date when making the comparison. The length should have been compared to 1.
     if (this.props.selectedMovies.length === 0) {

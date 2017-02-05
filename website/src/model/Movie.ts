@@ -1,3 +1,4 @@
+import { action } from "mobx"
 import { observable } from "mobx"
 
 import { MovieData } from "./data/MovieData"
@@ -34,5 +35,10 @@ export class Movie {
 
   public addShowing(showing: Showing) {
     this.showings.push(showing)
+  }
+
+  @action
+  public toggleSelection() {
+    this.selected = !this.selected
   }
 }

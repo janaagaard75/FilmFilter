@@ -35,7 +35,6 @@ export class App extends Component<Props, void> {
               <MoviesSelecter
                 movies={this.props.store.getMoviesSortedByNumberOfShowings().slice(0, 24)}
                 selectedMovies={this.props.store.selectedMovies}
-                toggleMovieSelection={this.props.store.toggleMovieSelection}
               />
             </div>
             <div className="mb-3">
