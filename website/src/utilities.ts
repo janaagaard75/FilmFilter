@@ -38,3 +38,16 @@ export const parseAsLocalDateTime = (dateString: string): Date => {
 
   return dateTime
 }
+
+export const rangeArray = (length: number): Array<number> => {
+  // tslint:disable-next-line no-unused-variable
+  const range = new Array(length).fill(undefined).map((value, index) => index)
+  return range
+}
+
+export const splitIntoChunks = <T>(a: Array<T>, chunkSize: number): Array<Array<T>> => {
+  const chunks = rangeArray(Math.ceil(a.length / chunkSize))
+    // tslint:disable-next-line no-unused-variable
+    .map((value, index) => a.slice(index * chunkSize, index * chunkSize + chunkSize))
+  return chunks
+}
