@@ -4,7 +4,7 @@ import { observable } from "mobx"
 
 import { compareByName } from "../utilities"
 import { Data } from "./data/Data"
-import { ImmutableMoment } from "./ImmutableMoment"
+import { ImmutableDateTime } from "./ImmutableDateTime"
 import { Movie } from "./Movie"
 import { parseAsLocalDateTime } from "../utilities"
 import { SelectableDate } from "./SelectableDate"
@@ -74,22 +74,22 @@ export class Store {
     return sorted
   }
 
-  public getSelectableDate(date: ImmutableMoment): SelectableDate {
-    const existingSelectableDate = this.dates.find(selectableDate => selectableDate.date.equals(date))
+  public getSelectableDate(dateTime: ImmutableDateTime): SelectableDate {
+    const existingSelectableDate = this.dates.find(selectableDate => selectableDate.date.equals(dateTime.toDate()))
     if (existingSelectableDate !== undefined) {
       return existingSelectableDate
     }
 
-    const newWeek = this.getWeek(date)
-    const newSelectableDate = newWeek[date.weekday()]
+    const newWeek = this.getWeek(dateTime)
+    const newSelectableDate = newWeek[dateTime.weekday()]
     this.dates = this.dates.concat(newWeek)
     this.dates.sort((a, b) => a.date.diff(b.date))
     return newSelectableDate
   }
 
-  private getWeek(date: ImmutableMoment): Array<SelectableDate> {
-    const mondayOfWeek = date.subtract(date.weekday(), "days")
-    const week = [0, 1, 2, 3, 4, 5, 6].map(i => new SelectableDate(mondayOfWeek.add(i, "days")))
+  private getWeek(dateTime: ImmutableDateTime): Array<SelectableDate> {
+    const monday = dateTime.subtract(dateTime.weekday(), "days")
+    const week = [0, 1, 2, 3, 4, 5, 6].map(i => new SelectableDate(monday.add(i, "days")))
     return week
   }
 
@@ -122,11 +122,6 @@ export class Store {
       .filter(showingData => parseAsLocalDateTime(showingData.start).valueOf() >= now)
       .map(showingData => new Showing(showingData, this))
       .sort((showingA, showingB) => showingA.start.diff(showingB.start))
-  }
-
-  @action
-  public toggleDateSelection(date: SelectableDate) {
-    date.selected = !date.selected
   }
 
   // TODO: Is it worth using actions at thus forcing this method?

@@ -26,19 +26,16 @@ export class DataGetter {
   }
 
   private static isOutdated(timestamp: Date) {
-    // TODO: Need some kind of version invalidation.
-    return true
+    const now = new Date()
+    // tslint:disable-next-line prefer-const
+    let latestDataFetch = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 5, 0, 0)
+    if (latestDataFetch.valueOf() > now.valueOf()) {
+      latestDataFetch.setDate(latestDataFetch.getDate() - 1)
+    }
 
-    // const now = new Date()
-    // // tslint:disable-next-line prefer-const
-    // let latestDataFetch = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 5, 0, 0)
-    // if (latestDataFetch.valueOf() > now.valueOf()) {
-    //   latestDataFetch.setDate(latestDataFetch.getDate() - 1)
-    // }
-
-    // const millisecondsIn24Hours = 24 * 60 * 60 * 1000
-    // const millisecondsSinceLatestFetch = latestDataFetch.valueOf() - timestamp.valueOf()
-    // const isOutdated = millisecondsSinceLatestFetch > millisecondsIn24Hours
-    // return isOutdated
+    const millisecondsIn24Hours = 24 * 60 * 60 * 1000
+    const millisecondsSinceLatestFetch = latestDataFetch.valueOf() - timestamp.valueOf()
+    const isOutdated = millisecondsSinceLatestFetch > millisecondsIn24Hours
+    return isOutdated
   }
 }
