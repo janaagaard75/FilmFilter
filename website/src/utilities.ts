@@ -24,6 +24,7 @@ export const isString = (x: any): x is string => {
   return isAString
 }
 
+// TODO: Move to ImmutableMoment?
 /** Parse a string in the format "YYYY-MM-DDTHH:mm:ss" into a data with the local timezone. */
 export const parseAsLocalDateTime = (dateString: string): Date => {
   const numbers = dateString.split(/\D/)
