@@ -13,7 +13,7 @@ export class Week extends Component<Props, void> {
     return (
       <tr>
         {this.props.dates.map(date =>
-          <DateItem date={date}/>
+          <DateItem key={"date-" + date.key} date={date}/>
         )}
       </tr>
     )
