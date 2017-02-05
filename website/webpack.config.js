@@ -30,6 +30,7 @@ const plugins = [
     template: "src/index.html"
   }),
   new webpack.DefinePlugin({
+    "__BUILD_TIMESTAMP__": JSON.stringify(Date.now()),
     "process.env.NODE_ENV": JSON.stringify(nodeEnv)
   })
 ]
