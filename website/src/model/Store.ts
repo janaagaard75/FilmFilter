@@ -124,11 +124,4 @@ export class Store {
       .map(showingData => new Showing(showingData, this))
       .sort((showingA, showingB) => showingA.start.diff(showingB.start))
   }
-
-  // TODO: Is it worth using actions at thus forcing this method?
-
-  @action
-  public toggleTheaterSelection(theater: Theater) {
-    theater.selected = !theater.selected
-  }
 }

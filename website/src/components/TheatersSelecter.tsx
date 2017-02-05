@@ -9,7 +9,6 @@ import { TheaterItem } from "./TheaterItem"
 interface Props {
   theaters: Array<Theater>
   selectedTheaters: Array<Theater>
-  toggleTheaterSelection: (theater: Theater) => void
 }
 
 @observer
@@ -26,7 +25,7 @@ export class TheatersSelecter extends Component<Props, void> {
             <TheaterItem
               key={theater.theatherUrl}
               theater={theater}
-              toggleTheaterSelection={() => this.props.toggleTheaterSelection(theater)}
+              toggleTheaterSelection={() => theater.toggleSelection()}
             />
           )}
         </div>

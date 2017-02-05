@@ -1,3 +1,4 @@
+import { action } from "mobx"
 import { observable } from "mobx"
 
 import { TheaterData } from "./data/TheaterData"
@@ -21,5 +22,10 @@ export class Theater {
   private static cleanUpTheaterName(originalName: string) {
     const cleanedUpName = originalName.replace("Nordisk Film Biografer ", "")
     return cleanedUpName
+  }
+
+  @action
+  public toggleSelection() {
+    this.selected = !this.selected
   }
 }

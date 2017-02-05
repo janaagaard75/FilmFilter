@@ -41,7 +41,6 @@ export class App extends Component<Props, void> {
               <TheatersSelecter
                 theaters={this.props.store.getTheatersSortedByName()}
                 selectedTheaters={this.props.store.selectedTheaters}
-                toggleTheaterSelection={this.props.store.toggleTheaterSelection}
               />
             </div>
             <div className="mb-3">
