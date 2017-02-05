@@ -7,7 +7,6 @@ import { SelectableDate } from "../model/SelectableDate"
 
 interface Props {
   date: SelectableDate
-  toggleDateSelection: () => void
 }
 
 @observer
@@ -22,7 +21,7 @@ export class DateItem extends Component<Props, void> {
     )
 
     return (
-      <div className={cssClasses} onClick={this.props.toggleDateSelection}>
+      <div className={cssClasses} onClick={this.props.date.toggleSelection}>
         {this.props.date.label}
       </div>
     )
