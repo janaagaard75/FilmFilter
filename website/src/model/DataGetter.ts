@@ -6,7 +6,10 @@ export class DataGetter {
   public static async getData(): Promise<Data> {
     const storedData = DataStorer.loadData()
 
-    if (storedData === undefined || DataGetter.isOutdated(storedData.timestamp)) {
+    if (storedData === undefined
+      || DataGetter.isWrongVersion(storedData.buildTimestamp)
+      || DataGetter.isOutdated(storedData.storeTimestamp)
+    ) {
       const fetchedData = await DataGetter.fetchAndUpdateStoredData()
       return fetchedData
     }
@@ -25,7 +28,12 @@ export class DataGetter {
     return fetchedData
   }
 
-  private static isOutdated(timestamp: Date) {
+  private static isWrongVersion(buildTimestamp: number) {
+    const timestampMatches = buildTimestamp === __BUILD_TIMESTAMP__
+    return !timestampMatches
+  }
+
+  private static isOutdated(storeTimestamp: Date) {
     const now = new Date()
     // tslint:disable-next-line prefer-const
     let latestDataFetch = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 5, 0, 0)
@@ -34,7 +42,7 @@ export class DataGetter {
     }
 
     const millisecondsIn24Hours = 24 * 60 * 60 * 1000
-    const millisecondsSinceLatestFetch = latestDataFetch.valueOf() - timestamp.valueOf()
+    const millisecondsSinceLatestFetch = latestDataFetch.valueOf() - storeTimestamp.valueOf()
     const isOutdated = millisecondsSinceLatestFetch > millisecondsIn24Hours
     return isOutdated
   }

@@ -1,8 +1,9 @@
 import { Data } from "./data/Data"
 
 interface TimestampedData {
+  buildTimestamp: number,
   data: Data,
-  timestamp: Date
+  storeTimestamp: Date
 }
 
 // TODO: Add a date to the data being stored.
@@ -22,8 +23,9 @@ export class DataStorer {
 
   public static saveData(data: Data) {
     const storedData: TimestampedData = {
+      buildTimestamp: __BUILD_TIMESTAMP__,
       data: data,
-      timestamp: new Date()
+      storeTimestamp: new Date()
     }
 
     const dataString = JSON.stringify(storedData)
