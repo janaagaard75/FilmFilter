@@ -13,7 +13,6 @@ interface Props {
 export class DateItem extends Component<Props, void> {
   public render() {
     const cssClasses = classNames(
-      // TODO: Remove col-1-of-7 since it's no longer used.
       "clickable",
       {
         "selected-item": this.props.date.selected
