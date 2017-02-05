@@ -1,11 +1,10 @@
 import * as moment from "moment"
 import { Moment } from "moment"
-import { DurationInputArg2 } from "moment"
 
 import { isString } from "../utilities"
 import { parseAsLocalDateTime } from "../utilities"
 
-export class ImmutableMoment {
+export abstract class ImmutableMoment {
   constructor(dateTime?: string | Moment) {
     if (dateTime === undefined) {
       this.moment = moment()
@@ -18,12 +17,10 @@ export class ImmutableMoment {
     }
   }
 
-  private moment: Moment
+  protected moment: Moment
 
-  public add(amount: number, unit?: DurationInputArg2): ImmutableMoment {
-    const clone = this.moment.clone()
-    clone.add(amount, unit)
-    return new ImmutableMoment(clone)
+  public date(): number {
+    return this.moment.date()
   }
 
   public diff(other: ImmutableMoment): number {
@@ -31,35 +28,21 @@ export class ImmutableMoment {
     return diff
   }
 
-  public equals(other: ImmutableMoment): boolean {
-    const equals = this.moment.unix() === other.moment.unix()
-    return equals
-  }
-
   public format(format: string): string {
     const formatted = this.moment.format(format)
     return formatted
   }
 
-  public subtract(amount: number, unit?: DurationInputArg2): ImmutableMoment {
-    const clone = this.moment.clone()
-    clone.subtract(amount, unit)
-    return new ImmutableMoment(clone)
-  }
-
-  /** Return a new ImmutableMoment where the hours have been stripped. */
-  public toDate(): ImmutableMoment {
-    const date = new ImmutableMoment(moment(new Date(
-      this.moment.year(),
-      this.moment.month(),
-      this.moment.date()
-    )))
-
-    return date
+  public month(): number {
+    return this.moment.month()
   }
 
   public weekday(): number {
     const weekday = this.moment.weekday()
     return weekday
+  }
+
+  public year(): number {
+    return this.moment.year()
   }
 }

@@ -2,15 +2,16 @@ import * as moment from "moment"
 import { action } from "mobx"
 import { observable } from "mobx"
 
-import { ImmutableMoment } from "./ImmutableMoment"
+import { ImmutableDate } from "./ImmutableDate"
+import { ImmutableDateTime } from "./ImmutableDateTime"
 
 export class SelectableDate {
-  constructor(date: ImmutableMoment) {
-    this.date = date.toDate()
+  constructor(dateTime: ImmutableDateTime) {
+    this.date = dateTime.toDate()
     this.selected = false
   }
 
-  public readonly date: ImmutableMoment
+  public readonly date: ImmutableDate
   @observable public selected: boolean
 
   // TODO: Should this be part of the model? And if so, what about a formatting of the start in Showing.ts?
@@ -30,6 +31,6 @@ export class SelectableDate {
   }
 
   public static UndefinedSelectableDate = new SelectableDate(
-    new ImmutableMoment(moment(new Date(2000, 0, 1)))
+    new ImmutableDateTime(moment(new Date(2000, 0, 1)))
   )
 }

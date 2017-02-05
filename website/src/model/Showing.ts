@@ -1,4 +1,4 @@
-import { ImmutableMoment } from "./ImmutableMoment"
+import { ImmutableDateTime } from "./ImmutableDateTime"
 import { Movie } from "./Movie"
 import { SelectableDate } from "./SelectableDate"
 import { ShowingData } from "./data/ShowingData"
@@ -13,7 +13,7 @@ export class Showing {
     this.movie = store.getMovie(data.movieId)
     this.showingUrl = "http://www.kino.dk/" + data.showingUrl
     this.specialShowing = data.specialShowing
-    this.start = new ImmutableMoment(data.start)
+    this.start = new ImmutableDateTime(data.start)
     this.theater = store.getTheater(data.theaterId)
     this.threeD = data.threeD
     this.totalSeats = this.getTotalSeats(data.seatingInfo)
@@ -30,7 +30,7 @@ export class Showing {
   public readonly movie: Movie
   public readonly showingUrl: string
   public readonly specialShowing: boolean
-  public readonly start: ImmutableMoment
+  public readonly start: ImmutableDateTime
   public readonly theater: Theater
   public readonly threeD: boolean
   public readonly totalSeats: number
