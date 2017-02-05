@@ -83,6 +83,7 @@ export class Store {
     const newWeek = this.getWeek(dateTime)
     const newSelectableDate = newWeek[dateTime.weekday()]
     this.dates = this.dates.concat(newWeek)
+    // TODO: Sorting doesn't work.
     this.dates.sort((a, b) => a.date.diff(b.date))
     return newSelectableDate
   }
