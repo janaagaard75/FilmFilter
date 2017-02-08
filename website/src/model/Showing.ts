@@ -18,7 +18,7 @@ export class Showing {
     this.threeD = data.threeD
     this.totalSeats = this.getTotalSeats(data.seatingInfo)
 
-    this.date = store.getSelectableDate(this.start)
+    this.date = store.getOrAddSelectableDate(this.start)
 
     this.movie.addShowing(this)
   }
