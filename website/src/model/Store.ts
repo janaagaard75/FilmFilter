@@ -127,6 +127,11 @@ export class Store {
     // this.dates.sort((a, b) => a.date.diff(b.date))
   }
 
+  @action
+  public setUpdatingData(updating: boolean) {
+    this.updatingData = updating
+  }
+
   private getWeek(dateTime: ImmutableDateTime): Array<SelectableDate> {
     const monday = dateTime.subtract(dateTime.weekday(), "days")
     const week = [0, 1, 2, 3, 4, 5, 6].map(i => new SelectableDate(monday.add(i, "days")))
