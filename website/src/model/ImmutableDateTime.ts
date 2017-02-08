@@ -2,7 +2,6 @@
 import { DurationInputArg2 } from "moment"
 import { Moment } from "moment"
 
-import { ImmutableDate } from "./ImmutableDate"
 import { ImmutableMoment } from "./ImmutableMoment"
 
 export class ImmutableDateTime extends ImmutableMoment {
@@ -10,6 +9,7 @@ export class ImmutableDateTime extends ImmutableMoment {
     super(dateTime)
   }
 
+  // TODO: Is this method used?
   public add(amount: number, unit?: DurationInputArg2): ImmutableDateTime {
     const clone = this.moment.clone()
     clone.add(amount, unit)
@@ -21,14 +21,10 @@ export class ImmutableDateTime extends ImmutableMoment {
     return equals
   }
 
+  // TODO: Is this method used?
   public subtract(amount: number, unit?: DurationInputArg2): ImmutableDateTime {
     const clone = this.moment.clone()
     clone.subtract(amount, unit)
     return new ImmutableDateTime(clone)
-  }
-
-  public toDate(): ImmutableDate {
-    const date = new ImmutableDate(this.moment)
-    return date
   }
 }
