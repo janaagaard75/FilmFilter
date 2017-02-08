@@ -51,6 +51,8 @@ export class App extends Component<Props, void> {
             </div>
             <div className="mb-3">
               <button className="btn btn-secondary" onClick={() => this.handleUpateData()}>Opdater data</button>
+              {/* TODO: Use an ellipsis character. */}
+              <span>{this.props.store.getUpdatingData() ? "Opdaterer..." : ""}</span>
             </div>
           </div>
         </div>
