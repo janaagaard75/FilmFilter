@@ -121,10 +121,10 @@ export class Store {
       .map(showingData => new Showing(showingData, this))
       .sort((showingA, showingB) => showingA.start.diff(showingB.start))
 
-    // TODO: Fill in the missing dates.
+    this.dates = this.dates.sort((a, b) => a.date.diff(b.date))
 
-    // TODO: Verify that sorting works.
-    // this.dates.sort((a, b) => a.date.diff(b.date))
+    // TODO: Fill in the missing dates.
+    // const firstDate = this.dates.
   }
 
   @action
