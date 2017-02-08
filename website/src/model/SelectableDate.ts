@@ -6,8 +6,9 @@ import { ImmutableDate } from "./ImmutableDate"
 import { ImmutableDateTime } from "./ImmutableDateTime"
 
 export class SelectableDate {
-  constructor(dateTime: ImmutableDateTime) {
-    this.date = dateTime.toDate()
+  // TODO: Consider removing ImmutableDateTime and moving toDate and toDateTime out of ImmutableMoment.
+  constructor(dateOrDateTime: ImmutableDate | ImmutableDateTime) {
+    this.date = dateOrDateTime.toDate()
     this.selected = false
   }
 
