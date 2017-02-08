@@ -57,6 +57,32 @@ export class Store {
     return selectedTheaters
   }
 
+  private addMissingDates() {
+    this.sortDates()
+    const earliest = this.dates[0].date
+    const latest = this.dates[this.dates.length - 1].date
+
+    for (let date = earliest; date.equals(latest); date = date.add(1, "day")) {
+      this.getOrAddSelectableDate(date.toDateTime())
+    }
+  }
+
+  private addStartAndEndDates() {
+    this.sortDates()
+    const earliest = this.dates[0].date
+    const latest = this.dates[this.dates.length - 1].date
+
+    for (let i = 0; i < earliest.weekday(); i++) {
+      const selectableDate = new SelectableDate(earliest.subtract(i, "days"))
+      this.dates.push(selectableDate)
+    }
+
+    for (let i = 6; i > latest.weekday(); i--) {
+      const selectableDate = new SelectableDate(latest.add(i, "days"))
+      this.dates.push(selectableDate)
+    }
+  }
+
   public getFetchingAndParsing(): boolean {
     return this.fetchingAndParsing
   }
@@ -121,10 +147,9 @@ export class Store {
       .map(showingData => new Showing(showingData, this))
       .sort((showingA, showingB) => showingA.start.diff(showingB.start))
 
-    // TODO: Fill in the missing dates.
-    // const firstDate = this.dates.
-
-    this.dates = this.dates.sort((a, b) => a.date.diff(b.date))
+    this.addMissingDates()
+    this.addStartAndEndDates()
+    this.sortDates()
   }
 
   @action
@@ -132,9 +157,7 @@ export class Store {
     this.fetchingAndParsing = updating
   }
 
-  private getWeek(dateTime: ImmutableDateTime): Array<SelectableDate> {
-    const monday = dateTime.subtract(dateTime.weekday(), "days")
-    const week = [0, 1, 2, 3, 4, 5, 6].map(i => new SelectableDate(monday.add(i, "days")))
-    return week
+  private sortDates() {
+    this.dates = this.dates.sort((a, b) => a.date.diff(b.date))
   }
 }
