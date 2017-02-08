@@ -17,7 +17,7 @@ export class Store {
     this.movies = []
     this.showings = []
     this.theaters = []
-    this.updatingData = false
+    this.fetchingAndParsing = false
   }
 
   @observable private data: Data | undefined
@@ -25,7 +25,7 @@ export class Store {
   @observable private movies: Array<Movie>
   @observable private showings: Array<Showing>
   @observable private theaters: Array<Theater>
-  @observable private updatingData: boolean
+  @observable private fetchingAndParsing: boolean
 
   @computed
   public get matchingShowings(): Array<Showing> {
@@ -55,6 +55,10 @@ export class Store {
   public get selectedTheaters(): Array<Theater> {
     const selectedTheaters = this.theaters.filter(theater => theater.selected)
     return selectedTheaters
+  }
+
+  public getFetchingAndParsing(): boolean {
+    return this.fetchingAndParsing
   }
 
   public getMovie(movieId: number): Movie {
@@ -102,10 +106,6 @@ export class Store {
     return sortedByName
   }
 
-  public getUpdatingData(): boolean {
-    return this.updatingData
-  }
-
   @action
   public setData(data: Data) {
     this.data = data
@@ -124,12 +124,12 @@ export class Store {
     // TODO: Fill in the missing dates.
 
     // TODO: Verify that sorting works.
-    // this.dates.sort((a, b) => a.date.diff(b.date))
+    // this.dates.sort((a, b) => a.date.diff(b.date))
   }
 
   @action
-  public setUpdatingData(updating: boolean) {
-    this.updatingData = updating
+  public setFetchingAndParsing(updating: boolean) {
+    this.fetchingAndParsing = updating
   }
 
   private getWeek(dateTime: ImmutableDateTime): Array<SelectableDate> {
