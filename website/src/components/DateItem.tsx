@@ -12,15 +12,17 @@ interface Props {
 @observer
 export class DateItem extends Component<Props, void> {
   public render() {
+    const hasAtLeastOneShowing = this.props.date.showings.size > 0
     const cssClasses = classNames(
-      "clickable",
       {
+        "clickable": hasAtLeastOneShowing,
+        "disabled-date": !hasAtLeastOneShowing,
         "selected-item": this.props.date.selected
       }
     )
 
     return (
-      <td className={cssClasses} onClick={() => this.props.date.toggleSelection()}>
+      <td className={cssClasses} onClick={() => hasAtLeastOneShowing && this.props.date.toggleSelection()}>
         {this.props.date.label}
       </td>
     )

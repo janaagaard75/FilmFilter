@@ -19,6 +19,7 @@ export class Showing {
     this.totalSeats = this.getTotalSeats(data.seatingInfo)
 
     this.date = store.getOrAddSelectableDate(this.start.toDate())
+    this.date.addShowing(this)
 
     this.movie.addShowing(this)
   }

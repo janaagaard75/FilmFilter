@@ -4,6 +4,10 @@
   cursor: pointer
 }
 
+.disabled-date {
+  color: $gray-lighter;
+}
+
 .selected-item {
   background-color: #ddd;
 }

@@ -3,15 +3,18 @@ import { action } from "mobx"
 import { observable } from "mobx"
 
 import { ImmutableDate } from "./ImmutableDate"
+import { Showing } from "./Showing"
 
 export class SelectableDate {
   constructor(date: ImmutableDate) {
     this.date = date
     this.selected = false
+    this.showings = new Set()
   }
 
   public readonly date: ImmutableDate
   @observable public selected: boolean
+  public showings: Set<Showing>
 
   // TODO: Should this be part of the model? And if so, what about a formatting of the start in Showing.ts?
   public get label(): string {
@@ -22,6 +25,10 @@ export class SelectableDate {
   public get key(): string {
     const key = this.date.format("YYYYMMDD")
     return key
+  }
+
+  public addShowing(showing: Showing) {
+    this.showings.add(showing)
   }
 
   @action
