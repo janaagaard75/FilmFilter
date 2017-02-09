@@ -1,6 +1,8 @@
 import * as moment from "moment"
 import { Moment } from "moment"
 
+import { ImmutableDate } from "./ImmutableDate"
+import { ImmutableDateTime } from "./ImmutableDateTime"
 import { isString } from "../utilities"
 import { parseAsLocalDateTime } from "../utilities"
 
@@ -35,6 +37,16 @@ export abstract class ImmutableMoment {
 
   public month(): number {
     return this.moment.month()
+  }
+
+  public toDate(): ImmutableDate {
+    const date = new ImmutableDate(this.moment)
+    return date
+  }
+
+  public toDateTime(): ImmutableDateTime {
+    const date = new ImmutableDateTime(this.moment)
+    return date
   }
 
   public weekday(): number {

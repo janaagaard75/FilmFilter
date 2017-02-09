@@ -18,8 +18,10 @@ interface Props {
 @observer
 export class App extends Component<Props, void> {
   private async handleUpateData() {
+    this.props.store.setFetchingAndParsing(true)
     const fetchedData = await DataGetter.fetchAndUpdateStoredData()
     this.props.store.setData(fetchedData)
+    this.props.store.setFetchingAndParsing(false)
   }
 
   public render() {
@@ -51,6 +53,8 @@ export class App extends Component<Props, void> {
             </div>
             <div className="mb-3">
               <button className="btn btn-secondary" onClick={() => this.handleUpateData()}>Opdater data</button>
+              {/* TODO: Use an ellipsis character. */}
+              <span className="ml-2">{this.props.store.getFetchingAndParsing() ? "Opdaterer..." : ""}</span>
             </div>
           </div>
         </div>

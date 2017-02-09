@@ -17,6 +17,7 @@ export class Store {
     this.movies = []
     this.showings = []
     this.theaters = []
+    this.fetchingAndParsing = false
   }
 
   @observable private data: Data | undefined
@@ -24,7 +25,7 @@ export class Store {
   @observable private movies: Array<Movie>
   @observable private showings: Array<Showing>
   @observable private theaters: Array<Theater>
-  // TODO: Add an 'updating' state to the store.
+  @observable private fetchingAndParsing: boolean
 
   @computed
   public get matchingShowings(): Array<Showing> {
@@ -56,6 +57,36 @@ export class Store {
     return selectedTheaters
   }
 
+  private addMissingDates() {
+    this.sortDates()
+    const earliest = this.dates[0].date
+    const latest = this.dates[this.dates.length - 1].date
+
+    for (let date = earliest; date.equals(latest); date = date.add(1, "day")) {
+      this.getOrAddSelectableDate(date.toDateTime())
+    }
+  }
+
+  private addStartAndEndDates() {
+    this.sortDates()
+    const earliest = this.dates[0].date
+    const latest = this.dates[this.dates.length - 1].date
+
+    for (let i = 0; i < earliest.weekday(); i++) {
+      const selectableDate = new SelectableDate(earliest.subtract(i, "days"))
+      this.dates.push(selectableDate)
+    }
+
+    for (let i = 6; i > latest.weekday(); i--) {
+      const selectableDate = new SelectableDate(latest.add(i, "days"))
+      this.dates.push(selectableDate)
+    }
+  }
+
+  public getFetchingAndParsing(): boolean {
+    return this.fetchingAndParsing
+  }
+
   public getMovie(movieId: number): Movie {
     if (movieId === -1) {
       return Movie.UndefinedMovie
@@ -74,24 +105,16 @@ export class Store {
     return sorted
   }
 
-  public getSelectableDate(dateTime: ImmutableDateTime): SelectableDate {
+  @action
+  public getOrAddSelectableDate(dateTime: ImmutableDateTime): SelectableDate {
     const existingSelectableDate = this.dates.find(selectableDate => selectableDate.date.equals(dateTime.toDate()))
     if (existingSelectableDate !== undefined) {
       return existingSelectableDate
     }
 
-    const newWeek = this.getWeek(dateTime)
-    const newSelectableDate = newWeek[dateTime.weekday()]
-    this.dates = this.dates.concat(newWeek)
-    // TODO: Sorting doesn't work.
-    this.dates.sort((a, b) => a.date.diff(b.date))
+    const newSelectableDate = new SelectableDate(dateTime)
+    this.dates.push(newSelectableDate)
     return newSelectableDate
-  }
-
-  private getWeek(dateTime: ImmutableDateTime): Array<SelectableDate> {
-    const monday = dateTime.subtract(dateTime.weekday(), "days")
-    const week = [0, 1, 2, 3, 4, 5, 6].map(i => new SelectableDate(monday.add(i, "days")))
-    return week
   }
 
   public getTheater(theaterId: number): Theater {
@@ -123,5 +146,18 @@ export class Store {
       .filter(showingData => parseAsLocalDateTime(showingData.start).valueOf() >= now)
       .map(showingData => new Showing(showingData, this))
       .sort((showingA, showingB) => showingA.start.diff(showingB.start))
+
+    this.addMissingDates()
+    this.addStartAndEndDates()
+    this.sortDates()
+  }
+
+  @action
+  public setFetchingAndParsing(updating: boolean) {
+    this.fetchingAndParsing = updating
+  }
+
+  private sortDates() {
+    this.dates = this.dates.sort((a, b) => a.date.diff(b.date))
   }
 }

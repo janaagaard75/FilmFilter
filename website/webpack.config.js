@@ -56,7 +56,7 @@ module.exports = {
     host: "0.0.0.0",
     port: 9000
   },
-  devtool: isProduction ? "source-map" : "eval-source-map",
+  devtool: "source-map",
   entry: {
     "client": "./src/Main.tsx"
   },

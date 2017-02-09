@@ -28,8 +28,8 @@ export class DataGetter {
     return fetchedData
   }
 
-  private static isWrongVersion(buildTimestamp: number) {
-    const timestampMatches = buildTimestamp === __BUILD_TIMESTAMP__
+  private static isWrongVersion(storedBuildTimestamp: number) {
+    const timestampMatches = storedBuildTimestamp === __BUILD_TIMESTAMP__
     return !timestampMatches
   }
 
