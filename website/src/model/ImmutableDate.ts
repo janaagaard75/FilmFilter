@@ -1,6 +1,7 @@
 import * as moment from "moment"
 import { Moment } from "moment"
 
+import { ImmutableDateTime } from "./ImmutableDateTime"
 import { ImmutableMoment } from "./ImmutableMoment"
 
 type DateDurationUnit = (
@@ -42,5 +43,10 @@ export class ImmutableDate extends ImmutableMoment {
     const clone = this.moment.clone()
     clone.subtract(amount, unit)
     return new ImmutableDate(clone)
+  }
+
+  public toDateTime(): ImmutableDateTime {
+    const date = new ImmutableDateTime(this.moment)
+    return date
   }
 }
