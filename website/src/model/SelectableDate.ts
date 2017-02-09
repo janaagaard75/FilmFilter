@@ -3,12 +3,10 @@ import { action } from "mobx"
 import { observable } from "mobx"
 
 import { ImmutableDate } from "./ImmutableDate"
-import { ImmutableDateTime } from "./ImmutableDateTime"
 
 export class SelectableDate {
-  // TODO: Consider removing ImmutableDateTime and moving toDate and toDateTime out of ImmutableMoment.
-  constructor(dateOrDateTime: ImmutableDate | ImmutableDateTime) {
-    this.date = dateOrDateTime.toDate()
+  constructor(date: ImmutableDate) {
+    this.date = date
     this.selected = false
   }
 
@@ -32,6 +30,6 @@ export class SelectableDate {
   }
 
   public static UndefinedSelectableDate = new SelectableDate(
-    new ImmutableDateTime(moment(new Date(2000, 0, 1)))
+    new ImmutableDate(moment(new Date(2000, 0, 1)))
   )
 }
