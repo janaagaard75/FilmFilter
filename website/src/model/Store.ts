@@ -4,7 +4,7 @@ import { observable } from "mobx"
 
 import { compareByName } from "../utilities"
 import { Data } from "./data/Data"
-import { ImmutableDateTime } from "./ImmutableDateTime"
+import { ImmutableDate } from "./ImmutableDate"
 import { Movie } from "./Movie"
 import { parseAsLocalDateTime } from "../utilities"
 import { SelectableDate } from "./SelectableDate"
@@ -63,7 +63,7 @@ export class Store {
     const latest = this.dates[this.dates.length - 1].date
 
     for (let date = earliest; date.equals(latest); date = date.add(1, "day")) {
-      this.getOrAddSelectableDate(date.toDateTime())
+      this.getOrAddSelectableDate(date)
     }
   }
 
@@ -72,14 +72,12 @@ export class Store {
     const earliest = this.dates[0].date
     const latest = this.dates[this.dates.length - 1].date
 
-    for (let i = 0; i < earliest.weekday(); i++) {
-      const selectableDate = new SelectableDate(earliest.subtract(i, "days"))
-      this.dates.push(selectableDate)
+    for (let i = 1; i < earliest.weekday(); i++) {
+      this.getOrAddSelectableDate(earliest.subtract(i, "days"))
     }
 
     for (let i = 6; i > latest.weekday(); i--) {
-      const selectableDate = new SelectableDate(latest.add(i, "days"))
-      this.dates.push(selectableDate)
+      this.getOrAddSelectableDate(latest.add(i, "days"))
     }
   }
 
@@ -106,13 +104,13 @@ export class Store {
   }
 
   @action
-  public getOrAddSelectableDate(dateTime: ImmutableDateTime): SelectableDate {
-    const existingSelectableDate = this.dates.find(selectableDate => selectableDate.date.equals(dateTime.toDate()))
+  public getOrAddSelectableDate(date: ImmutableDate): SelectableDate {
+    const existingSelectableDate = this.dates.find(selectableDate => selectableDate.date.equals(date))
     if (existingSelectableDate !== undefined) {
       return existingSelectableDate
     }
 
-    const newSelectableDate = new SelectableDate(dateTime)
+    const newSelectableDate = new SelectableDate(date)
     this.dates.push(newSelectableDate)
     return newSelectableDate
   }
