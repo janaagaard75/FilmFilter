@@ -62,7 +62,7 @@ export class Store {
     const earliest = this.dates[0].date
     const latest = this.dates[this.dates.length - 1].date
 
-    for (let date = earliest; date.equals(latest); date = date.add(1, "day")) {
+    for (let date = earliest; !date.equals(latest); date = date.add(1, "day")) {
       this.getOrAddSelectableDate(date)
     }
   }
