@@ -10,7 +10,7 @@ import { Store } from "./model/Store"
 
 declare const process: any
 
-export class ConnectedApp extends RouteComponent<void> {
+export class ConnectedApp extends RouteComponent<void, void, void> {
   constructor() {
     super()
 
@@ -32,7 +32,7 @@ export class ConnectedApp extends RouteComponent<void> {
   public render() {
     return (
       <div>
-        <App routerContext={this.props} store={this.store}/>
+        <App routeProps={this.props} store={this.store}/>
         {this.includeDevTools &&
           <DevTools/>
         }

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Component } from "react"
 import { observer } from "mobx-react"
-import { RouterContext } from "react-router"
+import { RouteComponentProps } from "react-router"
 
 import { DateSelecter } from "./DateSelecter"
 import { MatchingShowings } from "./MatchingShowings"
@@ -11,7 +11,7 @@ import { TheatersSelecter } from "./TheatersSelecter"
 import { DataGetter } from "../model/DataGetter"
 
 interface Props {
-  routerContext: RouterContext.RouterContextProps
+  routeProps: RouteComponentProps<void, void>
   store: Store
 }
 
