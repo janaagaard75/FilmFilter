@@ -14,7 +14,7 @@ type DateDurationUnit = (
 
 export class ImmutableDate extends ImmutableMoment {
   constructor(dateTime: Moment) {
-    super(ImmutableDate.getDate(dateTime))
+    super(ImmutableDate.removeHoursAndMinutes(dateTime))
   }
 
   public add(amount: number, unit?: DateDurationUnit): ImmutableDate {
@@ -28,8 +28,7 @@ export class ImmutableDate extends ImmutableMoment {
     return equals
   }
 
-  /** Return a Moment where the hours and minutes have been removed. */
-  private static getDate(dateTime: Moment): Moment {
+  private static removeHoursAndMinutes(dateTime: Moment): Moment {
     const date = moment(new Date(
       dateTime.year(),
       dateTime.month(),
