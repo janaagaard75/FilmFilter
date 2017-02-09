@@ -72,7 +72,7 @@ export class Store {
     const earliest = this.dates[0].date
     const latest = this.dates[this.dates.length - 1].date
 
-    for (let i = 1; i < earliest.weekday(); i++) {
+    for (let i = 1; i <= earliest.weekday(); i++) {
       this.getOrAddSelectableDate(earliest.subtract(i, "days"))
     }
 
