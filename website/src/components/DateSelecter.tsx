@@ -20,7 +20,7 @@ export class DateSelecter extends Component<Props, void> {
       : "Dato: " + this.props.selectedDates.map(date => date.label).join(", ")
 
     const weeks = splitIntoChunks(this.props.dates, 7)
-    const firstEightWeeks = weeks.slice(0, 8)
+    const firstWeeks = weeks.slice(0, 10)
 
     return (
       <CollapsibleCard header={header}>
@@ -35,7 +35,7 @@ export class DateSelecter extends Component<Props, void> {
               <td>Lø</td>
               <td>Sø</td>
             </tr>
-            {firstEightWeeks.map(week =>
+            {firstWeeks.map(week =>
               <Week key={"week-" + week[0].key} dates={week}/>
             )}
           </tbody>
