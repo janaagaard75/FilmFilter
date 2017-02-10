@@ -1,24 +1,20 @@
 import { action } from "mobx"
-import { computed } from "mobx"
 import { observable } from "mobx"
 
 import { TheaterData } from "./data/TheaterData"
 
 export class Theater {
   constructor(data: TheaterData) {
+    this.favorited = false
     this.name = Theater.cleanUpTheaterName(data.name)
-    this._selected = false
+    this.selected = false
     this.theatherUrl = "http://www.kino.dk/" + data.theatherUrl
   }
 
-  @observable private _selected: boolean
+  @observable public favorited: boolean
   public readonly name: string
+  @observable public selected: boolean
   public readonly theatherUrl: string
-
-  @computed
-  public get selected(): boolean {
-    return this._selected
-  }
 
   public static readonly UndefinedTheater = new Theater({
     name: "",
@@ -31,7 +27,12 @@ export class Theater {
   }
 
   @action
+  public toggleFavorited() {
+    this.favorited = !this.favorited
+  }
+
+  @action
   public toggleSelection() {
-    this._selected = !this._selected
+    this.selected = !this.selected
   }
 }

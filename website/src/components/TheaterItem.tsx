@@ -6,7 +6,6 @@ import { observer } from "mobx-react"
 import { Theater } from "../model/Theater"
 
 interface Props {
-  toggleTheaterSelection: () => void
   theater: Theater
 }
 
@@ -14,25 +13,15 @@ interface Props {
 export class TheaterItem extends Component<Props, void> {
   public render() {
     const cssClasses = classNames(
-      "col-12 col-md-6 col-lg-4",
+      "col-12 col-md-6 col-lg-4 clickable ellipsis",
       {
         "selected-item": this.props.theater.selected
       }
     )
 
     return (
-      <div className={cssClasses}>
-        <div className="form-check">
-          <label className="form-check-label">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              defaultChecked={this.props.theater.selected}
-              onChange={this.props.toggleTheaterSelection}
-            />
-            {" " + this.props.theater.name}
-          </label>
-        </div>
+      <div className={cssClasses} onClick={() => this.props.theater.toggleSelection()}>
+        {this.props.theater.name}
       </div>
     )
   }

@@ -8,6 +8,12 @@
   color: $gray-lighter;
 }
 
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .selected-item {
   background-color: #ddd;
 }

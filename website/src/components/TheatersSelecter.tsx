@@ -26,7 +26,6 @@ export class TheatersSelecter extends Component<Props, void> {
             <TheaterItem
               key={theater.theatherUrl}
               theater={theater}
-              toggleTheaterSelection={() => theater.toggleSelection()}
             />
           )}
         </div>
