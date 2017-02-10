@@ -1,5 +1,9 @@
 @import "bootstrap";
 
+html {
+  overflow-y: scroll;
+}
+
 .clickable {
   cursor: pointer
 }
