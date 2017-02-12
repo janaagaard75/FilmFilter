@@ -23,9 +23,9 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@15.0.8":
-  version "15.0.8"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-15.0.8.tgz#3aaceb79ef2a27fb41e4ab681c2e4b35803d7918"
+"@types/react@*", "@types/react@15.0.9":
+  version "15.0.9"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-15.0.9.tgz#b45b6174870890a7f8426cdad6935ba7af4c13f4"
 
 "@types/whatwg-fetch@0.0.33":
   version "0.0.33"
@@ -1049,13 +1049,13 @@ date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
 
-debug@2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.0.tgz#bc596bcabe7617f11d9fa15361eded5608b8499b"
+debug@2.6.1, debug@^2.2.0:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.1.tgz#79855090ba2c4e3115cc7d8769491d58f0491351"
   dependencies:
     ms "0.7.2"
 
-debug@^2.2.0, debug@~2.2.0:
+debug@~2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.2.0.tgz#f87057e995b1a1f6ae6a4960664137bc56f039da"
   dependencies:
@@ -1504,9 +1504,9 @@ findup-sync@~0.3.0:
   dependencies:
     glob "~5.0.0"
 
-firebase-tools@3.2.2:
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/firebase-tools/-/firebase-tools-3.2.2.tgz#35efaaafd7acd186ac88587325c285e0fa2fb4cd"
+firebase-tools@3.2.3:
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/firebase-tools/-/firebase-tools-3.2.3.tgz#c1a1473a0a01e131c120c6158dc50d99cbc63fb7"
   dependencies:
     JSONStream "^1.2.1"
     archiver "^0.16.0"
@@ -2712,11 +2712,11 @@ moment@2.17.1:
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.17.1.tgz#fed9506063f36b10f066c8b59a144d7faebe1d82"
 
 morgan@^1.5.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/morgan/-/morgan-1.8.0.tgz#7884d7816b7e5a22db11a9e3a572b197a0e5566c"
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/morgan/-/morgan-1.8.1.tgz#f93023d3887bd27b78dfd6023cea7892ee27a4b1"
   dependencies:
     basic-auth "~1.1.0"
-    debug "2.6.0"
+    debug "2.6.1"
     depd "~1.1.0"
     on-finished "~2.3.0"
     on-headers "~1.0.1"
@@ -4329,7 +4329,16 @@ ua-parser-js@^0.7.9:
   version "0.7.12"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.12.tgz#04c81a99bdd5dc52263ea29d24c6bf8d4818a4bb"
 
-uglify-js@2.7.x, uglify-js@^2.7.5, "uglify-js@git://github.com/mishoo/UglifyJS2#harmony":
+uglify-js@2.7.x, uglify-js@^2.7.5:
+  version "2.7.5"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.7.5.tgz#4612c0c7baaee2ba7c487de4904ae122079f2ca8"
+  dependencies:
+    async "~0.2.6"
+    source-map "~0.5.1"
+    uglify-to-browserify "~1.0.0"
+    yargs "~3.10.0"
+
+"uglify-js@git://github.com/mishoo/UglifyJS2#harmony":
   version "2.7.5"
   resolved "git://github.com/mishoo/UglifyJS2#4bd31607f665499543bbc83192225203ae6763d1"
   dependencies:
