@@ -21,7 +21,8 @@ export class TheaterItem extends Component<Props, void> {
 
     return (
       <div className={cssClasses}>
-        <span onClick={() => this.props.theater.toggleSelection()} className="clickable ellipsis">{this.props.theater.name}</span>
+        {/* TODO: Fix the ellipsis. */}
+        <span className="ellipsis"><span className="fa fa-star-o"/> <span onClick={() => this.props.theater.toggleSelection()} className="clickable">{this.props.theater.name}</span></span>
       </div>
     )
   }
