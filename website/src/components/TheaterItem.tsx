@@ -12,17 +12,24 @@ interface Props {
 @observer
 export class TheaterItem extends Component<Props, void> {
   public render() {
-    const cssClasses = classNames(
-      "col-12 col-md-6 col-lg-4",
+    const divCssClasses = classNames(
+      "col-12 col-md-6 col-lg-4 ellipsis",
       {
         "selected-item": this.props.theater.selected
       }
     )
 
+    const starCssClasses = classNames(
+      "clickcable fa",
+      {
+        "fa-star": this.props.theater.favorited,
+        "fa-star-o": !this.props.theater.favorited
+      }
+    )
+
     return (
-      <div className={cssClasses}>
-        {/* TODO: Fix the ellipsis. */}
-        <span className="ellipsis"><span className="fa fa-star-o"/> <span onClick={() => this.props.theater.toggleSelection()} className="clickable">{this.props.theater.name}</span></span>
+      <div className={divCssClasses}>
+        <span className={starCssClasses} onClick={() => this.props.theater.toggleFavorited()}/> <span className="clickable" onClick={() => this.props.theater.toggleSelection()}>{this.props.theater.name}</span>
       </div>
     )
   }
