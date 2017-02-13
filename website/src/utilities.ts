@@ -1,3 +1,5 @@
+// TODO: Create utility classes with static methods.
+
 interface HasName {
   name: string
 }
