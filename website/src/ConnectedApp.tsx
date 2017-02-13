@@ -4,7 +4,6 @@ import DevTools from "mobx-react-devtools"
 import { useStrict } from "mobx"
 
 import { App } from "./components/App"
-import { DataGetter } from "./model/DataGetter"
 import { RouteComponent } from "./model/RouteComponent"
 import { Store } from "./model/Store"
 
@@ -19,11 +18,7 @@ export class ConnectedApp extends RouteComponent<void, void, void> {
     useStrict(true)
 
     this.store = new Store()
-
-    DataGetter.getData()
-      .then(data => {
-        this.store.setData(data)
-      })
+    this.store.initializeData()
   }
 
   private includeDevTools: boolean

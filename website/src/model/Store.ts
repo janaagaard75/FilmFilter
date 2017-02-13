@@ -4,6 +4,8 @@ import { observable } from "mobx"
 
 import { compareByName } from "../utilities"
 import { Data } from "./data/Data"
+import { DataFetcher } from "./DataFetcher"
+import { DataStorer } from "./DataStorer"
 import { ImmutableDate } from "./ImmutableDate"
 import { Movie } from "./Movie"
 import { parseAsLocalDateTime } from "../utilities"
@@ -25,6 +27,7 @@ export class Store {
   @observable private movies: Array<Movie>
   @observable private showings: Array<Showing>
   @observable private theaters: Array<Theater>
+  // TODO: Split into a fetching and a parsing boolean.
   @observable private fetchingAndParsing: boolean
 
   @computed
@@ -79,6 +82,31 @@ export class Store {
     for (let i = 6; i > latest.weekday(); i--) {
       this.getOrAddSelectableDate(latest.add(i, "days"))
     }
+  }
+
+  public initializeData(): void {
+    const storedData = DataStorer.loadData()
+    if (DataStorer.dataIsOkay(storedData)) {
+      this.setData(storedData.data)
+    }
+    else {
+      this.fetchAndUpdateData()
+    }
+  }
+
+  @action
+  public async fetchAndUpdateData(): Promise<void> {
+    this.setFetchingAndParsing(true)
+
+    const fetchedData = await DataFetcher.fetchData()
+    if (fetchedData === undefined) {
+      throw new Error("Could not fetch data.")
+    }
+
+    DataStorer.saveData(fetchedData)
+    this.setData(fetchedData)
+
+    this.setFetchingAndParsing(false)
   }
 
   public getFetchingAndParsing(): boolean {
@@ -150,6 +178,7 @@ export class Store {
     this.sortDates()
   }
 
+  // TODO: Might not need this method any more.
   @action
   public setFetchingAndParsing(updating: boolean) {
     this.fetchingAndParsing = updating
