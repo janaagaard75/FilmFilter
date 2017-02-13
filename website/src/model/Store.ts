@@ -1,4 +1,5 @@
 import { action } from "mobx"
+import { autorun } from "mobx"
 import { computed } from "mobx"
 import { observable } from "mobx"
 
@@ -20,6 +21,8 @@ export class Store {
     this.showings = []
     this.theaters = []
     this.fetchingAndParsing = false
+
+    autorun(this.storeSettings)
   }
 
   @observable private data: Data | undefined
@@ -182,6 +185,17 @@ export class Store {
   @action
   public setFetchingAndParsing(updating: boolean) {
     this.fetchingAndParsing = updating
+  }
+
+  private storeSettings() {
+    const theaters = this.getTheatersSortedByName()
+    const settings = {
+      favoritedTheaters: theaters.filter(theater => theater.favorited),
+      selectedTheaters: theaters.filter(theater => theater.selected)
+    }
+
+    const settingsString = JSON.stringify(settings)
+    localStorage.setItem("settings", settingsString)
   }
 
   private sortDates() {
