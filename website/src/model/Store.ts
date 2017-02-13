@@ -188,6 +188,10 @@ export class Store {
   }
 
   private storeSettings() {
+    if (this === undefined) {
+      return
+    }
+
     const theaters = this.getTheatersSortedByName()
     const settings = {
       favoritedTheaters: theaters.filter(theater => theater.favorited),
