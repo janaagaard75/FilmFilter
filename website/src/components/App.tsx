@@ -25,6 +25,8 @@ export class App extends Component<Props, void> {
   }
 
   public render() {
+    const ellipsis = "\u2026"
+
     return (
       <div className="container-fluid">
         <h1>Film Filter</h1>
@@ -53,8 +55,7 @@ export class App extends Component<Props, void> {
             </div>
             <div className="mb-3">
               <button className="btn btn-secondary" onClick={() => this.handleUpateData()}>Opdater data</button>
-              {/* TODO: Use an ellipsis character. */}
-              <span className="ml-2">{this.props.store.getFetchingAndParsing() ? "Opdaterer..." : ""}</span>
+              <span className="ml-2">{this.props.store.getFetchingAndParsing() ? "Opdaterer" + ellipsis : ""}</span>
             </div>
           </div>
         </div>
