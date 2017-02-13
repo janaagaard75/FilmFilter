@@ -11,7 +11,6 @@ interface Props {
   selectedTheaters: Array<Theater>
 }
 
-// TODO: Add favorite theaters and save the list in local storage.
 @observer
 export class TheatersSelecter extends Component<Props, void> {
   public render() {
