@@ -3,7 +3,7 @@ import { Data } from "./data/Data"
 interface TimestampedData {
   buildTimestamp: number,
   data: Data,
-  storeTimestamp: Date
+  storeTimestamp: number
 }
 
 export class DataStorer {
@@ -30,7 +30,7 @@ export class DataStorer {
     const storedData: TimestampedData = {
       buildTimestamp: __BUILD_TIMESTAMP__,
       data: data,
-      storeTimestamp: new Date()
+      storeTimestamp: new Date().valueOf()
     }
 
     const dataString = JSON.stringify(storedData)
@@ -42,7 +42,7 @@ export class DataStorer {
     return timestampMatches
   }
 
-  private static isRecentEnough(storeTimestamp: Date) {
+  private static isRecentEnough(storeTimestamp: number) {
     const now = new Date()
     // tslint:disable-next-line prefer-const
     let latestDataCrawl = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 5, 0, 0)
@@ -51,7 +51,7 @@ export class DataStorer {
     }
 
     const millisecondsIn24Hours = 24 * 60 * 60 * 1000
-    const millisecondsSinceLatestFetch = latestDataCrawl.valueOf() - storeTimestamp.valueOf()
+    const millisecondsSinceLatestFetch = latestDataCrawl.valueOf() - storeTimestamp
     const isRecentEnough = millisecondsSinceLatestFetch < millisecondsIn24Hours
     return isRecentEnough
   }
