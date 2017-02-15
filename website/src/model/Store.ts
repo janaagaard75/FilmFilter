@@ -16,22 +16,22 @@ import { Theater } from "./Theater"
 
 export class Store {
   constructor() {
+    this._fetchingAndParsing = false
     this.dates = []
     this.movies = []
     this.showings = []
     this.theaters = []
-    this.fetchingAndParsing = false
 
     autorun(this.storeSettings)
   }
 
+  // TODO: Split into a fetching and a parsing boolean.
+  @observable private _fetchingAndParsing: boolean
   @observable private data: Data | undefined
-  @observable public dates: Array<SelectableDate>
   @observable private movies: Array<Movie>
   @observable private showings: Array<Showing>
   @observable private theaters: Array<Theater>
-  // TODO: Split into a fetching and a parsing boolean.
-  @observable private fetchingAndParsing: boolean
+  @observable public dates: Array<SelectableDate>
 
   @computed
   public get matchingShowings(): Array<Showing> {
@@ -43,6 +43,11 @@ export class Store {
       .filter(showing => this.selectedDates.length === 0 || showing.date.selected)
 
     return matching
+  }
+
+  @computed
+  public get fetchingAndParsing(): boolean {
+    return this._fetchingAndParsing
   }
 
   @computed
@@ -110,10 +115,6 @@ export class Store {
     this.setData(fetchedData)
 
     this.setFetchingAndParsing(false)
-  }
-
-  public getFetchingAndParsing(): boolean {
-    return this.fetchingAndParsing
   }
 
   public getMovie(movieId: number): Movie {
@@ -184,7 +185,7 @@ export class Store {
   // TODO: Might not need this method any more.
   @action
   public setFetchingAndParsing(updating: boolean) {
-    this.fetchingAndParsing = updating
+    this._fetchingAndParsing = updating
   }
 
   private storeSettings() {

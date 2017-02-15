@@ -47,7 +47,7 @@ export class App extends Component<Props, void> {
             </div>
             <div className="mb-3">
               <button className="btn btn-secondary" onClick={() => this.props.store.fetchAndUpdateData()}>Opdater data</button>
-              <span className="ml-2">{this.props.store.getFetchingAndParsing() ? "Opdaterer" + ellipsis : ""}</span>
+              <span className="ml-2">{this.props.store.fetchingAndParsing ? "Opdaterer" + ellipsis : ""}</span>
             </div>
           </div>
         </div>
