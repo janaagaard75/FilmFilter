@@ -25,7 +25,6 @@ export class Store {
     autorun(this.storeSettings)
   }
 
-  // TODO: Split into a fetching and a parsing boolean.
   @observable private _fetchingAndParsing: boolean
   @observable private data: Data | undefined
   @observable private movies: Array<Movie>
