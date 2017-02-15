@@ -35,7 +35,7 @@ export class App extends Component<Props, void> {
             </div>
             <div className="mb-3">
               <TheatersSelecter
-                theaters={this.props.store.getTheatersSortedByName()}
+                theaters={this.props.store.theatersSortedByName}
                 selectedTheaters={this.props.store.selectedTheaters}
               />
             </div>

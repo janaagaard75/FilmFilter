@@ -74,6 +74,12 @@ export class Store {
     return selectedTheaters
   }
 
+  @computed
+  public get theatersSortedByName(): Array<Theater> {
+    const sortedByName = this.theaters.sort(compareByName)
+    return sortedByName
+  }
+
   private addMissingDates() {
     this.sortDates()
     const earliest = this.dates[0].date
@@ -158,11 +164,6 @@ export class Store {
     return theater
   }
 
-  public getTheatersSortedByName(): Array<Theater> {
-    const sortedByName = this.theaters.sort(compareByName)
-    return sortedByName
-  }
-
   @action
   public setData(data: Data) {
     this.data = data
@@ -194,7 +195,7 @@ export class Store {
       return
     }
 
-    const theaters = this.getTheatersSortedByName()
+    const theaters = this.theatersSortedByName
     const settings = {
       favoritedTheaters: theaters.filter(theater => theater.favorited),
       selectedTheaters: theaters.filter(theater => theater.selected)
