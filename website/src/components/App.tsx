@@ -26,7 +26,7 @@ export class App extends Component<Props, void> {
               ? <span className="mr-3">Opdaterer&hellip;</span>
               : ""
             }
-            <button className="btn btn-secondary btn-sm" onClick={() => this.props.store.fetchAndUpdateData()}>Opdater data</button>
+            <button className="btn btn-secondary btn-sm" onClick={() => this.props.store.fetchAndUpdateData()}disabled={this.props.store.fetchingAndParsing}>Opdater data</button>
           </span>
         </div>
         <div className="row">
