@@ -17,14 +17,21 @@ interface Props {
 @observer
 export class App extends Component<Props, void> {
   public render() {
-    const ellipsis = "\u2026"
-
     return (
       <div className="container-fluid">
-        <h1>Film Filter</h1>
+        <div className="d-flex">
+          <h1 className="mr-auto">Film Filter</h1>
+          <span className="align-self-center">
+            {this.props.store.fetchingAndParsing
+              ? <span className="mr-3">Opdaterer&hellip;</span>
+              : ""
+            }
+            <button className="btn btn-secondary btn-sm" onClick={() => this.props.store.fetchAndUpdateData()}>Opdater data</button>
+          </span>
+        </div>
         <div className="row">
           <div className="col-md-5 flex-last mb-3">
-            <MatchingShowings matchingShowings={this.props.store.matchingShowings}/>
+            <MatchingShowings matchingShowings={this.props.store.matchingShowings} />
           </div>
           <div className="col-md-7">
             <div className="mb-3">
@@ -44,10 +51,6 @@ export class App extends Component<Props, void> {
                 dates={this.props.store.dates}
                 selectedDates={this.props.store.selectedDates}
               />
-            </div>
-            <div className="mb-3">
-              <button className="btn btn-secondary" onClick={() => this.props.store.fetchAndUpdateData()}>Opdater data</button>
-              <span className="ml-2">{this.props.store.fetchingAndParsing ? "Opdaterer" + ellipsis : ""}</span>
             </div>
           </div>
         </div>
