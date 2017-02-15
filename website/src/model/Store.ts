@@ -51,6 +51,12 @@ export class Store {
   }
 
   @computed
+  public get moviesSortedByNumberOfShowings(): Array<Movie> {
+    const sorted = this.movies.sort((a, b) => b.showings.length - a.showings.length)
+    return sorted
+  }
+
+  @computed
   public get selectedDates(): Array<SelectableDate> {
     const selectedDates = this.dates.filter(date => date.selected)
     return selectedDates
@@ -128,11 +134,6 @@ export class Store {
     }
 
     return movie
-  }
-
-  public getMoviesSortedByNumberOfShowings(): Array<Movie> {
-    const sorted = this.movies.sort((a, b) => b.showings.length - a.showings.length)
-    return sorted
   }
 
   @action

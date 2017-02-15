@@ -29,7 +29,7 @@ export class App extends Component<Props, void> {
           <div className="col-md-7">
             <div className="mb-3">
               <MoviesSelecter
-                movies={this.props.store.getMoviesSortedByNumberOfShowings().slice(0, 24)}
+                movies={this.props.store.moviesSortedByNumberOfShowings.slice(0, 24)}
                 selectedMovies={this.props.store.selectedMovies}
               />
             </div>
