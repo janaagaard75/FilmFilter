@@ -21,8 +21,6 @@ export class Store {
     this.movies = []
     this.showings = []
     this.theaters = []
-
-    autorun(this.storeSettings)
   }
 
   @observable private _fetchingAndParsing: boolean
@@ -103,16 +101,6 @@ export class Store {
     }
   }
 
-  public initializeData(): void {
-    const storedData = DataStorer.loadData()
-    if (DataStorer.dataIsOkay(storedData)) {
-      this.setData(storedData.data)
-    }
-    else {
-      this.fetchAndUpdateData()
-    }
-  }
-
   @action
   public async fetchAndUpdateData(): Promise<void> {
     this.setFetchingAndParsing(true)
@@ -163,6 +151,32 @@ export class Store {
     return theater
   }
 
+  public initialize() {
+    autorun(this.saveSettings)
+  }
+
+  public initializeData(): void {
+    const storedData = DataStorer.loadData()
+    if (DataStorer.dataIsOkay(storedData)) {
+      this.setData(storedData.data)
+    }
+    else {
+      this.fetchAndUpdateData()
+    }
+  }
+
+  // Using property to avoid 'this' being undefined.
+  private saveSettings = () => {
+    const theaters = this.theatersSortedByName
+    const settings = {
+      favoritedTheaters: theaters.filter(theater => theater.favorited),
+      selectedTheaters: theaters.filter(theater => theater.selected)
+    }
+
+    const settingsString = JSON.stringify(settings)
+    localStorage.setItem("settings", settingsString)
+  }
+
   @action
   public setData(data: Data) {
     this.data = data
@@ -186,21 +200,6 @@ export class Store {
   @action
   private setFetchingAndParsing(updating: boolean) {
     this._fetchingAndParsing = updating
-  }
-
-  private storeSettings() {
-    if (this === undefined) {
-      return
-    }
-
-    const theaters = this.theatersSortedByName
-    const settings = {
-      favoritedTheaters: theaters.filter(theater => theater.favorited),
-      selectedTheaters: theaters.filter(theater => theater.selected)
-    }
-
-    const settingsString = JSON.stringify(settings)
-    localStorage.setItem("settings", settingsString)
   }
 
   private sortDates() {

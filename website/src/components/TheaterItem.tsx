@@ -20,7 +20,7 @@ export class TheaterItem extends Component<Props, void> {
     )
 
     const starCssClasses = classNames(
-      "clickcable fa",
+      "clickable fa",
       {
         "fa-star": this.props.theater.favorited,
         "fa-star-o": !this.props.theater.favorited
