@@ -1,5 +1,3 @@
-import * as LZString from "lz-string"
-
 import { Data } from "./data/Data"
 
 interface TimestampedData {
@@ -19,13 +17,11 @@ export class DataStorer {
   }
 
   public static loadData(): TimestampedData | undefined {
-    const compressedData = localStorage.getItem(this.dataKey)
-    // tslint:disable-next-line no-null-keyword
-    if (compressedData === null) {
+    const dataString = localStorage.getItem(this.dataKey)
+    if (dataString === null) {
       return undefined
     }
 
-    const dataString = LZString.decompressFromUTF16(compressedData)
     try {
       return JSON.parse(dataString) as TimestampedData
     }
@@ -42,8 +38,7 @@ export class DataStorer {
     }
 
     const dataString = JSON.stringify(storedData)
-    const compressedData = LZString.compressToUTF16(dataString)
-    localStorage.setItem(this.dataKey, compressedData)
+    localStorage.setItem(this.dataKey, dataString)
   }
 
   private static isCorrectVersion(storedBuildTimestamp: number) {
