@@ -183,9 +183,8 @@ export class Store {
     this.sortDates()
   }
 
-  // TODO: Might not need this method any more.
   @action
-  public setFetchingAndParsing(updating: boolean) {
+  private setFetchingAndParsing(updating: boolean) {
     this._fetchingAndParsing = updating
   }
 
