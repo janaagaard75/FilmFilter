@@ -18,6 +18,7 @@ export class DataStorer {
 
   public static loadData(): TimestampedData | undefined {
     const dataString = localStorage.getItem(this.dataKey)
+    // tslint:disable-next-line no-null-keyword
     if (dataString === null) {
       return undefined
     }

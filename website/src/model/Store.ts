@@ -14,6 +14,12 @@ import { SelectableDate } from "./SelectableDate"
 import { Showing } from "./Showing"
 import { Theater } from "./Theater"
 
+// TODO: Only save the theaterUrls in the arrays.
+interface Settings {
+  favoritedTheaters: Array<Theater>
+  selectedTheaters: Array<Theater>
+}
+
 export class Store {
   constructor() {
     this._fetchingAndParsing = false
@@ -163,12 +169,38 @@ export class Store {
     else {
       this.fetchAndUpdateData()
     }
+
+    this.loadSettings()
   }
 
-  // Using property to avoid 'this' being undefined.
+  @action
+  private loadSettings() {
+    const settingsString = localStorage.getItem("settings")
+
+    // tslint:disable-next-line no-null-keyword
+    if (settingsString === null) {
+      return
+    }
+
+    const settings = JSON.parse(settingsString) as Settings
+    const favoritedTheaterUrls = settings.favoritedTheaters.map(theater => theater.theatherUrl)
+    const selectedTheaterUrls = settings.selectedTheaters.map(theater => theater.theatherUrl)
+
+    for (const theater of this.theaters) {
+      if (favoritedTheaterUrls.indexOf(theater.theatherUrl) !== -1) {
+        theater.favorited = true
+      }
+
+      if (selectedTheaterUrls.indexOf(theater.theatherUrl) !== -1) {
+        theater.selected = true
+      }
+    }
+  }
+
+  // Using member construction to avoid 'this' being undefined.
   private saveSettings = () => {
     const theaters = this.theatersSortedByName
-    const settings = {
+    const settings: Settings = {
       favoritedTheaters: theaters.filter(theater => theater.favorited),
       selectedTheaters: theaters.filter(theater => theater.selected)
     }
