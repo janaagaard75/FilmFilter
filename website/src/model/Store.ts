@@ -183,11 +183,11 @@ export class Store {
 
     const settings = JSON.parse(settingsString) as Settings
     for (const theater of this.theaters) {
-      if (settings.favoritedTheaterUrls.indexOf(theater.theatherUrl) !== -1) {
+      if (settings.favoritedTheaterUrls.indexOf(theater.theaterUrl) !== -1) {
         theater.favorited = true
       }
 
-      if (settings.selectedTheaterUrls.indexOf(theater.theatherUrl) !== -1) {
+      if (settings.selectedTheaterUrls.indexOf(theater.theaterUrl) !== -1) {
         theater.selected = true
       }
     }
@@ -196,8 +196,8 @@ export class Store {
   // Using member construction to avoid 'this' being undefined.
   private saveSettings = () => {
     const settings: Settings = {
-      favoritedTheaterUrls: this.theaters.filter(theater => theater.favorited).map(theater => theater.theatherUrl),
-      selectedTheaterUrls: this.theaters.filter(theater => theater.selected).map(theater => theater.theatherUrl)
+      favoritedTheaterUrls: this.theaters.filter(theater => theater.favorited).map(theater => theater.theaterUrl),
+      selectedTheaterUrls: this.theaters.filter(theater => theater.selected).map(theater => theater.theaterUrl)
     }
 
     const settingsString = JSON.stringify(settings)

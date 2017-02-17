@@ -21,7 +21,7 @@ export class ShowingRow extends Component<Props, void> {
           </a>
         </td>
         <td>
-          <a href={this.props.showing.theater.theatherUrl}>
+          <a href={this.props.showing.theater.theaterUrl}>
             {this.props.showing.theater.name}
           </a>
         </td>

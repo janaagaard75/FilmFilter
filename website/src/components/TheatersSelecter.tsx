@@ -27,7 +27,7 @@ export class TheatersSelecter extends Component<Props, void> {
         <div className="row">
           {favoritedTheaters.map(theater =>
             <TheaterItem
-              key={theater.theatherUrl}
+              key={theater.theaterUrl}
               theater={theater}
             />
           )}
@@ -40,7 +40,7 @@ export class TheatersSelecter extends Component<Props, void> {
         <div className="row">
           {notFavoritedTheaters.map(theater =>
             <TheaterItem
-              key={theater.theatherUrl}
+              key={theater.theaterUrl}
               theater={theater}
             />
           )}

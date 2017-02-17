@@ -8,14 +8,13 @@ export class Theater {
     this.favorited = false
     this.name = Theater.cleanUpTheaterName(data.name)
     this.selected = false
-    this.theatherUrl = "http://www.kino.dk/" + data.theatherUrl
+    this.theaterUrl = "http://www.kino.dk/" + data.theatherUrl
   }
 
   @observable public favorited: boolean
   public readonly name: string
   @observable public selected: boolean
-  // TODO: Rename to theaterUrl
-  public readonly theatherUrl: string
+  public readonly theaterUrl: string
 
   public static readonly UndefinedTheater = new Theater({
     name: "",
