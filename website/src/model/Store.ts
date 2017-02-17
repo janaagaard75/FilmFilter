@@ -14,10 +14,9 @@ import { SelectableDate } from "./SelectableDate"
 import { Showing } from "./Showing"
 import { Theater } from "./Theater"
 
-// TODO: Only save the theaterUrls in the arrays.
 interface Settings {
-  favoritedTheaters: Array<Theater>
-  selectedTheaters: Array<Theater>
+  favoritedTheaterUrls: Array<string>
+  selectedTheaterUrls: Array<string>
 }
 
 export class Store {
@@ -183,15 +182,12 @@ export class Store {
     }
 
     const settings = JSON.parse(settingsString) as Settings
-    const favoritedTheaterUrls = settings.favoritedTheaters.map(theater => theater.theatherUrl)
-    const selectedTheaterUrls = settings.selectedTheaters.map(theater => theater.theatherUrl)
-
     for (const theater of this.theaters) {
-      if (favoritedTheaterUrls.indexOf(theater.theatherUrl) !== -1) {
+      if (settings.favoritedTheaterUrls.indexOf(theater.theatherUrl) !== -1) {
         theater.favorited = true
       }
 
-      if (selectedTheaterUrls.indexOf(theater.theatherUrl) !== -1) {
+      if (settings.selectedTheaterUrls.indexOf(theater.theatherUrl) !== -1) {
         theater.selected = true
       }
     }
@@ -199,10 +195,9 @@ export class Store {
 
   // Using member construction to avoid 'this' being undefined.
   private saveSettings = () => {
-    const theaters = this.theatersSortedByName
     const settings: Settings = {
-      favoritedTheaters: theaters.filter(theater => theater.favorited),
-      selectedTheaters: theaters.filter(theater => theater.selected)
+      favoritedTheaterUrls: this.theaters.filter(theater => theater.favorited).map(theater => theater.theatherUrl),
+      selectedTheaterUrls: this.theaters.filter(theater => theater.selected).map(theater => theater.theatherUrl)
     }
 
     const settingsString = JSON.stringify(settings)

@@ -18,8 +18,8 @@ export class ConnectedApp extends RouteComponent<void, void, void> {
     useStrict(true)
 
     this.store = new Store()
-    this.store.initialize()
     this.store.initializeData()
+    this.store.initialize()
   }
 
   private includeDevTools: boolean

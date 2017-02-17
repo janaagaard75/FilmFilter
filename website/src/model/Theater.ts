@@ -14,6 +14,7 @@ export class Theater {
   @observable public favorited: boolean
   public readonly name: string
   @observable public selected: boolean
+  // TODO: Rename to theaterUrl
   public readonly theatherUrl: string
 
   public static readonly UndefinedTheater = new Theater({
