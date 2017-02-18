@@ -15,6 +15,7 @@ export class ConnectedApp extends RouteComponent<void, void, void> {
 
     this.includeDevTools = process.env.NODE_ENV === "development"
 
+    // TODO: Consider turning off strict mode. Not sure it's worth it.
     useStrict(true)
 
     this.store = new Store()
