@@ -107,6 +107,7 @@ export class Store {
     }
   }
 
+  // TODO: This should not clear the lists of favorited and selected theaters.
   @action
   public async fetchAndUpdateData(): Promise<void> {
     this.setFetchingAndParsing(true)
