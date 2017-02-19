@@ -28,6 +28,7 @@ export class MoviesSelecter extends Component<Props, State> {
   }
 
   private handleKeyUp(formEvent: FormEvent<HTMLInputElement>) {
+    // TODO: Hitting Escape should clear the input field.
     const filter = formEvent.currentTarget.value.trim()
     this.props.setMovieFilter(filter)
   }
