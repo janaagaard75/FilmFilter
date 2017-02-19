@@ -37,6 +37,17 @@ export class Store {
   @observable public dates: Array<SelectableDate>
 
   @computed
+  public get fetchingAndParsing(): boolean {
+    return this._fetchingAndParsing
+  }
+
+  @computed
+  public get matchingMovies(): Array<Movie> {
+    const matchingMovies = this.movies.filter(movie => movie.titleMatchesFilter(this.movieFilter))
+    return matchingMovies
+  }
+
+  @computed
   public get matchingShowings(): Array<Showing> {
     const matching = this.showings
       // TODO: Support movies that don't have a separate move page.
@@ -46,17 +57,6 @@ export class Store {
       .filter(showing => this.selectedDates.length === 0 || showing.date.selected)
 
     return matching
-  }
-
-  @computed
-  public get fetchingAndParsing(): boolean {
-    return this._fetchingAndParsing
-  }
-
-  @computed
-  public get matchingMovies(): Array<Movie> {
-    // TODO: Filter movies.
-    return this.movies
   }
 
   @computed

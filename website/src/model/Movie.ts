@@ -33,17 +33,25 @@ export class Movie {
     posterUrl: ""
   })
 
-  public addShowing(showing: Showing) {
+  public addShowing(showing: Showing): void {
     this.showings.push(showing)
   }
 
-  public static compareByNumberOfShowings(a: Movie, b: Movie) {
+  public titleMatchesFilter(filter: string): boolean {
+    const matches
+      = this.originalTitle.indexOf(filter) !== -1
+      || (this.danishTitle !== undefined
+        && this.danishTitle.indexOf(filter) !== -1)
+    return matches
+  }
+
+  public static compareByNumberOfShowings(a: Movie, b: Movie): number {
     const compare = b.showings.length - a.showings.length
     return compare
   }
 
   @action
-  public toggleSelection() {
+  public toggleSelection(): void {
     this.selected = !this.selected
   }
 }
