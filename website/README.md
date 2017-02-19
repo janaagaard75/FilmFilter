@@ -22,12 +22,8 @@ Consider installing `firebase-tools` as a global npm package.
 
 * Movies sometimes shuffle around when being selected. Maybe they should also be sorted by name.
 * Add a reset button?
-* Make it easy to select a group of cinemas.
-* Remember selected cinemas.
 * Better presentation of showings.
   * If a single movie has been selected, it's not necessary to show the name of the movie in the showings list.
-* Better presentation of dates. Use a calendar grid?
-* Shorter names for the cinemas.
 * Possible to select a start time interval.
-* Save the data in local storage, and only update if outdated.
 * Add routes to the app, so that it's possible to share links.
+* If a theater has been selected, then only show the movies that this theater is playing.

@@ -23,13 +23,14 @@ export class Store {
   constructor() {
     this._fetchingAndParsing = false
     this.dates = []
+    this.movieFilter = ""
     this.movies = []
     this.showings = []
     this.theaters = []
   }
 
   @observable private _fetchingAndParsing: boolean
-  @observable private data: Data | undefined
+  @observable private movieFilter: string
   @observable private movies: Array<Movie>
   @observable private showings: Array<Showing>
   @observable private theaters: Array<Theater>
@@ -53,9 +54,9 @@ export class Store {
   }
 
   @computed
-  public get moviesSortedByNumberOfShowings(): Array<Movie> {
-    const sorted = this.movies.sort((a, b) => b.showings.length - a.showings.length)
-    return sorted
+  public get matchingMovies(): Array<Movie> {
+    // TODO: Filter movies.
+    return this.movies
   }
 
   @computed
@@ -206,18 +207,18 @@ export class Store {
 
   @action
   public setData(data: Data) {
-    this.data = data
-
     this.dates = []
-    this.movies = this.data.movies.map(movieData => new Movie(movieData))
-    this.theaters = this.data.theaters.map(theaterData => new Theater(theaterData))
+    this.movies = data.movies.map(movieData => new Movie(movieData))
+    this.theaters = data.theaters.map(theaterData => new Theater(theaterData))
 
-    // TODO: The date strings are now being parsed twice, both in here and in the ImmutableMoment constructor. Consider fixing this by adding an intermediate model where start is a date.
+    // TODO: The date strings are being parsed twice, both in here and in the ImmutableMoment constructor. Consider fixing this by adding an intermediate model where start is a date.
     const now = Date.now()
-    this.showings = this.data.showings
+    this.showings = data.showings
       .filter(showingData => parseAsLocalDateTime(showingData.start).valueOf() >= now)
       .map(showingData => new Showing(showingData, this))
       .sort((showingA, showingB) => showingA.start.diff(showingB.start))
+
+    this.movies = this.movies.sort(Movie.compareByNumberOfShowings)
 
     this.addMissingDates()
     this.addStartAndEndDates()
@@ -227,6 +228,11 @@ export class Store {
   @action
   private setFetchingAndParsing(updating: boolean) {
     this._fetchingAndParsing = updating
+  }
+
+  @action
+  public setMovieFilter(filter: string) {
+    this.movieFilter = filter
   }
 
   private sortDates() {

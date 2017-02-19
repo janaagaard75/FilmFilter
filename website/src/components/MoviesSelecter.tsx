@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Component } from "react"
+import { FormEvent } from "react"
 import { observer } from "mobx-react"
 
 import { Movie } from "../model/Movie"
@@ -9,6 +10,7 @@ import { ToggleableCollapsibleCard } from "./bootstrap/ToggleableCollapsibleCard
 interface Props {
   movies: Array<Movie>
   selectedMovies: Array<Movie>
+  setMovieFilter: (filter: string) => void
 }
 
 interface State {
@@ -23,6 +25,11 @@ export class MoviesSelecter extends Component<Props, State> {
     this.state = {
       expanded: false
     }
+  }
+
+  private handleKeyUp(formEvent: FormEvent<HTMLInputElement>) {
+    const filter = formEvent.currentTarget.value.trim()
+    this.props.setMovieFilter(filter)
   }
 
   private handleToggleExpanded() {
@@ -53,6 +60,12 @@ export class MoviesSelecter extends Component<Props, State> {
         header={header}
         onToggleExpanded={() => this.handleToggleExpanded()}
       >
+        <input
+          type="text"
+          className="form-control mb-3"
+          placeholder="Søg efter film"
+          onKeyUp={e => this.handleKeyUp(e)}
+        />
         <div className="row">
           {this.props.movies.map(movie =>
             <MovieItem

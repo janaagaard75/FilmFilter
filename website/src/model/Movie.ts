@@ -37,6 +37,11 @@ export class Movie {
     this.showings.push(showing)
   }
 
+  public static compareByNumberOfShowings(a: Movie, b: Movie) {
+    const compare = b.showings.length - a.showings.length
+    return compare
+  }
+
   @action
   public toggleSelection() {
     this.selected = !this.selected
