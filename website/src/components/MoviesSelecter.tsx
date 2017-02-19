@@ -34,7 +34,7 @@ export class MoviesSelecter extends Component<Props, State> {
   private handleToggleMovieSelection(movie: Movie) {
     movie.toggleSelection()
 
-    // TODO: This works as intented, but unintentionally. The selectedMovies array isn't up to date when making the comparison. The length should have been compared to 1.
+    // This works as intented, but unintentionally. The selectedMovies array isn't up to date when making the comparison. The length should have been compared to 1.
     if (this.props.selectedMovies.length === 0) {
       this.setState({
         expanded: false
@@ -66,5 +66,3 @@ export class MoviesSelecter extends Component<Props, State> {
     )
   }
 }
-
-// TODO: Selecting a movie should close the collapsible.
