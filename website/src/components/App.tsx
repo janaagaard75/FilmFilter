@@ -38,7 +38,7 @@ export class App extends Component<Props, void> {
               <MoviesSelecter
                 movies={this.props.store.matchingMovies.slice(0, 24)}
                 selectedMovies={this.props.store.selectedMovies}
-                setMovieFilter={this.props.store.setMovieFilter}
+                setMovieFilter={(filter: string) => this.props.store.setMovieFilter(filter)}
               />
             </div>
             <div className="mb-3">

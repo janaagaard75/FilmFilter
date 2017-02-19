@@ -232,7 +232,7 @@ export class Store {
 
   @action
   public setMovieFilter(filter: string) {
-    this.movieFilter = filter
+    this.movieFilter = filter.toLocaleLowerCase()
   }
 
   private sortDates() {
