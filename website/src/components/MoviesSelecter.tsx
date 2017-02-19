@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Component } from "react"
-import { FormEvent } from "react"
+import { KeyboardEvent } from "react"
 import { observer } from "mobx-react"
 
 import { Movie } from "../model/Movie"
@@ -27,8 +27,11 @@ export class MoviesSelecter extends Component<Props, State> {
     }
   }
 
-  private handleKeyUp(formEvent: FormEvent<HTMLInputElement>) {
-    // TODO: Hitting Escape should clear the input field.
+  private handleKeyUp(formEvent: KeyboardEvent<HTMLInputElement>) {
+    if (formEvent.key === "Escape") {
+      formEvent.currentTarget.value = ""
+    }
+
     const filter = formEvent.currentTarget.value.trim()
     this.props.setMovieFilter(filter)
   }
