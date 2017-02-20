@@ -107,7 +107,6 @@ export class Store {
     }
   }
 
-  // TODO: This should not clear the lists of favorited and selected theaters.
   @action
   public async fetchAndUpdateData(): Promise<void> {
     this.setFetchingAndParsing(true)
@@ -119,6 +118,7 @@ export class Store {
 
     DataStorer.saveData(fetchedData)
     this.setData(fetchedData)
+    this.loadSettings()
 
     this.setFetchingAndParsing(false)
   }
@@ -166,12 +166,11 @@ export class Store {
     const storedData = DataStorer.loadData()
     if (DataStorer.dataIsOkay(storedData)) {
       this.setData(storedData.data)
+      this.loadSettings()
     }
     else {
       this.fetchAndUpdateData()
     }
-
-    this.loadSettings()
   }
 
   @action
@@ -197,6 +196,10 @@ export class Store {
   }
 
   private saveSettings() {
+    if (this.fetchingAndParsing) {
+      return
+    }
+
     const settings: Settings = {
       favoritedTheaterIds: this.theaters.filter(theater => theater.favorited).map(theater => theater.theaterId),
       selectedTheaterIds: this.theaters.filter(theater => theater.selected).map(theater => theater.theaterId)
