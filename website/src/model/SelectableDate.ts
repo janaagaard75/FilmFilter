@@ -16,7 +16,6 @@ export class SelectableDate {
   @observable public selected: boolean
   public showings: Set<Showing>
 
-  // TODO: Should this be part of the model? And if so, what about a formatting of the start in Showing.ts?
   public get label(): string {
     const label = this.date.format("D/M")
     return label
