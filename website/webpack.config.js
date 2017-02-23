@@ -70,7 +70,7 @@ module.exports = {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract({
           loader: "style-loader",
-          loader: [
+          use: [
             {
               loader: "css-loader",
               query: {
