@@ -30,31 +30,27 @@ export class App extends Component<Props, void> {
           </span>
         </div>
         <div className="row">
-          <div className="col-md-5 flex-last mb-3">
-            <MatchingShowings matchingShowings={this.props.store.matchingShowings} />
+          <div className="col-4">
+            <MoviesSelecter
+              movies={this.props.store.matchingMovies.slice(0, 24)}
+              selectedMovies={this.props.store.selectedMovies}
+              setMovieFilter={(filter: string) => this.props.store.setMovieFilter(filter)}
+            />
           </div>
-          <div className="col-md-7">
-            <div className="mb-3">
-              <MoviesSelecter
-                movies={this.props.store.matchingMovies.slice(0, 24)}
-                selectedMovies={this.props.store.selectedMovies}
-                setMovieFilter={(filter: string) => this.props.store.setMovieFilter(filter)}
-              />
-            </div>
-            <div className="mb-3">
-              <TheatersSelecter
-                theaters={this.props.store.theatersSortedByName}
-                selectedTheaters={this.props.store.selectedTheaters}
-              />
-            </div>
-            <div className="mb-3">
-              <DateSelecter
-                dates={this.props.store.dates}
-                selectedDates={this.props.store.selectedDates}
-              />
-            </div>
+          <div className="col-4">
+            <DateSelecter
+              dates={this.props.store.dates}
+              selectedDates={this.props.store.selectedDates}
+            />
+          </div>
+          <div className="col-4">
+            <TheatersSelecter
+              theaters={this.props.store.theatersSortedByName}
+              selectedTheaters={this.props.store.selectedTheaters}
+            />
           </div>
         </div>
+        <MatchingShowings matchingShowings={this.props.store.matchingShowings} />
       </div>
     )
   }
