@@ -64,12 +64,12 @@ module.exports = {
     rules: [
       {
         test: /\.json$/,
-        loader: "json-loader"
+        use: "json-loader"
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract({
-          loader: "style-loader",
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
           use: [
             {
               loader: "css-loader",
@@ -88,11 +88,11 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
-        loader: "awesome-typescript-loader"
+        use: "awesome-typescript-loader"
       },
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "file-loader"
+        use: "file-loader"
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
