@@ -4,7 +4,7 @@ import { observer } from "mobx-react"
 
 import { CollapsibleCard } from "./bootstrap/CollapsibleCard"
 import { Theater } from "../model/Theater"
-import { TheaterPicker } from "./TheaterPicker"
+import { TheatersPicker } from "./TheatersPicker"
 
 interface Props {
   theaters: Array<Theater>
@@ -18,33 +18,9 @@ export class TheatersCollapsible extends Component<Props, void> {
       ? "Vælg biograf"
       : "Biograf: " + this.props.selectedTheaters.map(theater => theater.name).join(", ")
 
-    const favoritedTheaters = this.props.theaters.filter(theater => theater.favorited)
-    const notFavoritedTheaters = this.props.theaters.filter(theater => !theater.favorited)
-    const bothTypes = favoritedTheaters.length >= 1 && notFavoritedTheaters.length >= 1
-
     return (
       <CollapsibleCard header={header}>
-        <div className="row">
-          {favoritedTheaters.map(theater =>
-            <TheaterPicker
-              key={theater.theaterId}
-              theater={theater}
-            />
-          )}
-        </div>
-        {bothTypes ? (
-          <hr/>
-        ) : (
-           ""
-        )}
-        <div className="row">
-          {notFavoritedTheaters.map(theater =>
-            <TheaterPicker
-              key={theater.theaterId}
-              theater={theater}
-            />
-          )}
-        </div>
+        <TheatersPicker theaters={this.props.theaters}/>
       </CollapsibleCard>
     )
   }
