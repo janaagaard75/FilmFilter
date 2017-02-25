@@ -3,9 +3,9 @@ import { Component } from "react"
 import { observer } from "mobx-react"
 
 import { CollapsibleCard } from "./bootstrap/CollapsibleCard"
+import { DatePicker } from "./DatePicker"
 import { SelectableDate } from "../model/SelectableDate"
 import { splitIntoChunks } from "../utilities"
-import { Weeks } from "./Weeks"
 
 interface Props {
   dates: Array<SelectableDate>
@@ -24,7 +24,7 @@ export class DateCollapsible extends Component<Props, void> {
 
     return (
       <CollapsibleCard header={header}>
-        <Weeks weeks={firstWeeks}/>
+        <DatePicker weeks={firstWeeks}/>
       </CollapsibleCard>
     )
   }
