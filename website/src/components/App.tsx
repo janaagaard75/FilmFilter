@@ -5,7 +5,7 @@ import { RouteComponentProps } from "react-router"
 
 import { DateCollapsible } from "./DateCollapsible"
 import { MatchingShowings } from "./MatchingShowings"
-import { MoviesSelecter } from "./MoviesSelecter"
+import { MoviesCollapsible } from "./MoviesCollapsible"
 import { Store } from "../model/Store"
 import { TheatersSelecter } from "./TheatersSelecter"
 
@@ -42,7 +42,7 @@ export class App extends Component<Props, void> {
         </ul>
         <div className="row">
           <div className="col-4">
-            <MoviesSelecter
+            <MoviesCollapsible
               movies={this.props.store.matchingMovies.slice(0, 24)}
               selectedMovies={this.props.store.selectedMovies}
               setMovieNameFilter={(filter: string) => this.props.store.setMovieNameFilter(filter)}

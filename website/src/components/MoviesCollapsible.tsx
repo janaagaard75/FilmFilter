@@ -17,7 +17,7 @@ interface State {
 }
 
 @observer
-export class MoviesSelecter extends Component<Props, State> {
+export class MoviesCollapsible extends Component<Props, State> {
   constructor(props: Props, context?: any) {
     super(props, context)
 
