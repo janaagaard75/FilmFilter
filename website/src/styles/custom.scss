@@ -1,4 +1,11 @@
 // Custom Bootstrap variables.
 
-// TODO: Test this extension https://marketplace.visualstudio.com/items?itemName=glen-84.sass-lint
-
+$nav-tabs-border-color: $gray-light; // #ddd
+$nav-tabs-border-width: 2 * $border-width;
+$nav-tabs-border-radius: $border-radius;
+$nav-tabs-link-hover-border-color: $nav-tabs-border-color; // $gray-lighter
+$nav-tabs-active-link-hover-color: $gray; // Active tab text color.
+$nav-tabs-active-link-hover-bg: $body-bg; // Active tab background color.
+$nav-tabs-active-link-hover-border-color: $nav-tabs-border-color; // #ddd  Active tab border color.
+$nav-tabs-justified-link-border-color: #ddd;
+$nav-tabs-justified-active-link-border-color: $body-bg;
