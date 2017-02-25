@@ -5,7 +5,7 @@ import { observer } from "mobx-react"
 import { CollapsibleCard } from "./bootstrap/CollapsibleCard"
 import { SelectableDate } from "../model/SelectableDate"
 import { splitIntoChunks } from "../utilities"
-import { Week } from "./Week"
+import { Weeks } from "./Weeks"
 
 interface Props {
   dates: Array<SelectableDate>
@@ -24,22 +24,7 @@ export class DateSelecter extends Component<Props, void> {
 
     return (
       <CollapsibleCard header={header}>
-        <table className="table">
-          <tbody>
-            <tr>
-              <td>Ma</td>
-              <td>Ti</td>
-              <td>On</td>
-              <td>To</td>
-              <td>Fr</td>
-              <td>Lø</td>
-              <td>Sø</td>
-            </tr>
-            {firstWeeks.map(week =>
-              <Week key={"week-" + week[0].key} dates={week}/>
-            )}
-          </tbody>
-        </table>
+        <Weeks weeks={firstWeeks}/>
       </CollapsibleCard>
     )
   }
