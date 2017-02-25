@@ -4,7 +4,7 @@ import { observer } from "mobx-react"
 
 import { CollapsibleCard } from "./bootstrap/CollapsibleCard"
 import { Theater } from "../model/Theater"
-import { TheaterItem } from "./TheaterItem"
+import { TheaterPicker } from "./TheaterPicker"
 
 interface Props {
   theaters: Array<Theater>
@@ -26,7 +26,7 @@ export class TheatersCollapsible extends Component<Props, void> {
       <CollapsibleCard header={header}>
         <div className="row">
           {favoritedTheaters.map(theater =>
-            <TheaterItem
+            <TheaterPicker
               key={theater.theaterId}
               theater={theater}
             />
@@ -39,7 +39,7 @@ export class TheatersCollapsible extends Component<Props, void> {
         )}
         <div className="row">
           {notFavoritedTheaters.map(theater =>
-            <TheaterItem
+            <TheaterPicker
               key={theater.theaterId}
               theater={theater}
             />
