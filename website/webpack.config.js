@@ -88,7 +88,7 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
-        loader: "ts-loader"
+        loader: "awesome-typescript-loader"
       },
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
