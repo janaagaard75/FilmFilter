@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Component } from "react"
+import { observer } from "mobx-react"
 
 import { SelectableDate } from "../model/SelectableDate"
 import { Week } from "./Week"
@@ -8,6 +9,7 @@ interface Props {
   weeks: Array<Array<SelectableDate>>
 }
 
+@observer
 export class DatesPicker extends Component<Props, void> {
   public render() {
     return (

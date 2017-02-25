@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Component } from "react"
+import { observer } from "mobx-react"
 
 interface Props {
   setFilter: (text: string) => void
@@ -10,6 +11,7 @@ interface State {
 }
 
 // TODO: Use this component or delete it.
+@observer
 export class FilterForm extends Component<Props, State> {
   constructor(props: Props, context?: any) {
     super(props, context)

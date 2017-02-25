@@ -1,5 +1,7 @@
 import * as React from "react"
 import { Component } from "react"
+import { observer } from "mobx-react"
+
 
 import { Theater } from "../model/Theater"
 import { TheaterPicker } from "./TheaterPicker"
@@ -8,6 +10,7 @@ interface Props {
   theaters: Array<Theater>
 }
 
+@observer
 export class TheatersPicker extends Component<Props, void> {
   public render() {
     const favoritedTheaters = this.props.theaters.filter(theater => theater.favorited)

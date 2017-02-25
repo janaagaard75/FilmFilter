@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Component } from "react"
 import { KeyboardEvent } from "react"
+import { observer } from "mobx-react"
 
 import { Movie } from "../model/Movie"
 import { MoviePicker } from "./MoviePicker"
@@ -11,6 +12,7 @@ interface Props {
   setMovieNameFilter: (filter: string) => void
 }
 
+@observer
 export class MoviesPicker extends Component<Props, void> {
   private handleKeyUp(formEvent: KeyboardEvent<HTMLInputElement>) {
     if (formEvent.key === "Escape") {
