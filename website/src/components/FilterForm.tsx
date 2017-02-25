@@ -2,13 +2,14 @@ import * as React from "react"
 import { Component } from "react"
 
 interface Props {
-  setMovieNameFilter: (text: string) => void
+  setFilter: (text: string) => void
 }
 
 interface State {
   text: string
 }
 
+// TODO: Use this component or delete it.
 export class FilterForm extends Component<Props, State> {
   constructor(props: Props, context?: any) {
     super(props, context)
@@ -28,7 +29,7 @@ export class FilterForm extends Component<Props, State> {
     e.preventDefault()
 
     const trimmedText = this.state.text.trim()
-    this.props.setMovieNameFilter(trimmedText)
+    this.props.setFilter(trimmedText)
   }
 
   public render() {
