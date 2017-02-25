@@ -12,7 +12,7 @@ interface Props {
 }
 
 @observer
-export class TheatersSelecter extends Component<Props, void> {
+export class TheatersCollapsible extends Component<Props, void> {
   public render() {
     const header = this.props.selectedTheaters.length === 0
       ? "Vælg biograf"

@@ -7,7 +7,7 @@ import { DateCollapsible } from "./DateCollapsible"
 import { MatchingShowings } from "./MatchingShowings"
 import { MoviesCollapsible } from "./MoviesCollapsible"
 import { Store } from "../model/Store"
-import { TheatersSelecter } from "./TheatersSelecter"
+import { TheatersCollapsible } from "./TheatersCollapsible"
 
 interface Props {
   routeProps: RouteComponentProps<void, void>
@@ -55,7 +55,7 @@ export class App extends Component<Props, void> {
             />
           </div>
           <div className="col-4">
-            <TheatersSelecter
+            <TheatersCollapsible
               theaters={this.props.store.theatersSortedByName}
               selectedTheaters={this.props.store.selectedTheaters}
             />
