@@ -8,7 +8,7 @@ interface Props {
   weeks: Array<Array<SelectableDate>>
 }
 
-export class DatePicker extends Component<Props, void> {
+export class DatesPicker extends Component<Props, void> {
   public render() {
     return (
       <table className="table">
