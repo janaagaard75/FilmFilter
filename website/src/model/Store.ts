@@ -23,14 +23,14 @@ export class Store {
   constructor() {
     this._fetchingAndParsing = false
     this.dates = []
-    this.movieFilter = ""
+    this.movieNameFilter = ""
     this.movies = []
     this.showings = []
     this.theaters = []
   }
 
   @observable private _fetchingAndParsing: boolean
-  @observable private movieFilter: string
+  @observable private movieNameFilter: string
   @observable private movies: Array<Movie>
   @observable private showings: Array<Showing>
   @observable private theaters: Array<Theater>
@@ -43,7 +43,7 @@ export class Store {
 
   @computed
   public get matchingMovies(): Array<Movie> {
-    const matchingMovies = this.movies.filter(movie => movie.titleMatchesFilter(this.movieFilter))
+    const matchingMovies = this.movies.filter(movie => movie.titleMatchesFilter(this.movieNameFilter))
     return matchingMovies
   }
 
@@ -235,8 +235,8 @@ export class Store {
   }
 
   @action
-  public setMovieFilter(filter: string) {
-    this.movieFilter = filter.toLocaleLowerCase()
+  public setMovieNameFilter(filter: string) {
+    this.movieNameFilter = filter.toLocaleLowerCase()
   }
 
   private sortDates() {

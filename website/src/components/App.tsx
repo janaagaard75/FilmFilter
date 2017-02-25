@@ -29,12 +29,23 @@ export class App extends Component<Props, void> {
             <button className="btn btn-secondary btn-sm" onClick={() => this.props.store.fetchAndUpdateData()}disabled={this.props.store.fetchingAndParsing}>Opdater data</button>
           </span>
         </div>
+        <ul className="nav nav-tabs nav-justified mb-3">
+          <li className="nav-item">
+            <span className="nav-link active">Film</span>
+          </li>
+          <li className="nav-item">
+            <span className="nav-link">Dato</span>
+          </li>
+          <li className="nav-item">
+            <span className="nav-link">Biograf</span>
+          </li>
+        </ul>
         <div className="row">
           <div className="col-4">
             <MoviesSelecter
               movies={this.props.store.matchingMovies.slice(0, 24)}
               selectedMovies={this.props.store.selectedMovies}
-              setMovieFilter={(filter: string) => this.props.store.setMovieFilter(filter)}
+              setMovieNameFilter={(filter: string) => this.props.store.setMovieNameFilter(filter)}
             />
           </div>
           <div className="col-4">

@@ -10,7 +10,7 @@ import { ToggleableCollapsibleCard } from "./bootstrap/ToggleableCollapsibleCard
 interface Props {
   movies: Array<Movie>
   selectedMovies: Array<Movie>
-  setMovieFilter: (filter: string) => void
+  setMovieNameFilter: (filter: string) => void
 }
 
 interface State {
@@ -33,7 +33,7 @@ export class MoviesSelecter extends Component<Props, State> {
     }
 
     const filter = formEvent.currentTarget.value.trim()
-    this.props.setMovieFilter(filter)
+    this.props.setMovieNameFilter(filter)
   }
 
   private handleToggleExpanded() {
