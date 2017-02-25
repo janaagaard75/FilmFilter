@@ -3,7 +3,7 @@ import { Component } from "react"
 import { observer } from "mobx-react"
 import { RouteComponentProps } from "react-router"
 
-import { DateSelecter } from "./DateSelecter"
+import { DateCollapsible } from "./DateCollapsible"
 import { MatchingShowings } from "./MatchingShowings"
 import { MoviesSelecter } from "./MoviesSelecter"
 import { Store } from "../model/Store"
@@ -49,7 +49,7 @@ export class App extends Component<Props, void> {
             />
           </div>
           <div className="col-4">
-            <DateSelecter
+            <DateCollapsible
               dates={this.props.store.dates}
               selectedDates={this.props.store.selectedDates}
             />
