@@ -1,10 +1,9 @@
 import * as React from "react"
 import { Component } from "react"
-import { KeyboardEvent } from "react"
 import { observer } from "mobx-react"
 
 import { Movie } from "../model/Movie"
-import { MovieItem } from "./MovieItem"
+import { MovieItems } from "./MovieItems"
 import { ToggleableCollapsibleCard } from "./bootstrap/ToggleableCollapsibleCard"
 
 interface Props {
@@ -25,15 +24,6 @@ export class MoviesSelecter extends Component<Props, State> {
     this.state = {
       expanded: false
     }
-  }
-
-  private handleKeyUp(formEvent: KeyboardEvent<HTMLInputElement>) {
-    if (formEvent.key === "Escape") {
-      formEvent.currentTarget.value = ""
-    }
-
-    const filter = formEvent.currentTarget.value.trim()
-    this.props.setMovieNameFilter(filter)
   }
 
   private handleToggleExpanded() {
@@ -64,21 +54,11 @@ export class MoviesSelecter extends Component<Props, State> {
         header={header}
         onToggleExpanded={() => this.handleToggleExpanded()}
       >
-        <input
-          type="text"
-          className="form-control mb-3"
-          placeholder="Søg efter film"
-          onKeyUp={e => this.handleKeyUp(e)}
+        <MovieItems
+          movies={this.props.movies}
+          setMovieNameFilter={this.props.setMovieNameFilter}
+          handleToggleMovieSelection={(movie) => this.handleToggleMovieSelection(movie)}
         />
-        <div className="row">
-          {this.props.movies.map(movie =>
-            <MovieItem
-              key={movie.movieUrl}
-              movie={movie}
-              toggleMovieSelection={() => this.handleToggleMovieSelection(movie)}
-            />
-          )}
-        </div>
       </ToggleableCollapsibleCard>
     )
   }
