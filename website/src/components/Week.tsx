@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Component } from "react"
 
-import { DateItem } from "./DateItem"
+import { DatePicker } from "./DatePicker"
 import { SelectableDate } from "../model/SelectableDate"
 
 interface Props {
@@ -13,7 +13,7 @@ export class Week extends Component<Props, void> {
     return (
       <tr>
         {this.props.dates.map(date =>
-          <DateItem key={"date-" + date.key} date={date}/>
+          <DatePicker key={"date-" + date.key} date={date}/>
         )}
       </tr>
     )
