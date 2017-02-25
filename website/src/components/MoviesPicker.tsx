@@ -3,7 +3,7 @@ import { Component } from "react"
 import { KeyboardEvent } from "react"
 
 import { Movie } from "../model/Movie"
-import { MovieItem } from "./MovieItem"
+import { MoviePicker } from "./MoviePicker"
 
 interface Props {
   handleToggleMovieSelection: (movie: Movie) => void
@@ -32,7 +32,7 @@ export class MoviesPicker extends Component<Props, void> {
         />
         <div className="row">
           {this.props.movies.map(movie =>
-            <MovieItem
+            <MoviePicker
               key={movie.movieUrl}
               movie={movie}
               toggleMovieSelection={() => this.props.handleToggleMovieSelection(movie)}

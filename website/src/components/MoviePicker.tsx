@@ -11,7 +11,7 @@ interface Props {
 }
 
 @observer
-export class MovieItem extends Component<Props, void> {
+export class MoviePicker extends Component<Props, void> {
   public render() {
     const cssClasses = classNames(
       // TODO: Add a col-lg-1-of-5.
