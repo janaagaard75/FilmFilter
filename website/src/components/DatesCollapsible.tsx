@@ -13,7 +13,7 @@ interface Props {
 }
 
 @observer
-export class DateCollapsible extends Component<Props, void> {
+export class DatesCollapsible extends Component<Props, void> {
   public render() {
     const header = this.props.selectedDates.length === 0
       ? "Vælg dato"
