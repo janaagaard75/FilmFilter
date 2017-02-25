@@ -11,7 +11,7 @@ interface Props {
   setMovieNameFilter: (filter: string) => void
 }
 
-export class MovieItems extends Component<Props, void> {
+export class MoviesPicker extends Component<Props, void> {
   private handleKeyUp(formEvent: KeyboardEvent<HTMLInputElement>) {
     if (formEvent.key === "Escape") {
       formEvent.currentTarget.value = ""

@@ -3,7 +3,7 @@ import { Component } from "react"
 import { observer } from "mobx-react"
 
 import { Movie } from "../model/Movie"
-import { MovieItems } from "./MovieItems"
+import { MoviesPicker } from "./MoviesPicker"
 import { ToggleableCollapsibleCard } from "./bootstrap/ToggleableCollapsibleCard"
 
 interface Props {
@@ -54,10 +54,10 @@ export class MoviesCollapsible extends Component<Props, State> {
         header={header}
         onToggleExpanded={() => this.handleToggleExpanded()}
       >
-        <MovieItems
+        <MoviesPicker
           movies={this.props.movies}
           setMovieNameFilter={this.props.setMovieNameFilter}
-          handleToggleMovieSelection={(movie) => this.handleToggleMovieSelection(movie)}
+          handleToggleMovieSelection={movie => this.handleToggleMovieSelection(movie)}
         />
       </ToggleableCollapsibleCard>
     )
