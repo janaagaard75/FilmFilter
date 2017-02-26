@@ -16,10 +16,24 @@ interface Props {
   store: Store
 }
 
+interface State {
+  activeTab: Tab
+}
+
 @observer
-export class App extends Component<Props, void> {
+export class App extends Component<Props, State> {
+  constructor(props: Props, context?: any) {
+    super(props, context)
+
+    this.state = {
+      activeTab: "Film"
+    }
+  }
+
   private setActiveTab(tab: Tab) {
-    console.info("Active tab: " + tab)
+    this.setState({
+      activeTab: tab
+    })
   }
 
   public render() {
@@ -36,7 +50,7 @@ export class App extends Component<Props, void> {
             <button className="btn btn-secondary btn-sm" onClick={() => this.props.store.fetchAndUpdateData()}disabled={this.props.store.fetchingAndParsing}>Opdater data</button>
           </span>
         </div>
-        <Tabs setActiveTab={this.setActiveTab}/>
+        <Tabs activeTab={this.state.activeTab} setActiveTab={(tab: Tab) => this.setActiveTab(tab)}/>
         <div className="row">
           <div className="col-4">
             <MoviesCollapsible

@@ -6,31 +6,12 @@ import { observer } from "mobx-react"
 import { Tab } from "../model/Tab"
 
 interface Props {
+  activeTab: Tab
   setActiveTab: (tab: Tab) => void
 }
 
-interface State {
-  activeTab: Tab
-}
-
 @observer
-export class Tabs extends Component<Props, State> {
-  constructor(props: Props, context?: any) {
-    super(props, context)
-
-    this.state = {
-      activeTab: "Film"
-    }
-  }
-
-  private setActiveTab(tab: Tab) {
-    this.setState({
-      activeTab: tab
-    })
-
-    this.props.setActiveTab(tab)
-  }
-
+export class Tabs extends Component<Props, void> {
   public render() {
     const tabs: Array<Tab> = ["Film", "Dato", "Biograf"]
 
@@ -42,13 +23,13 @@ export class Tabs extends Component<Props, State> {
             "nav-link",
             {
               // tslint:disable-next-line:object-literal-key-quotes
-              "active": tab === this.state.activeTab
+              "active": tab === this.props.activeTab
             }
           )
 
           return (
             <li className="nav-item" key={tab}>
-              <span onClick={() => this.setActiveTab(tab)} className={spanClasses}>
+              <span onClick={() => this.props.setActiveTab(tab)} className={spanClasses}>
                 {tab}
               </span>
             </li>
