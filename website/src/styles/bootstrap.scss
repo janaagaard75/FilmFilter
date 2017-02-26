@@ -6,9 +6,9 @@
  */
 
 // Core variables and mixins
-@import "../../node_modules/bootstrap/scss/variables";
+@import "bootstrap-variables";
 @import "../../node_modules/bootstrap/scss/mixins";
-@import "custom";
+// @import "custom";
 
 // Reset and dependencies
 @import "../../node_modules/bootstrap/scss/normalize";

@@ -1,0 +1,31 @@
+@import "variables";
+
+html {
+  overflow-y: scroll;
+}
+
+.clickable {
+  cursor: pointer
+}
+
+.disabled-date {
+  color: $gray-lighter;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.selected-item {
+  background-color: #ddd;
+}
+
+@media (min-width: map-get($grid-breakpoints, lg)) and (max-width: map-get($grid-breakpoints, xl) - 1) {
+  .col-lg-1-of-5 {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+}

@@ -1,25 +1,3 @@
 @import "bootstrap";
 @import "fontawesome";
-
-html {
-  overflow-y: scroll;
-}
-
-.clickable {
-  cursor: pointer
-}
-
-.disabled-date {
-  color: $gray-lighter;
-}
-
-.ellipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-
-.selected-item {
-  background-color: #ddd;
-}
+@import "global";
