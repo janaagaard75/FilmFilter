@@ -7,7 +7,6 @@ import { Movie } from "../model/Movie"
 import { MoviePicker } from "./MoviePicker"
 
 interface Props {
-  handleToggleMovieSelection: (movie: Movie) => void
   movies: Array<Movie>
   setMovieNameFilter: (filter: string) => void
 }
@@ -37,7 +36,6 @@ export class MoviesPicker extends Component<Props, void> {
             <MoviePicker
               key={movie.movieUrl}
               movie={movie}
-              toggleMovieSelection={() => this.props.handleToggleMovieSelection(movie)}
             />
           )}
         </div>

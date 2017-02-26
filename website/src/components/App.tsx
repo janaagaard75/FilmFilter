@@ -5,7 +5,6 @@ import { RouteComponentProps } from "react-router"
 
 import { DatesPicker } from "./DatesPicker"
 import { MatchingShowings } from "./MatchingShowings"
-import { Movie } from "../model/Movie"
 import { MoviesPicker } from "./MoviesPicker"
 import { splitIntoChunks } from "../utilities"
 import { Store } from "../model/Store"
@@ -46,7 +45,6 @@ export class App extends Component<Props, State> {
           <MoviesPicker
             movies={firstMovies}
             setMovieNameFilter={(filter: string) => this.props.store.setMovieNameFilter(filter)}
-            handleToggleMovieSelection={movie => movie.toggleSelection()}
           />
         )
 

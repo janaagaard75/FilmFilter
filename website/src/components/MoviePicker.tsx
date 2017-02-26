@@ -7,7 +7,6 @@ import { Movie } from "../model/Movie"
 
 interface Props {
   movie: Movie
-  toggleMovieSelection: () => void
 }
 
 @observer
@@ -23,7 +22,7 @@ export class MoviePicker extends Component<Props, void> {
     )
 
     return (
-      <div className={cssClasses} onClick={this.props.toggleMovieSelection}>
+      <div className={cssClasses} onClick={() => this.props.movie.toggleSelection()}>
         <img src={this.props.movie.posterUrl} alt={this.props.movie.originalTitle} className="img-fluid"/>
         {this.props.movie.originalTitle}
       </div>
