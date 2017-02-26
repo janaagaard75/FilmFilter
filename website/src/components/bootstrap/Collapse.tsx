@@ -13,7 +13,8 @@ export class Collapse extends Component<Props, void> {
     const cssClasses = classNames(
       "collapse",
       {
-        show: this.props.expanded
+        // tslint:disable-next-line:object-literal-key-quotes
+        "show": this.props.expanded
       }
     )
 
