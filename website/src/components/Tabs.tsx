@@ -39,8 +39,10 @@ export class Tabs extends Component<void, State> {
           )
 
           return (
-            <li className="nav-item">
-              <span onClick={() => this.handleClick(tab)} className={spanClasses}>{tab}</span>
+            <li className="nav-item" key={tab}>
+              <span onClick={() => this.handleClick(tab)} className={spanClasses}>
+                {tab}
+              </span>
             </li>
           )
         })}
