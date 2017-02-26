@@ -18,6 +18,7 @@ interface Props {
 }
 
 interface State {
+  // TODO: Allow that no tab is active.
   activeTab: Tab
 }
 
