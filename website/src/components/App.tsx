@@ -3,13 +3,15 @@ import { Component } from "react"
 import { observer } from "mobx-react"
 import { RouteComponentProps } from "react-router"
 
-import { DatesCollapsible } from "./DatesCollapsible"
+import { DatesPicker } from "./DatesPicker"
 import { MatchingShowings } from "./MatchingShowings"
-import { MoviesCollapsible } from "./MoviesCollapsible"
+import { Movie } from "../model/Movie"
+import { MoviesPicker } from "./MoviesPicker"
+import { splitIntoChunks } from "../utilities"
 import { Store } from "../model/Store"
 import { Tab } from "../model/Tab"
 import { Tabs } from "./Tabs"
-import { TheatersCollapsible } from "./TheatersCollapsible"
+import { TheatersPicker } from "./TheatersPicker"
 
 interface Props {
   routeProps: RouteComponentProps<void, void>
@@ -36,8 +38,40 @@ export class App extends Component<Props, State> {
     })
   }
 
+  private getTabContent() {
+    switch (this.state.activeTab) {
+      case "Film":
+        const firstMovies = this.props.store.matchingMovies.slice(0, 24)
+        return (
+          <MoviesPicker
+            movies={firstMovies}
+            setMovieNameFilter={(filter: string) => this.props.store.setMovieNameFilter(filter)}
+            handleToggleMovieSelection={movie => movie.toggleSelection()}
+          />
+        )
+
+      case "Dato":
+        const weeks = splitIntoChunks(this.props.store.dates, 7)
+        const firstWeeks = weeks.slice(0, 100)
+        return (
+          <DatesPicker
+            weeks={firstWeeks}
+          />
+        )
+
+      case "Biograf":
+        return (
+          <TheatersPicker
+            theaters={this.props.store.theatersSortedByName}
+          />
+        )
+
+      default:
+        throw new Error(`${this.state.activeTab} is not a supported tab type.`)
+    }
+  }
+
   public render() {
-    const firstMovies = this.props.store.matchingMovies.slice(0, 24)
     return (
       <div className="container-fluid">
         <div className="d-flex">
@@ -51,27 +85,7 @@ export class App extends Component<Props, State> {
           </span>
         </div>
         <Tabs activeTab={this.state.activeTab} setActiveTab={(tab: Tab) => this.setActiveTab(tab)}/>
-        <div className="row">
-          <div className="col-4">
-            <MoviesCollapsible
-              movies={firstMovies}
-              selectedMovies={this.props.store.selectedMovies}
-              setMovieNameFilter={(filter: string) => this.props.store.setMovieNameFilter(filter)}
-            />
-          </div>
-          <div className="col-4">
-            <DatesCollapsible
-              dates={this.props.store.dates}
-              selectedDates={this.props.store.selectedDates}
-            />
-          </div>
-          <div className="col-4">
-            <TheatersCollapsible
-              theaters={this.props.store.theatersSortedByName}
-              selectedTheaters={this.props.store.selectedTheaters}
-            />
-          </div>
-        </div>
+        {this.getTabContent()}
         <MatchingShowings matchingShowings={this.props.store.matchingShowings} />
       </div>
     )
