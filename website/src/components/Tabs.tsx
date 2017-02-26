@@ -1,15 +1,21 @@
 import * as classNames from "classnames"
 import * as React from "react"
 import { Component } from "react"
+import { observer } from "mobx-react"
 
-type Tab = "Film" | "Dato" | "Biograf"
+import { Tab } from "../model/Tab"
+
+interface Props {
+  setActiveTab: (tab: Tab) => void
+}
 
 interface State {
   activeTab: Tab
 }
 
-export class Tabs extends Component<void, State> {
-  constructor(props: void, context?: any) {
+@observer
+export class Tabs extends Component<Props, State> {
+  constructor(props: Props, context?: any) {
     super(props, context)
 
     this.state = {
@@ -17,17 +23,19 @@ export class Tabs extends Component<void, State> {
     }
   }
 
-  private handleClick(tab: Tab) {
+  private setActiveTab(tab: Tab) {
     this.setState({
       activeTab: tab
     })
+
+    this.props.setActiveTab(tab)
   }
 
   public render() {
     const tabs: Array<Tab> = ["Film", "Dato", "Biograf"]
 
     return (
-      <ul className="nav nav-tabs nav-justified mb-3">
+      <ul className="nav nav-tabs mb-3">
         {tabs.map(tab => {
           const spanClasses = classNames(
             "clickable",
@@ -40,7 +48,7 @@ export class Tabs extends Component<void, State> {
 
           return (
             <li className="nav-item" key={tab}>
-              <span onClick={() => this.handleClick(tab)} className={spanClasses}>
+              <span onClick={() => this.setActiveTab(tab)} className={spanClasses}>
                 {tab}
               </span>
             </li>

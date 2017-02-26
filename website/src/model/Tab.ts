@@ -1,0 +1,1 @@
+export type Tab = "Film" | "Dato" | "Biograf"

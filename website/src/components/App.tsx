@@ -7,6 +7,7 @@ import { DatesCollapsible } from "./DatesCollapsible"
 import { MatchingShowings } from "./MatchingShowings"
 import { MoviesCollapsible } from "./MoviesCollapsible"
 import { Store } from "../model/Store"
+import { Tab } from "../model/Tab"
 import { Tabs } from "./Tabs"
 import { TheatersCollapsible } from "./TheatersCollapsible"
 
@@ -17,6 +18,10 @@ interface Props {
 
 @observer
 export class App extends Component<Props, void> {
+  private setActiveTab(tab: Tab) {
+    console.info("Active tab: " + tab)
+  }
+
   public render() {
     const firstMovies = this.props.store.matchingMovies.slice(0, 24)
     return (
@@ -31,7 +36,7 @@ export class App extends Component<Props, void> {
             <button className="btn btn-secondary btn-sm" onClick={() => this.props.store.fetchAndUpdateData()}disabled={this.props.store.fetchingAndParsing}>Opdater data</button>
           </span>
         </div>
-        <Tabs/>
+        <Tabs setActiveTab={this.setActiveTab}/>
         <div className="row">
           <div className="col-4">
             <MoviesCollapsible
