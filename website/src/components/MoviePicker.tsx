@@ -13,8 +13,7 @@ interface Props {
 export class MoviePicker extends Component<Props, void> {
   public render() {
     const cssClasses = classNames(
-      // TODO: Add a col-lg-1-of-5.
-      "col-6 col-sm-4 col-md-3 col-xl-2",
+      "col-6 col-sm-4 col-md-3 col-lg-1-of-5 col-xl-2",
       "clickable",
       {
         "selected-item": this.props.movie.selected
