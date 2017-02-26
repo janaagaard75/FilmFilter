@@ -13,14 +13,16 @@ interface Props {
 export class TheaterPicker extends Component<Props, void> {
   public render() {
     const divCssClasses = classNames(
-      "col-12 col-md-6 col-lg-4 ellipsis",
+      "col-12 col-md-6 col-lg-4",
+      "ellipsis",
       {
         "selected-item": this.props.theater.selected
       }
     )
 
     const starCssClasses = classNames(
-      "clickable fa",
+      "clickable",
+      "fa",
       {
         "fa-star": this.props.theater.favorited,
         "fa-star-o": !this.props.theater.favorited
