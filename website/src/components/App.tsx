@@ -17,6 +17,7 @@ interface Props {
 @observer
 export class App extends Component<Props, void> {
   public render() {
+    const firstMovies = this.props.store.matchingMovies.slice(0, 24)
     return (
       <div className="container-fluid">
         <div className="d-flex">
@@ -43,7 +44,7 @@ export class App extends Component<Props, void> {
         <div className="row">
           <div className="col-4">
             <MoviesCollapsible
-              movies={this.props.store.matchingMovies.slice(0, 24)}
+              movies={firstMovies}
               selectedMovies={this.props.store.selectedMovies}
               setMovieNameFilter={(filter: string) => this.props.store.setMovieNameFilter(filter)}
             />
