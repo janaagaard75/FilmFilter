@@ -23,7 +23,6 @@ export class MoviePicker extends Component<Props, void> {
     )
 
     return (
-      // TODO: What about the Danish title?
       <div className={cssClasses} onClick={this.props.toggleMovieSelection}>
         <img src={this.props.movie.posterUrl} alt={this.props.movie.originalTitle} className="img-fluid"/>
         {this.props.movie.originalTitle}
