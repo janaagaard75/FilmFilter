@@ -18,8 +18,7 @@ interface Props {
 }
 
 interface State {
-  // TODO: Allow that no tab is active.
-  activeTab: Tab
+  activeTab: Tab | undefined
 }
 
 @observer
@@ -28,14 +27,21 @@ export class App extends Component<Props, State> {
     super(props, context)
 
     this.state = {
-      activeTab: "Film"
+      activeTab: undefined
     }
   }
 
   private setActiveTab(tab: Tab) {
-    this.setState({
-      activeTab: tab
-    })
+    if (tab === this.state.activeTab) {
+      this.setState({
+        activeTab: undefined
+      })
+    }
+    else {
+      this.setState({
+        activeTab: tab
+      })
+    }
   }
 
   private getTabContent() {
@@ -65,8 +71,11 @@ export class App extends Component<Props, State> {
           />
         )
 
+      case undefined:
+        return undefined
+
       default:
-        throw new Error(`${this.state.activeTab} is not a supported tab type.`)
+        throw new Error(`'${this.state.activeTab}' is not a supported tab type.`)
     }
   }
 

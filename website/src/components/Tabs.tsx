@@ -6,7 +6,7 @@ import { observer } from "mobx-react"
 import { Tab } from "../model/Tab"
 
 interface Props {
-  activeTab: Tab
+  activeTab: Tab | undefined
   setActiveTab: (tab: Tab) => void
 }
 
