@@ -37,7 +37,7 @@ let useCssAnimations // Whether to use CSS animations or setTimeout.
 let sheet // A stylesheet to hold the @keyframe or VML rules.
 
 /** Utility function to create elements. If no tag name is given, a DIV is created. Optionally properties can be passed. */
-function createEl(tag, prop) {
+function createEl(tag: any, prop: any) {
   let el = document.createElement(tag || "div")
   let n
 
@@ -48,16 +48,17 @@ function createEl(tag, prop) {
 }
 
 /** * Appends children and returns the parent. */
-function ins(parent /* child1, child2, ...*/) {
-  for (let i = 1, n = arguments.length; i < n; i++) {
-    parent.appendChild(arguments[i])
+function ins(parent: any, ...args: Array<any> /* child1, child2, ...*/) {
+  // args.length might be off by one.
+  for (let i = 1, n = args.length; i < n; i++) {
+    parent.appendChild(args[i])
   }
 
   return parent
 }
 
 /** Creates an opacity keyframe animation rule and returns its name. Since most mobile Webkits have timing issues with animation-delay, we create separate rules for each line/segment. */
-function addAnimation(alpha, trail, i, lines) {
+function addAnimation(alpha: any, trail: any, i: any, lines: any) {
   let name = ["opacity", trail, ~~(alpha * 100), i, lines].join("-")
   let start = 0.01 + i / lines * 100
   let z = Math.max(1 - (1 - alpha) / trail * (100 - start), alpha)
@@ -81,7 +82,7 @@ function addAnimation(alpha, trail, i, lines) {
 }
 
 /** Tries various vendor prefixes and returns the first supported property. */
-function vendor(el, prop) {
+function vendor(el: any, prop: any) {
   let s = el.style
   let pp
   let i
@@ -97,7 +98,7 @@ function vendor(el, prop) {
 }
 
 /** Sets multiple style properties at once. */
-function css(el, prop) {
+function css(el: any, prop: any) {
   for (let n in prop) {
     el.style[vendor(el, n) || n] = prop[n]
   }
@@ -106,9 +107,10 @@ function css(el, prop) {
 }
 
 /** Fills in default values. */
-function merge(obj) {
-  for (let i = 1; i < arguments.length; i++) {
-    let def = arguments[i]
+function merge(obj: any, ...args: Array<any>) {
+  // The length of args might be off by one.
+  for (let i = 1; i < args.length; i++) {
+    let def = args[i]
     for (let n in def) {
       if (obj[n] === undefined) {
         obj[n] = def[n]
@@ -119,37 +121,37 @@ function merge(obj) {
 }
 
 /** Returns the line color from the given string or array. */
-function getColor(color, idx) {
-  return typeof color == "string" ? color : color[idx % color.length]
+function getColor(color: any, idx: any) {
+  return typeof color === "string" ? color : color[idx % color.length]
 }
 
 // Built-in defaults
 
 let defaults = {
-  lines: 12,            // The number of lines to draw
-  length: 7,            // The length of each line
-  width: 5,             // The line thickness
-  radius: 10,           // The radius of the inner circle
-  scale: 1.0,           // Scales overall size of the spinner
-  corners: 1,           // Roundness (0..1)
-  color: "#000",        // #rgb or #rrggbb
-  opacity: 1 / 4,       // Opacity of the lines
-  rotate: 0,            // Rotation offset
-  direction: 1,         // 1: clockwise, -1: counterclockwise
-  speed: 1,             // Rounds per second
-  trail: 100,           // Afterglow percentage
-  fps: 20,              // Frames per second when using setTimeout()
-  zIndex: 2e9,          // Use a high z-index by default
   className: "spinner", // CSS class to assign to the element
-  top: "50%",           // center vertically
-  left: "50%",          // center horizontally
-  shadow: false,        // Whether to render a shadow
+  color: "#000",        // #rgb or #rrggbb
+  corners: 1,           // Roundness (0..1)
+  direction: 1,         // 1: clockwise, -1: counterclockwise
+  fps: 20,              // Frames per second when using setTimeout()
   hwaccel: false,       // Whether to use hardware acceleration
-  position: "absolute"  // Element positioning
+  left: "50%",          // center horizontally
+  length: 7,            // The length of each line
+  lines: 12,            // The number of lines to draw
+  opacity: 1 / 4,       // Opacity of the lines
+  position: "absolute", // Element positioning
+  radius: 10,           // The radius of the inner circle
+  rotate: 0,            // Rotation offset
+  scale: 1.0,           // Scales overall size of the spinner
+  shadow: false,        // Whether to render a shadow
+  speed: 1,             // Rounds per second
+  top: "50%",           // center vertically
+  trail: 100,           // Afterglow percentage
+  width: 5,             // The line thickness
+  zIndex: 2e9           // Use a high z-index by default
 }
 
 /** The constructor */
-function Spinner(o) {
+function Spinner(o: any) {
   this.opts = merge(o || {}, Spinner.defaults, defaults)
 }
 
@@ -158,7 +160,7 @@ Spinner.defaults = {}
 
 merge(Spinner.prototype, {
   /** Adds the spinner to the given target element. If this instance is already spinning, it is automatically removed from its previous target b calling stop() internally. */
-  spin: function (target) {
+  spin: function (target: any) {
     this.stop()
 
     let self = this
@@ -217,12 +219,12 @@ merge(Spinner.prototype, {
   },
 
   /** Internal method that draws the individual lines. Will be overwritten in VML fallback mode below. */
-  lines: function (el, o) {
+  lines: function (el: any, o: any) {
     let i = 0
     let start = (o.lines - 1) * (1 - o.direction) / 2
     let seg
 
-    function fill(color, shadow) {
+    function fill(color: any, shadow: any) {
       return css(createEl(), {
         position: "absolute",
         width: o.scale * (o.length + o.width) + "px",
@@ -253,7 +255,7 @@ merge(Spinner.prototype, {
   },
 
   /** Internal method that adjusts the opacity of a single line. Will be overwritten in VML fallback mode below. */
-  opacity: function (el, i, val) {
+  opacity: function (el: any, i: any, val: any) {
     if (i < el.childNodes.length) {
       el.childNodes[i].style.opacity = val
     }
@@ -282,7 +284,7 @@ return Spinner
 function initVML() {
 
   /* Utility function to create a VML tag */
-  function vml(tag, attr) {
+  function vml(tag: any, attr: any) {
     return createEl("<" + tag + " xmlns=\"urn:schemas-microsoft.com:vml\" class=\"spin-vml\">", attr)
   }
 
@@ -307,7 +309,7 @@ function initVML() {
     let g = css(grp(), { position: "absolute", top: margin, left: margin })
     let i
 
-    function seg(i, dx, filter) {
+    function seg(i: any, dx: any, filter: any) {
       ins(
         g,
         ins(
@@ -342,7 +344,7 @@ function initVML() {
     return ins(el, g)
   }
 
-  Spinner.prototype.opacity = function (el, i, val, o) {
+  Spinner.prototype.opacity = function (el: any, i: any, val: any, o: any) {
     let c = el.firstChild
     o = o.shadow && o.lines || 0
     if (c && i + o < c.childNodes.length) {
