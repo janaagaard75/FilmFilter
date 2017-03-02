@@ -14,7 +14,9 @@
     "build:prod": "yarn install && rimraf dist && cross-env NODE_ENV=production webpack",
     "deploy": "yarn build:prod && firebase deploy",
     "fix": "tslint --fix src/**/*.ts src/**/*.tsx",
-    "lint": "tslint src/**/*.ts src/**/*.tsx",
+    "lint": "yarn run lint-sass && yarn run lint-typescript",
+    "lint-sass": "sass-lint --verbose --no-exit",
+    "lint-typescript": "tslint src/**/*.ts src/**/*.tsx",
     "serve": "http-server dist -p 9000",
     "start": "yarn install && webpack-dev-server"
   },
@@ -49,6 +51,7 @@
     "json-loader": "0.5.4",
     "node-sass": "4.5.0",
     "rimraf": "2.6.1",
+    "sass-lint": "1.10.2",
     "sass-loader": "6.0.2",
     "style-loader": "0.13.2",
     "ts-loader": "2.0.1",
