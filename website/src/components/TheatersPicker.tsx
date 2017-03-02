@@ -18,7 +18,7 @@ export class TheatersPicker extends Component<Props, void> {
 
     return (
       <div>
-        <div className="row">
+        <div className="row pl-3 pr-3">
           {favoritedTheaters.map(theater =>
             <TheaterPicker
               key={theater.theaterId}
@@ -31,7 +31,7 @@ export class TheatersPicker extends Component<Props, void> {
         ) : (
             ""
         )}
-        <div className="row">
+        <div className="row pl-3 pr-3">
           {notFavoritedTheaters.map(theater =>
             <TheaterPicker
               key={theater.theaterId}

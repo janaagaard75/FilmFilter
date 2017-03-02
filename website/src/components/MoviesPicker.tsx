@@ -31,7 +31,7 @@ export class MoviesPicker extends Component<Props, void> {
           placeholder="Søg efter film"
           onKeyUp={e => this.handleKeyUp(e)}
         />
-        <div className="row">
+        <div className="row pl-3 pr-3">
           {this.props.movies.map(movie =>
             <MoviePicker
               key={movie.movieUrl}
