@@ -4,48 +4,45 @@
  * http://spin.js.org/
  *
  * Example:
-    var opts = {
-      lines: 12,            // The number of lines to draw
-      length: 7,            // The length of each line
-      width: 5,             // The line thickness
-      radius: 10,           // The radius of the inner circle
-      scale: 1.0,           // Scales overall size of the spinner
-      corners: 1,           // Roundness (0..1)
-      color: '#000',        // #rgb or #rrggbb
-      opacity: 1/4,         // Opacity of the lines
-      rotate: 0,            // Rotation offset
-      direction: 1,         // 1: clockwise, -1: counterclockwise
-      speed: 1,             // Rounds per second
-      trail: 100,           // Afterglow percentage
-      fps: 20,              // Frames per second when using setTimeout()
-      zIndex: 2e9,          // Use a high z-index by default
-      className: 'spinner', // CSS class to assign to the element
-      top: '50%',           // center vertically
-      left: '50%',          // center horizontally
-      shadow: false,        // Whether to render a shadow
-      hwaccel: false,       // Whether to use hardware acceleration (might be buggy)
-      position: 'absolute'  // Element positioning
-    };
-    var target = document.getElementById('foo');
-    var spinner = new Spinner(opts).spin(target);
+ *  var opts = {
+ *    lines: 12,            // The number of lines to draw
+ *    length: 7,            // The length of each line
+ *    width: 5,             // The line thickness
+ *    radius: 10,           // The radius of the inner circle
+ *    scale: 1.0,           // Scales overall size of the spinner
+ *    corners: 1,           // Roundness (0..1)
+ *    color: '#000',        // #rgb or #rrggbb
+ *    opacity: 1/4,         // Opacity of the lines
+ *    rotate: 0,            // Rotation offset
+ *    direction: 1,         // 1: clockwise, -1: counterclockwise
+ *    speed: 1,             // Rounds per second
+ *    trail: 100,           // Afterglow percentage
+ *    fps: 20,              // Frames per second when using setTimeout()
+ *    zIndex: 2e9,          // Use a high z-index by default
+ *    className: 'spinner', // CSS class to assign to the element
+ *    top: '50%',           // center vertically
+ *    left: '50%',          // center horizontally
+ *    shadow: false,        // Whether to render a shadow
+ *    hwaccel: false,       // Whether to use hardware acceleration (might be buggy)
+ *    position: 'absolute'  // Element positioning
+ *  };
+ *  var target = document.getElementById('foo');
+ *  var spinner = new Spinner(opts).spin(target);
  */
-; (function (root, factory) {
-  if (typeof module == "object" && module.exports) module.exports = factory(); // CommonJS
-  else if (typeof define == "function" && define.amd) define(factory); // AMD module
-  else root.Spinner = factory(); // Browser global
+(function (root, factory) {
+  if (typeof module == "object" && module.exports) module.exports = factory(); // CommonJS.
+  else if (typeof define == "function" && define.amd) define(factory); // AMD module.
+  else root.Spinner = factory(); // Browser global.
 }
   (this, function () {
     "use strict";
 
-    let prefixes = ["webkit", "Moz", "ms", "O"]; // Vendor prefixes
-    let animations = {}; // Animation rules keyed by their name
-    let useCssAnimations; // Whether to use CSS animations or setTimeout
-    let sheet; // A stylesheet to hold the @keyframe or VML rules
+    let prefixes = ["webkit", "Moz", "ms", "O"]; // Vendor prefixes.
+    let animations = {}; // Animation rules keyed by their name.
+    let useCssAnimations; // Whether to use CSS animations or setTimeout.
+    let sheet; // A stylesheet to hold the @keyframe or VML rules.
 
-    /**
-     * Utility function to create elements. If no tag name is given,
-     * a DIV is created. Optionally properties can be passed.
-     */
+    /** Utility function to create elements. If no tag name is given, a DIV is created. Optionally properties can be passed. */
     function createEl(tag, prop) {
       let el = document.createElement(tag || "div");
       let n;
@@ -54,9 +51,7 @@
       return el;
     }
 
-    /**
-     * Appends children and returns the parent.
-     */
+    /** * Appends children and returns the parent. */
     function ins(parent /* child1, child2, ...*/) {
       for (let i = 1, n = arguments.length; i < n; i++) {
         parent.appendChild(arguments[i]);
@@ -65,11 +60,7 @@
       return parent;
     }
 
-    /**
-     * Creates an opacity keyframe animation rule and returns its name.
-     * Since most mobile Webkits have timing issues with animation-delay,
-     * we create separate rules for each line/segment.
-     */
+    /** Creates an opacity keyframe animation rule and returns its name. Since most mobile Webkits have timing issues with animation-delay, we create separate rules for each line/segment. */
     function addAnimation(alpha, trail, i, lines) {
       let name = ["opacity", trail, ~~(alpha * 100), i, lines].join("-");
       let start = 0.01 + i / lines * 100;
@@ -93,9 +84,7 @@
       return name;
     }
 
-    /**
-     * Tries various vendor prefixes and returns the first supported property.
-     */
+    /** Tries various vendor prefixes and returns the first supported property. */
     function vendor(el, prop) {
       let s = el.style;
       let pp;
@@ -109,9 +98,7 @@
       }
     }
 
-    /**
-     * Sets multiple style properties at once.
-     */
+    /** Sets multiple style properties at once. */
     function css(el, prop) {
       for (let n in prop) {
         el.style[vendor(el, n) || n] = prop[n];
@@ -120,9 +107,7 @@
       return el;
     }
 
-    /**
-     * Fills in default values.
-     */
+    /** Fills in default values. */
     function merge(obj) {
       for (let i = 1; i < arguments.length; i++) {
         let def = arguments[i];
@@ -133,9 +118,7 @@
       return obj;
     }
 
-    /**
-     * Returns the line color from the given string or array.
-     */
+    /** Returns the line color from the given string or array. */
     function getColor(color, idx) {
       return typeof color == "string" ? color : color[idx % color.length];
     }
@@ -150,7 +133,7 @@
       scale: 1.0,           // Scales overall size of the spinner
       corners: 1,           // Roundness (0..1)
       color: "#000",        // #rgb or #rrggbb
-      opacity: 1 / 4,         // Opacity of the lines
+      opacity: 1 / 4,       // Opacity of the lines
       rotate: 0,            // Rotation offset
       direction: 1,         // 1: clockwise, -1: counterclockwise
       speed: 1,             // Rounds per second
@@ -174,11 +157,7 @@
     Spinner.defaults = {};
 
     merge(Spinner.prototype, {
-      /**
-       * Adds the spinner to the given target element. If this instance is already
-       * spinning, it is automatically removed from its previous target b calling
-       * stop() internally.
-       */
+      /** Adds the spinner to the given target element. If this instance is already spinning, it is automatically removed from its previous target b calling stop() internally. */
       spin: function (target) {
         this.stop();
 
@@ -224,9 +203,7 @@
         return self;
       },
 
-      /**
-       * Stops and removes the Spinner.
-       */
+      /** Stops and removes the Spinner. */
       stop: function () {
         let el = this.el;
         if (el) {
@@ -237,10 +214,7 @@
         return this;
       },
 
-      /**
-       * Internal method that draws the individual lines. Will be overwritten
-       * in VML fallback mode below.
-       */
+      /** Internal method that draws the individual lines. Will be overwritten in VML fallback mode below. */
       lines: function (el, o) {
         let i = 0;
         let start = (o.lines - 1) * (1 - o.direction) / 2;
@@ -274,10 +248,7 @@
         return el;
       },
 
-      /**
-       * Internal method that adjusts the opacity of a single line.
-       * Will be overwritten in VML fallback mode below.
-       */
+      /** Internal method that adjusts the opacity of a single line. Will be overwritten in VML fallback mode below. */
       opacity: function (el, i, val) {
         if (i < el.childNodes.length) el.childNodes[i].style.opacity = val;
       }
