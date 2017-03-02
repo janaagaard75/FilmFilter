@@ -29,7 +29,6 @@
  *  var target = document.getElementById('foo');
  *  var spinner = new Spinner(opts).spin(target);
  */
-"use strict";
 
 let prefixes = ["webkit", "Moz", "ms", "O"] // Vendor prefixes.
 let animations = {} // Animation rules keyed by their name.
@@ -299,8 +298,8 @@ function initVML() {
     function grp() {
       return css(
         vml("group", {
-          coordsize: s + " " + s,
-          coordorigin: -r + " " + -r
+          coordorigin: -r + " " + -r,
+          coordsize: s + " " + s
         }),
         { width: s, height: s }
       )
