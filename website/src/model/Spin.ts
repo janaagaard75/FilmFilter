@@ -31,9 +31,9 @@
  */
 
 let prefixes = ["webkit", "Moz", "ms", "O"] // Vendor prefixes.
-let animations = {} // Animation rules keyed by their name.
-let useCssAnimations: boolean // Whether to use CSS animations or setTimeout.
-let sheet // A stylesheet to hold the @keyframe or VML rules.
+let animations: any = {} // Animation rules keyed by their name.
+let useCssAnimations: any // Whether to use CSS animations or setTimeout.
+let sheet: any // A stylesheet to hold the @keyframe or VML rules.
 
 /** Utility function to create elements. If no tag name is given, a DIV is created. Optionally properties can be passed. */
 function createEl(tag?: any, prop?: any) {
