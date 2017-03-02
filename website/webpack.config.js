@@ -64,7 +64,7 @@ module.exports = {
     rules: [
       {
         test: /\.json$/,
-        use: "json-loader"
+        loader: "json-loader"
       },
       {
         test: /\.scss$/,
@@ -88,11 +88,11 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
-        use: "ts-loader"
+        loader: "ts-loader"
       },
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: "file-loader"
+        loader: "file-loader"
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
