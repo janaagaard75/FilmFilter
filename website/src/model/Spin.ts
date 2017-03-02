@@ -151,12 +151,15 @@ let defaults = {
 }
 
 /** The constructor */
-function Spinner(o: any) {
-  this.opts = merge(o || {}, Spinner.defaults, defaults)
-}
+export class Spinner {
+  constructor(o: any) {
+    this.opts = merge(o || {}, Spinner.defaults, defaults)
+  }
 
-// Global defaults that override the built-ins:
-Spinner.defaults = {}
+  static defaults: any = {}
+
+  opts: any
+}
 
 merge(Spinner.prototype, {
   /** Adds the spinner to the given target element. If this instance is already spinning, it is automatically removed from its previous target b calling stop() internally. */
@@ -273,5 +276,3 @@ if (typeof document !== "undefined") {
 
   useCssAnimations = vendor(probe, "animation")
 }
-
-return Spinner
