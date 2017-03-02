@@ -1,3 +1,4 @@
+import * as classNames from "classnames"
 import * as React from "react"
 import { Component } from "react"
 import { observer } from "mobx-react"
@@ -112,7 +113,14 @@ export class App extends Component<Props, State> {
             <div className="row mb-3">
               <div className="col-sm-4">
                 <button
-                  className="btn btn-secondary w-100 text-left"
+                  className={
+                    classNames(
+                      "btn btn-secondary w-100 text-left",
+                      {
+                        "active": this.state.activePicker === Picker.Movie
+                      }
+                    )
+                  }
                   onClick={() => this.setActivePicker(Picker.Movie)}
                 >
                     {this.getMovieButtonText()}
@@ -120,7 +128,14 @@ export class App extends Component<Props, State> {
               </div>
               <div className="col-sm-4">
                 <button
-                  className="btn btn-secondary w-100 text-left"
+                  className={
+                    classNames(
+                      "btn btn-secondary w-100 text-left",
+                      {
+                        "active": this.state.activePicker === Picker.Date
+                      }
+                    )
+                  }
                   onClick={() => this.setActivePicker(Picker.Date)}
                 >
                   Dato
@@ -128,7 +143,14 @@ export class App extends Component<Props, State> {
               </div>
               <div className="col-sm-4">
                 <button
-                  className="btn btn-secondary w-100 text-left"
+                  className={
+                    classNames(
+                      "btn btn-secondary w-100 text-left",
+                      {
+                        "active": this.state.activePicker === Picker.Theater
+                      }
+                    )
+                  }
                   onClick={() => this.setActivePicker(Picker.Theater)}
                 >
                   Biograf
