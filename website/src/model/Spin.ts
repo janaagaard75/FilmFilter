@@ -32,11 +32,11 @@
 
 let prefixes = ["webkit", "Moz", "ms", "O"] // Vendor prefixes.
 let animations = {} // Animation rules keyed by their name.
-let useCssAnimations // Whether to use CSS animations or setTimeout.
+let useCssAnimations: boolean // Whether to use CSS animations or setTimeout.
 let sheet // A stylesheet to hold the @keyframe or VML rules.
 
 /** Utility function to create elements. If no tag name is given, a DIV is created. Optionally properties can be passed. */
-function createEl(tag: any, prop: any) {
+function createEl(tag?: any, prop?: any) {
   const el = document.createElement(tag || "div")
   for (const n in prop) {
     el[n] = prop[n]
@@ -44,7 +44,7 @@ function createEl(tag: any, prop: any) {
   return el
 }
 
-/** * Appends children and returns the parent. */
+/** Appends children and returns the parent. */
 function ins(parent: any, ...args: Array<any> /* child1, child2, ...*/) {
   // args.length might be off by one.
   for (let i = 1, n = args.length; i < n; i++) {
@@ -272,7 +272,7 @@ if (typeof document !== "undefined") {
   const probe = css(createEl("group"), { behavior: "url(#default#VML)" })
 
   if (!vendor(probe, "transform") && probe.adj) {
-    initVML()
+    // initVML()
   }
   else {
     useCssAnimations = vendor(probe, "animation")
@@ -281,77 +281,77 @@ if (typeof document !== "undefined") {
 
 return Spinner
 
-function initVML() {
+// function initVML() {
 
-  /* Utility function to create a VML tag */
-  function vml(tag: any, attr: any) {
-    return createEl("<" + tag + " xmlns=\"urn:schemas-microsoft.com:vml\" class=\"spin-vml\">", attr)
-  }
+//   /* Utility function to create a VML tag */
+//   function vml(tag: any, attr: any) {
+//     return createEl("<" + tag + " xmlns=\"urn:schemas-microsoft.com:vml\" class=\"spin-vml\">", attr)
+//   }
 
-  // No CSS transforms but VML support, add a CSS rule for VML elements:
-  sheet.addRule(".spin-vml", "behavior:url(#default#VML)")
+//   // No CSS transforms but VML support, add a CSS rule for VML elements:
+//   sheet.addRule(".spin-vml", "behavior:url(#default#VML)")
 
-  Spinner.prototype.lines = function(el, o) {
-    const r = o.scale * (o.length + o.width)
-    const s = o.scale * 2 * r
+//   Spinner.prototype.lines = function(el, o) {
+//     const r = o.scale * (o.length + o.width)
+//     const s = o.scale * 2 * r
 
-    function grp() {
-      return css(
-        vml("group", {
-          coordorigin: -r + " " + -r,
-          coordsize: s + " " + s
-        }),
-        { width: s, height: s }
-      )
-    }
+//     function grp() {
+//       return css(
+//         vml("group", {
+//           coordorigin: -r + " " + -r,
+//           coordsize: s + " " + s
+//         }),
+//         { width: s, height: s }
+//       )
+//     }
 
-    const margin = -(o.width + o.length) * o.scale * 2 + "px"
-    const g = css(grp(), { position: "absolute", top: margin, left: margin })
-    let i
+//     const margin = -(o.width + o.length) * o.scale * 2 + "px"
+//     const g = css(grp(), { position: "absolute", top: margin, left: margin })
+//     let i
 
-    function seg(i: any, dx: any, filter: any) {
-      ins(
-        g,
-        ins(
-          css(grp(), { rotation: 360 / o.lines * i + "deg", left: ~~dx }),
-          ins(
-            css(
-              vml("roundrect", { arcsize: o.corners }),
-              {
-                filter: filter,
-                height: o.scale * o.width,
-                left: o.scale * o.radius,
-                top: -o.scale * o.width >> 1,
-                width: r
-              }
-            ),
-            vml("fill", { color: getColor(o.color, i), opacity: o.opacity }),
-            vml("stroke", { opacity: 0 }) // transparent stroke to fix color bleeding upon opacity change
-          )
-        )
-      )
-    }
+//     function seg(i: any, dx: any, filter: any) {
+//       ins(
+//         g,
+//         ins(
+//           css(grp(), { rotation: 360 / o.lines * i + "deg", left: ~~dx }),
+//           ins(
+//             css(
+//               vml("roundrect", { arcsize: o.corners }),
+//               {
+//                 filter: filter,
+//                 height: o.scale * o.width,
+//                 left: o.scale * o.radius,
+//                 top: -o.scale * o.width >> 1,
+//                 width: r
+//               }
+//             ),
+//             vml("fill", { color: getColor(o.color, i), opacity: o.opacity }),
+//             vml("stroke", { opacity: 0 }) // transparent stroke to fix color bleeding upon opacity change
+//           )
+//         )
+//       )
+//     }
 
-    if (o.shadow) {
-      for (i = 1; i <= o.lines; i++) {
-        seg(i, -2, "progid:DXImageTransform.Microsoft.Blur(pixelradius=2,makeshadow=1,shadowopacity=.3)")
-      }
-    }
+//     if (o.shadow) {
+//       for (i = 1; i <= o.lines; i++) {
+//         seg(i, -2, "progid:DXImageTransform.Microsoft.Blur(pixelradius=2,makeshadow=1,shadowopacity=.3)")
+//       }
+//     }
 
-    for (i = 1; i <= o.lines; i++) {
-      seg(i)
-    }
-    return ins(el, g)
-  }
+//     for (i = 1; i <= o.lines; i++) {
+//       seg(i)
+//     }
+//     return ins(el, g)
+//   }
 
-  Spinner.prototype.opacity = function(el: any, i: any, val: any, o: any) {
-    let c = el.firstChild
-    o = o.shadow && o.lines || 0
-    if (c && i + o < c.childNodes.length) {
-      c = c.childNodes[i + o] c = c && c.firstChild c = c && c.firstChild
-      if (c) {
-        c.opacity = val
-      }
-    }
-  }
-}
+//   Spinner.prototype.opacity = function(el: any, i: any, val: any, o: any) {
+//     let c = el.firstChild
+//     o = o.shadow && o.lines || 0
+//     if (c && i + o < c.childNodes.length) {
+//       c = c.childNodes[i + o] c = c && c.firstChild c = c && c.firstChild
+//       if (c) {
+//         c.opacity = val
+//       }
+//     }
+//   }
+// }
