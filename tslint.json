@@ -108,6 +108,9 @@
       true,
       "always"
     ],
+    "object-literal-key-quotes": [
+      false
+    ],
     "ter-indent": [
       true,
       2,
