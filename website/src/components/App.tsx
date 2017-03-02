@@ -79,6 +79,17 @@ export class App extends Component<Props, State> {
     }
   }
 
+  private getMovieButtonText(): string {
+    let buttonText = "Film"
+
+    if (this.props.store.selectedMovies.length > 0) {
+      const selectedMovies = this.props.store.selectedMovies.map(movie => movie.originalTitle).join(", ")
+      buttonText += `: ${selectedMovies}`
+    }
+
+    return buttonText
+  }
+
   public render() {
     return (
       <div className="container-fluid">
@@ -92,9 +103,26 @@ export class App extends Component<Props, State> {
             <button className="btn btn-secondary btn-sm" onClick={() => this.props.store.fetchAndUpdateData()}disabled={this.props.store.fetchingAndParsing}>Opdater data</button>
           </span>
         </div>
+        <div className="row">
+          <div className="col-md-8">
+            <div className="row">
+              <div className="col-md-4">
+                <button className="btn btn-secondary w-100 text-left">{this.getMovieButtonText()}</button>
+              </div>
+              <div className="col-md-4">
+                <button className="btn btn-secondary w-100 text-left">Dato</button>
+              </div>
+              <div className="col-md-4">
+                <button className="btn btn-secondary w-100 text-left">Biograf</button>
+              </div>
+              {this.getTabContent()}
+            </div>
+          </div>
+          <div className="col-md-4">
+            <MatchingShowings matchingShowings={this.props.store.matchingShowings} />
+          </div>
+        </div>
         <Tabs activeTab={this.state.activeTab} setActiveTab={(tab: Tab) => this.setActiveTab(tab)}/>
-        {this.getTabContent()}
-        <MatchingShowings matchingShowings={this.props.store.matchingShowings} />
       </div>
     )
   }
