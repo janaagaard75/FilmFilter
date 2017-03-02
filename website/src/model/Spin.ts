@@ -46,8 +46,7 @@ function createEl(tag?: any, prop?: any) {
 
 /** Appends children and returns the parent. */
 function ins(parent: any, ...args: Array<any> /* child1, child2, ...*/) {
-  // args.length might be off by one.
-  for (let i = 1, n = args.length; i < n; i++) {
+  for (let i = 1, n = args.length - 1; i < n; i++) {
     parent.appendChild(args[i])
   }
 
@@ -108,8 +107,7 @@ function css(el: any, prop: any) {
 
 /** Fills in default values. */
 function merge(obj: any, ...args: Array<any>) {
-  // The length of args might be off by one.
-  for (let i = 1; i < args.length; i++) {
+  for (let i = 1; i < args.length - 1; i++) {
     const def = args[i]
     for (const n in def) {
       if (obj[n] === undefined) {
