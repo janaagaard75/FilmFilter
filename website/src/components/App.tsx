@@ -8,9 +8,13 @@ import { MatchingShowings } from "./MatchingShowings"
 import { MoviesPicker } from "./MoviesPicker"
 import { splitIntoChunks } from "../utilities"
 import { Store } from "../model/Store"
-import { Tab } from "../model/Tab"
-import { Tabs } from "./Tabs"
 import { TheatersPicker } from "./TheatersPicker"
+
+enum Picker {
+  Date,
+  Movie,
+  Theater
+}
 
 interface Props {
   routeProps: RouteComponentProps<void, void>
@@ -18,7 +22,7 @@ interface Props {
 }
 
 interface State {
-  activeTab: Tab | undefined
+  activePicker: Picker | undefined
 }
 
 @observer
@@ -27,55 +31,20 @@ export class App extends Component<Props, State> {
     super(props, context)
 
     this.state = {
-      activeTab: undefined
+      activePicker: undefined
     }
   }
 
-  private setActiveTab(tab: Tab) {
-    if (tab === this.state.activeTab) {
+  private setActivePicker(picker: Picker) {
+    if (picker === this.state.activePicker) {
       this.setState({
-        activeTab: undefined
+        activePicker: undefined
       })
     }
     else {
       this.setState({
-        activeTab: tab
+        activePicker: picker
       })
-    }
-  }
-
-  private getTabContent() {
-    switch (this.state.activeTab) {
-      case "Film":
-        const firstMovies = this.props.store.matchingMovies.slice(0, 24)
-        return (
-          <MoviesPicker
-            movies={firstMovies}
-            setMovieNameFilter={(filter: string) => this.props.store.setMovieNameFilter(filter)}
-          />
-        )
-
-      case "Dato":
-        const weeks = splitIntoChunks(this.props.store.dates, 7)
-        const firstWeeks = weeks.slice(0, 100)
-        return (
-          <DatesPicker
-            weeks={firstWeeks}
-          />
-        )
-
-      case "Biograf":
-        return (
-          <TheatersPicker
-            theaters={this.props.store.theatersSortedByName}
-          />
-        )
-
-      case undefined:
-        return undefined
-
-      default:
-        throw new Error(`'${this.state.activeTab}' is not a supported tab type.`)
     }
   }
 
@@ -88,6 +57,41 @@ export class App extends Component<Props, State> {
     }
 
     return buttonText
+  }
+
+  private getTabContent() {
+    switch (this.state.activePicker) {
+      case Picker.Date:
+        const weeks = splitIntoChunks(this.props.store.dates, 7)
+        const firstWeeks = weeks.slice(0, 100)
+        return (
+          <DatesPicker
+            weeks={firstWeeks}
+          />
+        )
+
+      case Picker.Movie:
+        const firstMovies = this.props.store.matchingMovies.slice(0, 24)
+        return (
+          <MoviesPicker
+            movies={firstMovies}
+            setMovieNameFilter={(filter: string) => this.props.store.setMovieNameFilter(filter)}
+          />
+        )
+
+      case Picker.Theater:
+        return (
+          <TheatersPicker
+            theaters={this.props.store.theatersSortedByName}
+          />
+        )
+
+      case undefined:
+        return undefined
+
+      default:
+        throw new Error(`'${this.state.activePicker}' is not a supported tab type.`)
+    }
   }
 
   public render() {
@@ -107,13 +111,28 @@ export class App extends Component<Props, State> {
           <div className="col-md-8">
             <div className="row">
               <div className="col-md-4">
-                <button className="btn btn-secondary w-100 text-left">{this.getMovieButtonText()}</button>
+                <button
+                  className="btn btn-secondary w-100 text-left"
+                  onClick={() => this.setActivePicker(Picker.Movie)}
+                >
+                    {this.getMovieButtonText()}
+                </button>
               </div>
               <div className="col-md-4">
-                <button className="btn btn-secondary w-100 text-left">Dato</button>
+                <button
+                  className="btn btn-secondary w-100 text-left"
+                  onClick={() => this.setActivePicker(Picker.Date)}
+                >
+                  Dato
+                </button>
               </div>
               <div className="col-md-4">
-                <button className="btn btn-secondary w-100 text-left">Biograf</button>
+                <button
+                  className="btn btn-secondary w-100 text-left"
+                  onClick={() => this.setActivePicker(Picker.Theater)}
+                >
+                  Biograf
+                </button>
               </div>
               {this.getTabContent()}
             </div>
@@ -122,7 +141,6 @@ export class App extends Component<Props, State> {
             <MatchingShowings matchingShowings={this.props.store.matchingShowings} />
           </div>
         </div>
-        <Tabs activeTab={this.state.activeTab} setActiveTab={(tab: Tab) => this.setActiveTab(tab)}/>
       </div>
     )
   }

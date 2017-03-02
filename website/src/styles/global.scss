@@ -4,6 +4,10 @@ html {
   overflow-y: scroll;
 }
 
+button {
+  @extend .clickable
+}
+
 .clickable {
   cursor: pointer
 }
