@@ -47,7 +47,9 @@
       let el = document.createElement(tag || "div");
       let n;
 
-      for (n in prop) el[n] = prop[n];
+      for (n in prop) {
+        el[n] = prop[n];
+      }
       return el;
     }
 
@@ -94,7 +96,9 @@
       if (s[prop] !== undefined) return prop;
       for (i = 0; i < prefixes.length; i++) {
         pp = prefixes[i] + prop;
-        if (s[pp] !== undefined) return pp;
+        if (s[pp] !== undefined) {
+          return pp;
+        }
       }
     }
 
@@ -112,7 +116,9 @@
       for (let i = 1; i < arguments.length; i++) {
         let def = arguments[i];
         for (let n in def) {
-          if (obj[n] === undefined) obj[n] = def[n];
+          if (obj[n] === undefined) {
+            obj[n] = def[n];
+          }
         }
       }
       return obj;
@@ -208,7 +214,9 @@
         let el = this.el;
         if (el) {
           clearTimeout(this.timeout);
-          if (el.parentNode) el.parentNode.removeChild(el);
+          if (el.parentNode) {
+            el.parentNode.removeChild(el);
+          }
           this.el = undefined;
         }
         return this;
@@ -242,7 +250,9 @@
             animation: useCssAnimations && addAnimation(o.opacity, o.trail, start + i * o.direction, o.lines) + " " + 1 / o.speed + "s linear infinite"
           });
 
-          if (o.shadow) ins(seg, css(fill("#000", "0 0 4px #000"), { top: "2px" }));
+          if (o.shadow) {
+            ins(seg, css(fill("#000", "0 0 4px #000"), { top: "2px" }));
+          }
           ins(el, ins(seg, fill(getColor(o.color, i), "0 0 1px rgba(0,0,0,.1)")));
         }
         return el;
@@ -250,7 +260,9 @@
 
       /** Internal method that adjusts the opacity of a single line. Will be overwritten in VML fallback mode below. */
       opacity: function (el, i, val) {
-        if (i < el.childNodes.length) el.childNodes[i].style.opacity = val;
+        if (i < el.childNodes.length) {
+          el.childNodes[i].style.opacity = val;
+        }
       }
 
     });
@@ -284,7 +296,7 @@ function initVML() {
   // No CSS transforms but VML support, add a CSS rule for VML elements:
   sheet.addRule(".spin-vml", "behavior:url(#default#VML)");
 
-  Spinner.prototype.lines = function(el, o) {
+  Spinner.prototype.lines = function (el, o) {
     let r = o.scale * (o.length + o.width)
     let s = o.scale * 2 * r
 
@@ -325,21 +337,26 @@ function initVML() {
       )
     }
 
-    if (o.shadow)
+    if (o.shadow) {
       for (i = 1; i <= o.lines; i++) {
         seg(i, -2, "progid:DXImageTransform.Microsoft.Blur(pixelradius=2,makeshadow=1,shadowopacity=.3)")
       }
+    }
 
-    for (i = 1; i <= o.lines; i++) seg(i)
+    for (i = 1; i <= o.lines; i++) {
+      seg(i)
+    }
     return ins(el, g)
   }
 
-  Spinner.prototype.opacity = function(el, i, val, o) {
+  Spinner.prototype.opacity = function (el, i, val, o) {
     let c = el.firstChild
     o = o.shadow && o.lines || 0
     if (c && i + o < c.childNodes.length) {
       c = c.childNodes[i + o] c = c && c.firstChild c = c && c.firstChild
-      if (c) c.opacity = val
+      if (c) {
+        c.opacity = val
+      }
     }
   }
 }
