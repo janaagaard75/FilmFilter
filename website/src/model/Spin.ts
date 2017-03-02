@@ -31,22 +31,20 @@
  */
 export class Spinner {
   constructor(o: any) {
-    this.opts = merge(o || {}, Spinner.defaults, defaults)
+    this.opts = this.merge(o || {}, this.defaults)
 
     if (typeof document !== "undefined") {
-      sheet = (function() {
-        const el = createEl("style", { type: "text/css" })
-        ins(document.getElementsByTagName("head")[0], el)
+      this.sheet = (function() {
+        const el = this.createEl("style", { type: "text/css" })
+        this.ins(document.getElementsByTagName("head")[0], el)
         return el.sheet || el.styleSheet
       }())
 
-      const probe = css(createEl("group"), { behavior: "url(#default#VML)" })
+      const probe = this.css(this.createEl("group"), { behavior: "url(#default#VML)" })
 
-      useCssAnimations = vendor(probe, "animation")
+      this.useCssAnimations = this.vendor(probe, "animation")
     }
   }
-
-  static defaults: any = {}
 
   opts: any
 
@@ -56,9 +54,9 @@ export class Spinner {
 
     const self = this
     const o = self.opts
-    const el = self.el = createEl(null, { className: o.className })
+    const el = self.el = this.createEl(null, { className: o.className })
 
-    css(el, {
+    this.css(el, {
       left: o.left,
       position: o.position,
       top: o.top,
@@ -73,7 +71,7 @@ export class Spinner {
     el.setAttribute("role", "progressbar")
     self.lines(el, self.opts)
 
-    if (!useCssAnimations) {
+    if (!this.useCssAnimations) {
       // No CSS animation support, use setTimeout() instead
       let i = 0
       const start = (o.lines - 1) * (1 - o.direction) / 2
@@ -88,11 +86,12 @@ export class Spinner {
         for (let j = 0; j < o.lines; j++) {
           alpha = Math.max(1 - (i + (o.lines - j) * astep) % f * ostep, o.opacity)
 
-          self.opacity(el, j * o.direction + start, alpha, o)
+          this.opacity(el, j * o.direction + start, alpha, o)
         }
         self.timeout = self.el && setTimeout(anim, ~~(1000 / fps))
       })()
     }
+
     return self
   }
 
@@ -116,8 +115,8 @@ export class Spinner {
     let seg
 
     for (; i < o.lines; i++) {
-      seg = css(createEl(), {
-        animation: useCssAnimations && addAnimation(o.opacity, o.trail, start + i * o.direction, o.lines) + " " + 1 / o.speed + "s linear infinite",
+      seg = this.css(this.createEl(), {
+        animation: this.useCssAnimations && this.addAnimation(o.opacity, o.trail, start + i * o.direction, o.lines) + " " + 1 / o.speed + "s linear infinite",
         opacity: o.opacity,
         position: "absolute",
         top: 1 + ~(o.scale * o.width / 2) + "px",
@@ -125,10 +124,12 @@ export class Spinner {
       })
 
       if (o.shadow) {
-        ins(seg, css(fill("#000", "0 0 4px #000"), { top: "2px" }))
+        this.ins(seg, this.css(this.fill(o, "#000", "0 0 4px #000"), { top: "2px" }))
       }
-      ins(el, ins(seg, fill(getColor(o.color, i), "0 0 1px rgba(0,0,0,.1)")))
+
+      this.ins(el, this.ins(seg, this.fill(o, this.getColor(o.color, i), "0 0 1px rgba(0,0,0,.1)")))
     }
+
     return el
   }
 
@@ -140,8 +141,8 @@ export class Spinner {
   }
 
 
-  private fill(color: any, shadow: any) {
-    return css(createEl(), {
+  private fill(o: any, color: any, shadow: any) {
+    return this.css(this.createEl(), {
       background: color,
       borderRadius: (o.corners * o.scale * o.width >> 1) + "px",
       boxShadow: shadow,
@@ -206,20 +207,20 @@ export class Spinner {
     const name = ["opacity", trail, ~~(alpha * 100), i, lines].join("-")
     const start = 0.01 + i / lines * 100
     const z = Math.max(1 - (1 - alpha) / trail * (100 - start), alpha)
-    const prefix = useCssAnimations.substring(0, useCssAnimations.indexOf("Animation")).toLowerCase()
+    const prefix = this.useCssAnimations.substring(0, this.useCssAnimations.indexOf("Animation")).toLowerCase()
     const pre = prefix && "-" + prefix + "-" || ""
 
-    if (!animations[name]) {
-      sheet.insertRule(
+    if (!this.animations[name]) {
+      this.sheet.insertRule(
         "@" + pre + "keyframes " + name + "{" +
         "0%{opacity:" + z + "}" +
         start + "%{opacity:" + alpha + "}" +
         (start + 0.01) + "%{opacity:1}" +
         (start + trail) % 100 + "%{opacity:" + alpha + "}" +
         "100%{opacity:" + z + "}" +
-        "}", sheet.cssRules.length)
+        "}", this.sheet.cssRules.length)
 
-      animations[name] = 1
+      this.animations[name] = 1
     }
 
     return name
@@ -236,8 +237,8 @@ export class Spinner {
       return prop
     }
 
-    for (i = 0; i < prefixes.length; i++) {
-      pp = prefixes[i] + prop
+    for (i = 0; i < this.prefixes.length; i++) {
+      pp = this.prefixes[i] + prop
       if (s[pp] !== undefined) {
         return pp
       }
@@ -247,7 +248,7 @@ export class Spinner {
   /** Sets multiple style properties at once. */
   private css(el: any, prop: any) {
     for (const n in prop) {
-      el.style[vendor(el, n) || n] = prop[n]
+      el.style[this.vendor(el, n) || n] = prop[n]
     }
 
     return el
