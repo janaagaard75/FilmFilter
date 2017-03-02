@@ -108,9 +108,9 @@ export class App extends Component<Props, State> {
           </span>
         </div>
         <div className="row">
-          <div className="col-md-8">
-            <div className="row">
-              <div className="col-md-4">
+          <div className="col-md-7">
+            <div className="row mb-3">
+              <div className="col-sm-4">
                 <button
                   className="btn btn-secondary w-100 text-left"
                   onClick={() => this.setActivePicker(Picker.Movie)}
@@ -118,7 +118,7 @@ export class App extends Component<Props, State> {
                     {this.getMovieButtonText()}
                 </button>
               </div>
-              <div className="col-md-4">
+              <div className="col-sm-4">
                 <button
                   className="btn btn-secondary w-100 text-left"
                   onClick={() => this.setActivePicker(Picker.Date)}
@@ -126,7 +126,7 @@ export class App extends Component<Props, State> {
                   Dato
                 </button>
               </div>
-              <div className="col-md-4">
+              <div className="col-sm-4">
                 <button
                   className="btn btn-secondary w-100 text-left"
                   onClick={() => this.setActivePicker(Picker.Theater)}
@@ -134,10 +134,10 @@ export class App extends Component<Props, State> {
                   Biograf
                 </button>
               </div>
-              {this.getTabContent()}
             </div>
+            {this.getTabContent()}
           </div>
-          <div className="col-md-4">
+          <div className="col-md-5">
             <MatchingShowings matchingShowings={this.props.store.matchingShowings} />
           </div>
         </div>

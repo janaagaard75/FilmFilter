@@ -16,9 +16,7 @@ export class Card extends Component<Props, void> {
             {this.props.header}
           </h5>
         </div>
-        <div className="card-block">
-          {this.props.children}
-        </div>
+        {this.props.children}
       </div>
     )
   }
