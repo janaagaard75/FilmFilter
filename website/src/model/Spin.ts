@@ -34,16 +34,16 @@ export class Spinner {
     this.opts = this.merge(o || {}, this.defaults)
 
     if (typeof document !== "undefined") {
-      this.sheet = (function() {
-        const el = this.createEl("style", { type: "text/css" })
-        this.ins(document.getElementsByTagName("head")[0], el)
-        return el.sheet || el.styleSheet
-      }())
-
+      this.sheet = this.createStyleElement()
       const probe = this.css(this.createEl("group"), { behavior: "url(#default#VML)" })
-
       this.useCssAnimations = this.vendor(probe, "animation")
     }
+  }
+
+  private createStyleElement() {
+    const el = this.createEl("style", { type: "text/css" })
+    this.ins(document.getElementsByTagName("head")[0], el)
+    return el.sheet || el.styleSheet
   }
 
   el: any
@@ -55,7 +55,7 @@ export class Spinner {
     this.stop()
 
     const o = this.opts
-    this.el = this.createEl(null, { className: o.className })
+    this.el = this.createEl("div", { className: o.className })
 
     this.css(this.el, {
       left: o.left,
