@@ -46,17 +46,18 @@ export class Spinner {
     }
   }
 
+  el: any
   opts: any
+  timeout: any
 
   /** Adds the spinner to the given target element. If this instance is already spinning, it is automatically removed from its previous target b calling stop() internally. */
   public spin(target: any) {
     this.stop()
 
-    const self = this
-    const o = self.opts
-    const el = self.el = this.createEl(null, { className: o.className })
+    const o = this.opts
+    this.el = this.createEl(null, { className: o.className })
 
-    this.css(el, {
+    this.css(this.el, {
       left: o.left,
       position: o.position,
       top: o.top,
@@ -65,11 +66,11 @@ export class Spinner {
     })
 
     if (target) {
-      target.insertBefore(el, target.firstChild || null)
+      target.insertBefore(this.el, target.firstChild || null)
     }
 
-    el.setAttribute("role", "progressbar")
-    self.lines(el, self.opts)
+    this.el.setAttribute("role", "progressbar")
+    this.lines(this.el, this.opts)
 
     if (!this.useCssAnimations) {
       // No CSS animation support, use setTimeout() instead
@@ -86,13 +87,11 @@ export class Spinner {
         for (let j = 0; j < o.lines; j++) {
           alpha = Math.max(1 - (i + (o.lines - j) * astep) % f * ostep, o.opacity)
 
-          this.opacity(el, j * o.direction + start, alpha, o)
+          this.opacity(this.el, j * o.direction + start, alpha, o)
         }
-        self.timeout = self.el && setTimeout(anim, ~~(1000 / fps))
+        this.timeout = this.el && setTimeout(anim, ~~(1000 / fps))
       })()
     }
-
-    return self
   }
 
   /** Stops and removes the Spinner. */
@@ -124,10 +123,10 @@ export class Spinner {
       })
 
       if (o.shadow) {
-        this.ins(seg, this.css(this.fill(o, "#000", "0 0 4px #000"), { top: "2px" }))
+        this.ins(seg, this.css(this.fill(o, i, "#000", "0 0 4px #000"), { top: "2px" }))
       }
 
-      this.ins(el, this.ins(seg, this.fill(o, this.getColor(o.color, i), "0 0 1px rgba(0,0,0,.1)")))
+      this.ins(el, this.ins(seg, this.fill(o, i, this.getColor(o.color, i), "0 0 1px rgba(0,0,0,.1)")))
     }
 
     return el
@@ -141,7 +140,7 @@ export class Spinner {
   }
 
 
-  private fill(o: any, color: any, shadow: any) {
+  private fill(o: any, i: any, color: any, shadow: any) {
     return this.css(this.createEl(), {
       background: color,
       borderRadius: (o.corners * o.scale * o.width >> 1) + "px",
