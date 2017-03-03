@@ -114,7 +114,7 @@ export class Spinner {
     let seg
 
     for (; i < o.lines; i++) {
-      seg = this.css(this.createEl(), {
+      seg = this.css(this.createEl("div"), {
         animation: this.useCssAnimations && this.addAnimation(o.opacity, o.trail, start + i * o.direction, o.lines) + " " + 1 / o.speed + "s linear infinite",
         opacity: o.opacity,
         position: "absolute",
@@ -141,7 +141,7 @@ export class Spinner {
 
 
   private fill(o: any, i: any, color: any, shadow: any) {
-    return this.css(this.createEl(), {
+    return this.css(this.createEl("div"), {
       background: color,
       borderRadius: (o.corners * o.scale * o.width >> 1) + "px",
       boxShadow: shadow,
@@ -184,8 +184,8 @@ export class Spinner {
   sheet: any // A stylesheet to hold the @keyframe or VML rules.
 
   /** Utility function to create elements. If no tag name is given, a DIV is created. Optionally properties can be passed. */
-  private createEl(tag?: any, prop?: any) {
-    const el = document.createElement(tag || "div")
+  private createEl(tag: any, prop?: any) {
+    const el = document.createElement(tag)
     for (const n in prop) {
       el[n] = prop[n]
     }
