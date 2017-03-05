@@ -1,66 +1,37 @@
 @import "variables";
 
-$base-line-height: 24px;
-$off-white: rgba($white, 0.2);
-$pulse-duration: 750ms;
-$spin-duration: 1s;
+$spinner-size: 2 * (1px + 4px) + 17px;
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes pulse {
-  50% {
-    background: $white;
-  }
-}
-
-.loading {
-  animation: spin $spin-duration infinite linear;
-  border: .25rem solid $off-white;
-  border-radius: 50%;
-  border-top-color: $white;
-  height: $base-line-height;
-  width: $base-line-height;
-
-  &--double {
-    border-style: double;
-    border-width: .5rem;
-  }
-}
-
-.loading-pulse {
-  animation: pulse $pulse-duration infinite;
-  animation-delay: ($pulse-duration / 3);
-  background: $off-white;
-  height: $base-line-height;
+.spinner {
+  display: inline-block;
+  height: $spinner-size;
   position: relative;
-  width: ($base-line-height / 4);
+  width: $spinner-size;
+}
 
-  &:before,
-  &:after {
-    animation: pulse $pulse-duration infinite;
-    background: $off-white;
-    content: '';
-    display: block;
-    height: ($base-line-height / 1.5);
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: ($base-line-height / 4);
+.double-bounce1,
+.double-bounce2 {
+  animation: sk-bounce 2.0s infinite ease-in-out;
+  background-color: #333;
+  border-radius: 50%;
+  height: 100%;
+  left: 0;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.double-bounce2 {
+  animation-delay: -1.0s;
+}
+
+@keyframes sk-bounce {
+  0%,
+  100% {
+    transform: scale(0.0);
   }
-
-  &:before {
-    left: -($base-line-height / 2);
-  }
-
-  &:after {
-    animation-delay: ($pulse-duration / 1.5);
-    left: ($base-line-height / 2);
+  50% {
+    transform: scale(1.0);
   }
 }

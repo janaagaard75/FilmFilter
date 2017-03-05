@@ -102,7 +102,10 @@ export class App extends Component<Props, State> {
           <h1 className="mr-auto">Film Filter</h1>
           <span className="align-self-center">
             {this.props.store.fetchingAndParsing
-              ? <span className="mr-3">Opdaterer&hellip;</span>
+              ? <span className="spinner">
+                  <span className="double-bounce1"/>
+                  <span className="double-bounce2"/>
+                </span>
               : ""
             }
             <button className="btn btn-secondary btn-sm" onClick={() => this.props.store.fetchAndUpdateData()}disabled={this.props.store.fetchingAndParsing}>Opdater</button>
