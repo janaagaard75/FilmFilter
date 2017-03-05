@@ -6,6 +6,7 @@ import { observer } from "mobx-react"
 import { Movie } from "../model/Movie"
 
 interface Props {
+  cssClass: string
   movie: Movie
 }
 
@@ -15,6 +16,7 @@ export class MoviePicker extends Component<Props, void> {
     const cssClasses = classNames(
       "col-6 col-sm-4 col-md-3 col-lg-1-of-5 col-xl-2",
       "clickable",
+      this.props.cssClass,
       {
         "selected-item": this.props.movie.selected
       }

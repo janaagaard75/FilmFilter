@@ -72,10 +72,9 @@ export class App extends Component<Props, State> {
         )
 
       case Picker.Movie:
-        const firstMovies = this.props.store.matchingMovies.slice(0, 24)
         return (
           <MoviesPicker
-            movies={firstMovies}
+            movies={this.props.store.matchingMovies}
             setMovieNameFilter={(filter: string) => this.props.store.setMovieNameFilter(filter)}
           />
         )
