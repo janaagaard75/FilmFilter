@@ -22,7 +22,6 @@ rules:
       exclude:
         - breakpoint
         - mq
-
   no-vendor-prefixes: 2
   no-warn: 2
   no-debug: 2
@@ -39,10 +38,7 @@ rules:
   property-sort-order:
     - 2
     -
-      order:
-        - display
-        - margin
-      ignore-custom-properties: true
+      order: alphabetical
   variable-for-property:
     - 2
     -
