@@ -20,10 +20,18 @@ Consider installing `firebase-tools` as a global npm package.
 
 ## To Do
 
-* Movies sometimes shuffle around when being selected. Maybe they should also be sorted by name.
-* Add a reset button?
+* Filtering one category should update the others.
+* Add routes to the app, so that it's possible to share links.
+* Add a reset button.
 * Better presentation of showings.
   * If a single movie has been selected, it's not necessary to show the name of the movie in the showings list.
-* Possible to select a start time interval.
-* Add routes to the app, so that it's possible to share links.
-* If a theater has been selected, then only show the movies that this theater is playing.
+  * Likewise for dates and theaters.
+  * Have a call to action button with a ticket icon.
+* 2D/3D selector.
+* Language selector.
+* Possible to select a start time interval for the movie.
+* Possible to select a weekday in the calendar.
+* Don't include the month on each day, so that the calendar can fit on an iPhone 5.
+* Helpful animations.
+* Make the app dark.
+* Better highlight of selecting items.
