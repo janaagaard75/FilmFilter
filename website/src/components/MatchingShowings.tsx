@@ -13,13 +13,17 @@ interface Props {
 @observer
 export class MatchingShowings extends Component<Props, void> {
   public render() {
-    const header: string = this.props.matchingShowings.length === 0
-      ? "Ingen matchende forestillinger"
-      : "Forestillinger: " + this.props.matchingShowings.length
+    const atLeastOneMatchingShowing = this.props.matchingShowings.length >= 1
+    const header = "Forestillinger: " + this.props.matchingShowings.length
 
     return (
       <Card header={header}>
-        <ShowingsTable showings={this.props.matchingShowings.slice(0, 50)}/>
+        {atLeastOneMatchingShowing
+          ? <ShowingsTable showings={this.props.matchingShowings.slice(0, 50)}/>
+          : <div className="card-block">
+              Ingen matchende forestillinger.
+            </div>
+        }
       </Card>
     )
   }
