@@ -101,7 +101,7 @@ export class App extends Component<Props, State> {
         <div className="d-flex">
           <h1 className="mr-auto">Film Filter</h1>
           <span className="align-self-center">
-            {this.props.store.fetchingAndParsing || true
+            {this.props.store.fetchingAndParsing
               ? <span className="mr-3">Opdaterer&hellip;</span>
               : ""
             }
