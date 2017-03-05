@@ -13,7 +13,7 @@ interface Props {
 export class ShowingsTable extends Component<Props, void> {
   public render() {
     return (
-      <table className="table table-sm">
+      <table className="table table-sm table-responsive">
         <thead>
           <tr>
             <th>Film</th>
