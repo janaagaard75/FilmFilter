@@ -31,7 +31,14 @@ export class ConnectedApp extends RouteComponent<void, void, void> {
       <div>
         <App routeProps={this.props} store={this.store}/>
         {this.includeDevTools &&
-          <DevTools/>
+          <DevTools
+            position={
+              {
+                bottom: 0,
+                right: 20
+              }
+            }
+          />
         }
       </div>
     )
