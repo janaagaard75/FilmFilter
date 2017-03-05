@@ -8,6 +8,13 @@ button {
   @extend .clickable
 }
 
+.btn-no-active:active {
+  background-color: inherit;
+  background-image: inherit;
+  border-color: inherit;
+  color: inherit;
+}
+
 .clickable {
   cursor: pointer
 }

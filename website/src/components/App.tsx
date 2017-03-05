@@ -101,7 +101,7 @@ export class App extends Component<Props, State> {
         <div className="d-flex">
           <h1 className="mr-auto">Film Filter</h1>
           <span className="align-self-center">
-            {this.props.store.fetchingAndParsing
+            {this.props.store.fetchingAndParsing || true
               ? <span className="spinner">
                   <span className="double-bounce1"/>
                   <span className="double-bounce2"/>
@@ -118,7 +118,7 @@ export class App extends Component<Props, State> {
                 <button
                   className={
                     classNames(
-                      "btn btn-secondary w-100 text-left",
+                      "btn btn-secondary btn-no-active w-100 text-left",
                       {
                         "active": this.state.activePicker === Picker.Movie
                       }
@@ -133,7 +133,7 @@ export class App extends Component<Props, State> {
                 <button
                   className={
                     classNames(
-                      "btn btn-secondary w-100 text-left",
+                      "btn btn-secondary btn-no-active w-100 text-left",
                       {
                         "active": this.state.activePicker === Picker.Date
                       }
@@ -148,7 +148,7 @@ export class App extends Component<Props, State> {
                 <button
                   className={
                     classNames(
-                      "btn btn-secondary w-100 text-left",
+                      "btn btn-secondary btn-no-active w-100 text-left",
                       {
                         "active": this.state.activePicker === Picker.Theater
                       }
