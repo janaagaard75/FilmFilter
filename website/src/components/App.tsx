@@ -105,7 +105,7 @@ export class App extends Component<Props, State> {
               ? <span className="mr-3">Opdaterer&hellip;</span>
               : ""
             }
-            <button className="btn btn-secondary btn-sm" onClick={() => this.props.store.fetchAndUpdateData()}disabled={this.props.store.fetchingAndParsing}>Opdater data</button>
+            <button className="btn btn-secondary btn-sm" onClick={() => this.props.store.fetchAndUpdateData()}disabled={this.props.store.fetchingAndParsing}>Opdater</button>
           </span>
         </div>
         <div className="row">
