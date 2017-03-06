@@ -36,28 +36,26 @@ export class App extends Component<Props, State> {
     }
   }
 
-  private setActivePicker(picker: Picker) {
-    if (picker === this.state.activePicker) {
-      this.setState({
-        activePicker: undefined
-      })
+  private getDateButtonText(): string {
+    const standardButtonText = "Dato"
+    if (this.props.store.selectedDates.length === 0) {
+      return standardButtonText
     }
-    else {
-      this.setState({
-        activePicker: picker
-      })
-    }
+
+    const selectedDates = this.props.store.selectedDates.map(date => date.label).join(", ")
+    const buttonTextWithDates = `${standardButtonText}: ${selectedDates}`
+    return buttonTextWithDates
   }
 
   private getMovieButtonText(): string {
-    let buttonText = "Film"
-
-    if (this.props.store.selectedMovies.length > 0) {
-      const selectedMovies = this.props.store.selectedMovies.map(movie => movie.originalTitle).join(", ")
-      buttonText += `: ${selectedMovies}`
+    const standardButtonText = "Film"
+    if (this.props.store.selectedMovies.length === 0) {
+      return standardButtonText
     }
 
-    return buttonText
+    const selectedMovies = this.props.store.selectedMovies.map(movie => movie.originalTitle).join(", ")
+    const buttonTextWithMovies = `${standardButtonText}: ${selectedMovies}`
+    return buttonTextWithMovies
   }
 
   private getTabContent() {
@@ -90,7 +88,20 @@ export class App extends Component<Props, State> {
         return undefined
 
       default:
-        throw new Error(`'${this.state.activePicker}' is not a supported tab type.`)
+        throw new Error(`'${this.state.activePicker}' is not a supported picker type.`)
+    }
+  }
+
+  private setActivePicker(picker: Picker) {
+    if (picker === this.state.activePicker) {
+      this.setState({
+        activePicker: undefined
+      })
+    }
+    else {
+      this.setState({
+        activePicker: picker
+      })
     }
   }
 
@@ -122,7 +133,7 @@ export class App extends Component<Props, State> {
                   }
                   onClick={() => this.setActivePicker(Picker.Movie)}
                 >
-                    {this.getMovieButtonText()}
+                  {this.getMovieButtonText()}
                 </button>
               </div>
               <div className="col-sm-4">
@@ -137,7 +148,7 @@ export class App extends Component<Props, State> {
                   }
                   onClick={() => this.setActivePicker(Picker.Date)}
                 >
-                  Dato
+                  {this.getDateButtonText()}
                 </button>
               </div>
               <div className="col-sm-4">
