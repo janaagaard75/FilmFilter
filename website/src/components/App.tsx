@@ -130,9 +130,9 @@ export class App extends Component<Props, State> {
           </span>
         </div>
         <div className="row">
-          <div className="col-md-7">
-            <div className="row mb-3">
-              <div className="col-sm-4">
+          <div className="col-xl-7">
+            <div className="mb-3">
+              <div className="mb-1">
                 <button
                   className={
                     classNames(
@@ -147,7 +147,7 @@ export class App extends Component<Props, State> {
                   {this.getMovieButtonText()}
                 </button>
               </div>
-              <div className="col-sm-4">
+              <div className="mb-1">
                 <button
                   className={
                     classNames(
@@ -162,7 +162,7 @@ export class App extends Component<Props, State> {
                   {this.getDateButtonText()}
                 </button>
               </div>
-              <div className="col-sm-4">
+              <div className="mb-1">
                 <button
                   className={
                     classNames(
@@ -180,7 +180,7 @@ export class App extends Component<Props, State> {
             </div>
             {this.getTabContent()}
           </div>
-          <div className="col-md-5">
+          <div className="col-xl-5">
             <MatchingShowings matchingShowings={this.props.store.matchingShowings} />
           </div>
         </div>
