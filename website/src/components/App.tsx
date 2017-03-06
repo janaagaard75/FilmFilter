@@ -92,6 +92,17 @@ export class App extends Component<Props, State> {
     }
   }
 
+  private getTheaterButtonText(): string {
+    const standardButtonText = "Biograf"
+    if (this.props.store.selectedTheaters.length === 0) {
+      return standardButtonText
+    }
+
+    const selectedTheaters = this.props.store.selectedTheaters.map(theater => theater.name).join(", ")
+    const buttonTextWithTheaters = `${standardButtonText}: ${selectedTheaters}`
+    return buttonTextWithTheaters
+  }
+
   private setActivePicker(picker: Picker) {
     if (picker === this.state.activePicker) {
       this.setState({
@@ -163,7 +174,7 @@ export class App extends Component<Props, State> {
                   }
                   onClick={() => this.setActivePicker(Picker.Theater)}
                 >
-                  Biograf
+                  {this.getTheaterButtonText()}
                 </button>
               </div>
             </div>
