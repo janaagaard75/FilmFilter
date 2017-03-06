@@ -74,6 +74,7 @@ export class Store {
   @computed
   public get selectedTheaters(): Array<Theater> {
     const selectedTheaters = this.theaters.filter(theater => theater.selected)
+      .sort(compareByName)
     return selectedTheaters
   }
 
