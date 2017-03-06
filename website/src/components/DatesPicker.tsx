@@ -13,7 +13,7 @@ interface Props {
 export class DatesPicker extends Component<Props, void> {
   public render() {
     return (
-      <table className="table table-sm table-responsive">
+      <table className="table table-sm">
         <tbody>
           <tr>
             <td>Ma</td>
