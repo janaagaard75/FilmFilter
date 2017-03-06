@@ -33,7 +33,7 @@ export class Store {
   @observable private movieNameFilter: string
   @observable private movies: Array<Movie>
   @observable private showings: Array<Showing>
-  @observable private theaters: Array<Theater>
+  @observable public theaters: Array<Theater>
   @observable public dates: Array<SelectableDate>
 
   @computed
@@ -74,14 +74,7 @@ export class Store {
   @computed
   public get selectedTheaters(): Array<Theater> {
     const selectedTheaters = this.theaters.filter(theater => theater.selected)
-      .sort(compareByName)
     return selectedTheaters
-  }
-
-  @computed
-  public get theatersSortedByName(): Array<Theater> {
-    const sortedByName = this.theaters.sort(compareByName)
-    return sortedByName
   }
 
   private addMissingDates() {
@@ -214,7 +207,7 @@ export class Store {
   public setData(data: Data) {
     this.dates = []
     this.movies = data.movies.map(movieData => new Movie(movieData))
-    this.theaters = data.theaters.map(theaterData => new Theater(theaterData))
+    this.theaters = data.theaters.map(theaterData => new Theater(theaterData)).sort(compareByName)
 
     // TODO: The date strings are being parsed twice, both in here and in the ImmutableMoment constructor. Consider fixing this by adding an intermediate model where start is a date.
     const now = Date.now()
