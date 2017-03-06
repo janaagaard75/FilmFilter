@@ -58,7 +58,27 @@ export class App extends Component<Props, State> {
     return buttonTextWithMovies
   }
 
-  private getTabContent() {
+  private getPickerButton(picker: Picker, buttonText: string): JSX.Element {
+    return (
+      <div className="mb-1">
+        <button
+          className={
+            classNames(
+              "btn btn-secondary btn-no-active w-100 text-left",
+              {
+                "active": this.state.activePicker === picker
+              }
+            )
+          }
+          onClick={() => this.setActivePicker(picker)}
+        >
+          {buttonText}
+        </button>
+      </div>
+    )
+  }
+
+  private getTabContent(): JSX.Element | undefined {
     switch (this.state.activePicker) {
       case Picker.Date:
         const weeks = splitIntoChunks(this.props.store.dates, 7)
@@ -132,51 +152,9 @@ export class App extends Component<Props, State> {
         <div className="row">
           <div className="col-xl-7">
             <div className="mb-3">
-              <div className="mb-1">
-                <button
-                  className={
-                    classNames(
-                      "btn btn-secondary btn-no-active w-100 text-left",
-                      {
-                        "active": this.state.activePicker === Picker.Movie
-                      }
-                    )
-                  }
-                  onClick={() => this.setActivePicker(Picker.Movie)}
-                >
-                  {this.getMovieButtonText()}
-                </button>
-              </div>
-              <div className="mb-1">
-                <button
-                  className={
-                    classNames(
-                      "btn btn-secondary btn-no-active w-100 text-left",
-                      {
-                        "active": this.state.activePicker === Picker.Date
-                      }
-                    )
-                  }
-                  onClick={() => this.setActivePicker(Picker.Date)}
-                >
-                  {this.getDateButtonText()}
-                </button>
-              </div>
-              <div className="mb-1">
-                <button
-                  className={
-                    classNames(
-                      "btn btn-secondary btn-no-active w-100 text-left",
-                      {
-                        "active": this.state.activePicker === Picker.Theater
-                      }
-                    )
-                  }
-                  onClick={() => this.setActivePicker(Picker.Theater)}
-                >
-                  {this.getTheaterButtonText()}
-                </button>
-              </div>
+              {this.getPickerButton(Picker.Movie, this.getMovieButtonText())}
+              {this.getPickerButton(Picker.Date, this.getDateButtonText())}
+              {this.getPickerButton(Picker.Theater, this.getTheaterButtonText())}
             </div>
             {this.getTabContent()}
           </div>
