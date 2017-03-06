@@ -10,11 +10,13 @@ import { MoviesPicker } from "./MoviesPicker"
 import { splitIntoChunks } from "../utilities"
 import { Store } from "../model/Store"
 import { TheatersPicker } from "./TheatersPicker"
+import { TypePicker } from "./TypePicker"
 
 enum Picker {
   Date,
   Movie,
-  Theater
+  Theater,
+  Type
 }
 
 interface Props {
@@ -79,6 +81,7 @@ export class App extends Component<Props, State> {
   }
 
   private getTabContent(): JSX.Element | undefined {
+    // TODO: Use polymorphism to avoid this switch.
     switch (this.state.activePicker) {
       case Picker.Date:
         const weeks = splitIntoChunks(this.props.store.dates, 7)
@@ -104,6 +107,11 @@ export class App extends Component<Props, State> {
           />
         )
 
+      case Picker.Type:
+        return (
+          <TypePicker/>
+        )
+
       case undefined:
         return undefined
 
@@ -121,6 +129,11 @@ export class App extends Component<Props, State> {
     const selectedTheaters = this.props.store.selectedTheaters.map(theater => theater.name).join(", ")
     const buttonTextWithTheaters = `${standardButtonText}: ${selectedTheaters}`
     return buttonTextWithTheaters
+  }
+
+  private getTypeButtonText(): string {
+    const standardButtonText = "Type"
+    return standardButtonText
   }
 
   private setActivePicker(picker: Picker) {
@@ -155,6 +168,7 @@ export class App extends Component<Props, State> {
               {this.getPickerButton(Picker.Movie, this.getMovieButtonText())}
               {this.getPickerButton(Picker.Date, this.getDateButtonText())}
               {this.getPickerButton(Picker.Theater, this.getTheaterButtonText())}
+              {this.getPickerButton(Picker.Type, this.getTypeButtonText())}
             </div>
             {this.getTabContent()}
           </div>
