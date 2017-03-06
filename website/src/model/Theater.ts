@@ -11,10 +11,11 @@ export class Theater {
     this.theaterId = data.theatherUrl.replace("biografer/", "")
   }
 
-  @observable public favorited: boolean
   public readonly name: string
-  @observable public selected: boolean
   public readonly theaterId: string
+
+  @observable public favorited: boolean
+  @observable public selected: boolean
 
   public get theaterUrl(): string {
     const theaterUrl = "http://www.kino.dk/biografer/" + this.theaterId

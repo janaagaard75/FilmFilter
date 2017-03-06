@@ -19,12 +19,13 @@ export class Movie {
     }
   }
 
+  @observable public selected: boolean
+
   public readonly danishTitle?: string
   public readonly lowerCaseTitle: string
   public readonly movieUrl: string
   public readonly originalTitle: string
   public readonly posterUrl: string
-  @observable public selected: boolean
   public readonly showings: Array<Showing>
 
   public static UndefinedMovie: Movie = new Movie({
