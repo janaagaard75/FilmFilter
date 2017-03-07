@@ -103,7 +103,7 @@ export class App extends Component<Props, State> {
       case Picker.Theater:
         return (
           <TheatersPicker
-            theaters={this.props.store.theaters}
+            theaters={this.props.store.theatersSortedByName}
           />
         )
 

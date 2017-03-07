@@ -22,11 +22,11 @@ interface Settings {
 export class Store {
   @observable private movies: Array<Movie> = []
   @observable private showings: Array<Showing> = []
+  @observable private theaters: Array<Theater> = []
   @observable public dates: Array<SelectableDate> = []
   @observable public fetchingAndParsing: boolean = false
   @observable public movieNameFilter: string = ""
   @observable public selectedDimension: Dimension = Dimension.Both
-  @observable public theaters: Array<Theater> = []
 
   @computed
   public get matchingMovies(): Array<Movie> {
@@ -64,8 +64,14 @@ export class Store {
 
   @computed
   public get selectedTheaters(): Array<Theater> {
-    const selectedTheaters = this.theaters.filter(theater => theater.selected)
+    const selectedTheaters = this.theatersSortedByName.filter(theater => theater.selected)
     return selectedTheaters
+  }
+
+  @computed
+  public get theatersSortedByName(): Array<Theater> {
+    const sortedTheaters = this.theaters.sort(compareByName)
+    return sortedTheaters
   }
 
   private addMissingDates() {
@@ -194,7 +200,8 @@ export class Store {
   public setData(data: Data) {
     this.dates = []
     this.movies = data.movies.map(movieData => new Movie(movieData))
-    this.theaters = data.theaters.map(theaterData => new Theater(theaterData)).sort(compareByName)
+    // Don't sort the theaters, because the showings refer to them by ID.
+    this.theaters = data.theaters.map(theaterData => new Theater(theaterData))
 
     // TODO: The date strings are being parsed twice, both in here and in the ImmutableMoment constructor. Consider fixing this by adding an intermediate model where start is a date.
     const now = Date.now()
