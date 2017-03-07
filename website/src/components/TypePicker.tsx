@@ -11,6 +11,50 @@ interface Props {
 
 @observer
 export class TypePicker extends Component<Props, void> {
+  private toggleDimension(dimension: Dimension.TwoD | Dimension.ThreeD) {
+    // tslint:disable-next-line:switch-default
+    switch (this.props.store.selectedDimension) {
+      case Dimension.TwoD:
+        // tslint:disable-next-line:switch-default
+        switch (dimension) {
+          case Dimension.TwoD:
+            this.props.store.selectedDimension = Dimension.ThreeD
+            break
+
+          case Dimension.ThreeD:
+            this.props.store.selectedDimension = Dimension.Both
+            break
+        }
+        break
+
+      case Dimension.ThreeD:
+        // tslint:disable-next-line:switch-default
+        switch (dimension) {
+          case Dimension.TwoD:
+            this.props.store.selectedDimension = Dimension.Both
+            break
+
+          case Dimension.ThreeD:
+            this.props.store.selectedDimension = Dimension.TwoD
+            break
+        }
+        break
+
+      case Dimension.Both:
+        // tslint:disable-next-line:switch-default
+        switch (dimension) {
+          case Dimension.TwoD:
+            this.props.store.selectedDimension = Dimension.ThreeD
+            break
+
+          case Dimension.ThreeD:
+            this.props.store.selectedDimension = Dimension.TwoD
+            break
+        }
+        break
+    }
+  }
+
   public render() {
     return (
       <div className="row">
@@ -18,10 +62,10 @@ export class TypePicker extends Component<Props, void> {
           <div className="form-check">
             <label className="form-check-label">
               <input
-                type="radio"
+                type="checkbox"
                 className="form-check-input"
-                onClick={() => { this.props.store.selectedDimension = Dimension.TwoD }}
-                checked={this.props.store.selectedDimension === Dimension.TwoD}
+                onClick={() => { this.toggleDimension(Dimension.TwoD) }}
+                checked={this.props.store.selectedDimension === Dimension.TwoD || this.props.store.selectedDimension === Dimension.Both}
               />
               {" "}2D
             </label>
@@ -29,23 +73,12 @@ export class TypePicker extends Component<Props, void> {
           <div className="form-check">
             <label className="form-check-label">
               <input
-                type="radio"
+                type="checkbox"
                 className="form-check-input"
-                onClick={() => { this.props.store.selectedDimension = Dimension.ThreeD }}
-                checked={this.props.store.selectedDimension === Dimension.ThreeD}
+                onClick={() => { this.toggleDimension(Dimension.ThreeD) }}
+                checked={this.props.store.selectedDimension === Dimension.ThreeD || this.props.store.selectedDimension === Dimension.Both}
               />
               {" "}3D
-            </label>
-          </div>
-          <div className="form-check">
-            <label className="form-check-label">
-              <input
-                type="radio"
-                className="form-check-input"
-                onClick={() => { this.props.store.selectedDimension = Dimension.Both }}
-                checked={this.props.store.selectedDimension === Dimension.Both}
-              />
-              {" "}Ligegyldigt
             </label>
           </div>
         </div>
