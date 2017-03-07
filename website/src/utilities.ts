@@ -4,7 +4,9 @@ interface HasName {
   name: string
 }
 
-export const compareByName = (a: HasName, b: HasName) => {
+type compareResult = -1 | 0 | 1
+
+export const compareByName = (a: HasName, b: HasName): compareResult => {
   if (a.name > b.name) {
     return 1
   }
