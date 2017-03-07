@@ -96,7 +96,7 @@ export class App extends Component<Props, State> {
         return (
           <MoviesPicker
             movies={this.props.store.matchingMovies}
-            setMovieNameFilter={(filter: string) => this.props.store.setMovieNameFilter(filter)}
+            setMovieNameFilter={(filter: string) => { this.props.store.movieNameFilter = filter }}
           />
         )
 

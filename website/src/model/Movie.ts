@@ -1,4 +1,3 @@
-import { action } from "mobx"
 import { observable } from "mobx"
 
 import { MovieData } from "./data/MovieData"
@@ -53,7 +52,6 @@ export class Movie {
     return compare
   }
 
-  @action
   public toggleSelection(): void {
     this.selected = !this.selected
   }

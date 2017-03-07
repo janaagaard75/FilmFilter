@@ -1,5 +1,4 @@
 import * as moment from "moment"
-import { action } from "mobx"
 import { observable } from "mobx"
 
 import { ImmutableDate } from "./ImmutableDate"
@@ -30,7 +29,6 @@ export class SelectableDate {
     this.showings.add(showing)
   }
 
-  @action
   public toggleSelection() {
     this.selected = !this.selected
   }

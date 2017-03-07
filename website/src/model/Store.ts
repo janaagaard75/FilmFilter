@@ -1,4 +1,3 @@
-import { action } from "mobx"
 import { autorun } from "mobx"
 import { computed } from "mobx"
 import { observable } from "mobx"
@@ -21,18 +20,13 @@ interface Settings {
 }
 
 export class Store {
-  @observable private _fetchingAndParsing: boolean = false
-  @observable private movieNameFilter: string = ""
   @observable private movies: Array<Movie> = []
   @observable private showings: Array<Showing> = []
   @observable public dates: Array<SelectableDate> = []
+  @observable public fetchingAndParsing: boolean = false
+  @observable public movieNameFilter: string = ""
   @observable public selectedDimension: Dimension = Dimension.Both
   @observable public theaters: Array<Theater> = []
-
-  @computed
-  public get fetchingAndParsing(): boolean {
-    return this._fetchingAndParsing
-  }
 
   @computed
   public get matchingMovies(): Array<Movie> {
@@ -98,9 +92,8 @@ export class Store {
     }
   }
 
-  @action
   public async fetchAndUpdateData(): Promise<void> {
-    this.setFetchingAndParsing(true)
+    this.fetchingAndParsing = true
 
     const fetchedData = await DataFetcher.fetchData()
     if (fetchedData === undefined) {
@@ -111,7 +104,7 @@ export class Store {
     this.setData(fetchedData)
     this.loadSettings()
 
-    this.setFetchingAndParsing(false)
+    this.fetchingAndParsing = false
   }
 
   public getMovie(movieId: number): Movie {
@@ -127,7 +120,6 @@ export class Store {
     return movie
   }
 
-  @action
   public getOrAddSelectableDate(date: ImmutableDate): SelectableDate {
     const existingSelectableDate = this.dates.find(selectableDate => selectableDate.date.equals(date))
     if (existingSelectableDate !== undefined) {
@@ -164,7 +156,6 @@ export class Store {
     }
   }
 
-  @action
   private loadSettings() {
     const settingsString = localStorage.getItem("settings")
 
@@ -200,7 +191,6 @@ export class Store {
     localStorage.setItem("settings", settingsString)
   }
 
-  @action
   public setData(data: Data) {
     this.dates = []
     this.movies = data.movies.map(movieData => new Movie(movieData))
@@ -218,16 +208,6 @@ export class Store {
     this.addMissingDates()
     this.addStartAndEndDates()
     this.sortDates()
-  }
-
-  @action
-  private setFetchingAndParsing(updating: boolean) {
-    this._fetchingAndParsing = updating
-  }
-
-  @action
-  public setMovieNameFilter(filter: string) {
-    this.movieNameFilter = filter.toLocaleLowerCase()
   }
 
   private sortDates() {

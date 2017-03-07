@@ -1,4 +1,3 @@
-import { action } from "mobx"
 import { observable } from "mobx"
 
 import { TheaterData } from "./data/TheaterData"
@@ -32,12 +31,10 @@ export class Theater {
     return cleanedUpName
   }
 
-  @action
   public toggleFavorited() {
     this.favorited = !this.favorited
   }
 
-  @action
   public toggleSelection() {
     this.selected = !this.selected
   }
