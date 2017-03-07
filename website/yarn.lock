@@ -3033,6 +3033,10 @@ lru-cache@^4.0.0, lru-cache@^4.0.1:
     pseudomap "^1.0.1"
     yallist "^2.0.0"
 
+"lz-string@git://github.com/janaagaard75/lz-string":
+  version "1.4.4"
+  resolved "git://github.com/janaagaard75/lz-string#45cfe5e365c3e435f2465acad1c43ebb681b203f"
+
 macaddress@^0.2.8:
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/macaddress/-/macaddress-0.2.8.tgz#5904dc537c39ec6dbefeae902327135fa8511f12"
@@ -4354,8 +4358,8 @@ router@^1.0.0:
     utils-merge "1.0.0"
 
 rsvp@^3.0.18, rsvp@^3.1.0:
-  version "3.3.3"
-  resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-3.3.3.tgz#34633caaf8bc66ceff4be3c2e1dffd032538a813"
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-3.4.0.tgz#96f397d9c7e294351b3c1456a74b3d0e7542988d"
 
 run-async@^0.1.0:
   version "0.1.0"
@@ -4937,8 +4941,8 @@ tslint@4.5.1:
     update-notifier "^2.0.0"
 
 tsutils@^1.1.0:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-1.2.1.tgz#74101a75dbf435800614ccafa4cd89a8d41ea03e"
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-1.2.2.tgz#7e165c601367b9f89200b97ff47d9e38d1a6e4c8"
 
 tty-browserify@0.0.0:
   version "0.0.0"
