@@ -4,9 +4,26 @@
     <meta charset="utf-8">
     <title>Film Filter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {
+        margin: 0;
+      }
+
+      .loading-wrapper {
+        align-items: center;
+        display: flex;
+        font-family: sans-serif;
+        height: 100vh;
+        justify-content: center;
+      }
+    </style>
     <!-- TODO: Consider using https://github.com/filamentgroup/loadCSS -->
   </head>
   <body>
-    <div id="app">Loading&hellip;</div>
+    <div id="app">
+      <div class="loading-wrapper">
+        Loading&hellip;
+      </div>
+    </div>
   </body>
 </html>
