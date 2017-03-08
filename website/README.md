@@ -2,7 +2,8 @@
 
 ## Set Up
 
-Consider installing `firebase-tools` as a global npm package.
+1. Install `firebase-tools` as a global npm package.
+1. Run `firebase login`.
 
 ## Interface
 
