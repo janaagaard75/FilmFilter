@@ -20,13 +20,14 @@ interface Settings {
 }
 
 export class Store {
+  @observable public dates: Array<SelectableDate> = []
+  @observable public fetchingAndParsing: boolean = false
+  @observable public selectedDimension: Dimension = Dimension.Both
+
+  @observable private movieNameFilter: string = ""
   @observable private movies: Array<Movie> = []
   @observable private showings: Array<Showing> = []
   @observable private theaters: Array<Theater> = []
-  @observable public dates: Array<SelectableDate> = []
-  @observable public fetchingAndParsing: boolean = false
-  @observable public movieNameFilter: string = ""
-  @observable public selectedDimension: Dimension = Dimension.Both
 
   @computed
   public get matchingMovies(): Array<Movie> {
@@ -215,6 +216,10 @@ export class Store {
     this.addMissingDates()
     this.addStartAndEndDates()
     this.sortDates()
+  }
+
+  public setMovieNameFilter(filter: string) {
+    this.movieNameFilter = filter.toLocaleLowerCase()
   }
 
   private sortDates() {

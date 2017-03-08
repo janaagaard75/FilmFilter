@@ -12,20 +12,21 @@ export class Movie {
     this.selected = false
     this.showings = []
 
-    this.lowerCaseTitle = data.originalTitle.toLocaleLowerCase()
+    this.searchableTitle = data.originalTitle.toLocaleLowerCase()
     if (data.danishTitle !== undefined) {
-      this.lowerCaseTitle += " " + data.danishTitle.toLocaleLowerCase()
+      this.searchableTitle += " " + data.danishTitle.toLocaleLowerCase()
     }
   }
 
   @observable public selected: boolean
 
   public readonly danishTitle?: string
-  public readonly lowerCaseTitle: string
   public readonly movieUrl: string
   public readonly originalTitle: string
   public readonly posterUrl: string
   public readonly showings: Array<Showing>
+
+  private readonly searchableTitle: string
 
   public static UndefinedMovie: Movie = new Movie({
     movieUrl: "",
@@ -37,13 +38,9 @@ export class Movie {
     this.showings.push(showing)
   }
 
-  /** Returns true if the string `filter` is container in either the original or the Danish title of this movie. Assused that `filter` is lower case. */
+  /** Returns true if the string `filter` is container in either the original or the Danish title of this movie. Assumes that `filter` is lower cased. */
   public titleMatchesFilter(filter: string): boolean {
-    // TODO: Consider creating a single string containing both titles that are already lowercased.
-    const matches
-      = this.originalTitle.toLocaleLowerCase().indexOf(filter) !== -1
-      || (this.danishTitle !== undefined
-        && this.danishTitle.toLocaleLowerCase().indexOf(filter) !== -1)
+    const matches = this.searchableTitle.indexOf(filter) !== -1
     return matches
   }
 
