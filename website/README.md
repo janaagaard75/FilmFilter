@@ -22,6 +22,7 @@
 ## To Do
 
 * Filtering one category should update the others.
+  * Example: How do I easily see that the movie Logan isn't shown in 3D anywhere?
 * Add routes to the app, so that it's possible to share links.
 * Add a reset button.
 * Better presentation of showings.
