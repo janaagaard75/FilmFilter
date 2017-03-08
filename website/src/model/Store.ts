@@ -201,7 +201,7 @@ export class Store {
   public setData(data: Data) {
     this.dates = []
     this.movies = data.movies.map(movieData => new Movie(movieData))
-    // Don't sort the theaters, because the showings refer to them by ID.
+    // Don't sort the theaters, because the showings refer to them by ID in the array.
     this.theaters = data.theaters.map(theaterData => new Theater(theaterData))
 
     // TODO: The date strings are being parsed twice, both in here and in the ImmutableMoment constructor. Consider fixing this by adding an intermediate model where start is a date.
