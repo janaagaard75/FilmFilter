@@ -1,4 +1,5 @@
 import { Dimensions } from "./filters/Dimensions"
+import { FilmType } from "./filters/FilmType"
 import { ImmutableDateTime } from "./ImmutableDateTime"
 import { Movie } from "./Movie"
 import { SelectableDate } from "./SelectableDate"
@@ -50,8 +51,12 @@ export class Showing {
   }
 
   public matchesDimensionsFilter(dimensions: Dimensions): boolean {
-    const matches = !this.threeD && dimensions.twoD
-        || this.threeD && dimensions.threeD
+    const matches = !this.threeD && dimensions.twoD || this.threeD && dimensions.threeD
+    return matches
+  }
+
+  public matchesFilmTypeFilter(filmType: FilmType): boolean {
+    const matches = !this.imax && filmType.standardFilm || this.imax && filmType.imax
     return matches
   }
 }

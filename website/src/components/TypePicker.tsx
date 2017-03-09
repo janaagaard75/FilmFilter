@@ -30,14 +30,14 @@ export class TypePicker extends Component<Props, void> {
         </div>
         <div className="col-sm-6 col-md-3 mb-4">
           <Checkbox
-            checked={false}
-            onClick={() => undefined}
+            checked={this.props.filters.filmType.standardFilm}
+            onClick={() => this.props.filters.filmType.standardFilm = !this.props.filters.filmType.standardFilm}
           >
             Almindeligt lærred
           </Checkbox>
           <Checkbox
-            checked={false}
-            onClick={() => undefined}
+            checked={this.props.filters.filmType.imax}
+            onClick={() => this.props.filters.filmType.imax = !this.props.filters.filmType.imax}
           >
             IMAX
           </Checkbox>

@@ -45,6 +45,7 @@ export class Store {
       .filter(showing => this.selectedTheaters.length === 0 || showing.theater.selected)
       .filter(showing => this.selectedDates.length === 0 || showing.date.selected)
       .filter(showing => showing.matchesDimensionsFilter(this.filters.dimensions))
+      .filter(showing => showing.matchesFilmTypeFilter(this.filters.filmType))
 
     return matching
   }
