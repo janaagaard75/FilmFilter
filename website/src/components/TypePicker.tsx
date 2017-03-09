@@ -2,8 +2,8 @@ import * as React from "react"
 import { Component } from "react"
 import { observer } from "mobx-react"
 
-import { Radio } from "./bootstrap/Checkbox"
 import { Dimension } from "../model/Dimension"
+import { Radio } from "./bootstrap/Radio"
 import { Store } from "../model/Store"
 
 interface Props {
@@ -12,50 +12,6 @@ interface Props {
 
 @observer
 export class TypePicker extends Component<Props, void> {
-  private toggleDimension(dimension: Dimension.TwoD | Dimension.ThreeD) {
-    // tslint:disable-next-line:switch-default
-    switch (this.props.store.selectedDimension) {
-      case Dimension.TwoD:
-        // tslint:disable-next-line:switch-default
-        switch (dimension) {
-          case Dimension.TwoD:
-            this.props.store.selectedDimension = Dimension.ThreeD
-            break
-
-          case Dimension.ThreeD:
-            this.props.store.selectedDimension = Dimension.Both
-            break
-        }
-        break
-
-      case Dimension.ThreeD:
-        // tslint:disable-next-line:switch-default
-        switch (dimension) {
-          case Dimension.TwoD:
-            this.props.store.selectedDimension = Dimension.Both
-            break
-
-          case Dimension.ThreeD:
-            this.props.store.selectedDimension = Dimension.TwoD
-            break
-        }
-        break
-
-      case Dimension.Both:
-        // tslint:disable-next-line:switch-default
-        switch (dimension) {
-          case Dimension.TwoD:
-            this.props.store.selectedDimension = Dimension.ThreeD
-            break
-
-          case Dimension.ThreeD:
-            this.props.store.selectedDimension = Dimension.TwoD
-            break
-        }
-        break
-    }
-  }
-
   public render() {
     return (
       <div className="row">
