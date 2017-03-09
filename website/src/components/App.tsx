@@ -96,7 +96,7 @@ export class App extends Component<Props, State> {
         return (
           <MoviesPicker
             movies={this.props.store.matchingMovies}
-            setMovieNameFilter={(filter: string) => { this.props.store.movieNameFilter = filter }}
+            setMovieNameFilter={(filter: string) => { this.props.store.setMovieNameFilter(filter) }}
           />
         )
 
@@ -158,9 +158,11 @@ export class App extends Component<Props, State> {
           <h1 className="mr-auto">Film Filter</h1>
           <span className="align-self-center">
             {this.props.store.fetchingAndParsing
-              ? <span className="mr-3">Opdaterer&hellip;</span>
+              ? <span className="form-control-static mr-3"><i className="fa fa-spinner fa-pulse"/></span>
               : ""
             }
+          </span>
+          <span className="align-self-center">
             <button className="btn btn-secondary btn-sm" onClick={() => this.props.store.fetchAndUpdateData()}disabled={this.props.store.fetchingAndParsing}>Opdater</button>
           </span>
         </div>
