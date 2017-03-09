@@ -6,7 +6,7 @@ import { compareByName } from "../utilities"
 import { Data } from "./data/Data"
 import { DataFetcher } from "./DataFetcher"
 import { DataStorer } from "./DataStorer"
-import { Dimension } from "./Dimension"
+import { Filters } from "./filters/Filters"
 import { ImmutableDate } from "./ImmutableDate"
 import { Movie } from "./Movie"
 import { parseAsLocalDateTime } from "../utilities"
@@ -22,7 +22,8 @@ interface Settings {
 export class Store {
   @observable public dates: Array<SelectableDate> = []
   @observable public fetchingAndParsing: boolean = false
-  @observable public selectedDimension: Dimension = Dimension.Both
+  // TODO: Move movieNameFilter to the Filters class.
+  public filters = new Filters()
 
   @observable private movieNameFilter: string = ""
   @observable private movies: Array<Movie> = []
@@ -43,10 +44,7 @@ export class Store {
       .filter(showing => this.selectedMovies.length === 0 || showing.movie.selected)
       .filter(showing => this.selectedTheaters.length === 0 || showing.theater.selected)
       .filter(showing => this.selectedDates.length === 0 || showing.date.selected)
-      .filter(showing =>
-        this.selectedDimension === Dimension.Both
-        || this.selectedDimension === Dimension.TwoD && !showing.threeD
-        || this.selectedDimension === Dimension.ThreeD && showing.threeD)
+      .filter(showing => showing.matchesDimensionsFilter(this.filters.dimensions))
 
     return matching
   }

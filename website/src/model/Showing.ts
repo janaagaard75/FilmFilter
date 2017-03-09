@@ -1,3 +1,4 @@
+import { Dimensions } from "./filters/Dimensions"
 import { ImmutableDateTime } from "./ImmutableDateTime"
 import { Movie } from "./Movie"
 import { SelectableDate } from "./SelectableDate"
@@ -46,5 +47,11 @@ export class Showing {
     const totalSeatsLine = seatingInfo.filter(info => info.startsWith("Sæder"))[0]
     const totalSeats = parseInt(totalSeatsLine.substring("Sæder: ".length), 10)
     return totalSeats
+  }
+
+  public matchesDimensionsFilter(dimensions: Dimensions): boolean {
+    const matches = !this.threeD && dimensions.twoD
+        || this.threeD && dimensions.threeD
+    return matches
   }
 }

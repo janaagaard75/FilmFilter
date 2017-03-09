@@ -110,7 +110,7 @@ export class App extends Component<Props, State> {
       case Picker.Type:
         return (
           <TypePicker
-            store={this.props.store}
+            filters={this.props.store.filters}
           />
         )
 

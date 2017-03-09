@@ -3,11 +3,10 @@ import { Component } from "react"
 import { observer } from "mobx-react"
 
 import { Checkbox } from "./bootstrap/Checkbox"
-import { Dimension } from "../model/Dimension"
-import { Store } from "../model/Store"
+import { Filters } from "../model/filters/Filters"
 
 interface Props {
-  store: Store
+  filters: Filters
 }
 
 @observer
@@ -17,14 +16,14 @@ export class TypePicker extends Component<Props, void> {
       <div className="row">
         <div className="col-sm-6 col-md-3 mb-4">
           <Checkbox
-            checked={this.props.store.selectedDimension === Dimension.TwoD}
-            onClick={() => { this.props.store.selectedDimension = Dimension.TwoD }}
+            checked={this.props.filters.dimensions.twoD}
+            onClick={() => { this.props.filters.dimensions.twoD = !this.props.filters.dimensions.twoD }}
           >
             2D
           </Checkbox>
           <Checkbox
-            checked={this.props.store.selectedDimension === Dimension.ThreeD}
-            onClick={() => { this.props.store.selectedDimension = Dimension.ThreeD }}
+            checked={this.props.filters.dimensions.threeD}
+            onClick={() => { this.props.filters.dimensions.threeD = !this.props.filters.dimensions.threeD }}
           >
             3D
           </Checkbox>
