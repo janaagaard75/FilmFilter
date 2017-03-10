@@ -11,13 +11,9 @@ import { ImmutableDate } from "./ImmutableDate"
 import { Movie } from "./Movie"
 import { parseAsLocalDateTime } from "../utilities"
 import { SelectableDate } from "./SelectableDate"
+import { Settings } from "./Settings"
 import { Showing } from "./Showing"
 import { Theater } from "./Theater"
-
-interface Settings {
-  favoritedTheaterIds: Array<string> | undefined
-  selectedTheaterIds: Array<string> | undefined
-}
 
 export class Store {
   @observable public dates: Array<SelectableDate> = []
