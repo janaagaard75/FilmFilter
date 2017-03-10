@@ -1,9 +1,11 @@
 import { Dimensions } from "./filters/Dimensions"
 import { FilmType } from "./filters/FilmType"
 import { ImmutableDateTime } from "./ImmutableDateTime"
+import { Language } from "./filters/Language"
 import { Movie } from "./Movie"
 import { SelectableDate } from "./SelectableDate"
 import { ShowingData } from "./data/ShowingData"
+import { ShowingType } from "./filters/ShowingType"
 import { Store } from "./Store"
 import { Theater } from "./Theater"
 
@@ -51,12 +53,22 @@ export class Showing {
   }
 
   public matchesDimensionsFilter(dimensions: Dimensions): boolean {
-    const matches = !this.threeD && dimensions.twoD || this.threeD && dimensions.threeD
+    const matches = this.threeD && dimensions.threeD || !this.threeD && dimensions.twoD
     return matches
   }
 
   public matchesFilmTypeFilter(filmType: FilmType): boolean {
-    const matches = !this.imax && filmType.standardFilm || this.imax && filmType.imax
+    const matches = this.imax && filmType.imax || !this.imax && filmType.standardFilm
+    return matches
+  }
+
+  public matchesLanguageFilter(language: Language): boolean {
+    const matches = this.dubbed && language.dubbedToDanish || !this.dubbed && language.originalLanguage
+    return matches
+  }
+
+  public matchesShowingType(showingType: ShowingType): boolean {
+    const matches = this.specialShowing && showingType.specialShowings || !this.specialShowing && showingType.normalShowings
     return matches
   }
 }

@@ -44,28 +44,28 @@ export class TypePicker extends Component<Props, void> {
         </div>
         <div className="col-sm-6 col-md-3 mb-4">
           <Checkbox
-            checked={false}
-            onClick={() => undefined}
+            checked={this.props.filters.language.originalLanguage}
+            onClick={() => this.props.filters.language.originalLanguage = !this.props.filters.language.originalLanguage}
           >
             Originalt sprog
           </Checkbox>
           <Checkbox
-            checked={false}
-            onClick={() => undefined}
+            checked={this.props.filters.language.dubbedToDanish}
+            onClick={() => this.props.filters.language.dubbedToDanish = !this.props.filters.language.dubbedToDanish}
           >
             Oversat til dansk
           </Checkbox>
         </div>
         <div className="col-sm-6 col-md-3 mb-4">
           <Checkbox
-            checked={false}
-            onClick={() => undefined}
+            checked={this.props.filters.showingType.normalShowings}
+            onClick={() => this.props.filters.showingType.normalShowings = !this.props.filters.showingType.normalShowings}
           >
             Almindelig visning
           </Checkbox>
           <Checkbox
-            checked={false}
-            onClick={() => undefined}
+            checked={this.props.filters.showingType.specialShowings}
+            onClick={() => this.props.filters.showingType.specialShowings = !this.props.filters.showingType.specialShowings}
           >
             Særvisning
           </Checkbox>
