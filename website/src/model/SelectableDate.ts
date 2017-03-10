@@ -1,7 +1,7 @@
 import * as moment from "moment"
 import { observable } from "mobx"
 
-import { ImmutableDate } from "./ImmutableDate"
+import { ImmutableDate } from "./moment/ImmutableDate"
 import { Showing } from "./Showing"
 
 export class SelectableDate {

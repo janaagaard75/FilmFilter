@@ -1,6 +1,6 @@
 import { Dimensions } from "./filters/Dimensions"
 import { FilmType } from "./filters/FilmType"
-import { ImmutableDateTime } from "./ImmutableDateTime"
+import { ImmutableDateTime } from "./moment/ImmutableDateTime"
 import { Language } from "./filters/Language"
 import { Movie } from "./Movie"
 import { SelectableDate } from "./SelectableDate"

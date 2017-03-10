@@ -1,8 +1,8 @@
 import * as moment from "moment"
 import { Moment } from "moment"
 
-import { isString } from "../utilities"
-import { parseAsLocalDateTime } from "../utilities"
+import { isString } from "../../utilities"
+import { parseAsLocalDateTime } from "../../utilities"
 
 export abstract class ImmutableMoment {
   constructor(dateTime?: string | Moment) {
