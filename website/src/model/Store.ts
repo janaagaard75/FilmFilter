@@ -19,7 +19,7 @@ export class Store {
   @observable public dates: Array<SelectableDate> = []
   @observable public fetchingAndParsing: boolean = false
   // TODO: Move movieNameFilter to the Filters class.
-  public filters = new Filters()
+  public readonly filters = new Filters()
 
   @observable private movieNameFilter: string = ""
   @observable private movies: Array<Movie> = []
