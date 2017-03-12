@@ -170,6 +170,17 @@ export class Store {
 
     const settings = JSON.parse(settingsString) as Settings
 
+    if (settings.filters !== undefined) {
+      this.filters.dimensions.threeD = settings.filters.dimensions.threeD
+      this.filters.dimensions.twoD = settings.filters.dimensions.twoD
+      this.filters.filmType.imax = settings.filters.filmType.imax
+      this.filters.filmType.standardFilm = settings.filters.filmType.standardFilm
+      this.filters.language.dubbedToDanish = settings.filters.language.dubbedToDanish
+      this.filters.language.originalLanguage = settings.filters.language.originalLanguage
+      this.filters.showingType.normalShowings = settings.filters.showingType.normalShowings
+      this.filters.showingType.specialShowings = settings.filters.showingType.specialShowings
+    }
+
     for (const theater of this.theaters) {
       if (settings.favoritedTheaterIds !== undefined && settings.favoritedTheaterIds.indexOf(theater.theaterId) !== -1) {
         theater.favorited = true
@@ -188,6 +199,7 @@ export class Store {
 
     const settings: Settings = {
       favoritedTheaterIds: this.theaters.filter(theater => theater.favorited).map(theater => theater.theaterId),
+      filters: this.filters,
       selectedTheaterIds: this.theaters.filter(theater => theater.selected).map(theater => theater.theaterId)
     }
 
