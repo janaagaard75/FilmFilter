@@ -4,7 +4,7 @@ import { observer } from "mobx-react"
 
 interface Props {
   checked: boolean
-  onClick: () => void
+  onChange: () => void
 }
 
 @observer
@@ -17,7 +17,7 @@ export class Checkbox extends Component<Props, void> {
             type="checkbox"
             checked={this.props.checked}
             className="form-check-input"
-            onClick={this.props.onClick}
+            onChange={this.props.onChange}
           />
           {" "}{this.props.children}
         </label>
