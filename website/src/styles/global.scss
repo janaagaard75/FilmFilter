@@ -8,12 +8,13 @@ button {
   @extend .clickable
 }
 
-.btn-picker {
-  min-width: 6rem;
-}
-
 .clickable {
   cursor: pointer
+}
+
+.col-7rem {
+  flex: 0 0 7rem;
+  max-width: 7rem;
 }
 
 .disabled-date {
@@ -24,14 +25,6 @@ button {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.form-inline-xs .form-group {
-  align-items: center;
-  display: flex;
-  flex: 0 0 auto;
-  flex-flow: row wrap;
-  margin-bottom: 0;
 }
 
 .selected-item {

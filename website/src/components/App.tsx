@@ -40,12 +40,12 @@ export class App extends Component<Props, State> {
 
   private getPickerButton(buttonText: string, pickedText: string, picker: Picker): JSX.Element {
     return (
-      <div className="form-inline form-inline-xs mb-1">
-        <div className="form-group">
+      <div className="row mb-1">
+        <div className="col col-7rem">
           <button
             className={
               classNames(
-                "btn btn-secondary btn-picker",
+                "btn btn-secondary w-100",
                 {
                   "active": this.state.activePicker === picker
                 }
@@ -56,7 +56,7 @@ export class App extends Component<Props, State> {
             {buttonText}
           </button>
         </div>
-        <div className="form-group ml-2">
+        <div className="col">
           <p className="form-control-static">{pickedText}</p>
         </div>
       </div>
