@@ -31,6 +31,11 @@ button {
   background-color: $gray;
 }
 
+.table-text-center td,
+.table-text-center th {
+  text-align: center;
+}
+
 @media (min-width: map-get($grid-breakpoints, lg)) and (max-width: map-get($grid-breakpoints, xl) - 1) {
   .col-lg-1-of-5 {
     flex: 0 0 20%;

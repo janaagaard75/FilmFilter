@@ -23,7 +23,7 @@ export class DatePicker extends Component<Props, void> {
 
     return (
       <td className={cssClasses} onClick={() => hasAtLeastOneShowing && this.props.date.toggleSelection()}>
-        {this.props.date.label}
+        {this.props.date.date.format("D")}
       </td>
     )
   }

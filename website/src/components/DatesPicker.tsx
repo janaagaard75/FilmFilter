@@ -13,17 +13,19 @@ interface Props {
 export class DatesPicker extends Component<Props, void> {
   public render() {
     return (
-      <table className="table table-sm">
-        <tbody>
+      <table className="table table-sm table-text-center">
+        <thead>
           <tr>
-            <td>Ma</td>
-            <td>Ti</td>
-            <td>On</td>
-            <td>To</td>
-            <td>Fr</td>
-            <td>Lø</td>
-            <td>Sø</td>
+            <th>Ma</th>
+            <th>Ti</th>
+            <th>On</th>
+            <th>To</th>
+            <th>Fr</th>
+            <th>Lø</th>
+            <th>Sø</th>
           </tr>
+        </thead>
+        <tbody>
           {this.props.weeks.map(week =>
             <Week key={"week-" + week[0].key} dates={week}/>
           )}
