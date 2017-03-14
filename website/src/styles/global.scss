@@ -8,11 +8,8 @@ button {
   @extend .clickable
 }
 
-.btn-no-active:active {
-  background-color: inherit;
-  background-image: inherit;
-  border-color: inherit;
-  color: inherit;
+.btn-picker {
+  min-width: 6rem;
 }
 
 .clickable {
@@ -29,6 +26,13 @@ button {
   white-space: nowrap;
 }
 
+.form-inline-xs .form-group {
+  align-items: center;
+  display: flex;
+  flex: 0 0 auto;
+  flex-flow: row wrap;
+  margin-bottom: 0;
+}
 
 .selected-item {
   background-color: $gray;

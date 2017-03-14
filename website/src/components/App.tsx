@@ -38,46 +38,67 @@ export class App extends Component<Props, State> {
     }
   }
 
-  private getDateButtonText(): string {
-    const standardButtonText = "Dato"
-    if (this.props.store.selectedDates.length === 0) {
-      return standardButtonText
-    }
-
-    const selectedDates = this.props.store.selectedDates.map(date => date.label).join(", ")
-    const buttonTextWithDates = `${standardButtonText}: ${selectedDates}`
-    return buttonTextWithDates
-  }
-
-  private getMovieButtonText(): string {
-    const standardButtonText = "Film"
-    if (this.props.store.selectedMovies.length === 0) {
-      return standardButtonText
-    }
-
-    const selectedMovies = this.props.store.selectedMovies.map(movie => movie.originalTitle).join(", ")
-    const buttonTextWithMovies = `${standardButtonText}: ${selectedMovies}`
-    return buttonTextWithMovies
-  }
-
-  private getPickerButton(picker: Picker, buttonText: string): JSX.Element {
+  private getPickerButton(buttonText: string, pickedText: string, picker: Picker): JSX.Element {
     return (
-      <div className="mb-1">
-        <button
-          className={
-            classNames(
-              "btn btn-secondary btn-no-active w-100 text-left",
-              {
-                "active": this.state.activePicker === picker
-              }
-            )
-          }
-          onClick={() => this.setActivePicker(picker)}
-        >
-          {buttonText}
-        </button>
+      <div className="form-inline form-inline-xs mb-1">
+        <div className="form-group">
+          <button
+            className={
+              classNames(
+                "btn btn-secondary btn-picker",
+                {
+                  "active": this.state.activePicker === picker
+                }
+              )
+            }
+            onClick={() => this.setActivePicker(picker)}
+          >
+            {buttonText}
+          </button>
+        </div>
+        <div className="form-group ml-2">
+          <p className="form-control-static">{pickedText}</p>
+        </div>
       </div>
     )
+  }
+
+  private getSelectedDatesText(): string {
+    const selectedDates = this.props.store.selectedDates.map(date => date.label).join(", ")
+    return selectedDates
+  }
+
+  private getSelectedMoviesText(): string {
+    const selectedMovies = this.props.store.selectedMovies.map(movie => movie.originalTitle).join(", ")
+    return selectedMovies
+  }
+
+  private getSelectedTheatersText(): string {
+    const selectedTheaters = this.props.store.selectedTheaters.map(theater => theater.name).join(", ")
+    return selectedTheaters
+  }
+
+  private getSelectedTypesText(): string {
+    const selectedTypesTexts: Array<string> = []
+
+    if (this.props.store.filters.dimensions.twoD && !this.props.store.filters.dimensions.threeD) {
+      selectedTypesTexts.push("2D")
+    }
+
+    if (!this.props.store.filters.dimensions.twoD && this.props.store.filters.dimensions.threeD) {
+      selectedTypesTexts.push("3D")
+    }
+
+    if (this.props.store.filters.language.dubbedToDanish && !this.props.store.filters.language.originalLanguage) {
+      selectedTypesTexts.push("Oversat til dansk")
+    }
+
+    if (!this.props.store.filters.language.dubbedToDanish && this.props.store.filters.language.originalLanguage) {
+      selectedTypesTexts.push("Originalt sprog")
+    }
+
+    const selectedTypesText = selectedTypesTexts.join(", ")
+    return selectedTypesText
   }
 
   private getTabContent(): JSX.Element | undefined {
@@ -122,22 +143,6 @@ export class App extends Component<Props, State> {
     }
   }
 
-  private getTheaterButtonText(): string {
-    const standardButtonText = "Biograf"
-    if (this.props.store.selectedTheaters.length === 0) {
-      return standardButtonText
-    }
-
-    const selectedTheaters = this.props.store.selectedTheaters.map(theater => theater.name).join(", ")
-    const buttonTextWithTheaters = `${standardButtonText}: ${selectedTheaters}`
-    return buttonTextWithTheaters
-  }
-
-  private getTypeButtonText(): string {
-    const standardButtonText = "Type"
-    return standardButtonText
-  }
-
   private setActivePicker(picker: Picker) {
     if (picker === this.state.activePicker) {
       this.setState({
@@ -169,10 +174,10 @@ export class App extends Component<Props, State> {
         <div className="row">
           <div className="col-xl-7">
             <div className="mb-3">
-              {this.getPickerButton(Picker.Movie, this.getMovieButtonText())}
-              {this.getPickerButton(Picker.Date, this.getDateButtonText())}
-              {this.getPickerButton(Picker.Theater, this.getTheaterButtonText())}
-              {this.getPickerButton(Picker.Type, this.getTypeButtonText())}
+              {this.getPickerButton("Film", this.getSelectedMoviesText(), Picker.Movie)}
+              {this.getPickerButton("Dato", this.getSelectedDatesText(), Picker.Date)}
+              {this.getPickerButton("Biograf", this.getSelectedTheatersText(), Picker.Theater)}
+              {this.getPickerButton("Type", this.getSelectedTypesText(), Picker.Type)}
             </div>
             {this.getTabContent()}
           </div>
