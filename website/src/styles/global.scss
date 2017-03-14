@@ -20,7 +20,7 @@ button {
 }
 
 .disabled-date {
-  color: $gray-lighter;
+  color: $gray;
 }
 
 .ellipsis {
@@ -31,7 +31,7 @@ button {
 
 
 .selected-item {
-  background-color: #ddd;
+  background-color: $gray;
 }
 
 @media (min-width: map-get($grid-breakpoints, lg)) and (max-width: map-get($grid-breakpoints, xl) - 1) {

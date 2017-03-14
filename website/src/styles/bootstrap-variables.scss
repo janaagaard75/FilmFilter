@@ -1,3 +1,17 @@
 @import "../../node_modules/bootstrap/scss/variables";
 
+$body-bg: $black;
+$body-color: $gray-lighter;
+$btn-secondary-bg: $gray;
+$btn-secondary-border: $gray-dark;
+$card-border-color: $gray;
+$card-cap-bg: $gray-dark;
+$link-color: $teal;
+$table-border-color: $gray-dark;
+
+$btn-secondary-color: $body-color;
+$card-bg: $body-bg;
+// TODO: Is it possible to avoid having to duplicate this value?
+$link-hover-color: darken($link-color, 15%);
+
 $grid-gutter-width-base: 20px;
