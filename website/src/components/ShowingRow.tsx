@@ -16,18 +16,14 @@ export class ShowingRow extends Component<Props, void> {
     return (
       <tr>
         <td>
-          <a href={this.props.showing.movie.movieUrl}>
-            {this.props.showing.movie.originalTitle}
-          </a>
+          {this.props.showing.movie.originalTitle}
         </td>
         <td>
-          <a href={this.props.showing.theater.theaterUrl}>
-            {this.props.showing.theater.name}
-          </a>
+          {this.props.showing.theater.name}
         </td>
         <td>
           <a href={this.props.showing.showingUrl}>
-            {startLabel}
+            <span className="fa fa-ticket"/> {startLabel}
           </a>
         </td>
       </tr>
