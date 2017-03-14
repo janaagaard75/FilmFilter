@@ -14,4 +14,10 @@ $card-bg: $body-bg;
 // TODO: Is it possible to avoid having to duplicate this value?
 $link-hover-color: darken($link-color, 15%);
 
-$grid-gutter-width-base: 20px;
+$grid-gutter-widths: (
+  xs: 10px,
+  sm: 20px,
+  md: $grid-gutter-width-base,
+  lg: $grid-gutter-width-base,
+  xl: $grid-gutter-width-base
+);
