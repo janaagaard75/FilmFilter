@@ -192,7 +192,7 @@ export class App extends Component<Props, State> {
     return (
       <div className="container-fluid">
         <div className="d-flex">
-          <h1 className="mr-auto">Film Filter</h1>
+          <h1 className="mr-auto">Filmfilter</h1>
           <span className="align-self-center">
             {this.props.store.fetchingAndParsing
               ? <span className="form-control-static mr-3"><i className="fa fa-spinner fa-pulse"/></span>
