@@ -1,1 +1,2 @@
-declare var __BUILD_TIMESTAMP__: number
+declare const __BUILD_TIMESTAMP__: number
+declare const process: any

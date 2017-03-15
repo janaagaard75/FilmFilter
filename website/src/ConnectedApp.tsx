@@ -3,30 +3,26 @@ import * as React from "react"
 import DevTools from "mobx-react-devtools"
 
 import { App } from "./components/App"
+import { inDevelopmentMode } from "./utilities"
 import { RouteComponent } from "./model/RouteComponent"
 import { Store } from "./model/Store"
-
-declare const process: any
 
 export class ConnectedApp extends RouteComponent<void, void, void> {
   constructor() {
     super()
-
-    this.includeDevTools = process.env.NODE_ENV === "development"
 
     this.store = new Store()
     this.store.initializeData()
     this.store.initialize()
   }
 
-  private includeDevTools: boolean
   private store: Store
 
   public render() {
     return (
       <div>
         <App routeProps={this.props} store={this.store}/>
-        {this.includeDevTools &&
+        {inDevelopmentMode() &&
           <DevTools
             position={
               {
