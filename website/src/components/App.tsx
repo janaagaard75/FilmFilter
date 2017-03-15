@@ -90,7 +90,7 @@ export class App extends Component<Props, State> {
     }
 
     if (this.props.store.filters.language.dubbedToDanish && !this.props.store.filters.language.originalLanguage) {
-      selectedTypesTexts.push("Oversat til dansk")
+      selectedTypesTexts.push("Synkroniseret til dansk")
     }
 
     if (!this.props.store.filters.language.dubbedToDanish && this.props.store.filters.language.originalLanguage) {

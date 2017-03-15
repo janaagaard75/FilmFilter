@@ -53,7 +53,7 @@ export class TypePicker extends Component<Props, void> {
             checked={this.props.filters.language.dubbedToDanish}
             onChange={() => this.props.filters.language.dubbedToDanish = !this.props.filters.language.dubbedToDanish}
           >
-            Oversat til dansk
+            Synkroniseret til dansk
           </Checkbox>
         </div>
         <div className="col-sm-6 col-md-3 mb-4">
