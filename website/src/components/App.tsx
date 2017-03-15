@@ -89,12 +89,28 @@ export class App extends Component<Props, State> {
       selectedTypesTexts.push("3D")
     }
 
+    if (this.props.store.filters.filmType.imax && !this.props.store.filters.filmType.standardFilm) {
+      selectedTypesTexts.push("IMAX")
+    }
+
+    if (!this.props.store.filters.filmType.imax && this.props.store.filters.filmType.standardFilm) {
+      selectedTypesTexts.push("Almindeligt lærred")
+    }
+
     if (this.props.store.filters.language.dubbedToDanish && !this.props.store.filters.language.originalLanguage) {
       selectedTypesTexts.push("Synkroniseret til dansk")
     }
 
     if (!this.props.store.filters.language.dubbedToDanish && this.props.store.filters.language.originalLanguage) {
       selectedTypesTexts.push("Originalt sprog")
+    }
+
+    if (this.props.store.filters.showingType.normalShowings && !this.props.store.filters.showingType.specialShowings) {
+      selectedTypesTexts.push("Almindelige visninger")
+    }
+
+    if (!this.props.store.filters.showingType.normalShowings && this.props.store.filters.showingType.specialShowings) {
+      selectedTypesTexts.push("Særvisninger")
     }
 
     const selectedTypesText = selectedTypesTexts.join(", ")
