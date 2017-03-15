@@ -64,16 +64,28 @@ export class App extends Component<Props, State> {
   }
 
   private getSelectedDatesText(): string {
+    if (this.props.store.selectedDates.length === 0) {
+      return "Alle datoer"
+    }
+
     const selectedDates = this.props.store.selectedDates.map(date => date.label).join(", ")
     return selectedDates
   }
 
   private getSelectedMoviesText(): string {
+    if (this.props.store.selectedMovies.length === 0) {
+      return "Alle film"
+    }
+
     const selectedMovies = this.props.store.selectedMovies.map(movie => movie.originalTitle).join(", ")
     return selectedMovies
   }
 
   private getSelectedTheatersText(): string {
+    if (this.props.store.selectedTheaters.length === 0) {
+      return "Alle biografer"
+    }
+
     const selectedTheaters = this.props.store.selectedTheaters.map(theater => theater.name).join(", ")
     return selectedTheaters
   }
@@ -111,6 +123,10 @@ export class App extends Component<Props, State> {
 
     if (!this.props.store.filters.showingType.normalShowings && this.props.store.filters.showingType.specialShowings) {
       selectedTypesTexts.push("Særvisninger")
+    }
+
+    if (selectedTypesTexts.length === 0) {
+      return "Alle typer film"
     }
 
     const selectedTypesText = selectedTypesTexts.join(", ")
