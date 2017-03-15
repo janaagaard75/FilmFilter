@@ -21,7 +21,7 @@ export class DataStorer {
 
   public static loadData(): TimestampedData | undefined {
     const compressedData = localStorage.getItem(this.dataKey)
-    // tslint:disable-next-line no-null-keyword
+    // tslint:disable-next-line:no-null-keyword
     if (compressedData === null) {
       return undefined
     }
@@ -57,7 +57,7 @@ export class DataStorer {
 
   private static isRecentEnough(storeTimestamp: number) {
     const now = new Date()
-    // tslint:disable-next-line prefer-const
+    // tslint:disable-next-line:prefer-const
     let latestDataCrawl = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 5, 0, 0)
     if (latestDataCrawl.valueOf() > now.valueOf()) {
       latestDataCrawl.setDate(latestDataCrawl.getDate() - 1)

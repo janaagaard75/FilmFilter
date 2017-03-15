@@ -163,7 +163,7 @@ export class Store {
   private loadSettings() {
     const settingsString = localStorage.getItem("settings")
 
-    // tslint:disable-next-line no-null-keyword
+    // tslint:disable-next-line:no-null-keyword
     if (settingsString === null) {
       return
     }
