@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Component } from "react"
-import { KeyboardEvent } from "react"
+import { ChangeEvent } from "react"
 import { observer } from "mobx-react"
 
 import { SelectableDate } from "../model/SelectableDate"
@@ -17,32 +17,35 @@ interface State {
 
 @observer
 export class DatesPicker extends Component<Props, State> {
+  private readonly defaultFrom = "00:00"
+  private readonly defaultTo = "23:59"
+
   constructor(props?: Props, context?: any) {
     super(props, context)
 
     this.state = {
-      startIntervalFrom: "",
-      startIntervalTo: ""
+      startIntervalFrom: this.defaultFrom,
+      startIntervalTo: this.defaultTo
     }
   }
 
-  private handleKeyUpFrom(formEvent: KeyboardEvent<HTMLInputElement>) {
-    if (formEvent.key === "Escape") {
-      formEvent.currentTarget.value = ""
-    }
+  private handleChangeFrom(formEvent: ChangeEvent<HTMLInputElement>) {
+    const value = formEvent.currentTarget.value
+      ? formEvent.currentTarget.value
+      : this.defaultFrom
 
     this.setState({
-      startIntervalFrom: formEvent.currentTarget.value
+      startIntervalFrom: value
     })
   }
 
-  private handleKeyUpTo(formEvent: KeyboardEvent<HTMLInputElement>) {
-    if (formEvent.key === "Escape") {
-      formEvent.currentTarget.value = ""
-    }
+  private handleChangeTo(formEvent: ChangeEvent<HTMLInputElement>) {
+    const value = formEvent.currentTarget.value
+      ? formEvent.currentTarget.value
+      : this.defaultTo
 
     this.setState({
-      startIntervalTo: formEvent.currentTarget.value
+      startIntervalTo: value
     })
   }
 
@@ -51,68 +54,18 @@ export class DatesPicker extends Component<Props, State> {
       <div>
         <div className="form-inline mb-3">
           <label className="mr-3">Fra:</label>
-          <select className="form-control">
-            <option>0</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-            <option>8</option>
-            <option>9</option>
-            <option>10</option>
-            <option>11</option>
-            <option>12</option>
-            <option>13</option>
-            <option>14</option>
-            <option>15</option>
-            <option>16</option>
-            <option>17</option>
-            <option>18</option>
-            <option>19</option>
-            <option>20</option>
-            <option>21</option>
-            <option>22</option>
-            <option>23</option>
-          </select>
           <input
             type="time"
             className="form-control col-2"
-            onKeyUp={e => this.handleKeyUpFrom(e)}
+            onChange={e => this.handleChangeFrom(e)}
+            value={this.state.startIntervalFrom}
           />
           <label className="ml-5 mr-3">Til:</label>
-          <select className="form-control">
-            <option>0</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-            <option>8</option>
-            <option>9</option>
-            <option>10</option>
-            <option>11</option>
-            <option>12</option>
-            <option>13</option>
-            <option>14</option>
-            <option>15</option>
-            <option>16</option>
-            <option>17</option>
-            <option>18</option>
-            <option>19</option>
-            <option>20</option>
-            <option>21</option>
-            <option>22</option>
-            <option>23</option>
-          </select>
           <input
             type="time"
             className="form-control col-2"
-            onKeyUp={e => this.handleKeyUpTo(e)}
+            onChange={e => this.handleChangeTo(e)}
+            value={this.state.startIntervalTo}
           />
         </div>
         <table className="table table-sm table-text-center">
