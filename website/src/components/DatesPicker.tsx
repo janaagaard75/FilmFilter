@@ -80,7 +80,6 @@ export class DatesPicker extends Component<Props, State> {
           <input
             type="time"
             className="form-control col-2"
-            placeholder="Søg efter film"
             onKeyUp={e => this.handleKeyUpFrom(e)}
           />
           <label className="ml-5 mr-3">Til:</label>
@@ -113,7 +112,6 @@ export class DatesPicker extends Component<Props, State> {
           <input
             type="time"
             className="form-control col-2"
-            placeholder="Søg efter film"
             onKeyUp={e => this.handleKeyUpTo(e)}
           />
         </div>

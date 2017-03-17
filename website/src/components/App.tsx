@@ -41,6 +41,9 @@ export class App extends Component<Props, State> {
   private getPickerButton(buttonText: string, pickedText: string, picker: Picker): JSX.Element {
     return (
       <div className="row mb-1">
+        <div className="col">
+          <p className="form-control-static">{pickedText}</p>
+        </div>
         <div className="col col-7rem">
           <button
             className={
@@ -55,9 +58,6 @@ export class App extends Component<Props, State> {
           >
             {buttonText}
           </button>
-        </div>
-        <div className="col">
-          <p className="form-control-static">{pickedText}</p>
         </div>
       </div>
     )
@@ -204,7 +204,7 @@ export class App extends Component<Props, State> {
           </span>
         </div>
         <div className="row">
-          <div className="col-xl-7">
+          <div className="col-xl-6 push-xl-6">
             <div className="mb-3">
               {this.getPickerButton("Film", this.getSelectedMoviesText(), Picker.Movie)}
               {this.getPickerButton("Dato", this.getSelectedDatesText(), Picker.Date)}
@@ -213,7 +213,7 @@ export class App extends Component<Props, State> {
             </div>
             {this.getTabContent()}
           </div>
-          <div className="col-xl-5">
+          <div className="col-xl-6 pull-xl-6">
             <MatchingShowings matchingShowings={this.props.store.matchingShowings} />
           </div>
         </div>
