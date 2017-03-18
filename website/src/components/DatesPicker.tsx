@@ -49,24 +49,32 @@ export class DatesPicker extends Component<Props, State> {
     })
   }
 
+  private resetInterval() {
+    this.setState({
+      startIntervalFrom: this.defaultFrom,
+      startIntervalTo: this.defaultTo
+    })
+  }
+
   public render() {
     return (
       <div>
         <div className="form-inline mb-3">
-          <label className="mr-3">Fra:</label>
+          <label className="mr-3">Starttidspunkt:</label>
           <input
             type="time"
             className="form-control col-2"
             onChange={e => this.handleChangeFrom(e)}
             value={this.state.startIntervalFrom}
           />
-          <label className="ml-5 mr-3">Til:</label>
+          <label className="ml-2 mr-2">-</label>
           <input
             type="time"
             className="form-control col-2"
             onChange={e => this.handleChangeTo(e)}
             value={this.state.startIntervalTo}
           />
+           <button type="button" className="btn btn-secondary ml-5" onClick={() => this.resetInterval()}>Nulstil</button>
         </div>
         <table className="table table-sm table-text-center">
           <thead>
