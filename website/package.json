@@ -10,7 +10,7 @@
   "license": "ISC",
   "scripts": {
     "build": "yarn run build:dev",
-    "build:dev": "yarn install && rimraf dist && webpack",
+    "build:dev": "yarn install && rimraf dist && webpack -d",
     "build:prod": "yarn install && rimraf dist && cross-env NODE_ENV=production webpack -p",
     "deploy": "yarn build:prod && firebase deploy",
     "fix": "tslint --fix src/**/*.ts src/**/*.tsx",
