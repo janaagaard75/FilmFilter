@@ -60,7 +60,7 @@
     "tslint-eslint-rules": "^3.5.1",
     "tslint-react": "2.5.0",
     "typescript": "2.2.1",
-    "uglify-js": "git://github.com/mishoo/UglifyJS2#harmony",
+    "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git#harmony",
     "uglifyjs-webpack-plugin": "0.3.0",
     "url-loader": "0.5.8",
     "webpack": "2.2.1",
