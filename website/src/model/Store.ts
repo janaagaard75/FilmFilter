@@ -8,6 +8,7 @@ import { DataFetcher } from "./DataFetcher"
 import { DataStorer } from "./DataStorer"
 import { Filters } from "./filters/Filters"
 import { ImmutableDate } from "./moment/ImmutableDate"
+import { log } from "../utilities"
 import { Movie } from "./Movie"
 import { parseAsLocalDateTime } from "../utilities"
 import { SelectableDate } from "./SelectableDate"
@@ -179,6 +180,11 @@ export class Store {
       this.filters.language.originalLanguage = settings.filters.language.originalLanguage
       this.filters.showingType.normalShowings = settings.filters.showingType.normalShowings
       this.filters.showingType.specialShowings = settings.filters.showingType.specialShowings
+
+      if (settings.filters.startInterval !== undefined) {
+        this.filters.startInterval.from = settings.filters.startInterval.from
+        this.filters.startInterval.to = settings.filters.startInterval.to
+      }
     }
 
     for (const theater of this.theaters) {
@@ -196,6 +202,8 @@ export class Store {
     if (this.fetchingAndParsing) {
       return
     }
+
+    log("Saving settings.")
 
     const settings: Settings = {
       favoritedTheaterIds: this.theaters.filter(theater => theater.favorited).map(theater => theater.theaterId),
