@@ -141,6 +141,7 @@ export class App extends Component<Props, State> {
         const firstWeeks = weeks.slice(0, 100)
         return (
           <DatesPicker
+            startInterval={this.props.store.filters.startInterval}
             weeks={firstWeeks}
           />
         )

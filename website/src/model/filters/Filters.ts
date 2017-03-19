@@ -2,10 +2,12 @@ import { Dimensions } from "./Dimensions"
 import { FilmType } from "./FilmType"
 import { Language } from "./Language"
 import { ShowingType } from "./ShowingType"
+import { TimeInterval } from "../TimeInterval"
 
 export class Filters {
-  public dimensions = new Dimensions()
-  public filmType = new FilmType()
-  public language = new Language()
-  public showingType = new ShowingType()
+  public readonly dimensions = new Dimensions()
+  public readonly filmType = new FilmType()
+  public readonly language = new Language()
+  public readonly showingType = new ShowingType()
+  public readonly startInterval = new TimeInterval()
 }

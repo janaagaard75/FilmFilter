@@ -40,6 +40,15 @@ export const isString = (x: any): x is string => {
   return isAString
 }
 
+export const pad = (integer: number, minimumSize: number) => {
+  let padded = integer + ""
+  while (padded.length < minimumSize) {
+    padded = "0" + padded
+  }
+
+  return padded
+}
+
 /** Parse a string in the format "YYYY-MM-DDTHH:mm:ss" into a data with the local timezone. */
 export const parseAsLocalDateTime = (dateString: string): Date => {
   const numbers = dateString.split(/\D/)

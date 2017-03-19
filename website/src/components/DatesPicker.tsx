@@ -4,56 +4,37 @@ import { ChangeEvent } from "react"
 import { observer } from "mobx-react"
 
 import { SelectableDate } from "../model/SelectableDate"
+import { Time } from "../model/Time"
+import { TimeInterval } from "../model/TimeInterval"
 import { Week } from "./Week"
 
 interface Props {
+  startInterval: TimeInterval
   weeks: Array<Array<SelectableDate>>
 }
 
-interface State {
-  startIntervalFrom: string
-  startIntervalTo: string
-}
-
 @observer
-export class DatesPicker extends Component<Props, State> {
-  private readonly defaultFrom = "00:00"
-  private readonly defaultTo = "23:59"
-
-  constructor(props?: Props, context?: any) {
-    super(props, context)
-
-    this.state = {
-      startIntervalFrom: this.defaultFrom,
-      startIntervalTo: this.defaultTo
-    }
-  }
-
+export class DatesPicker extends Component<Props, void> {
+  // TODO: Extract the time interval picker to a separate component.
   private handleChangeFrom(formEvent: ChangeEvent<HTMLInputElement>) {
-    const value = formEvent.currentTarget.value
-      ? formEvent.currentTarget.value
-      : this.defaultFrom
+    const newValue: Time = formEvent.currentTarget.value
+      ? new Time(formEvent.currentTarget.value)
+      : TimeInterval.defaultFrom
 
-    this.setState({
-      startIntervalFrom: value
-    })
+    this.props.startInterval.from = newValue
   }
 
   private handleChangeTo(formEvent: ChangeEvent<HTMLInputElement>) {
-    const value = formEvent.currentTarget.value
-      ? formEvent.currentTarget.value
-      : this.defaultTo
+    const newValue: Time = formEvent.currentTarget.value
+      ? new Time(formEvent.currentTarget.value)
+      : TimeInterval.defaultTo
 
-    this.setState({
-      startIntervalTo: value
-    })
+    this.props.startInterval.to = newValue
   }
 
   private resetInterval() {
-    this.setState({
-      startIntervalFrom: this.defaultFrom,
-      startIntervalTo: this.defaultTo
-    })
+    this.props.startInterval.from = TimeInterval.defaultFrom
+    this.props.startInterval.to = TimeInterval.defaultTo
   }
 
   public render() {
@@ -65,14 +46,14 @@ export class DatesPicker extends Component<Props, State> {
             type="time"
             className="form-control col-2"
             onChange={e => this.handleChangeFrom(e)}
-            value={this.state.startIntervalFrom}
+            value={this.props.startInterval.from.inputFieldValue()}
           />
           <label className="ml-2 mr-2">-</label>
           <input
             type="time"
             className="form-control col-2"
             onChange={e => this.handleChangeTo(e)}
-            value={this.state.startIntervalTo}
+            value={this.props.startInterval.to.inputFieldValue()}
           />
            <button type="button" className="btn btn-secondary ml-5" onClick={() => this.resetInterval()}>Nulstil</button>
         </div>
