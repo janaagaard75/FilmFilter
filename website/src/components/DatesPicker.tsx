@@ -33,7 +33,7 @@ export class DatesPicker extends Component<Props, void> {
     return (
       <div>
         <div className="form-inline mb-3">
-          <label className="mr-3">Starttidspunkt:</label>
+          <label className="mr-3">Starter:</label>
           {/* TODO: Consider using an input type="text" with a pattern. */}
           <select
             className="custom-select"
@@ -96,7 +96,7 @@ export class DatesPicker extends Component<Props, void> {
             <option>23</option>
             <option>24</option>
           </select>
-           <button type="button" className="btn btn-secondary ml-5" onClick={() => this.resetInterval()}>Nulstil</button>
+           <button type="button" className="btn btn-secondary ml-3" onClick={() => this.resetInterval()}>Nulstil</button>
         </div>
         <table className="table table-sm table-text-center">
           <thead>
