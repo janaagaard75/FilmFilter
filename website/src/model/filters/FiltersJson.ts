@@ -9,5 +9,5 @@ export interface FiltersJson {
   filmType: FilmTypeJson
   language: LanguageJson
   showingType: ShowingTypeJson
-  startInterval: TimeIntervalJson | undefined
+  startInterval: TimeIntervalJson
 }

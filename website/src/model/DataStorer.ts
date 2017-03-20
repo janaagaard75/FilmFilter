@@ -32,7 +32,7 @@ export class DataStorer {
     try {
       return JSON.parse(dataString) as TimestampedData
     }
-    catch (ex) {
+    catch (error) {
       return undefined
     }
   }

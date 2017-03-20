@@ -1,6 +1,5 @@
 import { observable } from "mobx"
 
-import { Time } from "./Time"
 import { TimeIntervalJson } from "./TimeIntervalJson"
 
 export class TimeInterval implements TimeIntervalJson {
@@ -9,9 +8,9 @@ export class TimeInterval implements TimeIntervalJson {
     this.to = TimeInterval.defaultTo
   }
 
-  @observable public from: Time
-  @observable public to: Time
+  @observable public from: number
+  @observable public to: number
 
-  public static readonly defaultFrom = new Time({ hours: 0, minutes: 0 })
-  public static readonly defaultTo = new Time({ hours: 23, minutes: 59 })
+  public static readonly defaultFrom = 0
+  public static readonly defaultTo = 24
 }

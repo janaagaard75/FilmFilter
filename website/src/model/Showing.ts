@@ -73,9 +73,8 @@ export class Showing {
     return matches
   }
 
-  public matchesStartInterval(startInternval: TimeInterval): boolean {
-    const matches = this.start.minutesSinceMidnight() >= startInternval.from.minutesSinceMidnight()
-      && this.start.minutesSinceMidnight() <= startInternval.to.minutesSinceMidnight()
+  public matchesStartInterval(startInterval: TimeInterval): boolean {
+    const matches = this.start.hours() >= startInterval.from && this.start.hours() <= startInterval.to - 1
     return matches
   }
 }

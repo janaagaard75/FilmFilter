@@ -33,9 +33,8 @@ export abstract class ImmutableMoment {
     return formatted
   }
 
-  public minutesSinceMidnight(): number {
-    const minutesSinceMidnight = 60 * this.moment.hours() + this.moment.minutes()
-    return minutesSinceMidnight
+  public hours(): number {
+    return this.moment.hours()
   }
 
   public month(): number {
@@ -43,8 +42,7 @@ export abstract class ImmutableMoment {
   }
 
   public weekday(): number {
-    const weekday = this.moment.weekday()
-    return weekday
+    return this.moment.weekday()
   }
 
   public year(): number {
