@@ -17,10 +17,13 @@ class ShowingsSpider(scrapy.Spider):
         for movie_wrapper in response.xpath('//div[@id="cinema-showtimes"]/div[@class="cinema-movie-wrapper"]'):
             for title_item in movie_wrapper.xpath('div[@class="version-dependent-item"]'):
                 url_item = title_item.xpath('h3/a/@href')
-                if len(url_item) >= 1:
-                    movie_url = response.urljoin(url_item.extract_first())
-                else:
-                    movie_url = 'NO_MOVIE_URL'
+                # TODO: Why was this check necessary?
+                # TODO: Why is the check sometimes not passed, when NO_MOVIE_URL has been removed?
+                # TODO: How do I get all the movies scraped?
+                #if len(url_item) >= 1:
+                movie_url = response.urljoin(url_item.extract_first())
+                #else:
+                #    movie_url = 'NO_MOVIE_URL'
 
                 version_item = title_item.xpath('h3/a/span/text()')
                 if len(version_item) >= 1:
