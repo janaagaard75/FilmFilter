@@ -4,8 +4,8 @@ import { ChangeEvent } from "react"
 import { observer } from "mobx-react"
 
 import { SelectableDate } from "../model/SelectableDate"
-import { Time } from "../model/Time"
-import { TimeInterval } from "../model/TimeInterval"
+import { Time } from "../model/filters/Time"
+import { TimeInterval } from "../model/filters/TimeInterval"
 import { Week } from "./Week"
 
 interface Props {
@@ -18,7 +18,7 @@ export class DatesPicker extends Component<Props, void> {
   // TODO: Extract the time interval picker to a separate component.
   private handleChangeFrom(formEvent: ChangeEvent<HTMLInputElement>) {
     const newValue: Time = formEvent.currentTarget.value
-      ? new Time(formEvent.currentTarget.value)
+      ? Time.fromString(formEvent.currentTarget.value)
       : TimeInterval.defaultFrom
 
     this.props.startInterval.from = newValue
@@ -26,7 +26,7 @@ export class DatesPicker extends Component<Props, void> {
 
   private handleChangeTo(formEvent: ChangeEvent<HTMLInputElement>) {
     const newValue: Time = formEvent.currentTarget.value
-      ? new Time(formEvent.currentTarget.value)
+      ? Time.fromString(formEvent.currentTarget.value)
       : TimeInterval.defaultTo
 
     this.props.startInterval.to = newValue
@@ -42,6 +42,7 @@ export class DatesPicker extends Component<Props, void> {
       <div>
         <div className="form-inline mb-3">
           <label className="mr-3">Starttidspunkt:</label>
+          {/* TODO: Consider using an input type="text" with a pattern. */}
           <input
             type="time"
             className="form-control col-2"

@@ -36,7 +36,7 @@ export class Store {
   @computed
   public get matchingShowings(): Array<Showing> {
     const matching = this.showings
-      // TODO: Support movies that don't have a separate move page.
+      // TODO: Support movies that don't have a separate movie page.
       .filter(showing => showing.movie !== undefined)
       .filter(showing => this.selectedMovies.length === 0 || showing.movie.selected)
       .filter(showing => this.selectedTheaters.length === 0 || showing.theater.selected)
@@ -45,6 +45,7 @@ export class Store {
       .filter(showing => showing.matchesFilmTypeFilter(this.filters.filmType))
       .filter(showing => showing.matchesLanguageFilter(this.filters.language))
       .filter(showing => showing.matchesShowingType(this.filters.showingType))
+      // TODO: Filter out movies based on start time.
 
     return matching
   }
@@ -172,19 +173,7 @@ export class Store {
     const settings = JSON.parse(settingsString) as Settings
 
     if (settings.filters !== undefined) {
-      this.filters.dimensions.threeD = settings.filters.dimensions.threeD
-      this.filters.dimensions.twoD = settings.filters.dimensions.twoD
-      this.filters.filmType.imax = settings.filters.filmType.imax
-      this.filters.filmType.standardFilm = settings.filters.filmType.standardFilm
-      this.filters.language.dubbedToDanish = settings.filters.language.dubbedToDanish
-      this.filters.language.originalLanguage = settings.filters.language.originalLanguage
-      this.filters.showingType.normalShowings = settings.filters.showingType.normalShowings
-      this.filters.showingType.specialShowings = settings.filters.showingType.specialShowings
-
-      if (settings.filters.startInterval !== undefined) {
-        this.filters.startInterval.from = settings.filters.startInterval.from
-        this.filters.startInterval.to = settings.filters.startInterval.to
-      }
+      this.filters.setValues(settings.filters)
     }
 
     for (const theater of this.theaters) {

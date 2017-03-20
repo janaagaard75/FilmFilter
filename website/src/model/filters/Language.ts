@@ -1,6 +1,8 @@
 import { observable } from "mobx"
 
-export class Language {
+import { LanguageJson } from "./LanguageJson"
+
+export class Language implements LanguageJson {
   @observable public dubbedToDanish = true
   @observable public originalLanguage = true
 }

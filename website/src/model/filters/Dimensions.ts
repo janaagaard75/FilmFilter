@@ -1,6 +1,8 @@
 import { observable } from "mobx"
 
-export class Dimensions {
+import { DimensionsJson } from "./DimensionsJson"
+
+export class Dimensions implements DimensionsJson {
   @observable public threeD = true
   @observable public twoD = true
 }
