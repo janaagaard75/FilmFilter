@@ -10,4 +10,5 @@ export interface FiltersJson {
   language: LanguageJson
   showingType: ShowingTypeJson
   startInterval: TimeIntervalJson
+  version: number
 }
