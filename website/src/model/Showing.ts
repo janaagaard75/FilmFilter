@@ -8,6 +8,7 @@ import { ShowingData } from "./data/ShowingData"
 import { ShowingType } from "./filters/ShowingType"
 import { Store } from "./Store"
 import { Theater } from "./Theater"
+import { TimeInterval } from "./filters/TimeInterval"
 
 export class Showing {
   constructor(data: ShowingData, store: Store) {
@@ -69,6 +70,12 @@ export class Showing {
 
   public matchesShowingType(showingType: ShowingType): boolean {
     const matches = this.specialShowing && showingType.specialShowings || !this.specialShowing && showingType.normalShowings
+    return matches
+  }
+
+  public matchesStartInterval(startInternval: TimeInterval): boolean {
+    const matches = this.start.minutesSinceMidnight() >= startInternval.from.minutesSinceMidnight()
+      && this.start.minutesSinceMidnight() <= startInternval.to.minutesSinceMidnight()
     return matches
   }
 }

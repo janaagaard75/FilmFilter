@@ -16,6 +16,11 @@ export class Time implements TimeJson {
     return stringified
   }
 
+  public minutesSinceMidnight(): number {
+    const minutesSinceMidnight = 60 * this.hours + this.minutes
+    return minutesSinceMidnight
+  }
+
   public static fromString(timeString: string) {
     const splitted = timeString.split(/[^\d]/)
     const hours = parseInt(splitted[0], 10)

@@ -45,7 +45,7 @@ export class Store {
       .filter(showing => showing.matchesFilmTypeFilter(this.filters.filmType))
       .filter(showing => showing.matchesLanguageFilter(this.filters.language))
       .filter(showing => showing.matchesShowingType(this.filters.showingType))
-      // TODO: Filter out movies based on start time.
+      .filter(showing => showing.matchesStartInterval(this.filters.startInterval))
 
     return matching
   }
