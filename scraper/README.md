@@ -28,9 +28,10 @@ Had to do the following to make the pip command work. Something about El Capitan
     pip install shub
     shub login
 
-### Upgrading Scrapy
+### Upgrading Scrapy or shub
 
     pip install --upgrade Scrapy
+    pip install --upgrade shub
 
 If upgrading fails, uninstall and then reinstall:
 
