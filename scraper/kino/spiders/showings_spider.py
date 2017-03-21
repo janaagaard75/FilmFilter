@@ -37,7 +37,7 @@ class ShowingsSpider(scrapy.Spider):
 
                 request = scrapy.Request(response.url, callback=self.parse_showings_table)
                 request.meta['movieUrl'] = movie_url
-                request.meta['showings_table_value'] = title_item.xpath('@value').extract_first()
+                request.meta['showingsTableValue'] = title_item.xpath('@value').extract_first()
                 request.meta['theaterUrl'] = response.url
                 request.meta['version'] = version
                 yield request
@@ -45,7 +45,7 @@ class ShowingsSpider(scrapy.Spider):
 
     def parse_showings_table(self, response):
         movie_url = response.meta['movieUrl']
-        showings_table_value = response.meta['showings_table_value']
+        showings_table_value = response.meta['showingsTableValue']
         theater_url = response.meta['theaterUrl']
         version = response.meta['version']
 
@@ -59,7 +59,7 @@ class ShowingsSpider(scrapy.Spider):
                 jump_url = urldefrag(response.urljoin(jump_link.xpath('@href').extract_first()))[0]
                 request = scrapy.Request(jump_url, callback=self.parse_showings_table)
                 request.meta['movieUrl'] = movie_url
-                request.meta['showings_table_value'] = showings_table_value
+                request.meta['showingsTableValue'] = showings_table_value
                 request.meta['theaterUrl'] = theater_url
                 request.meta['version'] = version
                 yield request
@@ -95,7 +95,7 @@ class ShowingsSpider(scrapy.Spider):
                     next_page_url = urldefrag(response.urljoin(next_page.xpath('@href')[0].extract()))[0]
                     request = scrapy.Request(next_page_url, callback=self.parse_showings_table)
                     request.meta['movieUrl'] = movie_url
-                    request.meta['showings_table_value'] = showings_table_value
+                    request.meta['showingsTableValue'] = showings_table_value
                     request.meta['theaterUrl'] = theater_url
                     request.meta['version'] = version
                     yield request
