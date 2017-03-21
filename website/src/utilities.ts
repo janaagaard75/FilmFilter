@@ -1,24 +1,4 @@
 // TODO: Create utility classes with static methods.
-
-interface HasName {
-  name: string
-}
-
-type compareResult = -1 | 0 | 1
-
-export const compareByName = (a: HasName, b: HasName): compareResult => {
-  if (a.name > b.name) {
-    return 1
-  }
-
-  if (a.name < b.name) {
-    return -1
-  }
-
-  return 0
-}
-
-
 export const isNumber = (x: any): x is number => {
   const isANumber = typeof x === "number"
   return isANumber
@@ -37,4 +17,3 @@ export const pad = (integer: number, minimumSize: number) => {
 
   return padded
 }
-

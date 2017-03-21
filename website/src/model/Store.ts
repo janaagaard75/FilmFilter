@@ -2,7 +2,7 @@ import { autorun } from "mobx"
 import { computed } from "mobx"
 import { observable } from "mobx"
 
-import { compareByName } from "../utilities"
+import { Comparer } from "../utilities/Comparer"
 import { Data } from "./data/Data"
 import { DataFetcher } from "./DataFetcher"
 import { DataStorer } from "./DataStorer"
@@ -68,7 +68,7 @@ export class Store {
 
   @computed
   public get theatersSortedByName(): Array<Theater> {
-    const sortedTheaters = this.theaters.sort(compareByName)
+    const sortedTheaters = this.theaters.sort(Comparer.compareByName)
     return sortedTheaters
   }
 
