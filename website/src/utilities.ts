@@ -30,6 +30,13 @@ export const inDevelopmentMode = () => {
   return inDevMode
 }
 
+/** Returns an array of integers with the values from `min` to `max`, both inclusive. */
+export const integerArray = (min: number, max: number): Array<number> => {
+  const length = max - min + 1
+  const array = [...Array(length).keys()].map(i => i + min)
+  return array
+}
+
 export const isNumber = (x: any): x is number => {
   const isANumber = typeof x === "number"
   return isANumber
