@@ -19,10 +19,13 @@ class ShowingsSpider(scrapy.Spider):
                 url_item = title_item.xpath('h3/a/@href')
                 if len(url_item) >= 1:
                     movie_url = response.urljoin(url_item.extract_first())
+                    movie_title = ''
+                    version_item = title_item.xpath('h3/a/span/text()')
                 else:
                     movie_url = 'NO_MOVIE_URL'
+                    movie_title = title_item.xpath('h3/text()').extract_first()
+                    version_item = title_item.xpath('h3/span/text()')
 
-                version_item = title_item.xpath('h3/a/span/text()')
                 if len(version_item) >= 1:
                     # Strip the first dash.
                     version_string = version_item.re(r' - (.*)')[0]
@@ -33,6 +36,7 @@ class ShowingsSpider(scrapy.Spider):
                 version = version_string.split(' - ')
 
                 request = scrapy.Request(response.url, callback=self.parse_showings_table)
+                request.meta['movieTitle'] = movie_title
                 request.meta['movieUrl'] = movie_url
                 request.meta['showingsTableValue'] = title_item.xpath('@value').extract_first()
                 request.meta['theaterUrl'] = response.url
@@ -41,6 +45,7 @@ class ShowingsSpider(scrapy.Spider):
 
 
     def parse_showings_table(self, response):
+        movie_title = response.meta['movieTitle']
         movie_url = response.meta['movieUrl']
         showings_table_value = response.meta['showingsTableValue']
         theater_url = response.meta['theaterUrl']
@@ -55,6 +60,7 @@ class ShowingsSpider(scrapy.Spider):
             if jump_link.xpath('text()').extract_first().endswith(u'>'):
                 jump_url = urldefrag(response.urljoin(jump_link.xpath('@href').extract_first()))[0]
                 request = scrapy.Request(jump_url, callback=self.parse_showings_table)
+                request.meta['movieTitle'] = movie_title
                 request.meta['movieUrl'] = movie_url
                 request.meta['showingsTableValue'] = showings_table_value
                 request.meta['theaterUrl'] = theater_url
@@ -78,6 +84,7 @@ class ShowingsSpider(scrapy.Spider):
                         date_obj = datetime(datetime.now().year + 1, month, day, hour, minute)
 
                     showing = ShowingItem()
+                    showing['movieTitle'] = movie_title
                     showing['movieUrl'] = movie_url
                     showing['theaterUrl'] = theater_url
                     showing['seatingInfo'] = seating_info
@@ -91,21 +98,9 @@ class ShowingsSpider(scrapy.Spider):
                 if next_page:
                     next_page_url = urldefrag(response.urljoin(next_page.xpath('@href')[0].extract()))[0]
                     request = scrapy.Request(next_page_url, callback=self.parse_showings_table)
+                    request.meta['movieTitle'] = movie_title
                     request.meta['movieUrl'] = movie_url
                     request.meta['showingsTableValue'] = showings_table_value
                     request.meta['theaterUrl'] = theater_url
                     request.meta['version'] = version
                     yield request
-
-
-    def parse_movie_page(self, response):
-        movie = MovieItem()
-        movie['danishTitle'] = response.css('.node-title').xpath('text()').extract_first().strip()
-        movie['movieUrl'] = response.url
-        original_title_field = response.css('.field-field-movie-original-title .field-item')
-        if len(original_title_field) > 0:
-            movie['originalTitle'] = original_title_field.xpath('text()[2]').extract_first().strip()
-        else:
-            movie['originalTitle'] = ''
-        movie['posterUrl'] = response.css('.field-field-movie-poster-image .field-item').xpath('img/@src').extract_first()
-        return movie

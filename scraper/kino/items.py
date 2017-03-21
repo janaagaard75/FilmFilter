@@ -20,6 +20,7 @@ class TheaterItem(scrapy.Item):
     theaterUrl = scrapy.Field() # ID of the theater.
 
 class ShowingItem(scrapy.Item):
+    movieTitle = scrapy.Field() # Name of the movie, in case the movie doesn't have a separate page.
     movieUrl = scrapy.Field() # Reference to the movie.
     seatingInfo = scrapy.Field() # Number of seats, number of booked seats and room number.
     showingUrl = scrapy.Field() # ID of the showing.
