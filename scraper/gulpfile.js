@@ -6,7 +6,7 @@ const moment = require('moment')
 const runSequence = require('run-sequence')
 const shell = require("gulp-shell")
 
-const timestamp = moment().format("YYYYMMDDHHmmss")
+const timestamp = moment().format("YYYYMMDD-HHmmss")
 
 const movies = {}
 movies.fileWithTimestamp = `movies-${timestamp}.jsonl`
