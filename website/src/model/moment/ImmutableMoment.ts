@@ -1,15 +1,15 @@
 import * as moment from "moment"
 import { Moment } from "moment"
 
+import { Comparer } from "../../utilities/Comparer"
 import { Dates } from "../../utilities/Dates"
-import { isString } from "../../utilities"
 
 export abstract class ImmutableMoment {
   constructor(dateTime?: string | Moment) {
     if (dateTime === undefined) {
       this.moment = moment()
     }
-    else if (isString(dateTime)) {
+    else if (Comparer.isString(dateTime)) {
       this.moment = moment(Dates.parseAsLocalDateTime(dateTime))
     }
     else {

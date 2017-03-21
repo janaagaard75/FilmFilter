@@ -17,4 +17,14 @@ export class Comparer {
 
     return 0
   }
+
+  public static isNumber(x: any): x is number {
+    const isANumber = typeof x === "number"
+    return isANumber
+  }
+
+  public static isString = (x: any): x is string => {
+    const isAString = typeof x === "string"
+    return isAString
+  }
 }
