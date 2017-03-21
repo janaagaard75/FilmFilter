@@ -34,7 +34,6 @@ export class Store {
   @computed
   public get matchingShowings(): Array<Showing> {
     const matching = this.showings
-      // TODO: Support movies that don't have a separate movie page.
       .filter(showing => showing.movie !== undefined)
       .filter(showing => this.selectedMovies.length === 0 || showing.movie.selected)
       .filter(showing => this.selectedTheaters.length === 0 || showing.theater.selected)
@@ -203,6 +202,7 @@ export class Store {
   }
 
   public setData(data: Data) {
+    // TODO: Consider using a worker thread to parse this in a separate thread.
     this.dates = []
     this.movies = data.movies.map(movieData => new Movie(movieData))
     // Don't sort the theaters, because the showings refer to them by ID in the array.
