@@ -3,6 +3,7 @@ import { ChangeEvent } from "react"
 import { Component } from "react"
 
 import { Arrays } from "../utilities/Arrays"
+import { Numbers } from "../utilities/Numbers"
 import { TimeInterval } from "../model/filters/TimeInterval"
 
 interface Props {
@@ -34,7 +35,7 @@ export class TimePicker extends Component<Props, void> {
           value={this.props.startInterval.from}
         >
           {Arrays.rangeArray(0, 23).map(n =>
-            <option key={n}>{n}</option>
+            <option key={n}>{Numbers.pad(n, 2)}</option>
           )}
         </select>
         <label className="ml-2 mr-2">-</label>
@@ -44,7 +45,7 @@ export class TimePicker extends Component<Props, void> {
           value={this.props.startInterval.to}
         >
           {Arrays.rangeArray(1, 24).map(n =>
-            <option key={n}>{n}</option>
+            <option key={n}>{Numbers.pad(n, 2)}</option>
           )}
         </select>
           <button
