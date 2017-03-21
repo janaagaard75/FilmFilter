@@ -1,8 +1,8 @@
 import * as moment from "moment"
 import { Moment } from "moment"
 
+import { Dates } from "../../utilities/Dates"
 import { isString } from "../../utilities"
-import { parseAsLocalDateTime } from "../../utilities"
 
 export abstract class ImmutableMoment {
   constructor(dateTime?: string | Moment) {
@@ -10,7 +10,7 @@ export abstract class ImmutableMoment {
       this.moment = moment()
     }
     else if (isString(dateTime)) {
-      this.moment = moment(parseAsLocalDateTime(dateTime))
+      this.moment = moment(Dates.parseAsLocalDateTime(dateTime))
     }
     else {
       this.moment = moment(dateTime)

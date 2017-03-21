@@ -6,11 +6,11 @@ import { compareByName } from "../utilities"
 import { Data } from "./data/Data"
 import { DataFetcher } from "./DataFetcher"
 import { DataStorer } from "./DataStorer"
+import { Dates } from "../utilities/Dates"
 import { Filters } from "./filters/Filters"
 import { ImmutableDate } from "./moment/ImmutableDate"
-import { Logger } from "../utilities/logger"
+import { Logger } from "../utilities/Logger"
 import { Movie } from "./Movie"
-import { parseAsLocalDateTime } from "../utilities"
 import { SelectableDate } from "./SelectableDate"
 import { Settings } from "./Settings"
 import { Showing } from "./Showing"
@@ -211,7 +211,7 @@ export class Store {
     // TODO: The date strings are being parsed twice, both in here and in the ImmutableMoment constructor. Consider fixing this by adding an intermediate model where start is a date.
     const now = Date.now()
     this.showings = data.showings
-      .filter(showingData => parseAsLocalDateTime(showingData.start).valueOf() >= now)
+      .filter(showingData => Dates.parseAsLocalDateTime(showingData.start).valueOf() >= now)
       .map(showingData => new Showing(showingData, this))
       .sort((showingA, showingB) => showingA.start.diff(showingB.start))
 

@@ -2,7 +2,7 @@ import { Dimensions } from "./Dimensions"
 import { FilmType } from "./FilmType"
 import { FiltersJson } from "./FiltersJson"
 import { Language } from "./Language"
-import { Logger } from "../../utilities/logger"
+import { Logger } from "../../utilities/Logger"
 import { ShowingType } from "./ShowingType"
 import { TimeInterval } from "./TimeInterval"
 

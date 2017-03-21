@@ -1,7 +1,7 @@
 import * as LZString from "lz-string"
 
 import { Data } from "./data/Data"
-import { Logger } from "../utilities/logger"
+import { Logger } from "../utilities/Logger"
 
 interface TimestampedData {
   buildTimestamp: number,
