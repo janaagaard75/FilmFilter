@@ -18,18 +18,6 @@ export const compareByName = (a: HasName, b: HasName): compareResult => {
   return 0
 }
 
-export const log = (message: string) => {
-  if (inDevelopmentMode()) {
-    // tslint:disable-next-line:no-console
-    console.info(message)
-  }
-}
-
-export const inDevelopmentMode = () => {
-  const inDevMode = (process.env.NODE_ENV === "development")
-  return inDevMode
-}
-
 /** Returns an array of integers with the values from `min` to `max`, both inclusive. */
 export const integerArray = (min: number, max: number): Array<number> => {
   const length = max - min + 1

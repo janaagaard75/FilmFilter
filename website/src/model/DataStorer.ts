@@ -1,7 +1,7 @@
 import * as LZString from "lz-string"
 
 import { Data } from "./data/Data"
-import { log } from "../utilities"
+import { Logger } from "../utilities/logger"
 
 interface TimestampedData {
   buildTimestamp: number,
@@ -27,7 +27,7 @@ export class DataStorer {
     }
 
     const dataString = LZString.decompressFromUTF16(compressedData)
-    log(`Loading data. Size: ${dataString.length}, compressed: ${compressedData.length}.`)
+    Logger.log(`Loading data. Size: ${dataString.length}, compressed: ${compressedData.length}.`)
 
     try {
       return JSON.parse(dataString) as TimestampedData
@@ -46,7 +46,7 @@ export class DataStorer {
 
     const dataString = JSON.stringify(storedData)
     const compressedData = LZString.compressToUTF16(dataString)
-    log(`Saving data. Size: ${dataString.length}, compressed: ${compressedData.length}.`)
+    Logger.log(`Saving data. Size: ${dataString.length}, compressed: ${compressedData.length}.`)
     localStorage.setItem(this.dataKey, compressedData)
   }
 

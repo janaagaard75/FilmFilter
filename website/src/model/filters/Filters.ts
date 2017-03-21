@@ -2,7 +2,7 @@ import { Dimensions } from "./Dimensions"
 import { FilmType } from "./FilmType"
 import { FiltersJson } from "./FiltersJson"
 import { Language } from "./Language"
-import { log } from "../../utilities"
+import { Logger } from "../../utilities/logger"
 import { ShowingType } from "./ShowingType"
 import { TimeInterval } from "./TimeInterval"
 
@@ -17,7 +17,7 @@ export class Filters implements FiltersJson {
   public setValues(filtersJson: FiltersJson) {
     // TODO: This simply fails loading the settings if there is a version mismatch. Store settings in individual keys? Handle old versions better?
     if (filtersJson.version !== this.version) {
-      log(`The version of the stored filters is ${filtersJson.version}. Expected ${this.version}.`)
+      Logger.log(`The version of the stored filters is ${filtersJson.version}. Expected ${this.version}.`)
       return
     }
 

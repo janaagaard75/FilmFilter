@@ -8,7 +8,7 @@ import { DataFetcher } from "./DataFetcher"
 import { DataStorer } from "./DataStorer"
 import { Filters } from "./filters/Filters"
 import { ImmutableDate } from "./moment/ImmutableDate"
-import { log } from "../utilities"
+import { Logger } from "../utilities/logger"
 import { Movie } from "./Movie"
 import { parseAsLocalDateTime } from "../utilities"
 import { SelectableDate } from "./SelectableDate"
@@ -190,7 +190,7 @@ export class Store {
       return
     }
 
-    log("Saving settings.")
+    Logger.log("Saving settings.")
 
     const settings: Settings = {
       favoritedTheaterIds: this.theaters.filter(theater => theater.favorited).map(theater => theater.theaterId),

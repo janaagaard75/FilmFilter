@@ -3,7 +3,7 @@ import * as React from "react"
 import DevTools from "mobx-react-devtools"
 
 import { App } from "./components/App"
-import { inDevelopmentMode } from "./utilities"
+import { Environment } from "./utilities/Environment"
 import { RouteComponent } from "./model/RouteComponent"
 import { Store } from "./model/Store"
 
@@ -22,7 +22,7 @@ export class ConnectedApp extends RouteComponent<void, void, void> {
     return (
       <div>
         <App routeProps={this.props} store={this.store}/>
-        {inDevelopmentMode() &&
+        {Environment.inDevelopmentMode() &&
           <DevTools
             position={
               {
