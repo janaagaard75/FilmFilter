@@ -38,7 +38,7 @@ class ShowingsSpider(scrapy.Spider):
                 request = scrapy.Request(response.url, callback=self.parse_showings_table)
                 request.meta['movieUrl'] = movie_url
                 request.meta['showings_table_value'] = title_item.xpath('@value').extract_first()
-                request.meta['theater_url'] = response.url
+                request.meta['theaterUrl'] = response.url
                 request.meta['version'] = version
                 yield request
 
@@ -46,7 +46,7 @@ class ShowingsSpider(scrapy.Spider):
     def parse_showings_table(self, response):
         movie_url = response.meta['movieUrl']
         showings_table_value = response.meta['showings_table_value']
-        theater_url = response.meta['theater_url']
+        theater_url = response.meta['theaterUrl']
         version = response.meta['version']
 
         showings_table = response.xpath('//div[@class="cinema-movie clearfix"]/div[@value="' + showings_table_value + '"]')
@@ -60,7 +60,7 @@ class ShowingsSpider(scrapy.Spider):
                 request = scrapy.Request(jump_url, callback=self.parse_showings_table)
                 request.meta['movieUrl'] = movie_url
                 request.meta['showings_table_value'] = showings_table_value
-                request.meta['theater_url'] = theater_url
+                request.meta['theaterUrl'] = theater_url
                 request.meta['version'] = version
                 yield request
 
@@ -96,6 +96,19 @@ class ShowingsSpider(scrapy.Spider):
                     request = scrapy.Request(next_page_url, callback=self.parse_showings_table)
                     request.meta['movieUrl'] = movie_url
                     request.meta['showings_table_value'] = showings_table_value
-                    request.meta['theater_url'] = theater_url
+                    request.meta['theaterUrl'] = theater_url
                     request.meta['version'] = version
                     yield request
+
+
+    def parse_movie_page(self, response):
+        movie = MovieItem()
+        movie['danishTitle'] = response.css('.node-title').xpath('text()').extract_first().strip()
+        movie['movieUrl'] = response.url
+        original_title_field = response.css('.field-field-movie-original-title .field-item')
+        if len(original_title_field) > 0:
+            movie['originalTitle'] = original_title_field.xpath('text()[2]').extract_first().strip()
+        else:
+            movie['originalTitle'] = ''
+        movie['posterUrl'] = response.css('.field-field-movie-poster-image .field-item').xpath('img/@src').extract_first()
+        return movie
