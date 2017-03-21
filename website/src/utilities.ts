@@ -18,12 +18,6 @@ export const compareByName = (a: HasName, b: HasName): compareResult => {
   return 0
 }
 
-/** Returns an array of integers with the values from `min` to `max`, both inclusive. */
-export const integerArray = (min: number, max: number): Array<number> => {
-  const length = max - min + 1
-  const array = [...Array(length).keys()].map(i => i + min)
-  return array
-}
 
 export const isNumber = (x: any): x is number => {
   const isANumber = typeof x === "number"
@@ -56,17 +50,4 @@ export const parseAsLocalDateTime = (dateString: string): Date => {
     parseInt(numbers[5], 10))
 
   return dateTime
-}
-
-export const rangeArray = (length: number): Array<number> => {
-  // tslint:disable-next-line:no-unused-variable
-  const range = new Array(length).fill(undefined).map((value, index) => index)
-  return range
-}
-
-export const splitIntoChunks = <T>(a: Array<T>, chunkSize: number): Array<Array<T>> => {
-  const chunks = rangeArray(Math.ceil(a.length / chunkSize))
-    // tslint:disable-next-line:no-unused-variable
-    .map((value, index) => a.slice(index * chunkSize, index * chunkSize + chunkSize))
-  return chunks
 }

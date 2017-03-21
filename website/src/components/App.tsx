@@ -4,10 +4,10 @@ import { Component } from "react"
 import { observer } from "mobx-react"
 import { RouteComponentProps } from "react-router"
 
+import { Arrays } from "../utilities/Arrays"
 import { DatesPicker } from "./DatesPicker"
 import { MatchingShowings } from "./MatchingShowings"
 import { MoviesPicker } from "./MoviesPicker"
-import { splitIntoChunks } from "../utilities"
 import { Store } from "../model/Store"
 import { TheatersPicker } from "./TheatersPicker"
 import { TypePicker } from "./TypePicker"
@@ -137,7 +137,7 @@ export class App extends Component<Props, State> {
     // TODO: Use polymorphism to avoid this switch.
     switch (this.state.activePicker) {
       case Picker.Date:
-        const weeks = splitIntoChunks(this.props.store.dates, 7)
+        const weeks = Arrays.splitIntoChunks(this.props.store.dates, 7)
         const firstWeeks = weeks.slice(0, 100)
         return (
           <DatesPicker
