@@ -19,9 +19,7 @@ import { Theater } from "./Theater"
 export class Store {
   @observable public dates: Array<SelectableDate> = []
   @observable public fetchingAndParsing: boolean = false
-  // TODO: Move movieNameFilter to the Filters class.
   public readonly filters = new Filters()
-
   @observable private movieNameFilter: string = ""
   @observable private movies: Array<Movie> = []
   @observable private showings: Array<Showing> = []

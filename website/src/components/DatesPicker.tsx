@@ -34,7 +34,6 @@ export class DatesPicker extends Component<Props, void> {
       <div>
         <div className="form-inline mb-3">
           <label className="mr-3">Starter:</label>
-          {/* TODO: Consider using an input type="text" with a pattern. */}
           <select
             className="custom-select"
             onChange={e => this.handleChangeFrom(e)}
