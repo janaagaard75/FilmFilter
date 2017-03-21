@@ -1,6 +1,6 @@
 # Film Filter
 
-A side project, about testing how a filtering approach could work, when selecting a movie to see in the theater.
+A side project testing how a filtering approach could work when selecting a movie to see in the theater.
 
 ## Scraper
 
