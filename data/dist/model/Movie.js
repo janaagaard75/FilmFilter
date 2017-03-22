@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const UrlUtil_1 = require("./UrlUtil");
 class Movie {
     constructor(line) {

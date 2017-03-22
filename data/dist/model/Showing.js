@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const UrlUtil_1 = require("./UrlUtil");
 class Showing {
     constructor(line, lineIndex, movies, theaters) {
@@ -34,5 +35,6 @@ class Showing {
     }
 }
 exports.Showing = Showing;
+// TODO: Consider creating an array of combinations of the booleans, and then link to that instead, or introduce flags: https://basarat.gitbooks.io/typescript/docs/enums.html#enums-as-flags.
 // TODO: Consider the includes polyfill: http://stackoverflow.com/questions/37640785/how-do-you-add-polyfills-to-globals-in-typescript-modules 
 //# sourceMappingURL=Showing.js.map

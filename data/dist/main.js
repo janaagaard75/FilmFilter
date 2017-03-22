@@ -7,6 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 // tslint:disable no-console
 const express = require("express");
 const cors = require("cors");
@@ -27,6 +28,6 @@ app.get("/", (request, response) => __awaiter(this, void 0, void 0, function* ()
     response.json(data);
 }));
 app.listen(app.get("port"), () => {
-    console.info(`Node app is running on port ${app.get("port")}.`);
+    console.info(`Node app is running on port ${app.get("port")}. Open http://localhost:${app.get("port")}/ to start fetching and parsing.`);
 });
 //# sourceMappingURL=main.js.map
