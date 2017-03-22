@@ -20,7 +20,7 @@
     "cors": "2.8.1",
     "express": "4.15.2",
     "node-fetch": "1.6.3",
-    "ts-node": "2.1.0"
+    "ts-node": "3.0.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.1",
@@ -28,7 +28,7 @@
     "@types/node-fetch": "1.6.7",
     "rimraf": "2.6.1",
     "tslint": "4.5.1",
-    "tslint-eslint-rules": "3.4.0",
+    "tslint-eslint-rules": "3.5.1",
     "tslint-react": "^2.5.0",
     "typescript": "2.2.1"
   }
