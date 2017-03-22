@@ -26,6 +26,7 @@
     "member-ordering": [
       false
     ],
+    "no-bitwise": false,
     "no-null-keyword": true,
     "no-unused-expression": true,
     "no-unused-new": true,
