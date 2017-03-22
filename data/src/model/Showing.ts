@@ -16,6 +16,7 @@ export class Showing {
 
     if (line.movieUrl === "NO_MOVIE_URL") {
       this.movieId = -1
+      // TODO: Use the movieTitle property. Add a new movie, or add a movieTitle property to Showing?
     }
     else {
       const movieUrl = UrlUtil.removeStandardPrefix(line.movieUrl)
