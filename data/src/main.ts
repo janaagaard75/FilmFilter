@@ -16,7 +16,7 @@ app.set("port", (process.env.PORT || port))
 app.use(cors())
 
 // tslint:disable-next-line no-unused-variable
-app.get("/", async(request, response) => {
+app.get("/", async (request, response) => {
   console.info("Fetching and parting data.")
 
   const data = await DataUpdater.getData(apiKey, host, jobId)
@@ -25,5 +25,5 @@ app.get("/", async(request, response) => {
 })
 
 app.listen(app.get("port"), () => {
-  console.info(`Node app is running on port ${app.get("port")}.`)
+  console.info(`Node app is running on port ${app.get("port")}. Open http://localhost:${app.get("port")}/ to start fetching and parsing.`)
 })
