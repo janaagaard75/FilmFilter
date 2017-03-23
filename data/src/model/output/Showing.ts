@@ -11,10 +11,6 @@ export class Showing {
     movies: Array<Movie>,
     theaters: Array<Theater>
   ) {
-    this.setFlag(ShowingFlags.Dubbed, line.version.find(flag => flag === "dansk tale") !== undefined)
-
-    this.setFlag(ShowingFlags.Imax, line.version.find(flag => flag === "IMAX 2D" || flag === "IMAX 3D") !== undefined)
-
     if (line.movieUrl === "NO_MOVIE_URL") {
       this.movieId = -1
       // TODO: Use the movieTitle property. Add a new movie, or add a movieTitle property to Showing?
@@ -34,8 +30,6 @@ export class Showing {
 
     this.showingUrl = UrlUtil.removeStandardPrefix(line.showingUrl)
 
-    this.setFlag(ShowingFlags.SpecialShowing, line.version.find(flag => flag === "Særvisning") !== undefined)
-
     this.start = line.start
 
     const theaterUrl = UrlUtil.removeStandardPrefix(line.theaterUrl)
@@ -47,6 +41,12 @@ export class Showing {
     else {
       this.theaterId = theaters.indexOf(theater)
     }
+
+    this.setFlag(ShowingFlags.SpecialShowing, line.version.find(flag => flag === "Særvisning") !== undefined)
+
+    this.setFlag(ShowingFlags.Dubbed, line.version.find(flag => flag === "dansk tale") !== undefined)
+
+    this.setFlag(ShowingFlags.Imax, line.version.find(flag => flag === "IMAX 2D" || flag === "IMAX 3D") !== undefined)
 
     this.setFlag(ShowingFlags.ThreeD, line.version.find(flag => flag === "3D" || flag === "IMAX 3D") !== undefined)
   }
