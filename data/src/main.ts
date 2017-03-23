@@ -25,5 +25,5 @@ app.get("/", async (request, response) => {
 })
 
 app.listen(app.get("port"), () => {
-  console.info(`Node app is running on port ${app.get("port")}. Open http://localhost:${app.get("port")}/ to start fetching and parsing.`)
+  console.info(`Node app is running on port ${app.get("port")}. Run start-client or open http://localhost:${app.get("port")}/ to fetch and parse.`)
 })
