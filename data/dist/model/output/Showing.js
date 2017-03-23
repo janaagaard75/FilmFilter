@@ -1,12 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const Movie_1 = require("./Movie");
 const ShowingFlags_1 = require("./ShowingFlags");
 const UrlUtil_1 = require("./UrlUtil");
 class Showing {
     constructor(line, lineIndex, movies, theaters) {
         if (line.movieUrl === "NO_MOVIE_URL") {
-            this.movieId = -1;
-            // TODO: Use the movieTitle property. Add a new movie, or add a movieTitle property to Showing?
+            const newMovie = new Movie_1.Movie({
+                danishTitle: "",
+                movieUrl: "",
+                originalTitle: line.movieTitle,
+                posterUrl: "http://cdn01.kino.dk/sites/default/files/imagecache/k_poster_small/imagefield_default_images/movie-default-poster.jpg"
+            });
+            movies.push(newMovie);
+            this.movieId = movies.length - 1;
         }
         else {
             const movieUrl = UrlUtil_1.UrlUtil.removeStandardPrefix(line.movieUrl);

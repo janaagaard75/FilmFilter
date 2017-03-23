@@ -12,8 +12,14 @@ export class Showing {
     theaters: Array<Theater>
   ) {
     if (line.movieUrl === "NO_MOVIE_URL") {
-      this.movieId = -1
-      // TODO: Use the movieTitle property. Add a new movie, or add a movieTitle property to Showing?
+      const newMovie = new Movie({
+        danishTitle: "",
+        movieUrl: "",
+        originalTitle: line.movieTitle,
+        posterUrl: "http://cdn01.kino.dk/sites/default/files/imagecache/k_poster_small/imagefield_default_images/movie-default-poster.jpg"
+      })
+      movies.push(newMovie)
+      this.movieId = movies.length - 1
     }
     else {
       const movieUrl = UrlUtil.removeStandardPrefix(line.movieUrl)
