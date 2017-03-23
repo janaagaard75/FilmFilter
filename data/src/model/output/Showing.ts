@@ -1,4 +1,5 @@
 import { Movie } from "./Movie"
+import { ShowingFlags } from "./ShowingFlags"
 import { ShowingLine } from "../input/ShowingLine"
 import { Theater } from "./Theater"
 import { UrlUtil } from "./UrlUtil"
@@ -10,9 +11,9 @@ export class Showing {
     movies: Array<Movie>,
     theaters: Array<Theater>
   ) {
-    this.dubbed = (line.version.find(flag => flag === "dansk tale") !== undefined)
+    this.setFlag(ShowingFlags.Dubbed, line.version.find(flag => flag === "dansk tale") !== undefined)
 
-    this.imax = (line.version.find(flag => flag === "IMAX 2D" || flag === "IMAX 3D") !== undefined)
+    this.setFlag(ShowingFlags.Imax, line.version.find(flag => flag === "IMAX 2D" || flag === "IMAX 3D") !== undefined)
 
     if (line.movieUrl === "NO_MOVIE_URL") {
       this.movieId = -1
@@ -33,7 +34,7 @@ export class Showing {
 
     this.showingUrl = UrlUtil.removeStandardPrefix(line.showingUrl)
 
-    this.specialShowing = (line.version.find(flag => flag === "Særvisning") !== undefined)
+    this.setFlag(ShowingFlags.SpecialShowing, line.version.find(flag => flag === "Særvisning") !== undefined)
 
     this.start = line.start
 
@@ -47,20 +48,24 @@ export class Showing {
       this.theaterId = theaters.indexOf(theater)
     }
 
-    this.threeD = (line.version.find(flag => flag === "3D" || flag === "IMAX 3D") !== undefined)
+    this.setFlag(ShowingFlags.ThreeD, line.version.find(flag => flag === "3D" || flag === "IMAX 3D") !== undefined)
   }
 
-  public readonly dubbed: boolean
-  public readonly imax: boolean
+  public flags: ShowingFlags
   public readonly movieId: number
   public readonly seatingInfo: Array<string>
   public readonly showingUrl: string
-  public readonly specialShowing: boolean
   public readonly start: string
   public readonly theaterId: number
-  public readonly threeD: boolean
+
+  private setFlag(flag: ShowingFlags, value: boolean): void {
+    if (value) {
+      this.flags |= flag
+    }
+    else {
+      this.flags &= ~flag
+    }
+  }
 }
 
-// TODO: Consider creating an array of combinations of the booleans, and then link to that instead, or introduce flags: https://basarat.gitbooks.io/typescript/docs/enums.html#enums-as-flags.
-
-// TODO: Consider the includes polyfill: http://stackoverflow.com/questions/37640785/how-do-you-add-polyfills-to-globals-in-typescript-modules
+// TODO: Consider this Array.includes polyfill: http://stackoverflow.com/questions/37640785/how-do-you-add-polyfills-to-globals-in-typescript-modules
