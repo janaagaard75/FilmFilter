@@ -201,6 +201,10 @@ cors@2.8.1:
   dependencies:
     vary "^1"
 
+cps@*:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/cps/-/cps-1.0.2.tgz#2cd0b25d80f10909637e0856ad9ba634ce04ff1d"
+
 create-error-class@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/create-error-class/-/create-error-class-3.0.2.tgz#06be7abef947a3f14a30fd610671d401bca8b7b6"
@@ -546,6 +550,12 @@ isexe@^1.1.1:
 js-tokens@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.1.tgz#08e9f132484a2c45a30907e9dc4d5567b7f114d7"
+
+json-pretty-print@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/json-pretty-print/-/json-pretty-print-0.0.4.tgz#b0a9390a970eee29f4a4aacf6691cf9be474fe91"
+  dependencies:
+    cps "*"
 
 json-stringify-safe@~5.0.0:
   version "5.0.1"

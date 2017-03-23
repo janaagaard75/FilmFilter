@@ -14,7 +14,7 @@
     "build": "rimraf dist && tsc",
     "deploy": "echo Run 'git subtree push --prefix data heroku master' from the parent folder.",
     "lint": "tslint src/**/*.ts",
-    "start-client": "wget http://localhost:5000/ --destination data.json",
+    "start-client": "wget http://localhost:5000/ --destination output.json && json-pretty-print output.json output-prettified.json",
     "start-server": "ts-node src/main.ts"
   },
   "dependencies": {
@@ -27,6 +27,7 @@
     "@types/cors": "^2.8.1",
     "@types/express": "4.0.35",
     "@types/node-fetch": "1.6.7",
+    "json-pretty-print": "0.0.4",
     "node-wget": "0.4.2",
     "rimraf": "2.6.1",
     "tslint": "4.5.1",
