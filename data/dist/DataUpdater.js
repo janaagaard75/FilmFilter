@@ -9,9 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_fetch_1 = require("node-fetch");
-const Movie_1 = require("./model/Movie");
-const Showing_1 = require("./model/Showing");
-const Theater_1 = require("./model/Theater");
+const Movie_1 = require("./model/output/Movie");
+const Showing_1 = require("./model/output/Showing");
+const Theater_1 = require("./model/output/Theater");
 class DataUpdater {
     static getData(apiKey, host, jobId) {
         return __awaiter(this, void 0, void 0, function* () {

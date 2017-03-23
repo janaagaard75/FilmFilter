@@ -7,6 +7,7 @@ class Showing {
         this.imax = (line.version.find(flag => flag === "IMAX 2D" || flag === "IMAX 3D") !== undefined);
         if (line.movieUrl === "NO_MOVIE_URL") {
             this.movieId = -1;
+            // TODO: Use the movieTitle property. Add a new movie, or add a movieTitle property to Showing?
         }
         else {
             const movieUrl = UrlUtil_1.UrlUtil.removeStandardPrefix(line.movieUrl);
