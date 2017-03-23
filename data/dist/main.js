@@ -28,6 +28,6 @@ app.get("/", (request, response) => __awaiter(this, void 0, void 0, function* ()
     response.json(data);
 }));
 app.listen(app.get("port"), () => {
-    console.info(`Node app is running on port ${app.get("port")}. Open http://localhost:${app.get("port")}/ to start fetching and parsing.`);
+    console.info(`Node app is running on port ${app.get("port")}. Run start-client or open http://localhost:${app.get("port")}/ to fetch and parse.`);
 });
 //# sourceMappingURL=main.js.map
