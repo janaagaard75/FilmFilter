@@ -42,13 +42,13 @@ export class Showing {
       this.theaterId = theaters.indexOf(theater)
     }
 
-    this.setFlag(ShowingFlags.SpecialShowing, line.version.find(flag => flag === "Særvisning") !== undefined)
+    this.setFlag(ShowingFlags.SpecialShowing, line.version.includes("Særvisning"))
 
-    this.setFlag(ShowingFlags.Dubbed, line.version.find(flag => flag === "dansk tale") !== undefined)
+    this.setFlag(ShowingFlags.Dubbed, line.version.includes("dansk tale"))
 
-    this.setFlag(ShowingFlags.Imax, line.version.find(flag => flag === "IMAX 2D" || flag === "IMAX 3D") !== undefined)
+    this.setFlag(ShowingFlags.Imax, line.version.includes("IMAX 2D") || line.version.includes("IMAX 3D"))
 
-    this.setFlag(ShowingFlags.ThreeD, line.version.find(flag => flag === "3D" || flag === "IMAX 3D") !== undefined)
+    this.setFlag(ShowingFlags.ThreeD, line.version.includes("3D") || line.version.includes("IMAX 3D"))
   }
 
   public flags: ShowingFlags
@@ -67,5 +67,3 @@ export class Showing {
     }
   }
 }
-
-// TODO: Consider this Array.includes polyfill: http://stackoverflow.com/questions/37640785/how-do-you-add-polyfills-to-globals-in-typescript-modules
