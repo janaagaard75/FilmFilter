@@ -9,18 +9,19 @@ import { ShowingType } from "./filters/ShowingType"
 import { Store } from "./Store"
 import { Theater } from "./Theater"
 import { TimeInterval } from "./filters/TimeInterval"
+import { ShowingFlags } from "./data/ShowingFlags";
 
 export class Showing {
   constructor(data: ShowingData, store: Store) {
-    this.dubbed = data.dubbed
+    this.dubbed = Showing.getFlagValue(data, ShowingFlags.Dubbed)
     this.freeSeats = this.getFreeSeats(data.seatingInfo)
-    this.imax = data.imax
+    this.imax = Showing.getFlagValue(data, ShowingFlags.Imax)
     this.movie = store.getMovie(data.movieId)
     this.showingUrl = "http://www.kino.dk/" + data.showingUrl
-    this.specialShowing = data.specialShowing
+    this.specialShowing = Showing.getFlagValue(data, ShowingFlags.SpecialShowing)
     this.start = new ImmutableDateTime(data.start)
     this.theater = store.getTheater(data.theaterId)
-    this.threeD = data.threeD
+    this.threeD = Showing.getFlagValue(data, ShowingFlags.ThreeD)
     this.totalSeats = this.getTotalSeats(data.seatingInfo)
 
     this.date = store.getOrAddSelectableDate(this.start.toDate())
@@ -40,6 +41,11 @@ export class Showing {
   public readonly theater: Theater
   public readonly threeD: boolean
   public readonly totalSeats: number
+
+  private static getFlagValue(data: ShowingData, flag: ShowingFlags): boolean {
+    const flagValue = (data.flags & flag) > 0
+    return flagValue
+  }
 
   private getFreeSeats(seatingInfo: Array<string>): number {
     const freeSeatsLine = seatingInfo.filter(info => info.startsWith("Ledige"))[0]
