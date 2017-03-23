@@ -1,4 +1,4 @@
-import { MovieLine } from "./MovieLine"
+import { MovieLine } from "../input/MovieLine"
 import { UrlUtil } from "./UrlUtil"
 
 export class Movie {

@@ -1,4 +1,4 @@
-import { TheaterLine } from "./TheaterLine"
+import { TheaterLine } from "../input/TheaterLine"
 import { UrlUtil } from "./UrlUtil"
 
 export class Theater {

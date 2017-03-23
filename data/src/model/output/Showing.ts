@@ -1,5 +1,5 @@
 import { Movie } from "./Movie"
-import { ShowingLine } from "./ShowingLine"
+import { ShowingLine } from "../input/ShowingLine"
 import { Theater } from "./Theater"
 import { UrlUtil } from "./UrlUtil"
 
