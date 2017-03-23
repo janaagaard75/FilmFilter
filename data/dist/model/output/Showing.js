@@ -1,10 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const ShowingFlags_1 = require("./ShowingFlags");
 const UrlUtil_1 = require("./UrlUtil");
 class Showing {
     constructor(line, lineIndex, movies, theaters) {
-        this.dubbed = (line.version.find(flag => flag === "dansk tale") !== undefined);
-        this.imax = (line.version.find(flag => flag === "IMAX 2D" || flag === "IMAX 3D") !== undefined);
         if (line.movieUrl === "NO_MOVIE_URL") {
             this.movieId = -1;
             // TODO: Use the movieTitle property. Add a new movie, or add a movieTitle property to Showing?
@@ -21,7 +20,6 @@ class Showing {
         }
         this.seatingInfo = line.seatingInfo;
         this.showingUrl = UrlUtil_1.UrlUtil.removeStandardPrefix(line.showingUrl);
-        this.specialShowing = (line.version.find(flag => flag === "Særvisning") !== undefined);
         this.start = line.start;
         const theaterUrl = UrlUtil_1.UrlUtil.removeStandardPrefix(line.theaterUrl);
         const theater = theaters.find(t => t.theatherUrl === theaterUrl);
@@ -32,10 +30,19 @@ class Showing {
         else {
             this.theaterId = theaters.indexOf(theater);
         }
-        this.threeD = (line.version.find(flag => flag === "3D" || flag === "IMAX 3D") !== undefined);
+        this.setFlag(ShowingFlags_1.ShowingFlags.SpecialShowing, line.version.includes("Særvisning"));
+        this.setFlag(ShowingFlags_1.ShowingFlags.Dubbed, line.version.includes("dansk tale"));
+        this.setFlag(ShowingFlags_1.ShowingFlags.Imax, line.version.includes("IMAX 2D") || line.version.includes("IMAX 3D"));
+        this.setFlag(ShowingFlags_1.ShowingFlags.ThreeD, line.version.includes("3D") || line.version.includes("IMAX 3D"));
+    }
+    setFlag(flag, value) {
+        if (value) {
+            this.flags |= flag;
+        }
+        else {
+            this.flags &= ~flag;
+        }
     }
 }
 exports.Showing = Showing;
-// TODO: Consider creating an array of combinations of the booleans, and then link to that instead, or introduce flags: https://basarat.gitbooks.io/typescript/docs/enums.html#enums-as-flags.
-// TODO: Consider the includes polyfill: http://stackoverflow.com/questions/37640785/how-do-you-add-polyfills-to-globals-in-typescript-modules 
 //# sourceMappingURL=Showing.js.map
