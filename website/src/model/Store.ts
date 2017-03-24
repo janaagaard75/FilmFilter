@@ -160,10 +160,13 @@ export class Store {
   }
 
   private loadSettings() {
+    Logger.log("Loading settings.")
+
     const settingsString = localStorage.getItem("settings")
 
     // tslint:disable-next-line:no-null-keyword
     if (settingsString === null) {
+      Logger.log("No settings.")
       return
     }
 
