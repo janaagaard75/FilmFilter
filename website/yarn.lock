@@ -3033,8 +3033,8 @@ lru-cache@^4.0.0, lru-cache@^4.0.1:
     yallist "^2.0.0"
 
 "lz-string@git://github.com/janaagaard75/lz-string":
-  version "1.4.5"
-  resolved "git://github.com/janaagaard75/lz-string#f37c90d0dfff2a4ea2f530580914bb87e2baf63f"
+  version "1.4.6"
+  resolved "git://github.com/janaagaard75/lz-string#086a853fc97eb53d8ff6460081adf7457998c51a"
 
 macaddress@^0.2.8:
   version "0.2.8"
