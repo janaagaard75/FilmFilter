@@ -2,7 +2,6 @@ import * as classNames from "classnames"
 import * as React from "react"
 import { Component } from "react"
 import { observer } from "mobx-react"
-import { RouteComponentProps } from "react-router"
 
 import { Arrays } from "../utilities/Arrays"
 import { DatesPicker } from "./DatesPicker"
@@ -20,7 +19,6 @@ enum Picker {
 }
 
 interface Props {
-  routeProps: RouteComponentProps<void, void>
   store: Store
 }
 

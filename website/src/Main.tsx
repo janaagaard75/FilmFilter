@@ -1,21 +1,14 @@
 import * as moment from "moment"
 import * as React from "react"
-import { browserHistory } from "react-router"
 import { render } from "react-dom"
-import { Route } from "react-router"
-import { Router } from "react-router"
 
-import { allRoutes } from "./routes"
+import { ConnectedApp } from "./ConnectedApp"
 
 import "./styles/main.scss"
 
 moment.locale("da")
 
 render(
-  <Router history={browserHistory}>
-    {allRoutes.map(route =>
-      <Route key={route.routePath} component={route.component} path={route.routePath}/>
-    )}
-  </Router>,
+  <ConnectedApp/>,
   document.getElementById("app")
 )
