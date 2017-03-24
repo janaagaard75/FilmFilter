@@ -10,6 +10,7 @@
 * Filtering one category should update the others.
   * Example: How do I easily see that the movie Logan isn't shown in 3D anywhere?
 * Add a reset button.
+* Figure out why the settings aren't persisted as they should.
 * Better presentation of showings.
   * If a single movie has been selected, it's not necessary to show the name of the movie in the showings list.
   * Likewise for dates and theaters.
