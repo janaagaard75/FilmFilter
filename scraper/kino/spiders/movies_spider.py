@@ -8,9 +8,9 @@ class MoviesSpider(scrapy.Spider):
     start_urls = ['http://www.kino.dk/sitemap']
 
     def parse(self, response):
-        # TODO: Select all the hrefs that start with /film/.
         for movie_href in response.xpath('//a[starts-with(@href, "/film/")]'):
             movie_url = response.urljoin(movie_href.extract())
+            # TODO: There's something wrong with a lot of the URLs. Try decoding.
             yield scrapy.Request(movie_url, callback=self.parse_movie_page)
 
     def parse_movie_page(self, response):
