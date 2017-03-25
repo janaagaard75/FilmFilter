@@ -10,13 +10,14 @@
   },
   "license": "ISC",
   "scripts": {
-    "build-and-start-server": "yarn build && node dist/main.js",
-    "build": "rimraf dist && tsc",
+    "build-and-start": "yarn run build && yarn run start-prod-server",
+    "build-using-tsc": "rimraf dist && tsc",
+    "build": "rimraf dist && webpack",
     "deploy": "echo Run yarn build and then git subtree push --prefix data heroku master from the parent folder.",
     "lint": "tslint src/**/*.ts",
     "start-client": "rimraf output && mkdirp output && wget http://localhost:5000/ --destination output/data.json && json-pretty-print output/data.json output/data-prettified.json",
-    "start-server": "ts-node src/main.ts",
-    "webpack": "rimraf dist && webpack"
+    "start-dev-server": "ts-node src/main.ts",
+    "start-prod-server": "node dist/main.js"
   },
   "dependencies": {
     "cors": "2.8.1",
