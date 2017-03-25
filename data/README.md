@@ -6,6 +6,12 @@ Reads the data produced by the scraper, converts it into a single JSON file, and
 
 It is not possible (and also not recommended) to use `ts-node` in production, so the compiled JavaScript has to be included in the repository, because git is being used to deploy the code to Heroku.
 
+## Master Outdated
+
+```shell
+git push heroku `git subtree split --prefix data master`:master --force
+```
+
 ## TODOs
 
 * Add support for movies without a movie page.
