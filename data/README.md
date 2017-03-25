@@ -1,6 +1,8 @@
-# Film Filter Converter
+# Film Filter Data
 
-The converter reads the data produced by the scraper, and makes it available for download as a single JSON file.
+Provides data for the website.
+
+Reads the data produced by the scraper, converts it into a single JSON file, and makes it available on the web.
 
 It is not possible (and also not recommended) to use `ts-node` in production, so the compiled JavaScript has to be included in the repository, because git is being used to deploy the code to Heroku.
 
