@@ -1,4 +1,3 @@
-import json
 import scrapy
 
 from kino.items import MovieItem
@@ -7,25 +6,19 @@ class MoviesSpider(scrapy.Spider):
     name = 'movies'
     allowed_domains = ['kino.dk']
     # TODO: Use the parsed showings as basis for the list of movies to scrape.
-    aktuelle_film_urls = map(lambda n: "http://www.kino.dk/aktuelle-film?page=%d" % n, range(10))
-    film_paa_vej_urls = map(lambda n: "http://www.kino.dk/film-paa-vej?page=%d" % n, range(30))
-    start_urls = aktuelle_film_urls + film_paa_vej_urls
-
-    def get_movie_urls():
-        movies_file = open('output/movies.jsonl')
-        movie_lines = movies_file.readlines()
-        movie_urls = map(movie_lines, extract_movie_url)
-        return movie_urls
-
-    def extract_movie_url(movie_line):
-        movie_json = json.load(movie_line)
-        movie_url = movie_json['movieUrl']
-        return movie_url
+    # aktuelle_film_urls = map(lambda n: "http://www.kino.dk/aktuelle-film?page=%d" % n, range(10))
+    # film_paa_vej_urls = map(lambda n: "http://www.kino.dk/film-paa-vej?page=%d" % n, range(30))
+    # start_urls = aktuelle_film_urls + film_paa_vej_urls
+    start_urls = ['http://www.kino.dk/sitemap']
 
     def parse(self, response):
-        for movie_href in response.css('.movies-list-inner-wrap').xpath('./h2/a/@href'):
-            movieUrl = response.urljoin(movie_href.extract())
-            yield scrapy.Request(movieUrl, callback=self.parse_movie_page)
+        # TODO: Select all the hrefs that start with /film/.
+        response.css('a/@href')
+
+    # def parse(self, response):
+    #     for movie_href in response.css('.movies-list-inner-wrap').xpath('./h2/a/@href'):
+    #         movieUrl = response.urljoin(movie_href.extract())
+    #         yield scrapy.Request(movieUrl, callback=self.parse_movie_page)
 
     def parse_movie_page(self, response):
         movie = MovieItem()
