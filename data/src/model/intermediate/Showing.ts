@@ -1,4 +1,4 @@
-import { OutputData } from "./OutputData"
+import { IntermediateData } from "./OutputData"
 import { ShowingFlags } from "./ShowingFlags"
 import { ShowingLine } from "../input/ShowingLine"
 import { UrlUtil } from "./UrlUtil"
@@ -7,7 +7,7 @@ export class Showing {
   constructor(
     line: ShowingLine,
     lineIndex: number,
-    outputData: OutputData
+    outputData: IntermediateData
   ) {
     if (line.movieUrl === "NO_MOVIE_URL") {
       this.movieId = outputData.addMovieWithoutUrl(outputData.movies, line.movieTitle)

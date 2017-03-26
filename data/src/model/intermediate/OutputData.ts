@@ -6,7 +6,7 @@ import { Theater } from "./Theater"
 import { TheaterLine } from "../input/TheaterLine"
 import { UrlUtil } from "./UrlUtil"
 
-export class OutputData {
+export class IntermediateData {
   constructor(
     movieLines: Array<MovieLine>,
     showingLines: Array<ShowingLine>,

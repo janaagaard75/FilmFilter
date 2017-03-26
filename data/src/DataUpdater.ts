@@ -3,13 +3,13 @@ import fetch from "node-fetch"
 import { JobInfo } from "./model/JobInfo"
 import { JsonlType } from "./model/JsonlType"
 import { MovieLine } from "./model/input/MovieLine"
-import { OutputData } from "./model/output/OutputData"
+import { IntermediateData } from "./model/intermediate/OutputData"
 import { ShowingLine } from "./model/input/ShowingLine"
 import { TheaterLine } from "./model/input/TheaterLine"
 import { TypedJsonl } from "./model/TypedJsonl"
 
 export class DataUpdater {
-  public static async getData(apiKey: string, host: string, jobId: number): Promise<OutputData> {
+  public static async getData(apiKey: string, host: string, jobId: number): Promise<IntermediateData> {
     const protocolKeyAndHost = `https://${apiKey}:@${host}/`
     const jobInfos = await DataUpdater.fetchJobInfos(protocolKeyAndHost, jobId)
     const typedJsonls = await DataUpdater.fetchJsonls(protocolKeyAndHost, jobInfos)
@@ -47,12 +47,12 @@ export class DataUpdater {
     return Promise.all(dataFetchers)
   }
 
-  private static parseAndMergeJsonl(typedJsonls: Array<TypedJsonl>): OutputData {
+  private static parseAndMergeJsonl(typedJsonls: Array<TypedJsonl>): IntermediateData {
     const movieLines = DataUpdater.parseLines<MovieLine>(typedJsonls, "movies")
     const showingLines = DataUpdater.parseLines<ShowingLine>(typedJsonls, "showings")
     const theaterLines = DataUpdater.parseLines<TheaterLine>(typedJsonls, "theaters")
 
-    const data = new OutputData(movieLines, showingLines, theaterLines)
+    const data = new IntermediateData(movieLines, showingLines, theaterLines)
 
     return data
   }
