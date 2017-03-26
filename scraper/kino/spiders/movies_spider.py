@@ -7,9 +7,17 @@ class MoviesSpider(scrapy.Spider):
     start_urls = ['http://www.kino.dk/sitemap']
 
     def parse(self, response):
-        for movie_href in response.xpath('//a[starts-with(@href, "/film/")]/@href'):
-            movie_url = response.urljoin(movie_href.extract())
-            yield scrapy.Request(movie_url, callback=self.parse_movie_page)
+        for theather_href in response.xpath('//a[starts-with(@href, "/biografer/") and not(starts-with(@href, "/biografer/sal/"))]/@href'):
+            theater_url = response.urljoin(theather_href.extract())
+            yield scrapy.Request(theater_url, callback=self.parse_theater_page)
+
+    def parse_theater_page(self, response):
+        for movie_wrapper in response.xpath('//div[@id="cinema-showtimes"]/div[@class="cinema-movie-wrapper"]'):
+            for title_item in movie_wrapper.xpath('div[@class="version-dependent-item"]'):
+                url_item = title_item.xpath('h3/a/@href')
+                if len(url_item) >= 1:
+                    movie_url = response.urljoin(url_item.extract_first())
+                    yield scrapy.Request(movie_url, callback=self.parse_movie_page)
 
     def parse_movie_page(self, response):
         movie = MovieItem()
