@@ -8,5 +8,6 @@ export class Theater {
   }
 
   public readonly name: string
+  /** Short URL, without the standard prefix. */
   public readonly theatherUrl: string
 }

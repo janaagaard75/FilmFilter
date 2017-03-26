@@ -36,6 +36,7 @@ export class Showing {
   public flags: ShowingFlags
   public readonly movieId: number
   public readonly seatingInfo: Array<string>
+  /** Short URL, without the standard prefix. */
   public readonly showingUrl: string
   public readonly start: string
   public readonly theaterId: number
