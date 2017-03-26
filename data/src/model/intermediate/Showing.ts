@@ -1,4 +1,4 @@
-import { IntermediateData } from "./OutputData"
+import { IntermediateData } from "./IntermediateData"
 import { ShowingFlags } from "./ShowingFlags"
 import { ShowingLine } from "../input/ShowingLine"
 import { UrlUtil } from "./UrlUtil"
