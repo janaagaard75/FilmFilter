@@ -2,12 +2,9 @@ import fetch from "node-fetch"
 
 import { JobInfo } from "./model/JobInfo"
 import { JsonlType } from "./model/JsonlType"
-import { Movie } from "./model/output/Movie"
 import { MovieLine } from "./model/input/MovieLine"
 import { OutputData } from "./model/output/OutputData"
-import { Showing } from "./model/output/Showing"
 import { ShowingLine } from "./model/input/ShowingLine"
-import { Theater } from "./model/output/Theater"
 import { TheaterLine } from "./model/input/TheaterLine"
 import { TypedJsonl } from "./model/TypedJsonl"
 
@@ -56,9 +53,9 @@ export class DataUpdater {
     const theaterLines = DataUpdater.parseLines<TheaterLine>(typedJsonls, "theaters")
 
     const data = new OutputData()
-    data.movies = movieLines.map(line => new Movie(line))
-    data.theaters = theaterLines.map(line => new Theater(line))
-    data.showings = showingLines.map((line, index) => new Showing(line, index, data.movies, data.theaters))
+    data.setMovies(movieLines)
+    data.setTheaters(theaterLines)
+    data.setShowings(showingLines)
 
     // TODO: Add some code that filters out movies that aren't associated with any showings. This is pretty complicated since the showings currently point to indexes in the movies array.
 
