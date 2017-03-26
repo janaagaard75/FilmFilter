@@ -6,6 +6,5 @@ export interface ShowingData {
   readonly seatingInfo: Array<string>
   readonly showingUrl: string
   readonly start: string
-  readonly theaterIndex
-  : number
+  readonly theaterIndex: number
 }

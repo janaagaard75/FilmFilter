@@ -5,11 +5,11 @@ import { Language } from "./filters/Language"
 import { Movie } from "./Movie"
 import { SelectableDate } from "./SelectableDate"
 import { ShowingData } from "./data/ShowingData"
+import { ShowingFlags } from "./data/ShowingFlags"
 import { ShowingType } from "./filters/ShowingType"
 import { Store } from "./Store"
 import { Theater } from "./Theater"
 import { TimeInterval } from "./filters/TimeInterval"
-import { ShowingFlags } from "./data/ShowingFlags";
 
 export class Showing {
   constructor(data: ShowingData, store: Store) {
