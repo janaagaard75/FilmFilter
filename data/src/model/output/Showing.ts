@@ -9,16 +9,16 @@ export class Showing {
     outputData: OutputData
   ) {
     if (line.movieUrl === "NO_MOVIE_URL") {
-      this.movieId = outputData.addMovieWithoutUrl(line.movieTitle)
+      this.movieIndex = outputData.addMovieWithoutUrl(line.movieTitle)
     }
     else {
-      this.movieId = outputData.getMovieIndex(line.movieUrl)
+      this.movieIndex = outputData.getMovieIndex(line.movieUrl)
     }
 
     this.seatingInfo = line.seatingInfo
     this.showingUrl = UrlUtil.removeStandardPrefix(line.showingUrl)
     this.start = line.start
-    this.theaterId = outputData.getTheaterIndex(line.theaterUrl)
+    this.theaterIndex = outputData.getTheaterIndex(line.theaterUrl)
 
     this.setFlag(ShowingFlags.SpecialShowing, line.version.includes("Særvisning"))
 
@@ -30,12 +30,12 @@ export class Showing {
   }
 
   public flags: ShowingFlags
-  public readonly movieId: number
+  public readonly movieIndex: number
   public readonly seatingInfo: Array<string>
   /** Short URL, without the standard prefix or an intermediate ID. */
   public readonly showingUrl: string
   public readonly start: string
-  public readonly theaterId: number
+  public readonly theaterIndex: number
 
   private setFlag(flag: ShowingFlags, value: boolean): void {
     if (value) {
