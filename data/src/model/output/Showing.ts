@@ -9,7 +9,6 @@ export class Showing {
   constructor(
     line: ShowingLine,
     lineIndex: number,
-    movies: Array<Movie>,
     theaters: Array<Theater>,
     outputData: OutputData
   ) {
@@ -17,14 +16,7 @@ export class Showing {
       this.movieId = outputData.addMovieWithoutUrl(line.movieTitle)
     }
     else {
-      const movieUrl = UrlUtil.removeStandardPrefix(line.movieUrl)
-      const movie = movies.find(m => m.movieUrl === movieUrl)
-      if (movie === undefined) {
-        this.movieId = -1
-      }
-      else {
-        this.movieId = movies.indexOf(movie)
-      }
+      this.movieId = outputData.getMovieIndex(line.movieUrl)
     }
 
     this.seatingInfo = line.seatingInfo
