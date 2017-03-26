@@ -12,14 +12,7 @@ export class Showing {
     theaters: Array<Theater>
   ) {
     if (line.movieUrl === "NO_MOVIE_URL") {
-      const newMovie = new Movie({
-        danishTitle: "",
-        movieUrl: "",
-        originalTitle: line.movieTitle,
-        posterUrl: "http://cdn01.kino.dk/sites/default/files/imagecache/k_poster_small/imagefield_default_images/movie-default-poster.jpg"
-      })
-      movies.push(newMovie)
-      this.movieId = movies.length - 1
+      this.movieId = this.addMovieWithoutUrl(movies, line.movieTitle)
     }
     else {
       const movieUrl = UrlUtil.removeStandardPrefix(line.movieUrl)
@@ -63,6 +56,18 @@ export class Showing {
   public readonly showingUrl: string
   public readonly start: string
   public readonly theaterId: number
+
+  private addMovieWithoutUrl(movies: Array<Movie>, movieTitle: string): number {
+    const newMovie = new Movie({
+      danishTitle: "",
+      movieUrl: "",
+      originalTitle: movieTitle,
+      posterUrl: "http://cdn01.kino.dk/sites/default/files/imagecache/k_poster_small/imagefield_default_images/movie-default-poster.jpg"
+    })
+    movies.push(newMovie)
+    const movieId = movies.length - 1
+    return movieId
+  }
 
   private setFlag(flag: ShowingFlags, value: boolean): void {
     if (value) {
