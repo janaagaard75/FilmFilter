@@ -30,6 +30,7 @@ export class IntermediateData {
   }
 
   public addMovieWithoutUrl(movies: Array<IntermediateMovie>, movieTitle: string): IntermediateMovie {
+    // TODO: Verify if the movie already exists, i.e. a movie without a URL and with the same title.
     const newMovie = new IntermediateMovie({ movieTitle }, this)
     movies.push(newMovie)
     return newMovie
