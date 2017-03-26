@@ -26,12 +26,11 @@ export class IntermediateData {
   public theaters: Array<IntermediateTheater>
 
   private addMovies(movieLines: Array<MovieLine>): void {
-    this.movies = movieLines.map(line => new IntermediateMovie(line))
+    this.movies = movieLines.map(line => new IntermediateMovie(line, this))
   }
 
   public addMovieWithoutUrl(movies: Array<IntermediateMovie>, movieTitle: string): IntermediateMovie {
-    const movieId = `ID-${movies.length - 1}`
-    const newMovie = new IntermediateMovie({ movieId, movieTitle })
+    const newMovie = new IntermediateMovie({ movieTitle }, this)
     movies.push(newMovie)
     return newMovie
   }
@@ -58,7 +57,7 @@ export class IntermediateData {
     }
 
     const movieUrl = UrlUtil.removeStandardPrefix(movieUrlWithPrefix)
-    const movie = this.movies.find(m => m.movieUrlOrId === movieUrl)
+    const movie = this.movies.find(m => m.movieUrl === movieUrl)
     return movie
   }
 
@@ -66,5 +65,9 @@ export class IntermediateData {
     const theaterUrl = UrlUtil.removeStandardPrefix(theaterUrlWithPrefix)
     const theater = this.theaters.find(t => t.theaterUrl === theaterUrl)
     return theater
+  }
+
+  public getNextMovieId(): number {
+    return this.movies.length + 1
   }
 }
