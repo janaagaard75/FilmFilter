@@ -34,7 +34,7 @@ export class Showing {
     const theaterUrl = UrlUtil.removeStandardPrefix(line.theaterUrl)
     const theater = theaters.find(t => t.theatherUrl === theaterUrl)
     if (theater === undefined) {
-      console.error(`Theater with url '${theaterUrl}' was not found, line number ${lineIndex + 1}.`)
+      console.error(`The theater with url '${theaterUrl}' was not found. Line number ${lineIndex + 1}.`)
       this.theaterId = -1
     }
     else {
