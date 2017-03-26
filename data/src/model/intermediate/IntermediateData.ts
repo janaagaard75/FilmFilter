@@ -18,7 +18,7 @@ export class IntermediateData {
     // Adding showings last, because they depend on movies and theaters already being added.
     this.addShowings(showingLines)
 
-    // TODO: Add some code that filters out movies that aren't associated with any showings. This is complicated with the current setup since the showings currently point to indexes in the movies array. One solution is to introduce a temporary data state, where there aren't used any array indexes, perform the cleanup and the only introduce the indexes as the final step?
+    this.removeMoviesWithoutShowings()
   }
 
   public movies: Array<IntermediateMovie>
@@ -70,5 +70,11 @@ export class IntermediateData {
 
   public getNextMovieId(): number {
     return this.movies.length + 1
+  }
+
+  private removeMoviesWithoutShowings(): void {
+    this.movies = this.movies.filter(movie => {
+      this.showings.some(showing => showing.movie === movie)
+    })
   }
 }
