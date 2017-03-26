@@ -1,4 +1,3 @@
-import { Movie } from "./Movie"
 import { OutputData } from "./OutputData"
 import { ShowingFlags } from "./ShowingFlags"
 import { ShowingLine } from "../input/ShowingLine"
@@ -11,7 +10,7 @@ export class Showing {
     outputData: OutputData
   ) {
     if (line.movieUrl === "NO_MOVIE_URL") {
-      this.movieId = this.addMovieWithoutUrl(outputData.movies, line.movieTitle)
+      this.movieId = outputData.addMovieWithoutUrl(outputData.movies, line.movieTitle)
     }
     else {
       const movieUrl = UrlUtil.removeStandardPrefix(line.movieUrl)
@@ -55,19 +54,6 @@ export class Showing {
   public readonly showingUrl: string
   public readonly start: string
   public readonly theaterId: number
-
-  // TODO: This method belongs to OutputData.
-  private addMovieWithoutUrl(movies: Array<Movie>, movieTitle: string): number {
-    const newMovie = new Movie({
-      danishTitle: "",
-      movieUrl: "",
-      originalTitle: movieTitle,
-      posterUrl: "http://cdn01.kino.dk/sites/default/files/imagecache/k_poster_small/imagefield_default_images/movie-default-poster.jpg"
-    })
-    movies.push(newMovie)
-    const movieId = movies.length - 1
-    return movieId
-  }
 
   private setFlag(flag: ShowingFlags, value: boolean): void {
     if (value) {

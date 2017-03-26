@@ -22,6 +22,18 @@ export class OutputData {
   public showings: Array<Showing>
   public theaters: Array<Theater>
 
+  public addMovieWithoutUrl(movies: Array<Movie>, movieTitle: string): number {
+    const newMovie = new Movie({
+      danishTitle: "",
+      movieUrl: "",
+      originalTitle: movieTitle,
+      posterUrl: "http://cdn01.kino.dk/sites/default/files/imagecache/k_poster_small/imagefield_default_images/movie-default-poster.jpg"
+    })
+    movies.push(newMovie)
+    const movieId = movies.length - 1
+    return movieId
+  }
+
   private setMovies(movieLines: Array<MovieLine>): void {
     this.movies = movieLines.map(line => new Movie(line))
   }
