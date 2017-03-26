@@ -16,11 +16,11 @@ export class Showing {
     this.dubbed = Showing.getFlagValue(data, ShowingFlags.Dubbed)
     this.freeSeats = this.getFreeSeats(data.seatingInfo)
     this.imax = Showing.getFlagValue(data, ShowingFlags.Imax)
-    this.movie = store.getMovie(data.movieId)
+    this.movie = store.getMovie(data.movieIndex)
     this.showingUrl = "http://www.kino.dk/" + data.showingUrl
     this.specialShowing = Showing.getFlagValue(data, ShowingFlags.SpecialShowing)
     this.start = new ImmutableDateTime(data.start)
-    this.theater = store.getTheater(data.theaterId)
+    this.theater = store.getTheater(data.theaterIndex)
     this.threeD = Showing.getFlagValue(data, ShowingFlags.ThreeD)
     this.totalSeats = this.getTotalSeats(data.seatingInfo)
 
