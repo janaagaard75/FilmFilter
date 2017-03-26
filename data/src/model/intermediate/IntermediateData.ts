@@ -64,7 +64,7 @@ export class IntermediateData {
 
   public findTheater(theaterUrlWithPrefix: string): IntermediateTheater | undefined {
     const theaterUrl = UrlUtil.removeStandardPrefix(theaterUrlWithPrefix)
-    const theater = this.theaters.find(t => t.theatherUrl === theaterUrl)
+    const theater = this.theaters.find(t => t.theaterUrl === theaterUrl)
     return theater
   }
 }
