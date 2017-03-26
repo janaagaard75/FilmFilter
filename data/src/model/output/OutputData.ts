@@ -15,10 +15,17 @@ export class OutputData {
     this.theaters = theaterLines.map(line => new Theater(line))
 
     // Mappaing showings last, since they depend on movies and theaters.
-    this.showings = showingLines.map((line, index) => new Showing(line, index, this.movies, this.theaters))
+    this.showings = showingLines.map((line, index) => new Showing(line, index, this.movies, this.theaters, this))
   }
 
   public movies: Array<Movie>
   public showings: Array<Showing>
   public theaters: Array<Theater>
+
+  public addMovieWithoutUrl(movieTitle: string): number {
+    const newMovie = new Movie(movieTitle)
+    this.movies.push(newMovie)
+    const movieId = this.movies.length - 1
+    return movieId
+  }
 }

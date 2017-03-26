@@ -1,4 +1,5 @@
 import { Movie } from "./Movie"
+import { OutputData } from "./OutputData"
 import { ShowingFlags } from "./ShowingFlags"
 import { ShowingLine } from "../input/ShowingLine"
 import { Theater } from "./Theater"
@@ -9,10 +10,11 @@ export class Showing {
     line: ShowingLine,
     lineIndex: number,
     movies: Array<Movie>,
-    theaters: Array<Theater>
+    theaters: Array<Theater>,
+    outputData: OutputData
   ) {
     if (line.movieUrl === "NO_MOVIE_URL") {
-      this.movieId = this.addMovieWithoutUrl(movies, line.movieTitle)
+      this.movieId = outputData.addMovieWithoutUrl(line.movieTitle)
     }
     else {
       const movieUrl = UrlUtil.removeStandardPrefix(line.movieUrl)
@@ -57,13 +59,6 @@ export class Showing {
   public readonly showingUrl: string
   public readonly start: string
   public readonly theaterId: number
-
-  private addMovieWithoutUrl(movies: Array<Movie>, movieTitle: string): number {
-    const newMovie = new Movie(movieTitle)
-    movies.push(newMovie)
-    const movieId = movies.length - 1
-    return movieId
-  }
 
   private setFlag(flag: ShowingFlags, value: boolean): void {
     if (value) {
