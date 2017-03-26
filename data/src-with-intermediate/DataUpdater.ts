@@ -2,17 +2,14 @@ import fetch from "node-fetch"
 
 import { JobInfo } from "./model/JobInfo"
 import { JsonlType } from "./model/JsonlType"
-import { Movie } from "./model/output/Movie"
 import { MovieLine } from "./model/input/MovieLine"
-import { OutputData } from "./model/output/OutputData"
-import { Showing } from "./model/output/Showing"
+import { IntermediateData } from "./model/intermediate/IntermediateData"
 import { ShowingLine } from "./model/input/ShowingLine"
-import { Theater } from "./model/output/Theater"
 import { TheaterLine } from "./model/input/TheaterLine"
 import { TypedJsonl } from "./model/TypedJsonl"
 
 export class DataUpdater {
-  public static async getData(apiKey: string, host: string, jobId: number): Promise<OutputData> {
+  public static async getData(apiKey: string, host: string, jobId: number): Promise<IntermediateData> {
     const protocolKeyAndHost = `https://${apiKey}:@${host}/`
     const jobInfos = await DataUpdater.fetchJobInfos(protocolKeyAndHost, jobId)
     const typedJsonls = await DataUpdater.fetchJsonls(protocolKeyAndHost, jobInfos)
@@ -50,22 +47,12 @@ export class DataUpdater {
     return Promise.all(dataFetchers)
   }
 
-  private static parseAndMergeJsonl(typedJsonls: Array<TypedJsonl>): OutputData {
+  private static parseAndMergeJsonl(typedJsonls: Array<TypedJsonl>): IntermediateData {
     const movieLines = DataUpdater.parseLines<MovieLine>(typedJsonls, "movies")
     const showingLines = DataUpdater.parseLines<ShowingLine>(typedJsonls, "showings")
     const theaterLines = DataUpdater.parseLines<TheaterLine>(typedJsonls, "theaters")
 
-    const movies = movieLines.map(line => new Movie(line))
-    const theaters = theaterLines.map(line => new Theater(line))
-    const showings = showingLines.map((line, index) => new Showing(line, index, movies, theaters))
-
-    // TODO: Add some code that filters out movies that aren't associated with any showings. This is pretty complicated since the showings currently point to indexes in the movies array.
-
-    const data: OutputData = {
-      movies: movies,
-      showings: showings,
-      theaters: theaters
-    }
+    const data = new IntermediateData(movieLines, showingLines, theaterLines)
 
     return data
   }

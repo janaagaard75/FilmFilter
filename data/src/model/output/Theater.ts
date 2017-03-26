@@ -1,12 +1,12 @@
-import { IntermediateTheater } from "../intermediate/IntermediateTheater"
+import { TheaterLine } from "../input/TheaterLine"
+import { UrlUtil } from "./UrlUtil"
 
 export class Theater {
-  constructor(intermediateTheater: IntermediateTheater) {
-    this.name = intermediateTheater.name
-    this.theaterUrl = intermediateTheater.theaterUrl
+  constructor(line: TheaterLine) {
+    this.name = line.name
+    this.theatherUrl = UrlUtil.removeStandardPrefix(line.theaterUrl)
   }
 
   public readonly name: string
-  /** Short URL, without the standard prefix. */
-  public readonly theaterUrl: string
+  public readonly theatherUrl: string
 }
