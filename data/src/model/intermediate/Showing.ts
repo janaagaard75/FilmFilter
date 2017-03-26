@@ -1,11 +1,11 @@
 import { IntermediateData } from "./IntermediateData"
-import { Movie } from "./Movie"
+import { IntermediateMovie } from "./Movie"
 import { ShowingFlags } from "./ShowingFlags"
 import { ShowingLine } from "../input/ShowingLine"
-import { Theater } from "./Theater"
+import { IntermediateTheater } from "./Theater"
 import { UrlUtil } from "./UrlUtil"
 
-export class Showing {
+export class IntermediateShowing {
   constructor(
     line: ShowingLine,
     outputData: IntermediateData
@@ -38,11 +38,11 @@ export class Showing {
   }
 
   public flags: ShowingFlags
-  public readonly movie: Movie | undefined
+  public readonly movie: IntermediateMovie | undefined
   public readonly seatingInfo: Array<string>
   public readonly showingUrl: string
   public readonly start: string
-  public readonly theater: Theater | undefined
+  public readonly theater: IntermediateTheater | undefined
 
   private setFlag(flag: ShowingFlags, value: boolean): void {
     if (value) {

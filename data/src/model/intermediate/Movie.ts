@@ -6,9 +6,9 @@ interface MovieWithoutUrl {
   movieTitle: string
 }
 
-export class Movie {
+export class IntermediateMovie {
   constructor(movieLineOrMovieWithoutUrl: MovieLine | MovieWithoutUrl) {
-    if (Movie.isMovieLine(movieLineOrMovieWithoutUrl)) {
+    if (IntermediateMovie.isMovieLine(movieLineOrMovieWithoutUrl)) {
       this.movieUrlOrId = UrlUtil.removeStandardPrefix(movieLineOrMovieWithoutUrl.movieUrl)
       this.originalTitle = movieLineOrMovieWithoutUrl.originalTitle
       this.posterUrl = movieLineOrMovieWithoutUrl.posterUrl

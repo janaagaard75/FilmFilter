@@ -1,8 +1,8 @@
-import { Movie } from "./Movie"
+import { IntermediateMovie } from "./Movie"
 import { MovieLine } from "../input/MovieLine"
-import { Showing } from "./Showing"
+import { IntermediateShowing } from "./Showing"
 import { ShowingLine } from "../input/ShowingLine"
-import { Theater } from "./Theater"
+import { IntermediateTheater } from "./Theater"
 import { TheaterLine } from "../input/TheaterLine"
 import { UrlUtil } from "./UrlUtil"
 
@@ -21,17 +21,17 @@ export class IntermediateData {
     // TODO: Add some code that filters out movies that aren't associated with any showings. This is complicated with the current setup since the showings currently point to indexes in the movies array. One solution is to introduce a temporary data state, where there aren't used any array indexes, perform the cleanup and the only introduce the indexes as the final step?
   }
 
-  public movies: Array<Movie>
-  public showings: Array<Showing>
-  public theaters: Array<Theater>
+  public movies: Array<IntermediateMovie>
+  public showings: Array<IntermediateShowing>
+  public theaters: Array<IntermediateTheater>
 
   private addMovies(movieLines: Array<MovieLine>): void {
-    this.movies = movieLines.map(line => new Movie(line))
+    this.movies = movieLines.map(line => new IntermediateMovie(line))
   }
 
-  public addMovieWithoutUrl(movies: Array<Movie>, movieTitle: string): Movie {
+  public addMovieWithoutUrl(movies: Array<IntermediateMovie>, movieTitle: string): IntermediateMovie {
     const movieId = `ID-${movies.length - 1}`
-    const newMovie = new Movie({ movieId, movieTitle })
+    const newMovie = new IntermediateMovie({ movieId, movieTitle })
     movies.push(newMovie)
     return newMovie
   }
@@ -45,14 +45,14 @@ export class IntermediateData {
       throw new Error("No theaters. Remember to call setTheaters() first.")
     }
 
-    this.showings = showingLines.map(line => new Showing(line, this))
+    this.showings = showingLines.map(line => new IntermediateShowing(line, this))
   }
 
   private addTheaters(theaterLines: Array<TheaterLine>): void {
-    this.theaters = theaterLines.map(line => new Theater(line))
+    this.theaters = theaterLines.map(line => new IntermediateTheater(line))
   }
 
-  public findMovie(movieUrlWithPrefix: string): Movie | undefined {
+  public findMovie(movieUrlWithPrefix: string): IntermediateMovie | undefined {
     if (movieUrlWithPrefix === "NO_MOVIE_URL") {
       return undefined
     }
@@ -62,7 +62,7 @@ export class IntermediateData {
     return movie
   }
 
-  public findTheater(theaterUrlWithPrefix: string): Theater | undefined {
+  public findTheater(theaterUrlWithPrefix: string): IntermediateTheater | undefined {
     const theaterUrl = UrlUtil.removeStandardPrefix(theaterUrlWithPrefix)
     const theater = this.theaters.find(t => t.theatherUrl === theaterUrl)
     return theater

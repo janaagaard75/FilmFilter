@@ -1,7 +1,7 @@
 import { TheaterLine } from "../input/TheaterLine"
 import { UrlUtil } from "./UrlUtil"
 
-export class Theater {
+export class IntermediateTheater {
   constructor(line: TheaterLine) {
     this.name = line.name
     this.theatherUrl = UrlUtil.removeStandardPrefix(line.theaterUrl)
