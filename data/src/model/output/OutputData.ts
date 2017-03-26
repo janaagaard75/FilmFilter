@@ -35,7 +35,7 @@ export class OutputData {
       throw new Error("No theaters. Remember to calls setTheaters() first.")
     }
 
-    this.showings = showingLines.map((line, index) => new Showing(line, index, this.movies, this.theaters))
+    this.showings = showingLines.map((line, index) => new Showing(line, index, this))
   }
 
   private setTheaters(theaterLines: Array<TheaterLine>): void {

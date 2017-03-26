@@ -1,27 +1,26 @@
 import { Movie } from "./Movie"
+import { OutputData } from "./OutputData"
 import { ShowingFlags } from "./ShowingFlags"
 import { ShowingLine } from "../input/ShowingLine"
-import { Theater } from "./Theater"
 import { UrlUtil } from "./UrlUtil"
 
 export class Showing {
   constructor(
     line: ShowingLine,
     lineIndex: number,
-    movies: Array<Movie>,
-    theaters: Array<Theater>
+    outputData: OutputData
   ) {
     if (line.movieUrl === "NO_MOVIE_URL") {
-      this.movieId = this.addMovieWithoutUrl(movies, line.movieTitle)
+      this.movieId = this.addMovieWithoutUrl(outputData.movies, line.movieTitle)
     }
     else {
       const movieUrl = UrlUtil.removeStandardPrefix(line.movieUrl)
-      const movie = movies.find(m => m.movieUrl === movieUrl)
+      const movie = outputData.movies.find(m => m.movieUrl === movieUrl)
       if (movie === undefined) {
         this.movieId = -1
       }
       else {
-        this.movieId = movies.indexOf(movie)
+        this.movieId = outputData.movies.indexOf(movie)
       }
     }
 
@@ -32,13 +31,13 @@ export class Showing {
     this.start = line.start
 
     const theaterUrl = UrlUtil.removeStandardPrefix(line.theaterUrl)
-    const theater = theaters.find(t => t.theatherUrl === theaterUrl)
+    const theater = outputData.theaters.find(t => t.theatherUrl === theaterUrl)
     if (theater === undefined) {
       console.error(`The theater with url '${theaterUrl}' was not found. Line number ${lineIndex + 1}.`)
       this.theaterId = -1
     }
     else {
-      this.theaterId = theaters.indexOf(theater)
+      this.theaterId = outputData.theaters.indexOf(theater)
     }
 
     this.setFlag(ShowingFlags.SpecialShowing, line.version.includes("Særvisning"))
@@ -57,6 +56,7 @@ export class Showing {
   public readonly start: string
   public readonly theaterId: number
 
+  // TODO: This method belongs to OutputData.
   private addMovieWithoutUrl(movies: Array<Movie>, movieTitle: string): number {
     const newMovie = new Movie({
       danishTitle: "",
