@@ -16,7 +16,7 @@ export class OutputData {
     this.theaters = theaterLines.map(line => new Theater(line))
 
     // Mappaing showings last, since they depend on movies and theaters.
-    this.showings = showingLines.map((line, index) => new Showing(line, index, this.theaters, this))
+    this.showings = showingLines.map(line => new Showing(line, this))
   }
 
   public movies: Array<Movie>
@@ -40,5 +40,17 @@ export class OutputData {
 
     const movieIndex = this.movies.indexOf(movie)
     return movieIndex
+  }
+
+  public getTheaterIndex(prefixedTheaterUrl: string): number {
+    const theaterUrl = UrlUtil.removeStandardPrefix(prefixedTheaterUrl)
+    const theater = this.theaters.find(t => t.theatherUrl === theaterUrl)
+
+    if (theater === undefined) {
+      return -1
+    }
+
+    const theaterIndex = this.theaters.indexOf(theater)
+    return theaterIndex
   }
 }

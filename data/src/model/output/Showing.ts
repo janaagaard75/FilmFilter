@@ -1,15 +1,11 @@
-import { Movie } from "./Movie"
 import { OutputData } from "./OutputData"
 import { ShowingFlags } from "./ShowingFlags"
 import { ShowingLine } from "../input/ShowingLine"
-import { Theater } from "./Theater"
 import { UrlUtil } from "./UrlUtil"
 
 export class Showing {
   constructor(
     line: ShowingLine,
-    lineIndex: number,
-    theaters: Array<Theater>,
     outputData: OutputData
   ) {
     if (line.movieUrl === "NO_MOVIE_URL") {
@@ -20,20 +16,9 @@ export class Showing {
     }
 
     this.seatingInfo = line.seatingInfo
-
     this.showingUrl = UrlUtil.removeStandardPrefix(line.showingUrl)
-
     this.start = line.start
-
-    const theaterUrl = UrlUtil.removeStandardPrefix(line.theaterUrl)
-    const theater = theaters.find(t => t.theatherUrl === theaterUrl)
-    if (theater === undefined) {
-      console.error(`Theater with url '${theaterUrl}' was not found, line number ${lineIndex + 1}.`)
-      this.theaterId = -1
-    }
-    else {
-      this.theaterId = theaters.indexOf(theater)
-    }
+    this.theaterId = outputData.getTheaterIndex(line.theaterUrl)
 
     this.setFlag(ShowingFlags.SpecialShowing, line.version.includes("Særvisning"))
 
