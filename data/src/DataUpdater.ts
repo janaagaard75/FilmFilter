@@ -55,17 +55,12 @@ export class DataUpdater {
     const showingLines = DataUpdater.parseLines<ShowingLine>(typedJsonls, "showings")
     const theaterLines = DataUpdater.parseLines<TheaterLine>(typedJsonls, "theaters")
 
-    const movies = movieLines.map(line => new Movie(line))
-    const theaters = theaterLines.map(line => new Theater(line))
-    const showings = showingLines.map((line, index) => new Showing(line, index, movies, theaters))
+    const data = new OutputData()
+    data.movies = movieLines.map(line => new Movie(line))
+    data.theaters = theaterLines.map(line => new Theater(line))
+    data.showings = showingLines.map((line, index) => new Showing(line, index, data.movies, data.theaters))
 
     // TODO: Add some code that filters out movies that aren't associated with any showings. This is pretty complicated since the showings currently point to indexes in the movies array.
-
-    const data: OutputData = {
-      movies: movies,
-      showings: showings,
-      theaters: theaters
-    }
 
     return data
   }
