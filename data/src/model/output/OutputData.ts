@@ -1,9 +1,24 @@
 import { Movie } from "./Movie"
+import { MovieLine } from "../input/MovieLine"
 import { Showing } from "./Showing"
+import { ShowingLine } from "../input/ShowingLine"
 import { Theater } from "./Theater"
+import { TheaterLine } from "../input/TheaterLine"
 
-export interface OutputData {
-  movies: Array<Movie>
-  showings: Array<Showing>
-  theaters: Array<Theater>
+export class OutputData {
+  constructor(
+    movieLines: Array<MovieLine>,
+    showingLines: Array<ShowingLine>,
+    theaterLines: Array<TheaterLine>
+  ) {
+    this.movies = movieLines.map(line => new Movie(line))
+    this.theaters = theaterLines.map(line => new Theater(line))
+
+    // Mappaing showings last, since they depend on movies and theaters.
+    this.showings = showingLines.map((line, index) => new Showing(line, index, this.movies, this.theaters))
+  }
+
+  public movies: Array<Movie>
+  public showings: Array<Showing>
+  public theaters: Array<Theater>
 }
