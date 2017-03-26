@@ -58,12 +58,7 @@ export class Showing {
   public readonly theaterId: number
 
   private addMovieWithoutUrl(movies: Array<Movie>, movieTitle: string): number {
-    const newMovie = new Movie({
-      danishTitle: "",
-      movieUrl: "",
-      originalTitle: movieTitle,
-      posterUrl: "http://cdn01.kino.dk/sites/default/files/imagecache/k_poster_small/imagefield_default_images/movie-default-poster.jpg"
-    })
+    const newMovie = new Movie(movieTitle)
     movies.push(newMovie)
     const movieId = movies.length - 1
     return movieId
