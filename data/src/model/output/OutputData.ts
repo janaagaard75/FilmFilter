@@ -4,6 +4,7 @@ import { Showing } from "./Showing"
 import { ShowingLine } from "../input/ShowingLine"
 import { Theater } from "./Theater"
 import { TheaterLine } from "../input/TheaterLine"
+import { UrlUtil } from "./UrlUtil"
 
 export class OutputData {
   constructor(
@@ -32,6 +33,31 @@ export class OutputData {
     movies.push(newMovie)
     const movieId = movies.length - 1
     return movieId
+  }
+
+  public findMovie(movieUrlWithPrefix: string): number {
+    const movieUrl = UrlUtil.removeStandardPrefix(movieUrlWithPrefix)
+    const movie = this.movies.find(m => m.movieUrl === movieUrl)
+
+    if (movie === undefined) {
+      return -1
+    }
+
+    const movieId = this.movies.indexOf(movie)
+    return movieId
+  }
+
+  public findTheater(theaterUrlWithPrefix: string, showingLineIndex: number): number {
+    const theaterUrl = UrlUtil.removeStandardPrefix(theaterUrlWithPrefix)
+    const theater = this.theaters.find(t => t.theatherUrl === theaterUrl)
+
+    if (theater === undefined) {
+      console.error(`The theater with url '${theaterUrl}' was not found. Line number ${showingLineIndex + 1} in showings.jsonl.`)
+      return -1
+    }
+
+    const theaterId = this.theaters.indexOf(theater)
+    return theaterId
   }
 
   private setMovies(movieLines: Array<MovieLine>): void {

@@ -13,14 +13,7 @@ export class Showing {
       this.movieId = outputData.addMovieWithoutUrl(outputData.movies, line.movieTitle)
     }
     else {
-      const movieUrl = UrlUtil.removeStandardPrefix(line.movieUrl)
-      const movie = outputData.movies.find(m => m.movieUrl === movieUrl)
-      if (movie === undefined) {
-        this.movieId = -1
-      }
-      else {
-        this.movieId = outputData.movies.indexOf(movie)
-      }
+      this.movieId = outputData.findMovie(line.movieUrl)
     }
 
     this.seatingInfo = line.seatingInfo
@@ -29,15 +22,7 @@ export class Showing {
 
     this.start = line.start
 
-    const theaterUrl = UrlUtil.removeStandardPrefix(line.theaterUrl)
-    const theater = outputData.theaters.find(t => t.theatherUrl === theaterUrl)
-    if (theater === undefined) {
-      console.error(`The theater with url '${theaterUrl}' was not found. Line number ${lineIndex + 1}.`)
-      this.theaterId = -1
-    }
-    else {
-      this.theaterId = outputData.theaters.indexOf(theater)
-    }
+    this.theaterId = outputData.findTheater(line.theaterUrl, lineIndex)
 
     this.setFlag(ShowingFlags.SpecialShowing, line.version.includes("Særvisning"))
 
