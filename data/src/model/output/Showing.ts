@@ -9,7 +9,7 @@ export class Showing {
     outputData: OutputData
   ) {
     if (line.movieUrl === "NO_MOVIE_URL") {
-      this.movieIndex = outputData.addMovieWithoutUrl(line.movieTitle)
+      this.movieIndex = outputData.addOrGetMovieWithoutUrl(line.movieTitle)
     }
     else {
       this.movieIndex = outputData.getMovieIndex(line.movieUrl)

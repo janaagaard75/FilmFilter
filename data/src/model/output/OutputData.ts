@@ -23,11 +23,18 @@ export class OutputData {
   public showings: Array<Showing>
   public theaters: Array<Theater>
 
-  public addMovieWithoutUrl(movieTitle: string): number {
+  public addOrGetMovieWithoutUrl(movieTitle: string): number {
+    const existingMovie = this.movies.find(m => m.movieUrl === "NO_MOVIE_URL" && m.originalTitle === movieTitle)
+
+    if (existingMovie !== undefined) {
+      const movieIndex = this.movies.indexOf(existingMovie)
+      return movieIndex
+    }
+
     const newMovie = new Movie(movieTitle)
     this.movies.push(newMovie)
-    const movieId = this.movies.length - 1
-    return movieId
+    const movieIndex = this.movies.length - 1
+    return movieIndex
   }
 
   public getMovieIndex(prefixedMovieUrl: string): number {
