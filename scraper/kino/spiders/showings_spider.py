@@ -43,7 +43,6 @@ class ShowingsSpider(scrapy.Spider):
                 request.meta['version'] = version
                 yield request
 
-
     def parse_showings_table(self, response):
         movie_title = response.meta['movieTitle']
         movie_url = response.meta['movieUrl']
@@ -66,7 +65,6 @@ class ShowingsSpider(scrapy.Spider):
                 request.meta['theaterUrl'] = theater_url
                 request.meta['version'] = version
                 yield request
-
         else:
             for showings_column in showings_table.css('.cinema-movie-dates').xpath('li'):
                 for showing_cell in showings_column.xpath('ul/li/a'):

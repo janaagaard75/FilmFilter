@@ -1,5 +1,4 @@
 import scrapy
-
 from kino.items import TheaterItem
 
 class TheatersSpider(scrapy.Spider):

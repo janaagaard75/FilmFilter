@@ -1,5 +1,4 @@
 import scrapy
-
 from kino.items import MovieItem
 
 class MoviesSpider(scrapy.Spider):
