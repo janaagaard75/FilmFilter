@@ -29,16 +29,11 @@ export class IntermediateData {
     this.movies = movieLines.map(line => new Movie(line))
   }
 
-  public addMovieWithoutUrl(movies: Array<Movie>, movieTitle: string): number {
-    const newMovie = new Movie({
-      danishTitle: "",
-      movieUrl: "",
-      originalTitle: movieTitle,
-      posterUrl: "http://cdn01.kino.dk/sites/default/files/imagecache/k_poster_small/imagefield_default_images/movie-default-poster.jpg"
-    })
+  public addMovieWithoutUrl(movies: Array<Movie>, movieTitle: string): Movie {
+    const movieId = `ID-${movies.length - 1}`
+    const newMovie = new Movie({ movieId, movieTitle })
     movies.push(newMovie)
-    const movieId = movies.length - 1
-    return movieId
+    return newMovie
   }
 
   private addShowings(showingLines: Array<ShowingLine>): void {
@@ -47,38 +42,29 @@ export class IntermediateData {
     }
 
     if (this.theaters.length === 0) {
-      throw new Error("No theaters. Remember to calls setTheaters() first.")
+      throw new Error("No theaters. Remember to call setTheaters() first.")
     }
 
-    this.showings = showingLines.map((line, index) => new Showing(line, index, this))
+    this.showings = showingLines.map(line => new Showing(line, this))
   }
 
   private addTheaters(theaterLines: Array<TheaterLine>): void {
     this.theaters = theaterLines.map(line => new Theater(line))
   }
 
-  public findMovie(movieUrlWithPrefix: string): number {
-    const movieUrl = UrlUtil.removeStandardPrefix(movieUrlWithPrefix)
-    const movie = this.movies.find(m => m.movieUrl === movieUrl)
-
-    if (movie === undefined) {
-      return -1
+  public findMovie(movieUrlWithPrefix: string): Movie | undefined {
+    if (movieUrlWithPrefix === "NO_MOVIE_URL") {
+      return undefined
     }
 
-    const movieId = this.movies.indexOf(movie)
-    return movieId
+    const movieUrl = UrlUtil.removeStandardPrefix(movieUrlWithPrefix)
+    const movie = this.movies.find(m => m.movieUrlOrId === movieUrl)
+    return movie
   }
 
-  public findTheater(theaterUrlWithPrefix: string, showingLineIndex: number): number {
+  public findTheater(theaterUrlWithPrefix: string): Theater | undefined {
     const theaterUrl = UrlUtil.removeStandardPrefix(theaterUrlWithPrefix)
     const theater = this.theaters.find(t => t.theatherUrl === theaterUrl)
-
-    if (theater === undefined) {
-      console.error(`The theater with url '${theaterUrl}' was not found. Line number ${showingLineIndex + 1} in showings.jsonl.`)
-      return -1
-    }
-
-    const theaterId = this.theaters.indexOf(theater)
-    return theaterId
+    return theater
   }
 }

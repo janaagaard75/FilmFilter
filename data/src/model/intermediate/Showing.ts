@@ -1,19 +1,23 @@
 import { IntermediateData } from "./IntermediateData"
+import { Movie } from "./Movie"
 import { ShowingFlags } from "./ShowingFlags"
 import { ShowingLine } from "../input/ShowingLine"
+import { Theater } from "./Theater"
 import { UrlUtil } from "./UrlUtil"
 
 export class Showing {
   constructor(
     line: ShowingLine,
-    lineIndex: number,
     outputData: IntermediateData
   ) {
-    if (line.movieUrl === "NO_MOVIE_URL") {
-      this.movieId = outputData.addMovieWithoutUrl(outputData.movies, line.movieTitle)
+    const movie = outputData.findMovie(line.movieUrl)
+    if (movie === undefined) {
+      if (line.movieTitle !== "") {
+        this.movie = outputData.addMovieWithoutUrl(outputData.movies, line.movieTitle)
+      }
     }
     else {
-      this.movieId = outputData.findMovie(line.movieUrl)
+      this.movie = movie
     }
 
     this.seatingInfo = line.seatingInfo
@@ -22,7 +26,7 @@ export class Showing {
 
     this.start = line.start
 
-    this.theaterId = outputData.findTheater(line.theaterUrl, lineIndex)
+    this.theater = outputData.findTheater(line.theaterUrl)
 
     this.setFlag(ShowingFlags.SpecialShowing, line.version.includes("Særvisning"))
 
@@ -34,12 +38,11 @@ export class Showing {
   }
 
   public flags: ShowingFlags
-  public readonly movieId: number
+  public readonly movie: Movie | undefined
   public readonly seatingInfo: Array<string>
-  /** Short URL, without the standard prefix. */
   public readonly showingUrl: string
   public readonly start: string
-  public readonly theaterId: number
+  public readonly theater: Theater | undefined
 
   private setFlag(flag: ShowingFlags, value: boolean): void {
     if (value) {
