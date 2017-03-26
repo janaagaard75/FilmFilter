@@ -12,16 +12,22 @@ export class OutputData {
     showingLines: Array<ShowingLine>,
     theaterLines: Array<TheaterLine>
   ) {
-    this.setMovies(movieLines)
-    this.setTheaters(theaterLines)
-    this.setShowings(showingLines)
+    this.addMovies(movieLines)
+    this.addTheaters(theaterLines)
 
-    // TODO: Add some code that filters out movies that aren't associated with any showings. This is pretty complicated since the showings currently point to indexes in the movies array.
+    // Adding showings last, because they depend on movies and theaters already being added.
+    this.addShowings(showingLines)
+
+    // TODO: Add some code that filters out movies that aren't associated with any showings. This is complicated with the current setup since the showings currently point to indexes in the movies array. One solution is to introduce a temporary data state, where there aren't used any array indexes, perform the cleanup and the only introduce the indexes as the final step?
   }
 
   public movies: Array<Movie>
   public showings: Array<Showing>
   public theaters: Array<Theater>
+
+  private addMovies(movieLines: Array<MovieLine>): void {
+    this.movies = movieLines.map(line => new Movie(line))
+  }
 
   public addMovieWithoutUrl(movies: Array<Movie>, movieTitle: string): number {
     const newMovie = new Movie({
@@ -33,6 +39,22 @@ export class OutputData {
     movies.push(newMovie)
     const movieId = movies.length - 1
     return movieId
+  }
+
+  private addShowings(showingLines: Array<ShowingLine>): void {
+    if (this.movies.length === 0) {
+      throw new Error("No movies. Remember to call setMovies() first.")
+    }
+
+    if (this.theaters.length === 0) {
+      throw new Error("No theaters. Remember to calls setTheaters() first.")
+    }
+
+    this.showings = showingLines.map((line, index) => new Showing(line, index, this))
+  }
+
+  private addTheaters(theaterLines: Array<TheaterLine>): void {
+    this.theaters = theaterLines.map(line => new Theater(line))
   }
 
   public findMovie(movieUrlWithPrefix: string): number {
@@ -58,25 +80,5 @@ export class OutputData {
 
     const theaterId = this.theaters.indexOf(theater)
     return theaterId
-  }
-
-  private setMovies(movieLines: Array<MovieLine>): void {
-    this.movies = movieLines.map(line => new Movie(line))
-  }
-
-  private setShowings(showingLines: Array<ShowingLine>): void {
-    if (this.movies.length === 0) {
-      throw new Error("No movies. Remember to call setMovies() first.")
-    }
-
-    if (this.theaters.length === 0) {
-      throw new Error("No theaters. Remember to calls setTheaters() first.")
-    }
-
-    this.showings = showingLines.map((line, index) => new Showing(line, index, this))
-  }
-
-  private setTheaters(theaterLines: Array<TheaterLine>): void {
-    this.theaters = theaterLines.map(line => new Theater(line))
   }
 }
