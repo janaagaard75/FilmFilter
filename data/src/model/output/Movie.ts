@@ -21,8 +21,10 @@ export class Movie {
   }
 
   public readonly danishTitle?: string
+  /** Short URL, without the standard prefix or an intermediate ID. */
   public readonly movieUrl?: string
   public readonly originalTitle: string
+  /** Full URL, does not start with the standard prefix. */
   public readonly posterUrl: string
 
   private static isMovieLine(x: any): x is MovieLine {
