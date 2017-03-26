@@ -1,8 +1,8 @@
-import { IntermediateMovie } from "./Movie"
+import { IntermediateMovie } from "./IntermediateMovie"
+import { IntermediateShowing } from "./IntermediateShowing"
+import { IntermediateTheater } from "./IntermediateTheater"
 import { MovieLine } from "../input/MovieLine"
-import { IntermediateShowing } from "./Showing"
 import { ShowingLine } from "../input/ShowingLine"
-import { IntermediateTheater } from "./Theater"
 import { TheaterLine } from "../input/TheaterLine"
 import { UrlUtil } from "./UrlUtil"
 

@@ -1,8 +1,8 @@
 import { IntermediateData } from "./IntermediateData"
-import { IntermediateMovie } from "./Movie"
+import { IntermediateMovie } from "./IntermediateMovie"
+import { IntermediateTheater } from "./IntermediateTheater"
 import { ShowingFlags } from "./ShowingFlags"
 import { ShowingLine } from "../input/ShowingLine"
-import { IntermediateTheater } from "./Theater"
 import { UrlUtil } from "./UrlUtil"
 
 export class IntermediateShowing {
