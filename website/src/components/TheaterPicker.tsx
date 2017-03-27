@@ -14,7 +14,7 @@ export class TheaterPicker extends Component<Props, void> {
   public render() {
     const divCssClasses = classNames(
       "col-12 col-md-6 col-lg-4",
-      "ellipsis",
+      "ellipsis no-wrap",
       {
         "selected-item": this.props.theater.selected
       }

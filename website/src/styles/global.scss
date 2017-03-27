@@ -24,6 +24,9 @@ button {
 .ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.no-wrap {
   white-space: nowrap;
 }
 
