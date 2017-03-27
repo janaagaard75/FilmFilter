@@ -1,6 +1,6 @@
 // tslint:disable no-console
-import * as express from "express"
 import * as cors from "cors"
+import * as express from "express"
 import * as LZString from "lz-string"
 
 import { DataUpdater } from "./DataUpdater"
