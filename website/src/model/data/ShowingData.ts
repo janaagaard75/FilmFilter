@@ -4,7 +4,7 @@ export interface ShowingData {
   readonly flags: ShowingFlags
   readonly movieIndex: number
   readonly seatingInfo: Array<string>
-  readonly showingUrl: string
+  readonly showingId: number
   readonly start: string
   readonly theaterIndex: number
 }

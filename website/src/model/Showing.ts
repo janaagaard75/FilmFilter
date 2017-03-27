@@ -17,7 +17,7 @@ export class Showing {
     this.freeSeats = this.getFreeSeats(data.seatingInfo)
     this.imax = Showing.getFlagValue(data, ShowingFlags.Imax)
     this.movie = store.getMovie(data.movieIndex)
-    this.showingUrl = "http://www.kino.dk/" + data.showingUrl
+    this.showingUrl = `http://www.kino.dk/ticketflow/${data.showingId}`
     this.specialShowing = Showing.getFlagValue(data, ShowingFlags.SpecialShowing)
     this.start = new ImmutableDateTime(data.start)
     this.theater = store.getTheater(data.theaterIndex)
