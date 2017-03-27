@@ -1,4 +1,8 @@
-# Filmfilter Website
+# Film Filter Website
+
+Web front end built in TypeScript using using React, MobX, and Bootstrap, compiled with Webpack.
+
+Data is cached in local storage and so are the settings.
 
 ## Set Up
 
@@ -14,9 +18,8 @@
 * Better presentation of showings.
   * If a single movie has been selected, it's not necessary to show the name of the movie in the showings list.
   * Likewise for dates and theaters.
-  * Have a call to action button with a ticket icon.
 * Possible to select a weekday in the calendar.
-* Show the month somehow in the calendar.
+* Show the month in the calendar.
 * Helpful animations.
 * Add routes to the app, so that it's possible to share links.
 * Figure out why `cross-env NODE_ENV=production` makes the production build slightly smaller.
