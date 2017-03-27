@@ -1,7 +1,6 @@
 import { OutputData } from "./OutputData"
 import { ShowingFlags } from "./ShowingFlags"
 import { ShowingLine } from "../input/ShowingLine"
-import { UrlUtil } from "./UrlUtil"
 
 export class Showing {
   constructor(
@@ -16,25 +15,24 @@ export class Showing {
     }
 
     this.seatingInfo = line.seatingInfo
-    this.showingUrl = UrlUtil.removeStandardPrefix(line.showingUrl)
+    this.showingId = Showing.getShowingId(line.showingUrl)
     this.start = line.start
     this.theaterIndex = outputData.getTheaterIndex(line.theaterUrl)
 
     this.setFlag(ShowingFlags.SpecialShowing, line.version.includes("Særvisning"))
-
     this.setFlag(ShowingFlags.Dubbed, line.version.includes("dansk tale"))
-
     this.setFlag(ShowingFlags.Imax, line.version.includes("IMAX 2D") || line.version.includes("IMAX 3D"))
-
     this.setFlag(ShowingFlags.ThreeD, line.version.includes("3D") || line.version.includes("IMAX 3D"))
   }
 
   public flags: ShowingFlags
+  /** Index in the movies array. May be -1. */
   public readonly movieIndex: number
   public readonly seatingInfo: Array<string>
-  /** Short URL, without the standard prefix or an intermediate ID. */
-  public readonly showingUrl: string
+  /** ID in the URL to the showing, that is http://www.kino.dk/ticketflow/<showingId>. */
+  public readonly showingId: number
   public readonly start: string
+  /** Index in the theaters array. May be -1. */
   public readonly theaterIndex: number
 
   private setFlag(flag: ShowingFlags, value: boolean): void {
@@ -44,5 +42,11 @@ export class Showing {
     else {
       this.flags &= ~flag
     }
+  }
+
+  private static getShowingId(showingUrl: string): number {
+    const showingUrlPrefix = "http://www.kino.dk/ticketflow/"
+    const showingId = parseInt(showingUrl.slice(showingUrlPrefix.length), 10)
+    return showingId
   }
 }
