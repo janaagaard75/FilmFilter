@@ -22,5 +22,6 @@ git push heroku `git subtree split --prefix data master`:master --force
 
 ## TODOs
 
+* Turn on optimization in production build again (-p switch on Webpack). It seems that UglifyJS #harmony currently has issues.
 * Add support for 'babybio' showing type. This has to be added in the scraper first.
 * Inveatigate why the Webpack build is so much larger than compiling with tsc.
