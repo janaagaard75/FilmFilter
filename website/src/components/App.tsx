@@ -3,6 +3,7 @@ import * as React from "react"
 import { Component } from "react"
 import { observer } from "mobx-react"
 
+import { AppState } from "../model/AppState"
 import { Arrays } from "../utilities/Arrays"
 import { DatesPicker } from "./DatesPicker"
 import { MatchingShowings } from "./MatchingShowings"
@@ -193,13 +194,19 @@ export class App extends Component<Props, State> {
         <div className="d-flex">
           <h1 className="mr-auto">Filmfilter</h1>
           <span className="align-self-center">
-            {this.props.store.fetchingAndParsing
-              ? <span className="form-control-static mr-3"><i className="fa fa-spinner fa-pulse"/></span>
+            {this.props.store.state !== AppState.Idle
+              ? <span className="form-control-static mr-3">{this.props.store.state} <i className="fa fa-spinner fa-pulse"/></span>
               : ""
             }
           </span>
           <span className="align-self-center">
-            <button className="btn btn-secondary btn-sm" onClick={() => this.props.store.fetchAndUpdateData()}disabled={this.props.store.fetchingAndParsing}>Opdater</button>
+            <button
+              className="btn btn-secondary btn-sm"
+              onClick={() => this.props.store.fetchAndUpdateData()}
+              disabled={this.props.store.state !== AppState.Idle}
+            >
+              Opdater
+            </button>
           </span>
         </div>
         <div className="row">

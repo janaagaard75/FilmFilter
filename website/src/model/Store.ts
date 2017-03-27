@@ -2,6 +2,7 @@ import { autorun } from "mobx"
 import { computed } from "mobx"
 import { observable } from "mobx"
 
+import { AppState } from "./AppState"
 import { Comparer } from "../utilities/Comparer"
 import { Data } from "./data/Data"
 import { DataFetcher } from "./DataFetcher"
@@ -18,11 +19,11 @@ import { Theater } from "./Theater"
 
 export class Store {
   @observable public dates: Array<SelectableDate> = []
-  @observable public fetchingAndParsing: boolean = false
   public readonly filters = new Filters()
   @observable private movieNameFilter: string = ""
   @observable private movies: Array<Movie> = []
   @observable private showings: Array<Showing> = []
+  @observable public state: AppState = AppState.Idle
   @observable private theaters: Array<Theater> = []
 
   @computed
@@ -96,18 +97,19 @@ export class Store {
   }
 
   public async fetchAndUpdateData(): Promise<void> {
-    this.fetchingAndParsing = true
-
+    this.state = AppState.FetchingData
     const fetchedData = await DataFetcher.fetchData()
     if (fetchedData === undefined) {
       throw new Error("Could not fetch data.")
     }
 
+    this.state = AppState.SavingData
     DataStorer.saveData(fetchedData)
+
     this.setData(fetchedData)
     this.loadSettings()
 
-    this.fetchingAndParsing = false
+    this.state = AppState.Idle
   }
 
   public getMovie(movieId: number): Movie {
@@ -149,6 +151,7 @@ export class Store {
   }
 
   public initializeData(): void {
+    this.state = AppState.LoadingData
     const storedData = DataStorer.loadData()
     if (DataStorer.dataIsOkay(storedData)) {
       this.setData(storedData.data)
@@ -157,9 +160,12 @@ export class Store {
     else {
       this.fetchAndUpdateData()
     }
+
+    this.state = AppState.Idle
   }
 
   private loadSettings() {
+    this.state = AppState.LoadingSettings
     Logger.log("Loading settings.")
 
     const settingsString = localStorage.getItem("settings")
@@ -167,6 +173,7 @@ export class Store {
     // tslint:disable-next-line:no-null-keyword
     if (settingsString === null) {
       Logger.log("No settings.")
+      this.state = AppState.Idle
       return
     }
 
@@ -185,13 +192,16 @@ export class Store {
         theater.selected = true
       }
     }
+
+    this.state = AppState.Idle
   }
 
   private saveSettings() {
-    if (this.fetchingAndParsing) {
+    if (this.state === AppState.FetchingData || this.state === AppState.ParsingData) {
       return
     }
 
+    this.state = AppState.SavingSettings
     Logger.log("Saving settings.")
 
     const settings: Settings = {
@@ -202,9 +212,13 @@ export class Store {
 
     const settingsString = JSON.stringify(settings)
     localStorage.setItem("settings", settingsString)
+
+    this.state = AppState.Idle
   }
 
   public setData(data: Data) {
+    this.state = AppState.ParsingData
+
     // TODO: Consider using a worker thread to parse this in a separate thread.
     this.dates = []
     this.movies = data.movies.map(movieData => new Movie(movieData))
@@ -223,6 +237,8 @@ export class Store {
     this.addMissingDates()
     this.addStartAndEndDates()
     this.sortDates()
+
+    this.state = AppState.Idle
   }
 
   public setMovieNameFilter(filter: string) {
