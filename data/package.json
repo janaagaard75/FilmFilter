@@ -13,7 +13,7 @@
     "build-and-start": "yarn run build && yarn run start-prod-server",
     "build-using-tsc": "rimraf dist && tsc",
     "build": "rimraf dist && webpack",
-    "deploy": "yarn run build && cd .. && git subtree push --prefix data heroku master && cd data",
+    "deploy": "cd .. && git subtree push --prefix data heroku master && cd data",
     "lint": "tslint src/**/*.ts",
     "start-client": "rimraf output && mkdirp output && wget http://localhost:5000/ --destination output/data.json && json-pretty-print output/data.json output/data-prettified.json",
     "start-dev-server": "ts-node src/main.ts",
