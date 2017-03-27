@@ -4,6 +4,5 @@ export enum AppState {
   LoadingData,
   LoadingSettings,
   ParsingData,
-  SavingData,
-  SavingSettings
+  SavingData
 }

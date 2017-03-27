@@ -201,7 +201,6 @@ export class Store {
       return
     }
 
-    this.state = AppState.SavingSettings
     Logger.log("Saving settings.")
 
     const settings: Settings = {
@@ -212,8 +211,6 @@ export class Store {
 
     const settingsString = JSON.stringify(settings)
     localStorage.setItem("settings", settingsString)
-
-    this.state = AppState.Idle
   }
 
   public setData(data: Data) {
