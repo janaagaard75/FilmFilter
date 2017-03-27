@@ -1,6 +1,7 @@
 // tslint:disable no-console
 import * as express from "express"
 import * as cors from "cors"
+import * as LZString from "lz-string"
 
 import { DataUpdater } from "./DataUpdater"
 
@@ -22,6 +23,18 @@ app.get("/", async (request, response) => {
   const data = await DataUpdater.getData(apiKey, host, jobId)
   console.info("Done fetching and parsing. Responding.")
   response.json(data)
+})
+
+// tslint:disable-next-line no-unused-variable
+app.get("/compressed", async (request, response) => {
+  console.info("Fetching, parting and compressing data.")
+
+  const data = await DataUpdater.getData(apiKey, host, jobId)
+  const compressedData = LZString.compressToBase64(JSON.stringify(data))
+  console.info("Done fetching, parsing and compressing. Responding.")
+  response.setHeader("Content-Transfer-Encoding", "base64")
+  response.contentType("text/plain")
+  response.send(compressedData)
 })
 
 app.listen(app.get("port"), () => {
