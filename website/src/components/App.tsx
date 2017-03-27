@@ -188,6 +188,31 @@ export class App extends Component<Props, State> {
     }
   }
 
+  private static getStateDescription(state: AppState) {
+    switch (state) {
+      case AppState.FetchingData:
+        return "Fetching data"
+
+      case AppState.Idle:
+        return "Idle"
+
+      case AppState.LoadingData:
+        return "Loading data"
+
+      case AppState.LoadingSettings:
+        return "Loading settings"
+
+      case AppState.ParsingData:
+        return "Parsing data"
+
+      case AppState.SavingData:
+        return "Saving data"
+
+      default:
+        throw new Error(`'${state}' is not a supported state.`)
+    }
+  }
+
   public render() {
     return (
       <div className="container-fluid">
@@ -195,7 +220,7 @@ export class App extends Component<Props, State> {
           <h1 className="mr-auto">Filmfilter</h1>
           <span className="align-self-center">
             {this.props.store.state !== AppState.Idle
-              ? <span className="form-control-static mr-3">{this.props.store.state} <i className="fa fa-spinner fa-pulse"/></span>
+              ? <span className="form-control-static mr-3">{App.getStateDescription(this.props.store.state)} <i className="fa fa-spinner fa-pulse"/></span>
               : ""
             }
           </span>
