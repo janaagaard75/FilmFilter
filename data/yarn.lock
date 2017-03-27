@@ -2336,7 +2336,7 @@ tslint-eslint-rules@3.5.1:
   dependencies:
     doctrine "^0.7.2"
 
-tslint-react@^2.5.0:
+tslint-react@2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/tslint-react/-/tslint-react-2.5.0.tgz#94cd6143f6ae825c47f242c5146fc89caeadeae2"
 
