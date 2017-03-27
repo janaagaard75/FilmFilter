@@ -22,6 +22,7 @@
   "dependencies": {
     "cors": "2.8.1",
     "express": "4.15.2",
+    "lz-string": "git+https://github.com/janaagaard75/lz-string",
     "node-fetch": "1.6.3",
     "ts-node": "3.0.2"
   },

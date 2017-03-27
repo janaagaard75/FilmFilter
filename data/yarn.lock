@@ -1429,6 +1429,10 @@ lru-cache@^4.0.0:
     pseudomap "^1.0.1"
     yallist "^2.0.0"
 
+"lz-string@git+https://github.com/janaagaard75/lz-string":
+  version "1.4.6"
+  resolved "git+https://github.com/janaagaard75/lz-string#086a853fc97eb53d8ff6460081adf7457998c51a"
+
 make-error@^1.1.1:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/make-error/-/make-error-1.2.3.tgz#6c4402df732e0977ac6faf754a5074b3d2b1d19d"
