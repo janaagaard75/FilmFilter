@@ -12,12 +12,19 @@ interface Props {
 
 export class TimePicker extends Component<Props, void> {
   private handleChangeFrom(formEvent: ChangeEvent<HTMLSelectElement>) {
-    // TODO: Consider trying to be smart about the value of 'to' when 'from' is updated, and vice versa.
     this.props.startInterval.from = parseInt(formEvent.currentTarget.value, 10)
+
+    if (this.props.startInterval.to <= this.props.startInterval.from) {
+      this.props.startInterval.to = this.props.startInterval.from + 1
+    }
   }
 
   private handleChangeTo(formEvent: ChangeEvent<HTMLSelectElement>) {
     this.props.startInterval.to = parseInt(formEvent.currentTarget.value, 10)
+
+    if (this.props.startInterval.from >= this.props.startInterval.to) {
+      this.props.startInterval.from = this.props.startInterval.to - 1
+    }
   }
 
   private resetInterval() {
