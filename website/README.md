@@ -13,11 +13,14 @@ Data is cached in local storage and so are the settings.
 
 * Filtering one category should update the others.
   * Example: How do I easily see that the movie Logan isn't shown in 3D anywhere?
-* Add a reset button.
-* Figure out why the settings aren't persisted as they should.
+  * Add a reset button.
+* Figure out why the settings aren't always persisted as they should.
+* Prettier and better
 * Possible to select a weekday in the calendar.
 * Show the month in the calendar.
-* Helpful animations.
+* Helpful animations?
 * Add routes to the app, so that it's possible to share links.
 * Figure out why `cross-env NODE_ENV=production` makes the production build slightly smaller.
-* The spinner has disappeared when data is fetched automatically.
+* The spinner has disappeared when data is being fetched automatically. Has this got something to do with the methods being asynchonous?
+* Links to trailers.
+* IMDb and Rotten Tomatoes score? https://github.com/worr/node-imdb-api
