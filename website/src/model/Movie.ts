@@ -34,6 +34,12 @@ export class Movie {
     posterUrl: ""
   })
 
+  public get key(): string {
+    // TODO: Should this value be cached?
+    const key = this.movieUrl + this.originalTitle
+    return key
+  }
+
   public addShowing(showing: Showing): void {
     this.showings.push(showing)
   }

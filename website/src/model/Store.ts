@@ -197,8 +197,8 @@ export class Store {
   }
 
   private saveSettings() {
-    // TODO: Should this test for AppState !== Idle? And would that allow the reintroduction of the SavingSettings state?
-    if (this.state === AppState.FetchingData || this.state === AppState.ParsingData) {
+    if (this.state !== AppState.Idle) {
+      Logger.log(`Not saving settings since the app state is ${AppState[this.state]}.`)
       return
     }
 

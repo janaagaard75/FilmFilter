@@ -7,6 +7,8 @@ import { ShowingRow } from "./ShowingRow"
 
 interface Props {
   showings: Array<Showing>
+  showMovieColumn: boolean
+  showTheaterColumn: boolean
 }
 
 @observer
@@ -16,14 +18,25 @@ export class ShowingsTable extends Component<Props, void> {
       <table className="table table-sm">
         <thead>
           <tr>
-            <th>Film</th>
-            <th>Biograf</th>
+            {this.props.showMovieColumn
+              ? <th>Film</th>
+              : undefined
+            }
+            {this.props.showTheaterColumn
+              ? <th>Biograf</th>
+              : undefined
+            }
             <th>Tidspunkt</th>
           </tr>
         </thead>
         <tbody>
           {this.props.showings.map(showing =>
-            <ShowingRow key={showing.showingUrl} showing={showing}/>
+            <ShowingRow
+              key={showing.showingUrl}
+              showing={showing}
+              showMovieColumn={this.props.showMovieColumn}
+              showTheaterColumn={this.props.showTheaterColumn}
+            />
           )}
         </tbody>
       </table>

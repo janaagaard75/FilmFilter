@@ -29,7 +29,7 @@ export class TheatersPicker extends Component<Props, void> {
         {bothTypes ? (
           <hr/>
         ) : (
-            ""
+            undefined
         )}
         <div className="row pl-3 pr-3">
           {notFavoritedTheaters.map(theater =>

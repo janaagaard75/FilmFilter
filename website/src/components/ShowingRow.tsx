@@ -6,6 +6,8 @@ import { Showing } from "../model/Showing"
 
 interface Props {
   showing: Showing
+  showMovieColumn: boolean
+  showTheaterColumn: boolean
 }
 
 @observer
@@ -15,12 +17,14 @@ export class ShowingRow extends Component<Props, void> {
 
     return (
       <tr>
-        <td>
-          {this.props.showing.movie.originalTitle}
-        </td>
-        <td>
-          {this.props.showing.theater.name}
-        </td>
+        {this.props.showMovieColumn
+          ? <td>{this.props.showing.movie.originalTitle}</td>
+          : undefined
+        }
+        {this.props.showTheaterColumn
+          ? <td>{this.props.showing.theater.name}</td>
+          : undefined
+        }
         <td>
           <a href={this.props.showing.showingUrl}>
             <span className="fa fa-ticket"/> {startLabel}

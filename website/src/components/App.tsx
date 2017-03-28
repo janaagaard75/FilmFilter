@@ -221,7 +221,7 @@ export class App extends Component<Props, State> {
           <span className="align-self-center">
             {this.props.store.state !== AppState.Idle
               ? <span className="form-control-static mr-3">{App.getStateDescription(this.props.store.state)} <i className="fa fa-spinner fa-pulse"/></span>
-              : ""
+              : undefined
             }
           </span>
           <span className="align-self-center">
@@ -245,7 +245,11 @@ export class App extends Component<Props, State> {
             {this.getTabContent()}
           </div>
           <div className="col-xl-6 pull-xl-6">
-            <MatchingShowings matchingShowings={this.props.store.matchingShowings} />
+            <MatchingShowings
+              matchingShowings={this.props.store.matchingShowings}
+              selectedMovies={this.props.store.selectedMovies}
+              selectedTheaters={this.props.store.selectedTheaters}
+            />
           </div>
         </div>
       </div>

@@ -22,7 +22,7 @@ export class MoviesPicker extends Component<Props, void> {
     this.props.setMovieNameFilter(filter)
   }
 
-  private getMovieCssClass(index: number) {
+  private getMovieCssClass(index: number): string {
     // Only show the 25th movie in LG screen size.
     return index === 24
       ? "hidden-md-down hidden-xl-up"
@@ -43,7 +43,7 @@ export class MoviesPicker extends Component<Props, void> {
         <div className="row pl-3 pr-3">
           {firstMovies.map((movie, index) =>
             <MoviePicker
-              key={movie.movieUrl}
+              key={movie.key}
               cssClass={this.getMovieCssClass(index)}
               movie={movie}
             />
