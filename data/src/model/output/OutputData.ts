@@ -51,7 +51,7 @@ export class OutputData {
 
   public getTheaterIndex(prefixedTheaterUrl: string): number {
     const theaterUrl = UrlUtil.removeStandardPrefix(prefixedTheaterUrl)
-    const theater = this.theaters.find(t => t.theatherUrl === theaterUrl)
+    const theater = this.theaters.find(t => t.theaterUrl === theaterUrl)
 
     if (theater === undefined) {
       return -1
