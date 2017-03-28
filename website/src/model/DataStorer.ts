@@ -38,6 +38,8 @@ export class DataStorer {
   }
 
   public static saveData(data: Data) {
+    Logger.log("Saving data.")
+
     const storedData: TimestampedData = {
       buildTimestamp: __BUILD_TIMESTAMP__,
       data: data,
