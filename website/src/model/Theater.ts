@@ -7,7 +7,7 @@ export class Theater {
     this.favorited = false
     this.name = Theater.cleanUpTheaterName(data.name)
     this.selected = false
-    this.theaterId = data.theatherUrl.replace("biografer/", "")
+    this.theaterId = data.theaterUrl.replace("biografer/", "")
   }
 
   public readonly name: string
@@ -23,7 +23,7 @@ export class Theater {
 
   public static readonly UndefinedTheater = new Theater({
     name: "",
-    theatherUrl: ""
+    theaterUrl: ""
   })
 
   private static cleanUpTheaterName(originalName: string) {
