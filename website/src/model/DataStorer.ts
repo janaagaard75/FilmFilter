@@ -52,6 +52,14 @@ export class DataStorer {
 
   private static isCorrectVersion(storedBuildTimestamp: number) {
     const timestampMatches = storedBuildTimestamp === __BUILD_TIMESTAMP__
+
+    if (timestampMatches) {
+      Logger.log("Timestamp on stored data matches.")
+    }
+    else {
+      Logger.log("Timestamp on stored data does not match.")
+    }
+
     return timestampMatches
   }
 
@@ -66,6 +74,14 @@ export class DataStorer {
     const millisecondsIn24Hours = 24 * 60 * 60 * 1000
     const millisecondsSinceLatestFetch = latestDataCrawl.valueOf() - storeTimestamp
     const isRecentEnough = millisecondsSinceLatestFetch < millisecondsIn24Hours
+
+    if (isRecentEnough) {
+      Logger.log("The stored data is recent enough.")
+    }
+    else {
+      Logger.log("The stored data is outdated.")
+    }
+
     return isRecentEnough
   }
 }
