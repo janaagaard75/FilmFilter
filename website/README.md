@@ -15,11 +15,9 @@ Data is cached in local storage and so are the settings.
   * Example: How do I easily see that the movie Logan isn't shown in 3D anywhere?
 * Add a reset button.
 * Figure out why the settings aren't persisted as they should.
-* Better presentation of showings.
-  * If a single movie has been selected, it's not necessary to show the name of the movie in the showings list.
-  * Likewise for dates and theaters.
 * Possible to select a weekday in the calendar.
 * Show the month in the calendar.
 * Helpful animations.
 * Add routes to the app, so that it's possible to share links.
 * Figure out why `cross-env NODE_ENV=production` makes the production build slightly smaller.
+* The spinner has disappeared when data is fetched automatically.
