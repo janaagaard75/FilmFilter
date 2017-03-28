@@ -54,10 +54,10 @@ export class DataStorer {
     const timestampMatches = storedBuildTimestamp === __BUILD_TIMESTAMP__
 
     if (timestampMatches) {
-      Logger.log("Timestamp on stored data matches.")
+      Logger.log("Build timestamp on stored data matches.")
     }
     else {
-      Logger.log("Timestamp on stored data does not match.")
+      Logger.log("Build timestamp on stored data does not match.")
     }
 
     return timestampMatches
