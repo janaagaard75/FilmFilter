@@ -26,6 +26,7 @@ export class Movie {
   public readonly posterUrl: string
   public readonly showings: Array<Showing>
 
+  private memoizedKey: string | undefined = undefined
   private readonly searchableTitle: string
 
   public static UndefinedMovie: Movie = new Movie({
@@ -35,9 +36,11 @@ export class Movie {
   })
 
   public get key(): string {
-    // TODO: Should this value be cached?
-    const key = this.movieUrl + this.originalTitle
-    return key
+    if (this.memoizedKey === undefined) {
+      this.memoizedKey = this.movieUrl + this.originalTitle
+    }
+
+    return this.memoizedKey
   }
 
   public addShowing(showing: Showing): void {
