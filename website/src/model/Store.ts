@@ -104,7 +104,7 @@ export class Store {
     }
 
     this.state = AppState.SavingData
-    DataStorer.saveData(fetchedData)
+    await DataStorer.saveData(fetchedData)
 
     this.setData(fetchedData)
     this.loadSettings()

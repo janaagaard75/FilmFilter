@@ -20,7 +20,7 @@ export class DataStorer {
   }
 
   public static loadData(): TimestampedData | undefined {
-    const compressedData = localStorage.getItem(this.dataKey)
+    const compressedData = localStorage.getItem(DataStorer.dataKey)
     // tslint:disable-next-line:no-null-keyword
     if (compressedData === null) {
       return undefined
@@ -37,19 +37,24 @@ export class DataStorer {
     }
   }
 
-  public static saveData(data: Data) {
+  public static saveData(data: Data): Promise<void> {
     Logger.log("Saving data.")
 
-    const storedData: TimestampedData = {
-      buildTimestamp: __BUILD_TIMESTAMP__,
-      data: data,
-      storeTimestamp: new Date().valueOf()
-    }
+    const promise = new Promise<void>(resolve => {
+      const storedData: TimestampedData = {
+        buildTimestamp: __BUILD_TIMESTAMP__,
+        data: data,
+        storeTimestamp: new Date().valueOf()
+      }
 
-    const dataString = JSON.stringify(storedData)
-    const compressedData = LZString.compressToUTF16(dataString)
-    Logger.log(`Saving data. Size: ${dataString.length}, compressed: ${compressedData.length}.`)
-    localStorage.setItem(this.dataKey, compressedData)
+      const dataString = JSON.stringify(storedData)
+      const compressedData = LZString.compressToUTF16(dataString)
+      Logger.log(`Saving data. Size: ${dataString.length}, compressed: ${compressedData.length}.`)
+      localStorage.setItem(DataStorer.dataKey, compressedData)
+      resolve(undefined)
+    })
+
+    return promise
   }
 
   private static isCorrectVersion(storedBuildTimestamp: number) {
