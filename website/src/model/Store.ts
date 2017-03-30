@@ -278,6 +278,7 @@ export class Store {
 
     Logger.log("Saving settings.")
 
+    // TODO: Create a Settings class that will handle the persisted settings.
     const settings: Settings = {
       favoritedTheaterIds: this.theaters.filter(theater => theater.favorited).map(theater => theater.theaterId),
       filters: this.filters,
