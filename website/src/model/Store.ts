@@ -67,6 +67,32 @@ export class Store {
   }
 
   @computed
+  public get stateDescription() {
+    switch (this.state) {
+      case AppState.FetchingData:
+        return "Fetching data"
+
+      case AppState.Idle:
+        return "Idle"
+
+      case AppState.LoadingData:
+        return "Loading data"
+
+      case AppState.LoadingSettings:
+        return "Loading settings"
+
+      case AppState.ParsingData:
+        return "Parsing data"
+
+      case AppState.SavingData:
+        return "Saving data"
+
+      default:
+        return `'${this.state}' is an unknown state.`
+    }
+  }
+
+  @computed
   public get theatersSortedByName(): Array<Theater> {
     const sortedTheaters = this.theaters.sort(Comparer.compareByName)
     return sortedTheaters

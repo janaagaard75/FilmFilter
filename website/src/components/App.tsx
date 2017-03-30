@@ -1,7 +1,6 @@
 import * as classNames from "classnames"
 import * as React from "react"
 import { Component } from "react"
-import { computed } from "mobx/lib/mobx"
 import { observer } from "mobx-react"
 
 import { AppState } from "../model/AppState"
@@ -189,32 +188,6 @@ export class App extends Component<Props, State> {
     }
   }
 
-  @computed
-  private get stateDescription() {
-    switch (this.props.store.state) {
-      case AppState.FetchingData:
-        return "Fetching data"
-
-      case AppState.Idle:
-        return "Idle"
-
-      case AppState.LoadingData:
-        return "Loading data"
-
-      case AppState.LoadingSettings:
-        return "Loading settings"
-
-      case AppState.ParsingData:
-        return "Parsing data"
-
-      case AppState.SavingData:
-        return "Saving data"
-
-      default:
-        throw new Error(`'${this.props.store.state}' is not a supported state.`)
-    }
-  }
-
   public render() {
     return (
       <div className="container-fluid">
@@ -222,7 +195,7 @@ export class App extends Component<Props, State> {
           <h1 className="mr-auto">Filmfilter</h1>
           <span className="align-self-center">
             {this.props.store.state !== AppState.Idle
-              ? <span className="form-control-static mr-3">{this.stateDescription} <i className="fa fa-spinner fa-pulse"/></span>
+              ? <span className="form-control-static mr-3">{this.props.store.stateDescription} <i className="fa fa-spinner fa-pulse"/></span>
               : undefined
             }
           </span>
