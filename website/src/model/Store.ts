@@ -1,6 +1,6 @@
-import { autorun } from "mobx"
 import { computed } from "mobx"
 import { observable } from "mobx"
+import { reaction } from "mobx"
 
 import { AppState } from "./AppState"
 import { Comparer } from "../utilities/Comparer"
@@ -173,7 +173,55 @@ export class Store {
   }
 
   public initialize() {
-    autorun(() => this.saveSettings())
+    reaction(
+      () => this.filters.dimensions.threeD,
+      () => this.saveSettings()
+    )
+
+    reaction(
+      () => this.filters.dimensions.twoD,
+      () => this.saveSettings()
+    )
+
+    reaction(
+      () => this.filters.filmType.imax,
+      () => this.saveSettings()
+    )
+
+    reaction(
+      () => this.filters.filmType.standardFilm,
+      () => this.saveSettings()
+    )
+
+    reaction(
+      () => this.filters.language.dubbedToDanish,
+      () => this.saveSettings()
+    )
+
+    reaction(
+      () => this.filters.language.originalLanguage,
+      () => this.saveSettings()
+    )
+
+    reaction(
+      () => this.filters.showingType.normalShowings,
+      () => this.saveSettings()
+    )
+
+    reaction(
+      () => this.filters.showingType.specialShowings,
+      () => this.saveSettings()
+    )
+
+    reaction(
+      () => this.theaters.filter(theater => theater.favorited),
+      () => this.saveSettings()
+    )
+
+    reaction(
+      () => this.theaters.filter(theater => theater.selected),
+      () => this.saveSettings()
+    )
   }
 
   public initializeData(): void {
