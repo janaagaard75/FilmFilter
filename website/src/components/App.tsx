@@ -5,6 +5,7 @@ import { observer } from "mobx-react"
 
 import { AppState } from "../model/AppState"
 import { Arrays } from "../utilities/Arrays"
+import { CurrentState } from "./CurrentState"
 import { DatesPicker } from "./DatesPicker"
 import { MatchingShowings } from "./MatchingShowings"
 import { MoviesPicker } from "./MoviesPicker"
@@ -194,10 +195,7 @@ export class App extends Component<Props, State> {
         <div className="d-flex">
           <h1 className="mr-auto">Filmfilter</h1>
           <span className="align-self-center">
-            {this.props.store.state !== AppState.Idle
-              ? <span className="form-control-static mr-3">{this.props.store.stateDescription} <i className="fa fa-spinner fa-pulse"/></span>
-              : undefined
-            }
+            <CurrentState store={this.props.store}/>
           </span>
           <span className="align-self-center">
             <button
