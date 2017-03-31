@@ -272,7 +272,8 @@ export class Store {
 
   private saveSettings() {
     if (this.state !== AppState.Idle) {
-      Logger.log(`Not saving settings since the app state is ${AppState[this.state]}.`)
+      // Log statement disabled since it was too chatty.
+      // Logger.log(`Not saving settings since the app state is ${AppState[this.state]}.`)
       return
     }
 
