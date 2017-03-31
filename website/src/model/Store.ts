@@ -239,8 +239,8 @@ export class Store {
   }
 
   private loadSettings() {
-    this.state = AppState.LoadingSettings
     Logger.log("Loading settings.")
+    this.state = AppState.LoadingSettings
 
     const settingsString = localStorage.getItem("settings")
 
@@ -290,6 +290,7 @@ export class Store {
   }
 
   public setData(data: Data) {
+    Logger.log("Parsing and setting data.")
     this.state = AppState.ParsingData
 
     // TODO: Consider using a worker thread to parse this in a separate thread.

@@ -20,6 +20,7 @@ export class DataStorer {
   }
 
   public static loadData(): TimestampedData | undefined {
+    Logger.log("Loading data from local storage.")
     const compressedData = localStorage.getItem(DataStorer.dataKey)
     // tslint:disable-next-line:no-null-keyword
     if (compressedData === null) {
@@ -27,9 +28,10 @@ export class DataStorer {
     }
 
     const dataString = LZString.decompressFromUTF16(compressedData)
-    Logger.log(`Loading data. Size: ${dataString.length}, compressed: ${compressedData.length}.`)
+    Logger.log(`Data size loaded: ${compressedData.length}, decompressed: ${dataString.length}.`)
 
     try {
+      Logger.log("Parsing JSON string.")
       return JSON.parse(dataString) as TimestampedData
     }
     catch (error) {
@@ -38,8 +40,9 @@ export class DataStorer {
   }
 
   public static saveData(data: Data): Promise<void> {
-    Logger.log("Saving data.")
+    Logger.log("Saving data to local storage. Compressing first.")
 
+    // TODO: This promise probably doesn't do anyting, since it's still single threaded code.
     const promise = new Promise<void>(resolve => {
       const storedData: TimestampedData = {
         buildTimestamp: __BUILD_TIMESTAMP__,
@@ -49,8 +52,9 @@ export class DataStorer {
 
       const dataString = JSON.stringify(storedData)
       const compressedData = LZString.compressToUTF16(dataString)
-      Logger.log(`Saving data. Size: ${dataString.length}, compressed: ${compressedData.length}.`)
+      Logger.log(`Compressed data. Size: ${dataString.length}, compressed: ${compressedData.length}. Saving to local storage.`)
       localStorage.setItem(DataStorer.dataKey, compressedData)
+      Logger.log("Data saved to local storage.")
       resolve(undefined)
     })
 
