@@ -18,13 +18,18 @@ import { Showing } from "./Showing"
 import { Theater } from "./Theater"
 
 export class Store {
-  @observable public appState: AppState = AppState.Idle
+  @observable private _currentState: AppState = AppState.Idle
   @observable public dates: Array<SelectableDate> = []
   public readonly filters = new Filters()
   @observable private movieNameFilter: string = ""
   @observable private movies: Array<Movie> = []
   @observable private showings: Array<Showing> = []
   @observable private theaters: Array<Theater> = []
+
+  @computed
+  public get currentState(): AppState {
+    return this._currentState
+  }
 
   @computed
   public get matchingMovies(): Array<Movie> {
@@ -68,7 +73,7 @@ export class Store {
 
   @computed
   public get stateDescription() {
-    switch (this.appState) {
+    switch (this._currentState) {
       case AppState.FetchingData:
         return "Fetching data"
 
@@ -88,7 +93,7 @@ export class Store {
         return "Saving data"
 
       default:
-        return `'${this.appState}' is an unknown state.`
+        return `'${this._currentState}' is an unknown state.`
     }
   }
 
@@ -123,19 +128,19 @@ export class Store {
   }
 
   public async fetchAndUpdateData(): Promise<void> {
-    this.appState = AppState.FetchingData
+    this._currentState = AppState.FetchingData
     const fetchedData = await DataFetcher.fetchData()
     if (fetchedData === undefined) {
       throw new Error("Could not fetch data.")
     }
 
-    this.appState = AppState.SavingData
+    this._currentState = AppState.SavingData
     await DataStorer.saveData(fetchedData)
 
     this.setData(fetchedData)
     this.loadSettings()
 
-    this.appState = AppState.Idle
+    this._currentState = AppState.Idle
   }
 
   public getMovie(movieId: number): Movie {
@@ -225,7 +230,7 @@ export class Store {
   }
 
   public initializeData(): void {
-    this.appState = AppState.LoadingData
+    this._currentState = AppState.LoadingData
     const storedData = DataStorer.loadData()
     if (DataStorer.dataIsOkay(storedData)) {
       this.setData(storedData.data)
@@ -235,19 +240,19 @@ export class Store {
       this.fetchAndUpdateData()
     }
 
-    this.appState = AppState.Idle
+    this._currentState = AppState.Idle
   }
 
   private loadSettings() {
     Logger.log("Loading settings.")
-    this.appState = AppState.LoadingSettings
+    this._currentState = AppState.LoadingSettings
 
     const settingsString = localStorage.getItem("settings")
 
     // tslint:disable-next-line:no-null-keyword
     if (settingsString === null) {
       Logger.log("No settings.")
-      this.appState = AppState.Idle
+      this._currentState = AppState.Idle
       return
     }
 
@@ -267,11 +272,11 @@ export class Store {
       }
     }
 
-    this.appState = AppState.Idle
+    this._currentState = AppState.Idle
   }
 
   private saveSettings() {
-    if (this.appState !== AppState.Idle) {
+    if (this._currentState !== AppState.Idle) {
       // Log statement disabled since it was too chatty.
       // Logger.log(`Not saving settings since the app state is ${AppState[this.state]}.`)
       return
@@ -292,7 +297,7 @@ export class Store {
 
   public setData(data: Data) {
     Logger.log("Parsing and setting data.")
-    this.appState = AppState.ParsingData
+    this._currentState = AppState.ParsingData
 
     // TODO: Consider using a worker thread to parse this in a separate thread.
     this.dates = []
@@ -313,7 +318,7 @@ export class Store {
     this.addStartAndEndDates()
     this.sortDates()
 
-    this.appState = AppState.Idle
+    this._currentState = AppState.Idle
   }
 
   public setMovieNameFilter(filter: string) {
