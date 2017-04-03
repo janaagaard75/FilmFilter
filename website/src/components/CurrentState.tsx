@@ -20,7 +20,7 @@ export class CurrentState extends Component<Props, void> {
     super(props, context)
 
     reaction(
-      () => this.props.store.state,
+      () => this.props.store.appState,
       () => this.forceUpdate()
     )
 
@@ -34,7 +34,7 @@ export class CurrentState extends Component<Props, void> {
   public render() {
     return (
       <span>
-        {this.props.store.state !== AppState.Idle
+        {this.props.store.appState !== AppState.Idle
           ? <span className="form-control-static mr-3">{this.props.store.stateDescription} <i className="fa fa-spinner fa-pulse"/></span>
           : undefined
         }
