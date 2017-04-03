@@ -1,7 +1,10 @@
 import * as React from "react"
+import { autorun } from "mobx"
 import { Component } from "react"
 import { observer } from "mobx-react"
 import { reaction } from "mobx"
+import { whyRun } from "mobx"
+import { isObservable } from "mobx"
 
 import { AppState } from "../model/AppState"
 import { Logger } from "../utilities/Logger"
@@ -20,11 +23,13 @@ export class CurrentState extends Component<Props, void> {
       () => this.props.store.state,
       () => this.forceUpdate()
     )
-  }
 
-  // private forceRender() {
-  //   Logger.log(`Forcing update render of CurrentState. State: ${this.props.store.state}, ${this.props.store.stateDescription}.`)
-  // }
+    autorun(
+      () => {
+        whyRun()
+      }
+    )
+  }
 
   public render() {
     return (
