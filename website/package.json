@@ -16,7 +16,7 @@
     "fix": "tslint --fix src/**/*.ts src/**/*.tsx",
     "lint": "yarn run lint-sass && yarn run lint-typescript",
     "lint-sass": "sass-lint --verbose --no-exit",
-    "lint-typescript": "tslint src/**/*.ts src/**/*.tsx",
+    "lint-typescript": "tslint --project ./tsconfig.json --type-check src/**/*.ts src/**/*.tsx",
     "serve": "http-server dist -p 9000",
     "start": "yarn install && webpack-dev-server"
   },
