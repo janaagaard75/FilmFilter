@@ -201,7 +201,7 @@ export class App extends Component<Props, State> {
             <button
               className="btn btn-secondary btn-sm"
               onClick={() => this.props.store.fetchAndUpdateData()}
-              disabled={this.props.store.currentState !== AppState.Idle}
+              disabled={this.props.store.appState !== AppState.Idle}
             >
               Opdater
             </button>
