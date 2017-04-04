@@ -16,21 +16,6 @@ interface Props {
 
 @observer
 export class CurrentState extends Component<Props, void> {
-  constructor(props: Props, context?: any) {
-    super(props, context)
-
-    reaction(
-      () => this.props.store.appState,
-      () => this.forceUpdate()
-    )
-
-    autorun(
-      () => {
-        whyRun()
-      }
-    )
-  }
-
   public render() {
     return (
       <span>
