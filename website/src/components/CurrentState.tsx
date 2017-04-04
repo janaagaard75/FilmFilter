@@ -1,5 +1,7 @@
 import * as React from "react"
 import { Component } from "react"
+import { computed } from "mobx"
+import { observable } from "mobx"
 import { observer } from "mobx-react"
 
 import { AppState } from "../model/AppState"
@@ -11,13 +13,45 @@ interface Props {
 
 @observer
 export class CurrentState extends Component<Props, void> {
+  @observable private progress: number = 0
+
+  private count(): void {
+    this.progress = 0
+    this.forceUpdate()
+
+    const max = 1e7
+    console.info(`Counting to ${max}.`)
+
+    for (let i = 1; i <= max; i++) {
+      this.progress = i / max
+
+      if (this.progress % (max / 100) === 0) {
+        this.forceUpdate()
+      }
+    }
+
+    console.info("Done counting.")
+
+    // Try with at asynchronous solution. hamster.io?
+  }
+
+  @computed
+  private get progressPercent(): string {
+    const progressInPercent = Math.floor(100 * this.progress)
+    return `${progressInPercent}%`
+  }
+
   public render() {
     return (
       <span>
-        {this.props.store.appState !== AppState.Idle
-          ? <span className="form-control-static mr-3">{this.props.store.stateDescription} <i className="fa fa-spinner fa-pulse"/></span>
-          : undefined
-        }
+        <button className="btn btn-primary btn-sm mr-3" onClick={() => this.count()}>Count</button>
+        <span className="mr-5">{this.progressPercent}</span>
+        <span>
+          {this.props.store.appState !== AppState.Idle
+            ? <span className="form-control-static mr-3">{this.props.store.stateDescription} <i className="fa fa-spinner fa-pulse"/></span>
+            : undefined
+          }
+        </span>
       </span>
     )
   }
