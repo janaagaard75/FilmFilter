@@ -42,7 +42,7 @@ export class DataStorer {
   }
 
   public static saveData(data: Data): Promise<void> {
-    // TODO: This promise probably doesn't do anyting, since it's still single threaded code.
+    // TODO: This promise doesn't do anyting yet, since it's still single threaded code. This will change with web workers, so keepting the promise.
     const promise = new Promise<void>(resolve => {
       Logger.log("Saving data to local storage. Stringifying JSON.")
       const storedData: TimestampedData = {
