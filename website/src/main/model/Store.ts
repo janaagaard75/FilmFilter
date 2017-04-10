@@ -246,7 +246,7 @@ export class Store {
 
     // tslint:disable-next-line:no-null-keyword
     if (settingsString === null) {
-      Logger.log("No settings.")
+      Logger.log("No settings to load.")
       this.appState = AppState.Idle
       return
     }
@@ -268,6 +268,7 @@ export class Store {
     }
 
     this.appState = AppState.Idle
+    Logger.log("Done loading settings.")
   }
 
   private saveSettings() {
@@ -277,7 +278,7 @@ export class Store {
       return
     }
 
-    Logger.log("Saving settings.")
+    Logger.log("Saving settings to local storage.")
 
     // TODO: Create a Settings class that will handle the persisted settings.
     const settings: Settings = {
@@ -288,6 +289,7 @@ export class Store {
 
     const settingsString = JSON.stringify(settings)
     localStorage.setItem("settings", settingsString)
+    Logger.log("Done saving settings.")
   }
 
   public setData(data: Data) {
@@ -300,6 +302,7 @@ export class Store {
     // Don't sort the theaters, because the showings refer to them by ID in the array.
     this.theaters = data.theaters.map(theaterData => new Theater(theaterData))
 
+    Logger.log("Done parsing movies and theaters. Parseing showings.")
     // TODO: The date strings are being parsed twice, both in here and in the ImmutableMoment constructor. Consider fixing this by adding an intermediate model where start is a date.
     const now = Date.now()
     this.showings = data.showings
@@ -307,6 +310,7 @@ export class Store {
       .map(showingData => new Showing(showingData, this))
       .sort((showingA, showingB) => showingA.start.diff(showingB.start))
 
+    Logger.log("Done parsing showings. Finishing up.")
     this.movies = this.movies.sort(Movie.compareByNumberOfShowings)
 
     this.addMissingDates()
@@ -314,6 +318,7 @@ export class Store {
     this.sortDates()
 
     this.appState = AppState.Idle
+    Logger.log("Done parsing and setting data.")
   }
 
   public setMovieNameFilter(filter: string) {

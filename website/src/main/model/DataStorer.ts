@@ -31,19 +31,20 @@ export class DataStorer {
     Logger.log(`Data size loaded: ${compressedData.length}, decompressed: ${dataString.length}.`)
 
     try {
-      Logger.log("Parsing JSON string.")
+      Logger.log("Done loading. Parsing JSON string.")
       return JSON.parse(dataString) as TimestampedData
+      Logger.log("Done parsing JSON. Done loading data.")
     }
     catch (error) {
+      console.error(error)
       return undefined
     }
   }
 
   public static saveData(data: Data): Promise<void> {
-    Logger.log("Saving data to local storage. Compressing first.")
-
     // TODO: This promise probably doesn't do anyting, since it's still single threaded code.
     const promise = new Promise<void>(resolve => {
+      Logger.log("Saving data to local storage. Stringifying JSON.")
       const storedData: TimestampedData = {
         buildTimestamp: __BUILD_TIMESTAMP__,
         data: data,
@@ -51,8 +52,9 @@ export class DataStorer {
       }
 
       const dataString = JSON.stringify(storedData)
+      Logger.log("Done stringifying. Compressing to UTF16.")
       const compressedData = LZString.compressToUTF16(dataString)
-      Logger.log(`Compressed data. Size: ${dataString.length}, compressed: ${compressedData.length}. Saving to local storage.`)
+      Logger.log(`Done compresing. Compressed data. Size: ${dataString.length}, compressed: ${compressedData.length}. Saving to local storage.`)
       localStorage.setItem(DataStorer.dataKey, compressedData)
       Logger.log("Data saved to local storage.")
       resolve(undefined)
@@ -68,7 +70,7 @@ export class DataStorer {
       Logger.log("Build timestamp on stored data matches.")
     }
     else {
-      Logger.log("Build timestamp on stored data does not match.")
+      Logger.log("Build timestamp on stored data does not match. The saved data might not match the new code base.")
     }
 
     return timestampMatches

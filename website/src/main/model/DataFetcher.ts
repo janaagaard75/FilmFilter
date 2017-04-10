@@ -8,21 +8,20 @@ export class DataFetcher {
   private static readonly dataUrl = "https://film-filter-data.herokuapp.com/compressed"
 
   public static async fetchData(): Promise<Data | undefined> {
-    Logger.log("Fetching data.")
-
     try {
+      Logger.log("Fetching data from API.")
       const response = await window.fetch(this.dataUrl, { mode: "cors" })
       const compressedString = await response.text()
+      Logger.log("Done fetching. Decompressing Base64.")
       const dataString = LZString.decompressFromBase64(compressedString)
+      Logger.log("Done decompressing. Parse JSON string.")
       const data = JSON.parse(dataString) as Data
+      Logger.log("Done parsing. Fetching data done.")
       return data
     }
     catch (error) {
       console.error(error)
       return undefined
-    }
-    finally {
-      Logger.log("Done fetching data.")
     }
   }
 }
