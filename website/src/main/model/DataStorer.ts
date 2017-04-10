@@ -33,11 +33,13 @@ export class DataStorer {
     try {
       Logger.log("Done loading. Parsing JSON string.")
       return JSON.parse(dataString) as TimestampedData
-      Logger.log("Done parsing JSON. Done loading data.")
     }
     catch (error) {
       console.error(error)
       return undefined
+    }
+    finally {
+      Logger.log("Done parsing JSON. Done loading data.")
     }
   }
 
