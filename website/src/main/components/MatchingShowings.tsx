@@ -28,7 +28,7 @@ export class MatchingShowings extends Component<Props, void> {
         {atLeastOneMatchingShowing
           ? <ShowingsTable
             showings={this.props.matchingShowings.slice(0, 25)}
-            showMovieColumn={showMovieColumn}
+            showMovieColumns={showMovieColumn}
             showTheaterColumn={showTheaterColumn}
           />
           : <div className="card-block">

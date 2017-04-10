@@ -6,7 +6,7 @@ import { Showing } from "../model/Showing"
 
 interface Props {
   showing: Showing
-  showMovieColumn: boolean
+  showMovieColumns: boolean
   showTheaterColumn: boolean
 }
 
@@ -17,13 +17,16 @@ export class ShowingRow extends Component<Props, void> {
 
     return (
       <tr>
-        {this.props.showMovieColumn
-          ? <td>{this.props.showing.movie.originalTitle}</td>
-          : undefined
+        {this.props.showMovieColumns &&
+          <td>
+            <img src={this.props.showing.movie.posterUrl} className="movie-thumbnail"/>
+          </td>
         }
-        {this.props.showTheaterColumn
-          ? <td>{this.props.showing.theater.name}</td>
-          : undefined
+        {this.props.showMovieColumns &&
+          <td>{this.props.showing.movie.originalTitle}</td>
+        }
+        {this.props.showTheaterColumn &&
+          <td>{this.props.showing.theater.name}</td>
         }
         <td>
           <a href={this.props.showing.showingUrl}>

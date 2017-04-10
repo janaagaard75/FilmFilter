@@ -7,7 +7,7 @@ import { ShowingRow } from "./ShowingRow"
 
 interface Props {
   showings: Array<Showing>
-  showMovieColumn: boolean
+  showMovieColumns: boolean
   showTheaterColumn: boolean
 }
 
@@ -15,16 +15,14 @@ interface Props {
 export class ShowingsTable extends Component<Props, void> {
   public render() {
     return (
-      <table className="table table-sm">
+      <table className="table table-sm table-showings">
         <thead>
           <tr>
-            {this.props.showMovieColumn
-              ? <th>Film</th>
-              : undefined
+            {this.props.showMovieColumns &&
+              <th colSpan={2}>Film</th>
             }
-            {this.props.showTheaterColumn
-              ? <th>Biograf</th>
-              : undefined
+            {this.props.showTheaterColumn &&
+              <th>Biograf</th>
             }
             <th>Tidspunkt</th>
           </tr>
@@ -34,7 +32,7 @@ export class ShowingsTable extends Component<Props, void> {
             <ShowingRow
               key={showing.showingUrl}
               showing={showing}
-              showMovieColumn={this.props.showMovieColumn}
+              showMovieColumns={this.props.showMovieColumns}
               showTheaterColumn={this.props.showTheaterColumn}
             />
           )}

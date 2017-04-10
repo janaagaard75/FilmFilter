@@ -26,12 +26,21 @@ button {
   text-overflow: ellipsis;
 }
 
+.movie-thumbnail {
+  height: $movie-thumbnail-height;
+  width: $movie-thumbnail-height / 3 * 2;
+}
+
 .no-wrap {
   white-space: nowrap;
 }
 
 .selected-item {
   background-color: $gray;
+}
+
+.table-showings td {
+  vertical-align: middle;
 }
 
 .table-text-center td,
