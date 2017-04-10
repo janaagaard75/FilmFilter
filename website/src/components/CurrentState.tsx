@@ -16,23 +16,12 @@ export class CurrentState extends Component<Props, void> {
   @observable private progress: number = 0
 
   private count(): void {
-    this.progress = 0
-    this.forceUpdate()
-
-    const max = 1e7
-    console.info(`Counting to ${max}.`)
-
-    for (let i = 1; i <= max; i++) {
-      this.progress = i / max
-
-      if (this.progress % (max / 100) === 0) {
-        this.forceUpdate()
-      }
-    }
-
-    console.info("Done counting.")
-
-    // Try with at asynchronous solution. hamster.io?
+    const CounterWorker = require("worker-loader!./Counter.worker") as any
+    const counterWorker = new CounterWorker()
+    counterWorker.addEventListener("message", (e: any) => {
+      console.info("Message from worker:", e)
+    })
+    counterWorker.postMessage({ a: 1 })
   }
 
   @computed
