@@ -17,7 +17,7 @@ export class CurrentState extends Component<Props, void> {
 
   private count(): void {
     const CounterWorker = require("worker-loader!./Counter.worker") as any
-    const counterWorker = new CounterWorker()
+    const counterWorker = new CounterWorker() as Worker
     counterWorker.addEventListener("message", (e: any) => {
       console.info("Message from worker:", e)
     })

@@ -5,8 +5,8 @@ self.addEventListener("message", e => {
       // Comment required to satify TSlint.
     }
 
-    (self.postMessage as any)(`Hello from worker, ${i}.`)
+    (self as DedicatedWorkerGlobalScope).postMessage(`Hello from worker, ${i}.`)
   }
 
-  (self.postMessage as any)(e.data);
+  (self as DedicatedWorkerGlobalScope).postMessage(e.data);
 }, false);
