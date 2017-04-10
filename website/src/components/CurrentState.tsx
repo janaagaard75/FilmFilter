@@ -16,7 +16,7 @@ export class CurrentState extends Component<Props, void> {
   @observable private progress: number = 0
 
   private count(): void {
-    const CounterWorker = require("worker-loader!./Counter.worker") as any
+    const CounterWorker = require("worker-loader!../../workers/Counter.worker") as any
     const counterWorker = new CounterWorker() as Worker
     counterWorker.addEventListener("message", (e: any) => {
       console.info("Message from worker:", e)
