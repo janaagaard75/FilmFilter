@@ -6,7 +6,7 @@ import { ConnectedApp } from "./ConnectedApp"
 
 import "./styles/main.scss"
 
-import "../node_modules/moment/locale/da"
+import "../../node_modules/moment/locale/da"
 moment.locale("da")
 
 render(

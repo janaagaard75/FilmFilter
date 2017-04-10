@@ -14,7 +14,7 @@ const outputDir = path.join(__dirname, "dist")
 const plugins = [
   new CopyWebpackPlugin([
     {
-      from: "src/favicon.ico"
+      from: "src/main/favicon.ico"
     }
   ]),
   new ExtractTextPlugin("bundle.[contenthash:8].css"),
@@ -27,7 +27,7 @@ const plugins = [
       removeScriptTypeAttributes: true,
       removeStyleLinkTypeAttributes: true
     },
-    template: "src/index.html"
+    template: "src/main/index.html"
   }),
   new webpack.DefinePlugin({
     "__BUILD_TIMESTAMP__": JSON.stringify(Date.now()),
@@ -58,7 +58,7 @@ module.exports = {
   },
   devtool: "source-map",
   entry: {
-    "client": "./src/Main.tsx"
+    "client": "./src/main/Main.tsx"
   },
   module: {
     rules: [
