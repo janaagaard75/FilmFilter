@@ -87,6 +87,17 @@ module.exports = {
         })
       },
       {
+        test: /.*\/src\/workers\/.*\.ts$/,
+        use: [
+          {
+            loader: "worker-loader"
+          },
+          {
+            loader: "ts-loader"
+          }
+        ]
+      },
+      {
         test: /\.tsx?$/,
         loader: "ts-loader"
       },
