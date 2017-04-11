@@ -7,6 +7,7 @@ import { SelectableDate } from "../main/model/SelectableDate"
 import { Showing } from "../main/model/Showing"
 import { StoreInterface } from "../main/model/StoreInterface"
 import { Theater } from "../main/model/Theater"
+import { TypedMessageEvent } from "./TypedMessageEvent"
 
 class DataParser implements StoreInterface {
   private parsedData: ParsedData
@@ -112,10 +113,6 @@ class DataParser implements StoreInterface {
   private sortDates() {
     this.parsedData.dates = this.parsedData.dates.sort((a, b) => a.date.diff(b.date))
   }
-}
-
-interface TypedMessageEvent<T> extends MessageEvent {
-  data: T
 }
 
 type ApiDataMessageEvent = TypedMessageEvent<ApiData>

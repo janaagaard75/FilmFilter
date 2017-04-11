@@ -12,12 +12,14 @@ import { Filters } from "./filters/Filters"
 import { ImmutableDate } from "./moment/ImmutableDate"
 import { Logger } from "../utilities/Logger"
 import { Movie } from "./Movie"
+import { ParsedData } from "./ParsedData"
 import { SelectableDate } from "./SelectableDate"
 import { Settings } from "./Settings"
 import { Showing } from "./Showing"
 import { StoreInterface } from "./StoreInterface"
 import { Strings } from "../utilities/Strings"
 import { Theater } from "./Theater"
+import { TypedMessageEvent } from "../../workers/TypedMessageEvent"
 
 export class Store implements StoreInterface {
   @observable public appState: AppState = AppState.Idle
@@ -294,7 +296,7 @@ export class Store implements StoreInterface {
     Logger.log("Done saving settings.")
   }
 
-  public setData(data: ApiData) {
+  public setData(data: ApiData): void {
     Logger.log("Parsing and setting data.")
     this.appState = AppState.ParsingData
 
@@ -321,6 +323,16 @@ export class Store implements StoreInterface {
 
     this.appState = AppState.Idle
     Logger.log("Done parsing and setting data.")
+  }
+
+  public setDataAsync(data: ApiData): Promise<void> {
+    const DataParser = require("../../workers/DataParser") as any
+    const dataParser = new DataParser() as Worker
+    dataParser.addEventListener("message", (e: TypedMessageEvent<ParsedData>) => {
+      // tslint:disable-next-line:no-console
+      console.info("Message from worker:", e)
+    })
+    dataParser.postMessage({ a: 1 })
   }
 
   public setMovieNameFilter(filter: string) {
