@@ -1,6 +1,6 @@
 class Counter {
   public messageReceived(e: MessageEvent) {
-    (self as DedicatedWorkerGlobalScope).postMessage(e.data)
+    postMessage(e.data)
     this.count()
   }
 
@@ -11,7 +11,7 @@ class Counter {
         // Comment here to satify TSlint.
       }
 
-      (self as DedicatedWorkerGlobalScope).postMessage(`Hello from worker, ${i}.`)
+      postMessage(`Hello from worker, ${i}.`)
     }
   }
 }
