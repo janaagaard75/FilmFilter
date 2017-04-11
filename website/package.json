@@ -14,10 +14,10 @@
     "build": "yarn run build:dev",
     "deploy": "yarn build:prod && firebase deploy",
     "fix": "tslint --fix src/**/*.ts src/**/*.tsx",
-    "lint:main": "tslint --project ./src/main/tsconfig.json --type-check src/main/**/*.ts src/main/**/*.tsx",
     "lint:sass": "sass:lint --verbose --no-exit",
-    "lint:typescript": "yarn run lint:main && yarn run lint:workers",
-    "lint:workers": "tslint --project ./src/workers/tsconfig.json --type-check src/workers/**/*.ts",
+    "lint:typescript:main": "tslint --project src/main/tsconfig.json --type-check src/main/**/*.ts src/main/**/*.tsx",
+    "lint:typescript:workers": "tslint --project src/workers/tsconfig.json --type-check src/workers/**/*.ts",
+    "lint:typescript": "yarn run lint:typescript:main && yarn run lint:typescript:workers",
     "lint": "yarn run lint:sass && yarn run lint:typescript",
     "serve": "http-server dist -p 9000",
     "start": "yarn install && webpack-dev-server"
