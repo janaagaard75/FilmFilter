@@ -14,6 +14,7 @@ Data is cached in local storage and so are the settings.
 * Filtering one category should update the others.
   * Example: How do I easily see that the movie Logan isn't shown in 3D anywhere?
   * Add a reset button.
+* Bug: It can happen that multiple movies have the same key.
 * Figure out why the settings aren't always persisted as they should.
 * Prettier and better
 * Possible to select a weekday in the calendar.
