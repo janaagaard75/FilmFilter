@@ -19,6 +19,7 @@ export class CurrentState extends Component<Props, void> {
     const CounterWorker = require("../../workers/Counter") as any
     const counterWorker = new CounterWorker() as Worker
     counterWorker.addEventListener("message", (e: any) => {
+      // tslint:disable-next-line:no-console
       console.info("Message from worker:", e)
     })
     counterWorker.postMessage({ a: 1 })
