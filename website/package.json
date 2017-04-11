@@ -16,7 +16,7 @@
     "fix": "tslint --fix src/**/*.ts src/**/*.tsx",
     "lint:sass": "sass:lint --verbose --no-exit",
     "lint:typescript:main": "tslint --project src/main/tsconfig.json --type-check src/main/**/*.ts src/main/**/*.tsx",
-    "lint:typescript:workers": "tslint --project src/workers/tsconfig.json --type-check src/workers/**/*.ts",
+    "lint:typescript:workers": "tslint src/workers/**/*.ts",
     "lint:typescript": "yarn run lint:typescript:main && yarn run lint:typescript:workers",
     "lint": "yarn run lint:sass && yarn run lint:typescript",
     "serve": "http-server dist -p 9000",
