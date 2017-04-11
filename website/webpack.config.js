@@ -87,7 +87,7 @@ module.exports = {
         })
       },
       {
-        test: /.*\/src\/workers\/.*\.ts$/,
+        test: /.*[\/\\]src[\/\\]workers[\/\\].*\.ts$/,
         use: [
           {
             loader: "worker-loader"
