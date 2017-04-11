@@ -14,7 +14,7 @@
     "build": "yarn run build:dev",
     "deploy": "yarn build:prod && firebase deploy",
     "fix": "tslint --fix src/**/*.ts src/**/*.tsx",
-    "lint:sass": "sass:lint --verbose --no-exit",
+    "lint:sass": "sass-lint --verbose --no-exit",
     "lint:typescript:main": "tslint --project src/main/tsconfig.json --type-check src/main/**/*.ts src/main/**/*.tsx",
     "lint:typescript:workers": "tslint src/workers/**/*.ts",
     "lint:typescript": "yarn run lint:typescript:main && yarn run lint:typescript:workers",
