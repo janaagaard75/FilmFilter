@@ -56,7 +56,7 @@ export class DataStorer {
       const dataString = JSON.stringify(storedData)
       Logger.log("Done stringifying. Compressing to UTF16.")
       const compressedData = LZString.compressToUTF16(dataString)
-      Logger.log(`Done compresing. Compressed data. Size: ${dataString.length}, compressed: ${compressedData.length}. Saving to local storage.`)
+      Logger.log(`Done compressing. Compressed data. Size: ${dataString.length}, compressed: ${compressedData.length}. Saving to local storage.`)
       localStorage.setItem(DataStorer.dataKey, compressedData)
       Logger.log("Data saved to local storage.")
       resolve(undefined)
