@@ -2,6 +2,7 @@ import { observable } from "mobx"
 
 import { ApiMovie } from "./data/ApiMovie"
 import { Showing } from "./Showing"
+import { Strings } from "../utilities/Strings"
 
 export class Movie {
   constructor(data: ApiMovie) {
@@ -12,9 +13,9 @@ export class Movie {
     this.selected = false
     this.showings = []
 
-    this.searchableTitle = data.originalTitle.toLocaleLowerCase()
+    this.searchableTitle = Strings.searchable(data.originalTitle)
     if (data.danishTitle !== undefined) {
-      this.searchableTitle += " " + data.danishTitle.toLocaleLowerCase()
+      this.searchableTitle += " " + Strings.searchable(data.danishTitle)
     }
   }
 
@@ -37,7 +38,7 @@ export class Movie {
 
   public get key(): string {
     if (this.memoizedKey === undefined) {
-      this.memoizedKey = this.movieUrl + this.originalTitle
+      this.memoizedKey = "KEY-" + this.movieUrl + this.originalTitle + this.posterUrl
     }
 
     return this.memoizedKey
@@ -47,7 +48,7 @@ export class Movie {
     this.showings.push(showing)
   }
 
-  /** Returns true if the string `filter` is container in either the original or the Danish title of this movie. Assumes that `filter` is lower cased. */
+  /** Returns true if the string `filter` is container in either the original or the Danish title of this movie. Assumes that `filter` has been transformed with `Strings.searchable()`. */
   public titleMatchesFilter(filter: string): boolean {
     const matches = this.searchableTitle.indexOf(filter) !== -1
     return matches

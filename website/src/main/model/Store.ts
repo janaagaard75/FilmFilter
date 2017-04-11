@@ -16,6 +16,7 @@ import { SelectableDate } from "./SelectableDate"
 import { Settings } from "./Settings"
 import { Showing } from "./Showing"
 import { StoreInterface } from "./StoreInterface"
+import { Strings } from "../utilities/Strings"
 import { Theater } from "./Theater"
 
 export class Store implements StoreInterface {
@@ -323,7 +324,7 @@ export class Store implements StoreInterface {
   }
 
   public setMovieNameFilter(filter: string) {
-    this.movieNameFilter = filter.toLocaleLowerCase()
+    this.movieNameFilter = Strings.searchable(filter)
   }
 
   private sortDates() {
