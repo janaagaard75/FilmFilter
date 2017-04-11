@@ -25,20 +25,67 @@ class DataParser implements StoreInterface {
   }
 
   public getTheater(theaterIndex: number): Theater {
+    const theater = this.parsedData.theaters[theaterIndex]
+
+    if (theater === undefined) {
+      return Theater.UndefinedTheater
+    }
+
+    return theater
   }
 
   public getOrAddSelectableDate(date: ImmutableDate): SelectableDate {
+    const existingSelectableDate = this.parsedData.dates.find(selectableDate => selectableDate.date.equals(date))
+    if (existingSelectableDate !== undefined) {
+      return existingSelectableDate
+    }
+
+    const newSelectableDate = new SelectableDate(date)
+    this.parsedData.dates.push(newSelectableDate)
+    return newSelectableDate
   }
 
-  public parseData(data: ApiData) {
+  public parseAndSendBack(data: ApiData) {
+    this.parseData(data)
+    this.sendParsedDataBack()
+  }
+
+  private addStartAndEndDates() {
+    this.sortDates()
+    const earliest = this.parsedData.dates[0].date
+    const latest = this.parsedData.dates[this.parsedData.dates.length - 1].date
+
+    for (let i = 1; i <= earliest.weekday(); i++) {
+      this.getOrAddSelectableDate(earliest.subtract(i, "days"))
+    }
+
+    for (let i = 6; i > latest.weekday(); i--) {
+      this.getOrAddSelectableDate(latest.add(i, "days"))
+    }
+  }
+
+  private addMissingDates() {
+    this.sortDates()
+    const earliest = this.parsedData.dates[0].date
+    const latest = this.parsedData.dates[this.parsedData.dates.length - 1].date
+
+    for (let date = earliest; !date.equals(latest); date = date.add(1, "day")) {
+      this.getOrAddSelectableDate(date)
+    }
+  }
+
+  private initializeParsedData() {
     this.parsedData = {
       dates: [],
       movies: [],
       showings: [],
       theaters: []
     }
+  }
 
-    // TODO: Consider using a worker thread to parse this in a separate thread.
+  private parseData(data: ApiData) {
+    this.initializeParsedData()
+
     const dates = []
     let movies = data.movies.map(movieData => new Movie(movieData))
     // Don't sort the theaters, because the showings refer to them by ID in the array.
@@ -58,18 +105,12 @@ class DataParser implements StoreInterface {
     this.sortDates()
   }
 
-  private addMissingDates() {
-    this.sortDates()
-    const earliest = this.dates[0].date
-    const latest = this.dates[this.dates.length - 1].date
-
-    for (let date = earliest; !date.equals(latest); date = date.add(1, "day")) {
-      this.getOrAddSelectableDate(date)
-    }
+  private sendParsedDataBack(): void {
+    postMessage(this.parsedData)
   }
 
-  private sendOutputBack(): void {
-    postMessage(this)
+  private sortDates() {
+    this.parsedData.dates = this.parsedData.dates.sort((a, b) => a.date.diff(b.date))
   }
 }
 
@@ -77,7 +118,7 @@ interface TypedMessageEvent<T> extends MessageEvent {
   data: T
 }
 
-type DataMessageEvent = TypedMessageEvent<ApiData>
+type ApiDataMessageEvent = TypedMessageEvent<ApiData>
 
 const store = new DataParser()
-self.addEventListener("message", (e: DataMessageEvent) => store.parseData(e.data), false)
+self.addEventListener("message", (e: ApiDataMessageEvent) => store.parseAndSendBack(e.data), false)
