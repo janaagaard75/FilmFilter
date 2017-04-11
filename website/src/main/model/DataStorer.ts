@@ -1,6 +1,6 @@
 import * as LZString from "lz-string"
 
-import { ApiData } from "./data/Data"
+import { ApiData } from "./data/ApiData"
 import { Logger } from "../utilities/Logger"
 
 interface TimestampedData {
