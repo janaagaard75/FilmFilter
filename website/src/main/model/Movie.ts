@@ -38,7 +38,7 @@ export class Movie {
 
   public get key(): string {
     if (this.memoizedKey === undefined) {
-      this.memoizedKey = "KEY-" + this.movieUrl + this.originalTitle + this.posterUrl
+      this.memoizedKey = this.movieUrl + this.posterUrl + this.originalTitle
     }
 
     return this.memoizedKey
