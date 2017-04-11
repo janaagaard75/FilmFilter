@@ -142,7 +142,7 @@ export class Store implements StoreInterface {
 
   public async fetchAndUpdateData(): Promise<void> {
     const data = await this.fetchAndSaveData()
-    this.setData(data)
+    await this.setDataAsync(data)
   }
 
   public getMovie(movieId: number): Movie {
@@ -234,6 +234,7 @@ export class Store implements StoreInterface {
   public async initializeData(): Promise<void> {
     this.appState = AppState.LoadingData
     const storedData = DataStorer.loadData()
+
     let data: ApiData
     if (DataStorer.dataIsOkay(storedData)) {
       data = storedData.data
@@ -242,7 +243,7 @@ export class Store implements StoreInterface {
       data = await this.fetchAndSaveData()
     }
 
-    this.setData(data)
+    await this.setDataAsync(data)
     this.loadSettings()
 
     this.appState = AppState.Idle
@@ -302,7 +303,7 @@ export class Store implements StoreInterface {
     Logger.log("Done saving settings.")
   }
 
-  public setData(data: ApiData): void {
+  public setData2(data: ApiData): void {
     Logger.log("Parsing and setting data.")
     this.appState = AppState.ParsingData
 

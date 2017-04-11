@@ -46,12 +46,12 @@ class DataParser implements StoreInterface {
     return newSelectableDate
   }
 
-  public parseAndSendBack(data: ApiData) {
+  public parseAndSendBack(data: ApiData): void {
     this.parseData(data)
     this.sendParsedDataBack()
   }
 
-  private addStartAndEndDates() {
+  private addStartAndEndDates(): void {
     this.sortDates()
     const earliest = this.parsedData.dates[0].date
     const latest = this.parsedData.dates[this.parsedData.dates.length - 1].date
@@ -65,7 +65,7 @@ class DataParser implements StoreInterface {
     }
   }
 
-  private addMissingDates() {
+  private addMissingDates(): void {
     this.sortDates()
     const earliest = this.parsedData.dates[0].date
     const latest = this.parsedData.dates[this.parsedData.dates.length - 1].date
@@ -75,7 +75,7 @@ class DataParser implements StoreInterface {
     }
   }
 
-  private initializeParsedData() {
+  private initializeParsedData(): void {
     this.parsedData = {
       dates: [],
       movies: [],
@@ -84,34 +84,38 @@ class DataParser implements StoreInterface {
     }
   }
 
-  private parseData(data: ApiData) {
+  private parseData(data: ApiData): void {
     this.initializeParsedData()
 
-    const dates = []
-    let movies = data.movies.map(movieData => new Movie(movieData))
+    this.parsedData.movies = data.movies.map(movieData => new Movie(movieData))
     // Don't sort the theaters, because the showings refer to them by ID in the array.
-    const theaters = data.theaters.map(theaterData => new Theater(theaterData))
+    this.parsedData.theaters = data.theaters.map(theaterData => new Theater(theaterData))
 
     // TODO: The date strings are being parsed twice, both in here and in the ImmutableMoment constructor. Consider fixing this by adding an intermediate model where start is a date.
     const now = Date.now()
-    const showings = data.showings
+    this.parsedData.showings = data.showings
       .filter(showingData => Dates.parseAsLocalDateTime(showingData.start).valueOf() >= now)
       .map(showingData => new Showing(showingData, this))
       .sort((showingA, showingB) => showingA.start.diff(showingB.start))
 
-    movies = movies.sort(Movie.compareByNumberOfShowings)
-
+    this.sortMovies()
     this.addMissingDates()
     this.addStartAndEndDates()
     this.sortDates()
   }
 
   private sendParsedDataBack(): void {
+    // TODO: Fix this. The issue is probably that the objects in ParsedData are too complex. What to do?
+    debugger
     postMessage(this.parsedData)
   }
 
-  private sortDates() {
+  private sortDates(): void {
     this.parsedData.dates = this.parsedData.dates.sort((a, b) => a.date.diff(b.date))
+  }
+
+  private sortMovies(): void {
+    this.parsedData.movies = this.parsedData.movies.sort(Movie.compareByNumberOfShowings)
   }
 }
 

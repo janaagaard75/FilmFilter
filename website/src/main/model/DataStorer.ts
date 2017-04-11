@@ -16,6 +16,7 @@ export class DataStorer {
     const isUpToDate = storedData !== undefined
       && DataStorer.isCorrectVersion(storedData.buildTimestamp)
       && DataStorer.isRecentEnough(storedData.storeTimestamp)
+    Logger.log("The stored data is up-to-date, that is from the correct build and recent enough.")
     return isUpToDate
   }
 
