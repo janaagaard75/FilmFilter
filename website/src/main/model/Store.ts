@@ -302,7 +302,7 @@ export class Store {
     // Don't sort the theaters, because the showings refer to them by ID in the array.
     this.theaters = data.theaters.map(theaterData => new Theater(theaterData))
 
-    Logger.log("Done parsing movies and theaters. Parseing showings.")
+    Logger.log("Done parsing movies and theaters. Parsing showings.")
     // TODO: The date strings are being parsed twice, both in here and in the ImmutableMoment constructor. Consider fixing this by adding an intermediate model where start is a date.
     const now = Date.now()
     this.showings = data.showings
