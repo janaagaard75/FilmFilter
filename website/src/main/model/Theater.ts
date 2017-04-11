@@ -1,9 +1,9 @@
 import { observable } from "mobx"
 
-import { TheaterData } from "./data/TheaterData"
+import { ApiTheater } from "./data/TheaterData"
 
 export class Theater {
-  constructor(data: TheaterData) {
+  constructor(data: ApiTheater) {
     this.favorited = false
     this.name = Theater.cleanUpTheaterName(data.name)
     this.selected = false

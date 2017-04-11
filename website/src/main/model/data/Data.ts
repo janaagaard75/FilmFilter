@@ -1,10 +1,10 @@
-import { MovieData } from "./MovieData"
-import { ShowingData } from "./ShowingData"
-import { TheaterData } from "./TheaterData"
+import { ApiMovie } from "./MovieData"
+import { ApiShowing } from "./ShowingData"
+import { ApiTheater } from "./TheaterData"
 
 // TODO: Figure out a better name for this. RawData? ApiData? Same goes for the associated *Data classes.
-export interface Data {
-  movies: Array<MovieData>
-  showings: Array<ShowingData>
-  theaters: Array<TheaterData>
+export interface ApiData {
+  movies: Array<ApiMovie>
+  showings: Array<ApiShowing>
+  theaters: Array<ApiTheater>
 }

@@ -1,6 +1,6 @@
 import { ShowingFlags } from "./ShowingFlags"
 
-export interface ShowingData {
+export interface ApiShowing {
   readonly flags: ShowingFlags
   readonly movieIndex: number
   readonly seatingInfo: Array<string>

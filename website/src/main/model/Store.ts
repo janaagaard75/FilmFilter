@@ -4,7 +4,7 @@ import { reaction } from "mobx"
 
 import { AppState } from "./AppState"
 import { Comparer } from "../utilities/Comparer"
-import { Data } from "./data/Data"
+import { ApiData } from "./data/Data"
 import { DataFetcher } from "./DataFetcher"
 import { DataStorer } from "./DataStorer"
 import { Dates } from "../utilities/Dates"
@@ -15,9 +15,10 @@ import { Movie } from "./Movie"
 import { SelectableDate } from "./SelectableDate"
 import { Settings } from "./Settings"
 import { Showing } from "./Showing"
+import { StoreInterface } from "./StoreInterface"
 import { Theater } from "./Theater"
 
-export class Store {
+export class Store implements StoreInterface {
   @observable public appState: AppState = AppState.Idle
   @observable public dates: Array<SelectableDate> = []
   public readonly filters = new Filters()
@@ -292,7 +293,7 @@ export class Store {
     Logger.log("Done saving settings.")
   }
 
-  public setData(data: Data) {
+  public setData(data: ApiData) {
     Logger.log("Parsing and setting data.")
     this.appState = AppState.ParsingData
 

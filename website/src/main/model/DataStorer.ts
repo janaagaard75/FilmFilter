@@ -1,11 +1,11 @@
 import * as LZString from "lz-string"
 
-import { Data } from "./data/Data"
+import { ApiData } from "./data/Data"
 import { Logger } from "../utilities/Logger"
 
 interface TimestampedData {
   buildTimestamp: number,
-  data: Data,
+  data: ApiData,
   storeTimestamp: number
 }
 
@@ -43,7 +43,7 @@ export class DataStorer {
     }
   }
 
-  public static saveData(data: Data): Promise<void> {
+  public static saveData(data: ApiData): Promise<void> {
     // TODO: This promise doesn't do anyting yet, since it's still single threaded code. This will change with web workers, so keepting the promise.
     const promise = new Promise<void>(resolve => {
       Logger.log("Saving data to local storage. Stringifying JSON.")

@@ -1,21 +1,19 @@
 import { Dimensions } from "./filters/Dimensions"
 import { FilmType } from "./filters/FilmType"
-import { ImmutableDate } from "./moment/ImmutableDate"
 import { ImmutableDateTime } from "./moment/ImmutableDateTime"
 import { Language } from "./filters/Language"
 import { Movie } from "./Movie"
 import { SelectableDate } from "./SelectableDate"
-import { ShowingData } from "./data/ShowingData"
+import { ApiShowing } from "./data/ShowingData"
 import { ShowingFlags } from "./data/ShowingFlags"
 import { ShowingType } from "./filters/ShowingType"
-import { Store } from "./Store"
 import { StoreInterface } from "./StoreInterface"
 import { Theater } from "./Theater"
 import { TimeInterval } from "./filters/TimeInterval"
 
 export class Showing {
   constructor(
-    data: ShowingData,
+    data: ApiShowing,
     store: StoreInterface
   ) {
     this.dubbed = Showing.getFlagValue(data, ShowingFlags.Dubbed)
@@ -47,7 +45,7 @@ export class Showing {
   public readonly threeD: boolean
   public readonly totalSeats: number
 
-  private static getFlagValue(data: ShowingData, flag: ShowingFlags): boolean {
+  private static getFlagValue(data: ApiShowing, flag: ShowingFlags): boolean {
     const flagValue = (data.flags & flag) > 0
     return flagValue
   }

@@ -1,10 +1,10 @@
 import { observable } from "mobx"
 
-import { MovieData } from "./data/MovieData"
+import { ApiMovie } from "./data/MovieData"
 import { Showing } from "./Showing"
 
 export class Movie {
-  constructor(data: MovieData) {
+  constructor(data: ApiMovie) {
     this.danishTitle = data.danishTitle
     this.movieUrl = "http://www.kino.dk/" + data.movieUrl
     this.originalTitle = data.originalTitle
