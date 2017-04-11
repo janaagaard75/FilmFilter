@@ -126,7 +126,7 @@ export class Store implements StoreInterface {
     }
   }
 
-  public async fetchAndUpdateData(): Promise<void> {
+  private async fetchAndSaveData(): Promise<ApiData> {
     this.appState = AppState.FetchingData
     const fetchedData = await DataFetcher.fetchData()
     if (fetchedData === undefined) {
@@ -136,10 +136,13 @@ export class Store implements StoreInterface {
     this.appState = AppState.SavingData
     await DataStorer.saveData(fetchedData)
 
-    this.setData(fetchedData)
-    this.loadSettings()
-
     this.appState = AppState.Idle
+    return fetchedData
+  }
+
+  public async fetchAndUpdateData(): Promise<void> {
+    const data = await this.fetchAndSaveData()
+    this.setData(data)
   }
 
   public getMovie(movieId: number): Movie {
@@ -228,16 +231,19 @@ export class Store implements StoreInterface {
     )
   }
 
-  public initializeData(): void {
+  public async initializeData(): Promise<void> {
     this.appState = AppState.LoadingData
     const storedData = DataStorer.loadData()
+    let data: ApiData
     if (DataStorer.dataIsOkay(storedData)) {
-      this.setData(storedData.data)
-      this.loadSettings()
+      data = storedData.data
     }
     else {
-      this.fetchAndUpdateData()
+      data = await this.fetchAndSaveData()
     }
+
+    this.setData(data)
+    this.loadSettings()
 
     this.appState = AppState.Idle
   }
@@ -326,13 +332,23 @@ export class Store implements StoreInterface {
   }
 
   public setDataAsync(data: ApiData): Promise<void> {
-    const DataParser = require("../../workers/DataParser") as any
-    const dataParser = new DataParser() as Worker
-    dataParser.addEventListener("message", (e: TypedMessageEvent<ParsedData>) => {
-      // tslint:disable-next-line:no-console
-      console.info("Message from worker:", e)
+    const DataParserWorker = require("../../workers/DataParser") as any
+    const dataParserWorker = new DataParserWorker() as Worker
+
+    const promise = new Promise<void>(resolve => {
+      dataParserWorker.addEventListener("message", (e: TypedMessageEvent<ParsedData>) => {
+        this.dates = e.data.dates
+        this.movies = e.data.movies
+        this.showings = e.data.showings
+        this.theaters = e.data.theaters
+
+        resolve(undefined)
+      })
     })
-    dataParser.postMessage({ a: 1 })
+
+    dataParserWorker.postMessage(data)
+
+    return promise
   }
 
   public setMovieNameFilter(filter: string) {
