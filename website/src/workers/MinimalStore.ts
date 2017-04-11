@@ -1,38 +1,43 @@
-import { Data } from "../main/model/data/Data"
+import { ApiData } from "../main/model/data/ApiData"
 import { Dates } from "../main/utilities/Dates"
 import { ImmutableDate } from "../main/model/moment/ImmutableDate"
 import { Movie } from "../main/model/Movie"
+import { ParsedData } from "../main/model/ParsedData"
 import { SelectableDate } from "../main/model/SelectableDate"
 import { Showing } from "../main/model/Showing"
 import { StoreInterface } from "../main/model/StoreInterface"
 import { Theater } from "../main/model/Theater"
 
-interface Output {
-  dates: Array<SelectableDate>
-  movies: Array<Movie>
-  showings: Array<Showing>
-  theaters: Array<Theater>
-}
-
-class MinimalStore implements StoreInterface, Output {
-  public dates: Array<SelectableDate> = []
-  public movies: Array<Movie> = []
-  public showings: Array<Showing> = []
-  public theaters: Array<Theater> = []
+class DataParser implements StoreInterface {
+  private parsedData: ParsedData
 
   public getMovie(movieIndex: number): Movie {
+    if (movieIndex === -1) {
+      return Movie.UndefinedMovie
+    }
 
+    const movie = this.parsedData.movies[movieIndex]
+    if (movie === undefined) {
+      return Movie.UndefinedMovie
+    }
+
+    return movie
   }
 
   public getTheater(theaterIndex: number): Theater {
-
   }
 
   public getOrAddSelectableDate(date: ImmutableDate): SelectableDate {
-
   }
 
-  public parseData(data: Data) {
+  public parseData(data: ApiData) {
+    this.parsedData = {
+      dates: [],
+      movies: [],
+      showings: [],
+      theaters: []
+    }
+
     // TODO: Consider using a worker thread to parse this in a separate thread.
     const dates = []
     let movies = data.movies.map(movieData => new Movie(movieData))
@@ -53,6 +58,16 @@ class MinimalStore implements StoreInterface, Output {
     this.sortDates()
   }
 
+  private addMissingDates() {
+    this.sortDates()
+    const earliest = this.dates[0].date
+    const latest = this.dates[this.dates.length - 1].date
+
+    for (let date = earliest; !date.equals(latest); date = date.add(1, "day")) {
+      this.getOrAddSelectableDate(date)
+    }
+  }
+
   private sendOutputBack(): void {
     postMessage(this)
   }
@@ -62,7 +77,7 @@ interface TypedMessageEvent<T> extends MessageEvent {
   data: T
 }
 
-type DataMessageEvent = TypedMessageEvent<Data>
+type DataMessageEvent = TypedMessageEvent<ApiData>
 
-const store = new MinimalStore()
+const store = new DataParser()
 self.addEventListener("message", (e: DataMessageEvent) => store.parseData(e.data), false)
