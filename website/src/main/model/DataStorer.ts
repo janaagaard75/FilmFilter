@@ -2,12 +2,7 @@ import * as LZString from "lz-string"
 
 import { ApiData } from "./data/ApiData"
 import { Logger } from "../utilities/Logger"
-
-interface TimestampedData {
-  buildTimestamp: number,
-  data: ApiData,
-  storeTimestamp: number
-}
+import { TimestampedData } from "./TimestampedData"
 
 export class DataStorer {
   private static readonly dataKey = "data"
