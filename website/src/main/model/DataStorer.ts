@@ -42,35 +42,15 @@ export class DataStorer {
   }
 
   public static saveData(data: ApiData): Promise<void> {
-    // TODO: This promise doesn't do anyting yet, since it's still single threaded code. This will change with web workers, so keepting the promise.
-    const promise = new Promise<void>(resolve => {
-      Logger.log("Saving data to local storage. Stringifying JSON.")
-      const storedData: TimestampedData = {
-        buildTimestamp: __BUILD_TIMESTAMP__,
-        data: data,
-        storeTimestamp: new Date().valueOf()
-      }
-
-      const dataString = JSON.stringify(storedData)
-      Logger.log("Done stringifying. Compressing to UTF16.")
-      const compressedData = LZString.compressToUTF16(dataString)
-      Logger.log(`Done compressing. Compressed data. Size: ${dataString.length}, compressed: ${compressedData.length}. Saving to local storage.`)
-      localStorage.setItem(DataStorer.dataKey, compressedData)
-      Logger.log("Data saved to local storage.")
-      resolve(undefined)
-    })
-
-    return promise
-  }
-
-  public static saveDataUsingWorker(data: ApiData): Promise<void> {
+    Logger.log("Saving data to local storage using worker.")
     const LzstringWorker = require("../../workers/LzstringWorker") as any
     const lzstringWorker = new LzstringWorker() as Worker
 
     const promise = new Promise<void>(resolve => {
       lzstringWorker.addEventListener("message", (e: TypedMessageEvent<string>) => {
-        const compressedData = e.data
-        localStorage.setItem(DataStorer.dataKey, compressedData)
+        Logger.log("Message received from worker. Saving to local storage.")
+        localStorage.setItem(DataStorer.dataKey, e.data)
+        Logger.log("Saved to local storage. Done saving data to local storage using worker.")
         resolve(undefined)
       })
     })
@@ -86,6 +66,7 @@ export class DataStorer {
       type: "compressTimestampedDataToString"
     }
 
+    Logger.log("Calling worker to stringify and compress JSON.")
     lzstringWorker.postMessage(message)
 
     return promise
