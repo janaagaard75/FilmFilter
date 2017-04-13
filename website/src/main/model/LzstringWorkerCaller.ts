@@ -1,5 +1,4 @@
 import { ApiData } from "./data/ApiData"
-import { Logger } from "../utilities/Logger"
 import { TimestampedData } from "./TimestampedData"
 import { TypedMessageEvent } from "../../workers/TypedMessageEvent"
 import { WorkerMessage } from "../../workers/WorkerMessage"
@@ -17,7 +16,6 @@ export class LzstringWorkerCaller {
 
     const promise = new Promise<string>(resolve => {
       lzstringWorker.addEventListener("message", (e: TypedMessageEvent<string>) => {
-        Logger.log("Worker done compressing timestamped data to string.")
         resolve(e.data)
       })
     })
@@ -27,7 +25,6 @@ export class LzstringWorkerCaller {
       type: "compressTimestampedDataToString"
     }
 
-    Logger.log("Calling worker compress timestamped data.")
     lzstringWorker.postMessage(message)
 
     return promise
@@ -38,7 +35,6 @@ export class LzstringWorkerCaller {
 
     const promise = new Promise<ApiData>(resolve => {
       lzstringWorker.addEventListener("message", (e: TypedMessageEvent<ApiData>) => {
-        Logger.log("Worker done decompressing string to API data.")
         resolve(e.data)
       })
     })
@@ -48,7 +44,6 @@ export class LzstringWorkerCaller {
       type: "decompressStringToApiData"
     }
 
-    Logger.log("Calling worker to decompress to API data.")
     lzstringWorker.postMessage(message)
 
     return promise
