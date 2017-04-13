@@ -5,29 +5,29 @@ import { ImmutableDateTime } from "./moment/ImmutableDateTime"
 import { Language } from "./filters/Language"
 import { Movie } from "./Movie"
 import { SelectableDate } from "./SelectableDate"
+import { ShowingConstructorHelper } from "./ShowingConstructorHelper"
 import { ShowingFlags } from "./api-data/ShowingFlags"
 import { ShowingType } from "./filters/ShowingType"
-import { StoreInterface } from "./StoreInterface"
 import { Theater } from "./Theater"
 import { TimeInterval } from "./filters/TimeInterval"
 
 export class Showing {
   constructor(
     data: ApiShowing,
-    store: StoreInterface
+    helper: ShowingConstructorHelper
   ) {
     this.dubbed = Showing.getFlagValue(data, ShowingFlags.Dubbed)
     this.freeSeats = this.getFreeSeats(data.seatingInfo)
     this.imax = Showing.getFlagValue(data, ShowingFlags.Imax)
-    this.movie = store.getMovie(data.movieIndex)
+    this.movie = helper.getMovie(data.movieIndex)
     this.showingUrl = `http://www.kino.dk/ticketflow/${data.showingId}`
     this.specialShowing = Showing.getFlagValue(data, ShowingFlags.SpecialShowing)
     this.start = new ImmutableDateTime(data.start)
-    this.theater = store.getTheater(data.theaterIndex)
+    this.theater = helper.getTheater(data.theaterIndex)
     this.threeD = Showing.getFlagValue(data, ShowingFlags.ThreeD)
     this.totalSeats = this.getTotalSeats(data.seatingInfo)
 
-    this.date = store.getOrAddSelectableDate(this.start.toDate())
+    this.date = helper.getOrAddSelectableDate(this.start.toDate())
     this.date.addShowing(this)
 
     this.movie.addShowing(this)

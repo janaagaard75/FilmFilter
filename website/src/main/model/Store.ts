@@ -15,12 +15,12 @@ import { ParsedData } from "./ParsedData"
 import { SelectableDate } from "./SelectableDate"
 import { Settings } from "./Settings"
 import { Showing } from "./Showing"
-import { StoreInterface } from "./StoreInterface"
+import { ShowingConstructorHelper } from "./ShowingConstructorHelper"
 import { Strings } from "../utilities/Strings"
 import { Theater } from "./Theater"
 import { TypedMessageEvent } from "../../workers/TypedMessageEvent"
 
-export class Store implements StoreInterface {
+export class Store implements ShowingConstructorHelper {
   @observable public appState: AppState = AppState.Idle
   @observable public dates: Array<SelectableDate> = []
   public readonly filters = new Filters()
