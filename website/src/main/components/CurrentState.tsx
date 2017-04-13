@@ -1,7 +1,5 @@
 import * as React from "react"
 import { Component } from "react"
-import { computed } from "mobx"
-import { observable } from "mobx"
 import { observer } from "mobx-react"
 
 import { AppState } from "../model/AppState"
