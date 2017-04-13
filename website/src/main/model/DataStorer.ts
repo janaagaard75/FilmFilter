@@ -2,9 +2,8 @@ import * as LZString from "lz-string"
 
 import { ApiData } from "./data/ApiData"
 import { Logger } from "../utilities/Logger"
+import { LzstringWorkerCaller } from "./LzstringWorkerCaller"
 import { TimestampedData } from "./TimestampedData"
-import { TypedMessageEvent } from "../../workers/TypedMessageEvent"
-import { WorkerMessage } from "../../workers/WorkerMessage"
 
 export class DataStorer {
   private static readonly dataKey = "data"
@@ -41,35 +40,18 @@ export class DataStorer {
     }
   }
 
-  public static saveData(data: ApiData): Promise<void> {
+  public static async saveData(data: ApiData): Promise<void> {
     Logger.log("Saving data to local storage using worker.")
-    const LzstringWorker = require("../../workers/LzstringWorker") as any
-    const lzstringWorker = new LzstringWorker() as Worker
 
-    const promise = new Promise<void>(resolve => {
-      lzstringWorker.addEventListener("message", (e: TypedMessageEvent<string>) => {
-        Logger.log("Message received from worker. Saving to local storage.")
-        localStorage.setItem(DataStorer.dataKey, e.data)
-        Logger.log("Saved to local storage. Done saving data to local storage using worker.")
-        resolve(undefined)
-      })
-    })
-
-    const storedData: TimestampedData = {
+    const timestampedData: TimestampedData = {
       buildTimestamp: __BUILD_TIMESTAMP__,
       data: data,
       storeTimestamp: new Date().valueOf()
     }
 
-    const message: WorkerMessage<any> = {
-      payload: storedData,
-      type: "compressTimestampedDataToString"
-    }
+    const compressedString = await LzstringWorkerCaller.compressTimestampedDataToString(timestampedData)
 
-    Logger.log("Calling worker to stringify and compress JSON.")
-    lzstringWorker.postMessage(message)
-
-    return promise
+    localStorage.setItem(DataStorer.dataKey, compressedString)
   }
 
   private static isCorrectVersion(storedBuildTimestamp: number) {
