@@ -3,17 +3,18 @@ import * as LZString from "lz-string"
 import { ApiData } from "../main/model/data/ApiData"
 import { TimestampedData } from "../main/model/TimestampedData"
 import { TypedMessageEvent } from "./TypedMessageEvent"
+import { WorkerMessage } from "./WorkerMessage"
 
 class LzstringWorker {
-  public handleMessage(message: LzstringMessage) {
-    switch (message.command) {
+  public handleMessage(message: WorkerMessage<any>) {
+    switch (message.type) {
       case "compressTimestampedDataToString":
-        const compressedData = lzstringWorker.compressTimestampedDataToString(message.value)
+        const compressedData = LzstringWorker.compressTimestampedDataToString(message.payload)
         this.sendMessageBack(compressedData)
         break
 
       case "decompressStringToApiData":
-        const apiDatan = LzstringWorker.decompressStringToApiData(message.value)
+        const apiData = LzstringWorker.decompressStringToApiData(message.payload)
         this.sendMessageBack(apiData)
         break
     }
@@ -36,17 +37,9 @@ class LzstringWorker {
   }
 }
 
-// TODO: Would it be better to let each worker handle a single thing, in order to simplify the API for workers?
-interface LzstringMessage {
-  command: "compressTimestampedDataToString" | "decompressStringToApiData"
-  value: string | TimestampedData
-}
-
-type LzstringMessageEvent = TypedMessageEvent<LzstringMessage>
-
 const lzstringWorker = new LzstringWorker()
 self.addEventListener(
   "message",
-  (e: LzstringMessageEvent) => lzstringWorker.handleMessage(e.data),
+  (e: TypedMessageEvent<WorkerMessage<any>>) => lzstringWorker.handleMessage(e.data),
   false
 )

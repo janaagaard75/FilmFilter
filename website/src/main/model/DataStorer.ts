@@ -3,6 +3,8 @@ import * as LZString from "lz-string"
 import { ApiData } from "./data/ApiData"
 import { Logger } from "../utilities/Logger"
 import { TimestampedData } from "./TimestampedData"
+import { TypedMessageEvent } from "../../workers/TypedMessageEvent"
+import { WorkerMessage } from "../../workers/WorkerMessage"
 
 export class DataStorer {
   private static readonly dataKey = "data"
@@ -57,6 +59,34 @@ export class DataStorer {
       Logger.log("Data saved to local storage.")
       resolve(undefined)
     })
+
+    return promise
+  }
+
+  public static saveDataUsingWorker(data: ApiData): Promise<void> {
+    const LzstringWorker = require("../../workers/LzstringWorker") as any
+    const lzstringWorker = new LzstringWorker() as Worker
+
+    const promise = new Promise<void>(resolve => {
+      lzstringWorker.addEventListener("message", (e: TypedMessageEvent<string>) => {
+        const compressedData = e.data
+        localStorage.setItem(DataStorer.dataKey, compressedData)
+        resolve(undefined)
+      })
+    })
+
+    const storedData: TimestampedData = {
+      buildTimestamp: __BUILD_TIMESTAMP__,
+      data: data,
+      storeTimestamp: new Date().valueOf()
+    }
+
+    const message: WorkerMessage<any> = {
+      payload: storedData,
+      type: "compressTimestampedDataToString"
+    }
+
+    lzstringWorker.postMessage(message)
 
     return promise
   }

@@ -334,8 +334,8 @@ export class Store implements StoreInterface {
     Logger.log("Done parsing and setting data.")
   }
 
-  public setDataAsync(data: ApiData): Promise<void> {
-    const DataParserWorker = require("../../workers/DataParser") as any
+  public setDataUsingWorker(data: ApiData): Promise<void> {
+    const DataParserWorker = require("../../workers/DataParserWorker") as any
     const dataParserWorker = new DataParserWorker() as Worker
 
     const promise = new Promise<void>(resolve => {

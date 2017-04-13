@@ -106,6 +106,7 @@ class DataParser implements StoreInterface {
 
   private sendParsedDataBack(): void {
     // TODO: Fix this. The issue is probably that the objects in ParsedData are too complex. What to do?
+    // tslint:disable-next-line:no-debugger
     debugger
     postMessage(this.parsedData)
   }
