@@ -26,3 +26,4 @@ Data is cached in local storage and so are the settings.
 * The spinner has disappeared when data is being fetched automatically. Has this got something to do with the methods being asynchonous?
 * Links to trailers.
 * IMDb and Rotten Tomatoes score? <https://github.com/worr/node-imdb-api>
+* Fix wiggly loader icon. It's fine one Font Awesome's web site.
