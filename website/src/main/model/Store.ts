@@ -8,10 +8,10 @@ import { Comparer } from "../utilities/Comparer"
 import { DataFetcher } from "./DataFetcher"
 import { DataStorer } from "./DataStorer"
 import { Dates } from "../utilities/Dates"
+import { DryData } from "./DryData"
 import { Filters } from "./filters/Filters"
 import { ImmutableDate } from "./moment/ImmutableDate"
 import { Movie } from "./Movie"
-import { ParsedData } from "./ParsedData"
 import { SelectableDate } from "./SelectableDate"
 import { Settings } from "./Settings"
 import { Showing } from "./Showing"
@@ -326,7 +326,7 @@ export class Store implements ShowingConstructorHelper {
     const dataParserWorker = new DataParserWorker() as Worker
 
     const promise = new Promise<void>(resolve => {
-      dataParserWorker.addEventListener("message", (e: TypedMessageEvent<ParsedData>) => {
+      dataParserWorker.addEventListener("message", (e: TypedMessageEvent<DryData>) => {
         this.dates = e.data.dates
         this.movies = e.data.movies
         this.showings = e.data.showings

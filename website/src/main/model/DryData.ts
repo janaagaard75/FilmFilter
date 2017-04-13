@@ -3,7 +3,7 @@ import { SelectableDate } from "./SelectableDate"
 import { Showing } from "./Showing"
 import { Theater } from "./Theater"
 
-export interface ParsedData {
+export interface DryData {
   dates: Array<SelectableDate>
   movies: Array<Movie>
   showings: Array<Showing>
