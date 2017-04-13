@@ -102,7 +102,7 @@ module.exports = {
         loader: "ts-loader"
       },
       {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: "url-loader",
         query: {
           limit: 10000,
