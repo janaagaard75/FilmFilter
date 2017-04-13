@@ -28,11 +28,6 @@
     ],
     "no-bitwise": false,
     "no-null-keyword": true,
-    "no-unused-variable": [
-      true,
-      "check-parameters",
-      "react"
-    ],
     "object-literal-shorthand": false,
     "one-line": [
       false
