@@ -8,7 +8,6 @@ import { Comparer } from "../utilities/Comparer"
 import { DataFetcher } from "./DataFetcher"
 import { DataStorer } from "./DataStorer"
 import { Dates } from "../utilities/Dates"
-import { DryData } from "./dry-data/DryData"
 import { Filters } from "./filters/Filters"
 import { ImmutableDate } from "./moment/ImmutableDate"
 import { Movie } from "./Movie"
@@ -18,7 +17,6 @@ import { Showing } from "./Showing"
 import { ShowingConstructorHelper } from "./ShowingConstructorHelper"
 import { Strings } from "../utilities/Strings"
 import { Theater } from "./Theater"
-import { TypedMessageEvent } from "../../workers/TypedMessageEvent"
 
 export class Store implements ShowingConstructorHelper {
   @observable public appState: AppState = AppState.Idle
@@ -319,26 +317,6 @@ export class Store implements ShowingConstructorHelper {
     this.sortDates()
 
     this.appState = AppState.Idle
-  }
-
-  public setDataUsingWorker(data: ApiData): Promise<void> {
-    const DataParserWorker = require("../../workers/DataParserWorker") as any
-    const dataParserWorker = new DataParserWorker() as Worker
-
-    const promise = new Promise<void>(resolve => {
-      dataParserWorker.addEventListener("message", (e: TypedMessageEvent<DryData>) => {
-        this.dates = e.data.dates
-        this.movies = e.data.movies
-        this.showings = e.data.showings
-        this.theaters = e.data.theaters
-
-        resolve(undefined)
-      })
-    })
-
-    dataParserWorker.postMessage(data)
-
-    return promise
   }
 
   public setMovieNameFilter(filter: string) {
