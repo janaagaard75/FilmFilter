@@ -1,6 +1,6 @@
 import { observable } from "mobx"
 
-import { ApiMovie } from "./data/ApiMovie"
+import { ApiMovie } from "./api-data/ApiMovie"
 import { Showing } from "./Showing"
 import { Strings } from "../utilities/Strings"
 

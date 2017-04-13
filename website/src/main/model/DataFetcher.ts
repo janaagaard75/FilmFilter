@@ -1,6 +1,6 @@
 import "whatwg-fetch"
 
-import { ApiData } from "./data/ApiData"
+import { ApiData } from "./api-data/ApiData"
 import { LzstringWorkerCaller } from "./LzstringWorkerCaller"
 
 export class DataFetcher {

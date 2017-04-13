@@ -1,6 +1,6 @@
 import { observable } from "mobx"
 
-import { ApiTheater } from "./data/ApiTheater"
+import { ApiTheater } from "./api-data/ApiTheater"
 
 export class Theater {
   constructor(data: ApiTheater) {

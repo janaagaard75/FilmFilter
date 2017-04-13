@@ -1,6 +1,6 @@
 import * as LZString from "lz-string"
 
-import { ApiData } from "./data/ApiData"
+import { ApiData } from "./api-data/ApiData"
 import { Logger } from "../utilities/Logger"
 import { LzstringWorkerCaller } from "./LzstringWorkerCaller"
 import { TimestampedData } from "./TimestampedData"

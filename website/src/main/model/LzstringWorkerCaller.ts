@@ -1,4 +1,4 @@
-import { ApiData } from "./data/ApiData"
+import { ApiData } from "./api-data/ApiData"
 import { TimestampedData } from "./TimestampedData"
 import { TypedMessageEvent } from "../../workers/TypedMessageEvent"
 import { WorkerMessage } from "../../workers/WorkerMessage"
