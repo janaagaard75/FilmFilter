@@ -13,11 +13,10 @@ const jobId = 142200
 const port = 5000
 
 app.set("port", (process.env.PORT || port))
-// app.use(express.static(__dirname + "/public"))
 app.use(cors())
 
 // tslint:disable-next-line no-unused-variable
-app.get("/", async (request, response) => {
+app.get("/", async (_request, response) => {
   console.info("Fetching and parting data.")
 
   const data = await DataUpdater.getData(apiKey, host, jobId)
@@ -26,7 +25,7 @@ app.get("/", async (request, response) => {
 })
 
 // tslint:disable-next-line no-unused-variable
-app.get("/compressed", async (request, response) => {
+app.get("/compressed", async (_request, response) => {
   console.info("Fetching, parting and compressing data.")
 
   const data = await DataUpdater.getData(apiKey, host, jobId)
