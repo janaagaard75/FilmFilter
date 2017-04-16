@@ -17,6 +17,9 @@ export class Movie {
     if (data.danishTitle !== undefined) {
       this.searchableTitle += " " + Strings.searchable(data.danishTitle)
     }
+
+    // "http://cdn01.kino.dk/sites/default/files/imagecache/k_poster_small/imagefield_default_images/movie-default-poster.jpg"
+
   }
 
   @observable public selected: boolean

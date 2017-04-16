@@ -1,1 +1,0 @@
-export type JsonlType = "movies" | "showings" | "theaters"

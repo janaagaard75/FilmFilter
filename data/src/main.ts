@@ -15,16 +15,20 @@ const port = 5000
 app.set("port", (process.env.PORT || port))
 app.use(cors())
 
-// tslint:disable-next-line no-unused-variable
 app.get("/", async (_request, response) => {
   console.info("Fetching and parting data.")
-
   const data = await DataUpdater.getData(apiKey, host, jobId)
   console.info("Done fetching and parsing. Responding.")
   response.json(data)
 })
 
-// tslint:disable-next-line no-unused-variable
+app.get("/v2", async(_requese, response) => {
+  console.info("Fetch and parsing data v2.")
+  const data = await DataUpdater.getDataV2(apiKey, host, jobId)
+  console.info("Done fetching and parsing. Responding.")
+  response.json(data)
+})
+
 app.get("/compressed", async (_request, response) => {
   console.info("Fetching, parting and compressing data.")
 
