@@ -30,9 +30,18 @@ app.get("/v2", async(_requese, response) => {
 })
 
 app.get("/compressed", async (_request, response) => {
-  console.info("Fetching, parting and compressing data.")
-
+  console.info("Fetching, parsing and compressing data.")
   const data = await DataUpdater.getData(apiKey, host, jobId)
+  const compressedData = LZString.compressToBase64(JSON.stringify(data))
+  console.info("Done fetching, parsing and compressing. Responding.")
+  response.setHeader("Content-Transfer-Encoding", "base64")
+  response.contentType("text/plain")
+  response.send(compressedData)
+})
+
+app.get("/compressed-v2", async (_request, response) => {
+  console.info("Fetching, parsing and compressing data.")
+  const data = await DataUpdater.getDataV2(apiKey, host, jobId)
   const compressedData = LZString.compressToBase64(JSON.stringify(data))
   console.info("Done fetching, parsing and compressing. Responding.")
   response.setHeader("Content-Transfer-Encoding", "base64")
