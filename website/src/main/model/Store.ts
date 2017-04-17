@@ -333,10 +333,9 @@ export class Store implements ShowingConstructorHelper {
   public setData(data: ApiData): void {
     this.appState = AppState.ParsingData
 
-    // TODO: Consider using a worker thread to parse this in a separate thread.
     this.dates = []
+    // Don't sort the movies and the theaters, because the showings refer to them by ID in the array.
     this.movies = data.movies.map(movieData => new Movie(movieData))
-    // Don't sort the theaters, because the showings refer to them by ID in the array.
     this.theaters = data.theaters.map(theaterData => new Theater(theaterData))
 
     // TODO: The date strings are being parsed twice, both in here and in the ImmutableMoment constructor. Consider fixing this by adding an intermediate model where start is a date.
@@ -356,7 +355,16 @@ export class Store implements ShowingConstructorHelper {
   }
 
   public setDataV2(data: SerializableData): void {
+    this.appState = AppState.ParsingData
 
+    this.dates = []
+    // Don't sort the movies and the theaters, because the showings refer to them by ID in the array.
+    this.movies = data.movies.map(serializableMovie => new Movie(serializeableMovie))
+    this.theaters = data.theaters.map(serializableTheater => new Theater(serializableTheater))
+
+    const now = Date.now()
+    this.showings = data.showings
+      .filter(serializableShowing => Dates.parseAsLocalDateTime(se
   }
 
   public setMovieNameFilter(filter: string): void {
