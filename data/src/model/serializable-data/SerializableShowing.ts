@@ -32,7 +32,6 @@ export class SerializableShowing {
   public flags: ShowingFlags
   public readonly freeSeats: number
   public readonly movieIndex: number
-  public readonly selectableDateIndex: number // TODO: Not yet set in the constructor.
   public readonly showingId: number
   public readonly start: number
   public readonly theaterIndex: number
