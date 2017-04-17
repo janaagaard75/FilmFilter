@@ -1,6 +1,7 @@
 import { ApiData } from "./api-data/ApiData"
 import { SerializableData } from "./serializable-data/SerializableData"
 import { TimestampedData } from "./TimestampedData"
+import { TimestampedDataV2 } from "./TimestampedDataV2"
 import { TypedMessageEvent } from "../../workers/TypedMessageEvent"
 import { WorkerMessage } from "../../workers/WorkerMessage"
 
@@ -24,6 +25,25 @@ export class LzstringWorkerCaller {
     const message: WorkerMessage<TimestampedData> = {
       payload: timestampedData,
       type: "compressTimestampedDataToString"
+    }
+
+    lzstringWorker.postMessage(message)
+
+    return promise
+  }
+
+  public static compressTimestampedDataV2ToString(timestampedData: TimestampedDataV2): Promise<string> {
+    const lzstringWorker = this.getWorker()
+
+    const promise = new Promise<string>(resolve => {
+      lzstringWorker.addEventListener("message", (e: TypedMessageEvent<string>) => {
+        resolve(e.data)
+      })
+    })
+
+    const message: WorkerMessage<TimestampedDataV2> = {
+      payload: timestampedData,
+      type: "compressTimestampedDataToStringV2"
     }
 
     lzstringWorker.postMessage(message)

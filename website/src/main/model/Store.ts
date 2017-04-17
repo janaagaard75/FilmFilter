@@ -12,6 +12,7 @@ import { Filters } from "./filters/Filters"
 import { ImmutableDate } from "./moment/ImmutableDate"
 import { Movie } from "./Movie"
 import { SelectableDate } from "./SelectableDate"
+import { SerializableData } from "./serializable-data/SerializableData"
 import { Settings } from "./Settings"
 import { Showing } from "./Showing"
 import { ShowingConstructorHelper } from "./ShowingConstructorHelper"
@@ -132,6 +133,20 @@ export class Store implements ShowingConstructorHelper {
 
     this.appState = AppState.SavingData
     await DataStorer.saveData(fetchedData)
+
+    this.appState = AppState.Idle
+    return fetchedData
+  }
+
+  private async fetchAndSaveDataV2(): Promise<SerializableData> {
+    this.appState = AppState.FetchingData
+    const fetchedData = await DataFetcher.fetchDataV2()
+    if (fetchedData === undefined) {
+      throw new Error("Count not fetch data.")
+    }
+
+    this.appState = AppState.SavingData
+    await DataStorer.saveDataV2(fetchedData)
 
     this.appState = AppState.Idle
     return fetchedData

@@ -3,6 +3,7 @@ import * as LZString from "lz-string"
 import { ApiData } from "../main/model/api-data/ApiData"
 import { SerializableData } from "../main/model/serializable-data/SerializableData"
 import { TimestampedData } from "../main/model/TimestampedData"
+import { TimestampedDataV2 } from "../main/model/TimestampedDataV2"
 import { TypedMessageEvent } from "./TypedMessageEvent"
 import { WorkerMessage } from "./WorkerMessage"
 
@@ -14,9 +15,19 @@ class LzstringWorker {
         this.sendMessageBack(compressedData)
         break
 
+      case "compressTimestampedDataToStringV2":
+        const compressedDataV2 = LzstringWorker.compressTimestampedDataToStringV2(message.payload)
+        this.sendMessageBack(compressedDataV2)
+        break
+
       case "decompressStringToApiData":
         const apiData = LzstringWorker.decompressStringToApiData(message.payload)
         this.sendMessageBack(apiData)
+        break
+
+      case "decompressStringToSerializableData":
+        const serializableData = LzstringWorker.decompressStringToApiData(message.payload)
+        this.sendMessageBack(serializableData)
         break
     }
   }
@@ -26,6 +37,12 @@ class LzstringWorker {
   }
 
   private static compressTimestampedDataToString(timestampedData: TimestampedData): string {
+    const dataString = JSON.stringify(timestampedData)
+    const compressedData = LZString.compressToUTF16(dataString)
+    return compressedData
+  }
+
+  private static compressTimestampedDataToStringV2(timestampedData: TimestampedDataV2): string {
     const dataString = JSON.stringify(timestampedData)
     const compressedData = LZString.compressToUTF16(dataString)
     return compressedData

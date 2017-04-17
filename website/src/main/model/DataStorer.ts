@@ -3,10 +3,13 @@ import * as LZString from "lz-string"
 import { ApiData } from "./api-data/ApiData"
 import { Logger } from "../utilities/Logger"
 import { LzstringWorkerCaller } from "./LzstringWorkerCaller"
+import { SerializableData } from "./serializable-data/SerializableData"
 import { TimestampedData } from "./TimestampedData"
+import { TimestampedDataV2 } from "./TimestampedDataV2"
 
 export class DataStorer {
   private static readonly dataKey = "data"
+  private static readonly dataKeyV2 = "dataV2"
 
   public static dataIsOkay(storedData: TimestampedData | undefined): storedData is TimestampedData {
     const isUpToDate = storedData !== undefined
@@ -47,6 +50,18 @@ export class DataStorer {
     const compressedString = await LzstringWorkerCaller.compressTimestampedDataToString(timestampedData)
 
     localStorage.setItem(DataStorer.dataKey, compressedString)
+  }
+
+  public static async saveDataV2(data: SerializableData): Promise<void> {
+    const timestampedData: TimestampedDataV2 = {
+      buildTimestamp: __BUILD_TIMESTAMP__,
+      data: data,
+      storeTimestamp: new Date().valueOf()
+    }
+
+    const compressedString = await LzstringWorkerCaller.compressTimestampedDataV2ToString(timestampedData)
+
+    localStorage.setItem(DataStorer.dataKeyV2, compressedString)
   }
 
   private static isCorrectVersion(storedBuildTimestamp: number) {
