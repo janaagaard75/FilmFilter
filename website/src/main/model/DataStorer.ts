@@ -19,6 +19,19 @@ export class DataStorer {
     if (isUpToDate) {
       Logger.log("The stored data is from the correct build and recent enough.")
     }
+
+    return isUpToDate
+  }
+
+  public static dataIsOkayV2(storedData: TimestampedDataV2 | undefined): storedData is TimestampedDataV2 {
+    const isUpToDate = storedData !== undefined
+      && DataStorer.isCorrectVersion(storedData.buildTimestamp)
+      && DataStorer.isRecentEnough(storedData.storeTimestamp)
+
+    if (isUpToDate) {
+      Logger.log("The stored data is from the coorect build and recent enough.")
+    }
+
     return isUpToDate
   }
 
@@ -33,6 +46,24 @@ export class DataStorer {
 
     try {
       return JSON.parse(dataString) as TimestampedData
+    }
+    catch (error) {
+      console.error(error)
+      return undefined
+    }
+  }
+
+  public static loadDataV2(): TimestampedDataV2 | undefined {
+    const compressedData = localStorage.getItem(DataStorer.dataKeyV2)
+    // tslint:disable-next-line:no-null-keyword
+    if (compressedData === null) {
+      return undefined
+    }
+
+    const dataString = LZString.decompressFromUTF16(compressedData)
+
+    try {
+      return JSON.parse(dataString) as TimestampedDataV2
     }
     catch (error) {
       console.error(error)

@@ -100,7 +100,7 @@ export class Store implements ShowingConstructorHelper {
     return sortedTheaters
   }
 
-  private addMissingDates() {
+  private addMissingDates(): void {
     this.sortDates()
     const earliest = this.dates[0].date
     const latest = this.dates[this.dates.length - 1].date
@@ -110,7 +110,7 @@ export class Store implements ShowingConstructorHelper {
     }
   }
 
-  private addStartAndEndDates() {
+  private addStartAndEndDates(): void {
     this.sortDates()
     const earliest = this.dates[0].date
     const latest = this.dates[this.dates.length - 1].date
@@ -154,8 +154,12 @@ export class Store implements ShowingConstructorHelper {
 
   public async fetchAndUpdateData(): Promise<void> {
     const data = await this.fetchAndSaveData()
-    // TODO: Switch to the asynchronous version.
     await this.setData(data)
+  }
+
+  public async fetchAndUpdateDataV2(): Promise<void> {
+    const data = await this.fetchAndSaveDataV2()
+    await this.setDataV2(data)
   }
 
   public getMovie(movieId: number): Movie {
@@ -192,7 +196,7 @@ export class Store implements ShowingConstructorHelper {
     return theater
   }
 
-  public initialize() {
+  public initialize(): void {
     reaction(
       () => this.filters.dimensions.threeD,
       () => this.saveSettings()
@@ -256,14 +260,31 @@ export class Store implements ShowingConstructorHelper {
       data = await this.fetchAndSaveData()
     }
 
-    // TODO: Switch to the asynchronous version.
     await this.setData(data)
     this.loadSettings()
 
     this.appState = AppState.Idle
   }
 
-  private loadSettings() {
+  public async initializeDataV2(): Promise<void> {
+    this.appState = AppState.LoadingData
+    const storedData = DataStorer.loadDataV2()
+
+    let data: SerializableData
+    if (DataStorer.dataIsOkayV2(storedData)) {
+      data = storedData.data
+    }
+    else {
+      data = await this.fetchAndSaveDataV2()
+    }
+
+    await this.setDataV2(data)
+    this.loadSettings()
+
+    this.appState = AppState.Idle
+  }
+
+  private loadSettings(): void {
     this.appState = AppState.LoadingSettings
 
     const settingsString = localStorage.getItem("settings")
@@ -293,7 +314,7 @@ export class Store implements ShowingConstructorHelper {
     this.appState = AppState.Idle
   }
 
-  private saveSettings() {
+  private saveSettings(): void {
     if (this.appState !== AppState.Idle) {
       return
     }
@@ -334,11 +355,15 @@ export class Store implements ShowingConstructorHelper {
     this.appState = AppState.Idle
   }
 
-  public setMovieNameFilter(filter: string) {
+  public setDataV2(data: SerializableData): void {
+
+  }
+
+  public setMovieNameFilter(filter: string): void {
     this.movieNameFilter = Strings.searchable(filter)
   }
 
-  private sortDates() {
+  private sortDates(): void {
     this.dates = this.dates.sort((a, b) => a.date.diff(b.date))
   }
 }
