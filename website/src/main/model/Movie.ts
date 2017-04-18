@@ -1,25 +1,18 @@
 import { observable } from "mobx"
 
-import { ApiMovie } from "./api-data/ApiMovie"
+import { SerializableMovie } from "./serializable-data/SerializableMovie"
 import { Showing } from "./Showing"
 import { Strings } from "../utilities/Strings"
 
 export class Movie {
-  constructor(data: ApiMovie) {
-    this.danishTitle = data.danishTitle
-    this.movieUrl = "http://www.kino.dk/" + data.movieUrl
-    this.originalTitle = data.originalTitle
-    this.posterUrl = data.posterUrl
+  constructor(serializableMovie: SerializableMovie) {
+    this.danishTitle = serializableMovie.danishTitle
+    this.movieUrl = "http://www.kino.dk/" + serializableMovie.movieUrl
+    this.originalTitle = serializableMovie.originalTitle
+    this.posterUrl = Movie.getPosterUrl(serializableMovie.posterUrl)
+    this.searchableTitle = Movie.getSearchableTitle(serializableMovie.danishTitle, serializableMovie.originalTitle)
     this.selected = false
     this.showings = []
-
-    this.searchableTitle = Strings.searchable(data.originalTitle)
-    if (data.danishTitle !== undefined) {
-      this.searchableTitle += " " + Strings.searchable(data.danishTitle)
-    }
-
-    // "http://cdn01.kino.dk/sites/default/files/imagecache/k_poster_small/imagefield_default_images/movie-default-poster.jpg"
-
   }
 
   @observable public selected: boolean
@@ -64,5 +57,22 @@ export class Movie {
 
   public toggleSelection(): void {
     this.selected = !this.selected
+  }
+
+  private static getPosterUrl(posterUrl: string | undefined): string {
+    if (posterUrl === undefined) {
+      return "http://cdn01.kino.dk/sites/default/files/imagecache/k_poster_small/imagefield_default_images/movie-default-poster.jpg"
+    }
+
+    return posterUrl
+  }
+
+  private static getSearchableTitle(danishTitle: string | undefined, originalTitle: string): string {
+    let searchableTitle = Strings.searchable(originalTitle)
+    if (danishTitle !== undefined) {
+      searchableTitle += " " + Strings.searchable(danishTitle)
+    }
+
+    return searchableTitle
   }
 }
