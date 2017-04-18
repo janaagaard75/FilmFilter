@@ -6,7 +6,7 @@ import { ImmutableDate } from "./ImmutableDate"
 import { ImmutableMoment } from "./ImmutableMoment"
 
 export class ImmutableDateTime extends ImmutableMoment {
-  constructor(dateTime?: string | Moment) {
+  constructor(dateTime?: Moment | string | number) {
     super(dateTime)
   }
 

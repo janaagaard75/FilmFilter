@@ -1,10 +1,10 @@
-import { ApiShowing } from "./api-data/ApiShowing"
 import { Dimensions } from "./filters/Dimensions"
 import { FilmType } from "./filters/FilmType"
 import { ImmutableDateTime } from "./moment/ImmutableDateTime"
 import { Language } from "./filters/Language"
 import { Movie } from "./Movie"
 import { SelectableDate } from "./SelectableDate"
+import { SerializableShowing } from "./serializable-data/SerializableShowing"
 import { ShowingConstructorHelper } from "./ShowingConstructorHelper"
 import { ShowingFlags } from "./api-data/ShowingFlags"
 import { ShowingType } from "./filters/ShowingType"
@@ -13,19 +13,19 @@ import { TimeInterval } from "./filters/TimeInterval"
 
 export class Showing {
   constructor(
-    data: ApiShowing,
+    serializableShowing: SerializableShowing,
     helper: ShowingConstructorHelper
   ) {
-    this.dubbed = Showing.getFlagValue(data, ShowingFlags.Dubbed)
-    this.freeSeats = this.getFreeSeats(data.seatingInfo)
-    this.imax = Showing.getFlagValue(data, ShowingFlags.Imax)
-    this.movie = helper.getMovie(data.movieIndex)
-    this.showingUrl = `http://www.kino.dk/ticketflow/${data.showingId}`
-    this.specialShowing = Showing.getFlagValue(data, ShowingFlags.SpecialShowing)
-    this.start = new ImmutableDateTime(data.start)
-    this.theater = helper.getTheater(data.theaterIndex)
-    this.threeD = Showing.getFlagValue(data, ShowingFlags.ThreeD)
-    this.totalSeats = this.getTotalSeats(data.seatingInfo)
+    this.dubbed = Showing.getFlagValue(serializableShowing, ShowingFlags.Dubbed)
+    this.freeSeats = serializableShowing.freeSeats
+    this.imax = Showing.getFlagValue(serializableShowing, ShowingFlags.Imax)
+    this.movie = helper.getMovie(serializableShowing.movieIndex)
+    this.showingUrl = `http://www.kino.dk/ticketflow/${serializableShowing.showingId}`
+    this.specialShowing = Showing.getFlagValue(serializableShowing, ShowingFlags.SpecialShowing)
+    this.start = new ImmutableDateTime(serializableShowing.start)
+    this.theater = helper.getTheater(serializableShowing.theaterIndex)
+    this.threeD = Showing.getFlagValue(serializableShowing, ShowingFlags.ThreeD)
+    this.totalSeats = serializableShowing.totalSeats
 
     this.date = helper.getOrAddSelectableDate(this.start.toDate())
     this.date.addShowing(this)
@@ -45,21 +45,9 @@ export class Showing {
   public readonly threeD: boolean
   public readonly totalSeats: number
 
-  private static getFlagValue(data: ApiShowing, flag: ShowingFlags): boolean {
-    const flagValue = (data.flags & flag) > 0
+  private static getFlagValue(serializableShowing: SerializableShowing, flag: ShowingFlags): boolean {
+    const flagValue = (serializableShowing.flags & flag) > 0
     return flagValue
-  }
-
-  private getFreeSeats(seatingInfo: Array<string>): number {
-    const freeSeatsLine = seatingInfo.filter(info => info.startsWith("Ledige"))[0]
-    const freeSeats = parseInt(freeSeatsLine.substring("Ledige: ".length), 10)
-    return freeSeats
-  }
-
-  private getTotalSeats(seatingInfo: Array<string>): number {
-    const totalSeatsLine = seatingInfo.filter(info => info.startsWith("Sæder"))[0]
-    const totalSeats = parseInt(totalSeatsLine.substring("Sæder: ".length), 10)
-    return totalSeats
   }
 
   public matchesDimensionsFilter(dimensions: Dimensions): boolean {

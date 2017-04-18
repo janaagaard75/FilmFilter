@@ -5,7 +5,7 @@ import { Comparer } from "../../utilities/Comparer"
 import { Dates } from "../../utilities/Dates"
 
 export abstract class ImmutableMoment {
-  constructor(dateTime?: string | Moment) {
+  constructor(dateTime?: Moment | string | number) {
     if (dateTime === undefined) {
       this.moment = moment()
     }
