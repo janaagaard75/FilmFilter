@@ -359,12 +359,22 @@ export class Store implements ShowingConstructorHelper {
 
     this.dates = []
     // Don't sort the movies and the theaters, because the showings refer to them by ID in the array.
-    this.movies = data.movies.map(serializableMovie => new Movie(serializeableMovie))
+    this.movies = data.movies.map(serializableMovie => new Movie(serializableMovie))
     this.theaters = data.theaters.map(serializableTheater => new Theater(serializableTheater))
 
     const now = Date.now()
     this.showings = data.showings
-      .filter(serializableShowing => Dates.parseAsLocalDateTime(se
+      .filter(serializableShowing => serializableShowing.start >= now)
+      .map(serializableShowing => new Showing(serializableShowing, this))
+      .sort((showingA, showingB) => showingA.start.diff(showingB.start)) // TODO: Add compare method.
+
+    this.movies = this.movies.sort(Movie.compareByNumberOfShowings)
+
+    this.addMissingDates()
+    this.addStartAndEndDates()
+    this.sortDates()
+
+    this.appState = AppState.Idle
   }
 
   public setMovieNameFilter(filter: string): void {
