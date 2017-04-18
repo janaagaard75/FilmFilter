@@ -1,13 +1,13 @@
 import { observable } from "mobx"
 
-import { ApiTheater } from "./api-data/ApiTheater"
+import { SerializableTheater } from "./serializable-data/SerializableTheater"
 
 export class Theater {
-  constructor(data: ApiTheater) {
+  constructor(serializableTheater: SerializableTheater) {
     this.favorited = false
-    this.name = Theater.cleanUpTheaterName(data.name)
+    this.name = Theater.cleanUpTheaterName(serializableTheater.name)
     this.selected = false
-    this.theaterId = data.theaterUrl.replace("biografer/", "")
+    this.theaterId = serializableTheater.theaterId
   }
 
   public readonly name: string
@@ -23,7 +23,7 @@ export class Theater {
 
   public static readonly UndefinedTheater = new Theater({
     name: "",
-    theaterUrl: ""
+    theaterId: ""
   })
 
   private static cleanUpTheaterName(originalName: string) {
