@@ -1,9 +1,10 @@
 // tslint:disable object-literal-sort-keys
+const BabiliPlugin = require("babili-webpack-plugin")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const path = require("path")
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+// const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require("webpack")
 
 const nodeEnv = process.env.NODE_ENV || "development"
@@ -36,10 +37,13 @@ const plugins = [
 ]
 
 if (isProduction) {
+  // plugins.push(
+  //   new UglifyJSPlugin({
+  //     sourceMap: true
+  //   })
+  // )
   plugins.push(
-    new UglifyJSPlugin({
-      sourceMap: true
-    })
+    new BabiliPlugin()
   )
 }
 else {
