@@ -1,8 +1,8 @@
 import { SerializableData } from "./SerializableData"
 import { SerializableMovie } from "./SerializableMovie"
-import { ShowingFlags } from "../output/ShowingFlags"
+import { ShowingFlags } from "./ShowingFlags"
 import { ShowingLine } from "../input/ShowingLine"
-import { UrlUtil } from "../output/UrlUtil"
+import { UrlUtil } from "./UrlUtil"
 
 export class SerializableShowing {
   constructor(

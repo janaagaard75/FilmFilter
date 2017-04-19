@@ -15,24 +15,7 @@ const port = 5000
 app.set("port", (process.env.PORT || port))
 app.use(cors())
 
-app.get("/", async (_request, response) => {
-  console.info("Fetching and parting data.")
-  const data = await DataUpdater.getData(apiKey, host, jobId)
-  console.info("Done fetching and parsing. Responding.")
-  response.json(data)
-})
-
-app.get("/compressed", async (_request, response) => {
-  console.info("Fetching, parsing and compressing data.")
-  const data = await DataUpdater.getData(apiKey, host, jobId)
-  const compressedData = LZString.compressToBase64(JSON.stringify(data))
-  console.info("Done fetching, parsing and compressing. Responding.")
-  response.setHeader("Content-Transfer-Encoding", "base64")
-  response.contentType("text/plain")
-  response.send(compressedData)
-})
-
-app.get("/v2", async(_requese, response) => {
+app.get("/v2", async (_requese, response) => {
   console.info("Fetch and parsing data v2.")
   const data = await DataUpdater.getDataV2(apiKey, host, jobId)
   console.info("Done fetching and parsing. Responding.")

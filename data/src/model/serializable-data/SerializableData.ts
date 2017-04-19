@@ -4,7 +4,7 @@ import { SerializableShowing } from "./SerializableShowing"
 import { SerializableTheater } from "./SerializableTheater"
 import { ShowingLine } from "../input/ShowingLine"
 import { TheaterLine } from "../input/TheaterLine"
-import { UrlUtil } from "../output/UrlUtil"
+import { UrlUtil } from "./UrlUtil"
 
 export class SerializableData {
   constructor(

@@ -3,26 +3,17 @@ import fetch from "node-fetch"
 import { JobInfo } from "./model/JobInfo"
 import { JsonlType } from "./model/JsonlType"
 import { MovieLine } from "./model/input/MovieLine"
-import { OutputData } from "./model/output/OutputData"
 import { SerializableData } from "./model/serializable-data/SerializableData"
 import { ShowingLine } from "./model/input/ShowingLine"
 import { TheaterLine } from "./model/input/TheaterLine"
 import { TypedJsonl } from "./model/TypedJsonl"
 
 export class DataUpdater {
-  public static async getData(apiKey: string, host: string, jobId: number): Promise<OutputData> {
-    const protocolKeyAndHost = `https://${apiKey}:@${host}/`
-    const jobInfos = await DataUpdater.fetchJobInfos(protocolKeyAndHost, jobId)
-    const typedJsonls = await DataUpdater.fetchJsonls(protocolKeyAndHost, jobInfos)
-    const data = DataUpdater.parseAndMergeJsonl(typedJsonls)
-    return data
-  }
-
   public static async getDataV2(apiKey: string, host: string, jobId: number): Promise<SerializableData> {
     const protocolKeyAndHost = `https://${apiKey}:@${host}/`
     const jobInfos = await DataUpdater.fetchJobInfos(protocolKeyAndHost, jobId)
     const typedJsonls = await DataUpdater.fetchJsonls(protocolKeyAndHost, jobInfos)
-    const data = DataUpdater.parseAndMergeJsonlV2(typedJsonls)
+    const data = DataUpdater.parseAndMergeJsonl(typedJsonls)
     return data
   }
 
@@ -56,16 +47,7 @@ export class DataUpdater {
     return Promise.all(dataFetchers)
   }
 
-  private static parseAndMergeJsonl(typedJsonls: Array<TypedJsonl>): OutputData {
-    const movieLines = DataUpdater.parseLines<MovieLine>(typedJsonls, "movies")
-    const showingLines = DataUpdater.parseLines<ShowingLine>(typedJsonls, "showings")
-    const theaterLines = DataUpdater.parseLines<TheaterLine>(typedJsonls, "theaters")
-
-    const data = new OutputData(movieLines, showingLines, theaterLines)
-    return data
-  }
-
-  private static parseAndMergeJsonlV2(typedJsonls: Array<TypedJsonl>): SerializableData {
+  private static parseAndMergeJsonl(typedJsonls: Array<TypedJsonl>): SerializableData {
     const movieLines = DataUpdater.parseLines<MovieLine>(typedJsonls, "movies")
     const showingLines = DataUpdater.parseLines<ShowingLine>(typedJsonls, "showings")
     const theaterLines = DataUpdater.parseLines<TheaterLine>(typedJsonls, "theaters")

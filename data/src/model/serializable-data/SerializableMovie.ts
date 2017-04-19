@@ -1,5 +1,5 @@
 import { MovieLine } from "../input/MovieLine"
-import { UrlUtil } from "../output/UrlUtil"
+import { UrlUtil } from "./UrlUtil"
 
 export class SerializableMovie {
   constructor(movieLine: MovieLine) {

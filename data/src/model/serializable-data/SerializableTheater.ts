@@ -1,5 +1,5 @@
 import { TheaterLine } from "../input/TheaterLine"
-import { UrlUtil } from "../output/UrlUtil"
+import { UrlUtil } from "./UrlUtil"
 
 export class SerializableTheater {
   constructor(theaterLine: TheaterLine) {
