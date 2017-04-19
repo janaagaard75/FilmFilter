@@ -35,7 +35,8 @@ export class SerializableMovie {
   public static noPosterUrl = "NO_POSTER_URL"
 
   public equals(other: SerializableMovie) {
-    const equals = this.danishTitle === other.danishTitle
+    const equals =
+      this.danishTitle === other.danishTitle
       && this.movieUrl === other.movieUrl
       && this.originalTitle === other.originalTitle
       && this.posterUrl === other.posterUrl

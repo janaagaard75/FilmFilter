@@ -1,10 +1,16 @@
+import { SerializableMovie } from "../serializable-data/SerializableMovie"
+
 export class UrlUtil {
   private static readonly standardUrlPrefix = "http://www.kino.dk/"
   private static readonly movieUrlPrefix = UrlUtil.standardUrlPrefix + "film/"
   private static readonly showingUrlPrefix = UrlUtil.standardUrlPrefix + "ticketflow/"
   private static readonly theaterUrlPrefix = UrlUtil.standardUrlPrefix + "biografer/"
 
-  public static getMovieUrl(prefixedMovieUrl: string): string {
+  public static getMovieUrl(prefixedMovieUrl: string): string | undefined {
+    if (prefixedMovieUrl === SerializableMovie.noMovieUrl) {
+      return undefined
+    }
+
     const movieUrl = prefixedMovieUrl.slice(this.movieUrlPrefix.length)
     return movieUrl
   }

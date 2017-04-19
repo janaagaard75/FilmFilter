@@ -14,7 +14,6 @@ export class SerializableData {
   ) {
     this.movies = movieLines
       .map(line => new SerializableMovie(line))
-      // TODO: This does not remove duplicates. Fix it.
       .filter((movie, index, array) => array.findIndex(m => m.equals(movie)) === index)
 
     this.theaters = theaterLines.map(line => new SerializableTheater(line))
