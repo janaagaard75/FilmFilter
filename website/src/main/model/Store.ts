@@ -2,12 +2,10 @@ import { computed } from "mobx"
 import { observable } from "mobx"
 import { reaction } from "mobx"
 
-// import { ApiData } from "./api-data/ApiData"
 import { AppState } from "./AppState"
 import { Comparer } from "../utilities/Comparer"
 import { DataFetcher } from "./DataFetcher"
 import { DataStorer } from "./DataStorer"
-// import { Dates } from "../utilities/Dates"
 import { Filters } from "./filters/Filters"
 import { ImmutableDate } from "./moment/ImmutableDate"
 import { Movie } from "./Movie"
@@ -124,20 +122,6 @@ export class Store implements ShowingConstructorHelper {
     }
   }
 
-  // private async fetchAndSaveData(): Promise<ApiData> {
-  //   this.appState = AppState.FetchingData
-  //   const fetchedData = await DataFetcher.fetchData()
-  //   if (fetchedData === undefined) {
-  //     throw new Error("Could not fetch data.")
-  //   }
-
-  //   this.appState = AppState.SavingData
-  //   await DataStorer.saveData(fetchedData)
-
-  //   this.appState = AppState.Idle
-  //   return fetchedData
-  // }
-
   private async fetchAndSaveDataV2(): Promise<SerializableData> {
     this.appState = AppState.FetchingData
     const fetchedData = await DataFetcher.fetchDataV2()
@@ -151,11 +135,6 @@ export class Store implements ShowingConstructorHelper {
     this.appState = AppState.Idle
     return fetchedData
   }
-
-  // public async fetchAndUpdateData(): Promise<void> {
-  //   const data = await this.fetchAndSaveData()
-  //   await this.setData(data)
-  // }
 
   public async fetchAndUpdateDataV2(): Promise<void> {
     const data = await this.fetchAndSaveDataV2()
@@ -249,24 +228,6 @@ export class Store implements ShowingConstructorHelper {
     )
   }
 
-  // public async initializeData(): Promise<void> {
-  //   this.appState = AppState.LoadingData
-  //   const storedData = DataStorer.loadData()
-
-  //   let data: ApiData
-  //   if (DataStorer.dataIsOkay(storedData)) {
-  //     data = storedData.data
-  //   }
-  //   else {
-  //     data = await this.fetchAndSaveData()
-  //   }
-
-  //   await this.setData(data)
-  //   this.loadSettings()
-
-  //   this.appState = AppState.Idle
-  // }
-
   public async initializeDataV2(): Promise<void> {
     this.appState = AppState.LoadingData
     const storedData = DataStorer.loadDataV2()
@@ -330,30 +291,6 @@ export class Store implements ShowingConstructorHelper {
     const settingsString = JSON.stringify(settings)
     localStorage.setItem("settings", settingsString)
   }
-
-  // public setData(data: ApiData): void {
-  //   this.appState = AppState.ParsingData
-
-  //   this.dates = []
-  //   // Don't sort the movies and the theaters, because the showings refer to them by ID in the array.
-  //   this.movies = data.movies.map(movieData => new Movie(movieData))
-  //   this.theaters = data.theaters.map(theaterData => new Theater(theaterData))
-
-  //   // TODO: The date strings are being parsed twice, both in here and in the ImmutableMoment constructor. Consider fixing this by adding an intermediate model where start is a date.
-  //   const now = Date.now()
-  //   this.showings = data.showings
-  //     .filter(showingData => Dates.parseAsLocalDateTime(showingData.start).valueOf() >= now)
-  //     .map(showingData => new Showing(showingData, this))
-  //     .sort((showingA, showingB) => showingA.start.diff(showingB.start))
-
-  //   this.movies = this.movies.sort(Movie.compareByNumberOfShowings)
-
-  //   this.addMissingDates()
-  //   this.addStartAndEndDates()
-  //   this.sortDates()
-
-  //   this.appState = AppState.Idle
-  // }
 
   public setDataV2(data: SerializableData): void {
     this.appState = AppState.ParsingData
