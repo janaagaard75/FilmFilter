@@ -40,7 +40,7 @@ export class SerializableData {
   }
 
   public getMovieIndexFromUrl(prefixedMovieUrl: string): number {
-    const movieUrl = UrlUtil.removeStandardPrefix(prefixedMovieUrl)
+    const movieUrl = UrlUtil.getMovieUrl(prefixedMovieUrl)
     const movie = this.movies.find(m => m.movieUrl === movieUrl)
 
     if (movie === undefined) {

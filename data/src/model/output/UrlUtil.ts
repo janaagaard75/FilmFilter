@@ -19,6 +19,7 @@ export class UrlUtil {
     return slicedUrl
   }
 
+  // TODO: Remove this method.
   public static removeStandardPrefix(prefixedUrl: string): string {
     const slicedUrl = prefixedUrl.slice(this.standardUrlPrefix.length)
     return slicedUrl
