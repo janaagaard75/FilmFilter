@@ -1,4 +1,4 @@
-import { ShowingFlags } from "../api-data/ShowingFlags"
+import { ShowingFlags } from "./ShowingFlags"
 
 export interface SerializableShowing {
   readonly flags: ShowingFlags

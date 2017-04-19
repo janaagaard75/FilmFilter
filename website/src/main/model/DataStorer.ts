@@ -6,9 +6,9 @@ import { SerializableData } from "./serializable-data/SerializableData"
 import { TimestampedData } from "./TimestampedData"
 
 export class DataStorer {
-  private static readonly dataKeyV2 = "dataV2"
+  private static readonly dataKey = "data"
 
-  public static dataIsOkayV2(storedData: TimestampedData | undefined): storedData is TimestampedData {
+  public static dataIsOkay(storedData: TimestampedData | undefined): storedData is TimestampedData {
     const isUpToDate = storedData !== undefined
       && DataStorer.isCorrectVersion(storedData.buildTimestamp)
       && DataStorer.isRecentEnough(storedData.storeTimestamp)
@@ -20,8 +20,8 @@ export class DataStorer {
     return isUpToDate
   }
 
-  public static loadDataV2(): TimestampedData | undefined {
-    const compressedData = localStorage.getItem(DataStorer.dataKeyV2)
+  public static loadData(): TimestampedData | undefined {
+    const compressedData = localStorage.getItem(DataStorer.dataKey)
     // tslint:disable-next-line:no-null-keyword
     if (compressedData === null) {
       return undefined
@@ -38,16 +38,16 @@ export class DataStorer {
     }
   }
 
-  public static async saveDataV2(data: SerializableData): Promise<void> {
+  public static async saveData(data: SerializableData): Promise<void> {
     const timestampedData: TimestampedData = {
       buildTimestamp: __BUILD_TIMESTAMP__,
       data: data,
       storeTimestamp: new Date().valueOf()
     }
 
-    const compressedString = await LzstringWorkerCaller.compressTimestampedDataV2ToString(timestampedData)
+    const compressedString = await LzstringWorkerCaller.compressTimestampedDataToString(timestampedData)
 
-    localStorage.setItem(DataStorer.dataKeyV2, compressedString)
+    localStorage.setItem(DataStorer.dataKey, compressedString)
   }
 
   private static isCorrectVersion(storedBuildTimestamp: number) {

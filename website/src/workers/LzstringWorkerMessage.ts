@@ -1,5 +1,5 @@
 import { WorkerMessage } from "./WorkerMessage"
 
-type LzstringWorkerMessageType = "compressTimestampedDataToStringV2" | "decompressStringToSerializableData"
+type LzstringWorkerMessageType = "compressTimestampedDataToString" | "decompressStringToSerializableData"
 
 export type LzstringWorkerMessage = WorkerMessage<LzstringWorkerMessageType>

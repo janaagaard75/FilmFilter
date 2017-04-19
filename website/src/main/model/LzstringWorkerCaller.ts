@@ -11,7 +11,7 @@ export class LzstringWorkerCaller {
     return lzstringWorker
   }
 
-  public static compressTimestampedDataV2ToString(timestampedData: TimestampedData): Promise<string> {
+  public static compressTimestampedDataToString(timestampedData: TimestampedData): Promise<string> {
     const lzstringWorker = this.getWorker()
 
     const promise = new Promise<string>(resolve => {
@@ -22,7 +22,7 @@ export class LzstringWorkerCaller {
 
     const message: LzstringWorkerMessage = {
       payload: timestampedData,
-      type: "compressTimestampedDataToStringV2"
+      type: "compressTimestampedDataToString"
     }
 
     lzstringWorker.postMessage(message)

@@ -2,15 +2,15 @@ import * as LZString from "lz-string"
 
 import { LzstringWorkerMessage } from "./LzstringWorkerMessage"
 import { SerializableData } from "../main/model/serializable-data/SerializableData"
-import { TimestampedData } from "../main/model/TimestampedDataV2"
+import { TimestampedData } from "../main/model/TimestampedData"
 import { TypedMessageEvent } from "./TypedMessageEvent"
 
 class LzstringWorker {
   public handleMessage(message: LzstringWorkerMessage) {
     switch (message.type) {
-      case "compressTimestampedDataToStringV2":
-        const compressedDataV2 = LzstringWorker.compressTimestampedDataToStringV2(message.payload)
-        this.sendMessageBack(compressedDataV2)
+      case "compressTimestampedDataToString":
+        const compressedData = LzstringWorker.compressTimestampedDataToString(message.payload)
+        this.sendMessageBack(compressedData)
         break
 
       case "decompressStringToSerializableData":
@@ -27,7 +27,7 @@ class LzstringWorker {
     postMessage(data)
   }
 
-  private static compressTimestampedDataToStringV2(timestampedData: TimestampedData): string {
+  private static compressTimestampedDataToString(timestampedData: TimestampedData): string {
     const dataString = JSON.stringify(timestampedData)
     const compressedData = LZString.compressToUTF16(dataString)
     return compressedData

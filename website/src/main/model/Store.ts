@@ -122,23 +122,23 @@ export class Store implements ShowingConstructorHelper {
     }
   }
 
-  private async fetchAndSaveDataV2(): Promise<SerializableData> {
+  private async fetchAndSaveData(): Promise<SerializableData> {
     this.appState = AppState.FetchingData
-    const fetchedData = await DataFetcher.fetchDataV2()
+    const fetchedData = await DataFetcher.fetchData()
     if (fetchedData === undefined) {
       throw new Error("Count not fetch data.")
     }
 
     this.appState = AppState.SavingData
-    await DataStorer.saveDataV2(fetchedData)
+    await DataStorer.saveData(fetchedData)
 
     this.appState = AppState.Idle
     return fetchedData
   }
 
-  public async fetchAndUpdateDataV2(): Promise<void> {
-    const data = await this.fetchAndSaveDataV2()
-    await this.setDataV2(data)
+  public async fetchAndUpdateData(): Promise<void> {
+    const data = await this.fetchAndSaveData()
+    await this.setData(data)
   }
 
   public getMovie(movieIndex: number): Movie {
@@ -228,19 +228,19 @@ export class Store implements ShowingConstructorHelper {
     )
   }
 
-  public async initializeDataV2(): Promise<void> {
+  public async initializeData(): Promise<void> {
     this.appState = AppState.LoadingData
-    const storedData = DataStorer.loadDataV2()
+    const storedData = DataStorer.loadData()
 
     let data: SerializableData
-    if (DataStorer.dataIsOkayV2(storedData)) {
+    if (DataStorer.dataIsOkay(storedData)) {
       data = storedData.data
     }
     else {
-      data = await this.fetchAndSaveDataV2()
+      data = await this.fetchAndSaveData()
     }
 
-    await this.setDataV2(data)
+    await this.setData(data)
     this.loadSettings()
 
     this.appState = AppState.Idle
@@ -292,7 +292,7 @@ export class Store implements ShowingConstructorHelper {
     localStorage.setItem("settings", settingsString)
   }
 
-  public setDataV2(data: SerializableData): void {
+  public setData(data: SerializableData): void {
     this.appState = AppState.ParsingData
 
     this.dates = []
