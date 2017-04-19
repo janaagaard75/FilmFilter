@@ -15,14 +15,14 @@ const port = 5000
 app.set("port", (process.env.PORT || port))
 app.use(cors())
 
-app.get("/v2", async (_requese, response) => {
+app.get("/", async (_requese, response) => {
   console.info("Fetch and parsing data v2.")
   const data = await DataUpdater.getDataV2(apiKey, host, jobId)
   console.info("Done fetching and parsing. Responding.")
   response.json(data)
 })
 
-app.get("/v2/compressed", async (_request, response) => {
+app.get("/compressed", async (_request, response) => {
   console.info("Fetching, parsing and compressing data.")
   const data = await DataUpdater.getDataV2(apiKey, host, jobId)
   const compressedData = LZString.compressToBase64(JSON.stringify(data))
