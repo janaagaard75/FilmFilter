@@ -1,6 +1,5 @@
 import "whatwg-fetch"
 
-// import { ApiData } from "./api-data/ApiData"
 import { LzstringWorkerCaller } from "./LzstringWorkerCaller"
 import { SerializableData } from "./serializable-data/SerializableData"
 
