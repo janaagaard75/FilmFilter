@@ -1,27 +1,27 @@
 import * as LZString from "lz-string"
 
-import { ApiData } from "./api-data/ApiData"
+// import { ApiData } from "./api-data/ApiData"
 import { Logger } from "../utilities/Logger"
 import { LzstringWorkerCaller } from "./LzstringWorkerCaller"
 import { SerializableData } from "./serializable-data/SerializableData"
-import { TimestampedData } from "./TimestampedData"
+// import { TimestampedData } from "./TimestampedData"
 import { TimestampedDataV2 } from "./TimestampedDataV2"
 
 export class DataStorer {
-  private static readonly dataKey = "data"
+  // private static readonly dataKey = "data"
   private static readonly dataKeyV2 = "dataV2"
 
-  public static dataIsOkay(storedData: TimestampedData | undefined): storedData is TimestampedData {
-    const isUpToDate = storedData !== undefined
-      && DataStorer.isCorrectVersion(storedData.buildTimestamp)
-      && DataStorer.isRecentEnough(storedData.storeTimestamp)
+  // public static dataIsOkay(storedData: TimestampedData | undefined): storedData is TimestampedData {
+  //   const isUpToDate = storedData !== undefined
+  //     && DataStorer.isCorrectVersion(storedData.buildTimestamp)
+  //     && DataStorer.isRecentEnough(storedData.storeTimestamp)
 
-    if (isUpToDate) {
-      Logger.log("The stored data is from the correct build and recent enough.")
-    }
+  //   if (isUpToDate) {
+  //     Logger.log("The stored data is from the correct build and recent enough.")
+  //   }
 
-    return isUpToDate
-  }
+  //   return isUpToDate
+  // }
 
   public static dataIsOkayV2(storedData: TimestampedDataV2 | undefined): storedData is TimestampedDataV2 {
     const isUpToDate = storedData !== undefined
@@ -35,23 +35,23 @@ export class DataStorer {
     return isUpToDate
   }
 
-  public static loadData(): TimestampedData | undefined {
-    const compressedData = localStorage.getItem(DataStorer.dataKey)
-    // tslint:disable-next-line:no-null-keyword
-    if (compressedData === null) {
-      return undefined
-    }
+  // public static loadData(): TimestampedData | undefined {
+  //   const compressedData = localStorage.getItem(DataStorer.dataKey)
+  //   // tslint:disable-next-line:no-null-keyword
+  //   if (compressedData === null) {
+  //     return undefined
+  //   }
 
-    const dataString = LZString.decompressFromUTF16(compressedData)
+  //   const dataString = LZString.decompressFromUTF16(compressedData)
 
-    try {
-      return JSON.parse(dataString) as TimestampedData
-    }
-    catch (error) {
-      console.error(error)
-      return undefined
-    }
-  }
+  //   try {
+  //     return JSON.parse(dataString) as TimestampedData
+  //   }
+  //   catch (error) {
+  //     console.error(error)
+  //     return undefined
+  //   }
+  // }
 
   public static loadDataV2(): TimestampedDataV2 | undefined {
     const compressedData = localStorage.getItem(DataStorer.dataKeyV2)
@@ -71,17 +71,17 @@ export class DataStorer {
     }
   }
 
-  public static async saveData(data: ApiData): Promise<void> {
-    const timestampedData: TimestampedData = {
-      buildTimestamp: __BUILD_TIMESTAMP__,
-      data: data,
-      storeTimestamp: new Date().valueOf()
-    }
+  // public static async saveData(data: ApiData): Promise<void> {
+  //   const timestampedData: TimestampedData = {
+  //     buildTimestamp: __BUILD_TIMESTAMP__,
+  //     data: data,
+  //     storeTimestamp: new Date().valueOf()
+  //   }
 
-    const compressedString = await LzstringWorkerCaller.compressTimestampedDataToString(timestampedData)
+  //   const compressedString = await LzstringWorkerCaller.compressTimestampedDataToString(timestampedData)
 
-    localStorage.setItem(DataStorer.dataKey, compressedString)
-  }
+  //   localStorage.setItem(DataStorer.dataKey, compressedString)
+  // }
 
   public static async saveDataV2(data: SerializableData): Promise<void> {
     const timestampedData: TimestampedDataV2 = {

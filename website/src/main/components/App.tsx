@@ -200,7 +200,7 @@ export class App extends Component<Props, State> {
           <span className="align-self-center">
             <button
               className="btn btn-secondary btn-sm"
-              onClick={() => this.props.store.fetchAndUpdateData()}
+              onClick={() => this.props.store.fetchAndUpdateDataV2()}
               disabled={this.props.store.appState !== AppState.Idle}
             >
               Opdater

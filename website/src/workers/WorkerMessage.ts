@@ -1,4 +1,5 @@
-export interface WorkerMessage<TPayload> {
+// TODO: Do something clever with these.
+export interface WorkerMessage<TPayload, TType> {
   payload: TPayload
-  type: string
+  type: TType
 }

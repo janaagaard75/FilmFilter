@@ -12,7 +12,7 @@ export class ConnectedApp extends Component<void, void> {
     super()
 
     this.store = new Store()
-    this.store.initializeData() // TODO: Use version 2.
+    this.store.initializeDataV2()
     this.store.initialize()
   }
 
