@@ -57,7 +57,7 @@
     "ts-loader": "2.0.3",
     "tslint": "5.1.0",
     "tslint-eslint-rules": "4.0.0",
-    "tslint-react": "2.5.0",
+    "tslint-react": "2.6.0",
     "typescript": "2.2.2",
     "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git#harmony",
     "uglifyjs-webpack-plugin": "0.4.3",
