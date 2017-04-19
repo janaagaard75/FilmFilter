@@ -2,7 +2,7 @@ import * as LZString from "lz-string"
 
 import { LzstringWorkerMessage } from "./LzstringWorkerMessage"
 import { SerializableData } from "../main/model/serializable-data/SerializableData"
-import { TimestampedDataV2 } from "../main/model/TimestampedDataV2"
+import { TimestampedData } from "../main/model/TimestampedDataV2"
 import { TypedMessageEvent } from "./TypedMessageEvent"
 
 class LzstringWorker {
@@ -27,7 +27,7 @@ class LzstringWorker {
     postMessage(data)
   }
 
-  private static compressTimestampedDataToStringV2(timestampedData: TimestampedDataV2): string {
+  private static compressTimestampedDataToStringV2(timestampedData: TimestampedData): string {
     const dataString = JSON.stringify(timestampedData)
     const compressedData = LZString.compressToUTF16(dataString)
     return compressedData

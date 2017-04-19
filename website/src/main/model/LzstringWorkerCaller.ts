@@ -1,5 +1,5 @@
 import { SerializableData } from "./serializable-data/SerializableData"
-import { TimestampedDataV2 } from "./TimestampedDataV2"
+import { TimestampedData } from "./TimestampedData"
 import { TypedMessageEvent } from "../../workers/TypedMessageEvent"
 import { LzstringWorkerMessage } from "../../workers/LzstringWorkerMessage"
 
@@ -11,7 +11,7 @@ export class LzstringWorkerCaller {
     return lzstringWorker
   }
 
-  public static compressTimestampedDataV2ToString(timestampedData: TimestampedDataV2): Promise<string> {
+  public static compressTimestampedDataV2ToString(timestampedData: TimestampedData): Promise<string> {
     const lzstringWorker = this.getWorker()
 
     const promise = new Promise<string>(resolve => {

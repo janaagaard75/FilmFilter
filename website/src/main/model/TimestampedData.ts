@@ -1,6 +1,6 @@
 import { SerializableData } from "./serializable-data/SerializableData"
 
-export interface TimestampedDataV2 {
+export interface TimestampedData {
   buildTimestamp: number,
   data: SerializableData,
   storeTimestamp: number
