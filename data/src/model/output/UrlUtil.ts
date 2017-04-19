@@ -1,4 +1,4 @@
-import { SerializableMovie } from "../serializable-data/SerializableMovie"
+import { SerializableMovie } from "./SerializableMovie"
 
 export class UrlUtil {
   private static readonly standardUrlPrefix = "http://www.kino.dk/"
