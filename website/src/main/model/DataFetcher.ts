@@ -5,7 +5,7 @@ import { LzstringWorkerCaller } from "./LzstringWorkerCaller"
 import { SerializableData } from "./serializable-data/SerializableData"
 
 export class DataFetcher {
-  private static readonly dataUrl = "https://film-filter-data.herokuapp.com/v2/compressed"
+  private static readonly dataUrl = "https://film-filter-data.herokuapp.com/compressed"
 
   public static async fetchData(): Promise<SerializableData | undefined> {
     try {
