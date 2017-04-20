@@ -1,7 +1,7 @@
 
-import { ApiMovie } from "./SerializableMovie"
-import { ApiShowing } from "./SerializableShowing"
-import { ApiTheater } from "./SerializableTheater"
+import { ApiMovie } from "./ApiMovie"
+import { ApiShowing } from "./ApiShowing"
+import { ApiTheater } from "./ApiTheater"
 
 // TODO: Prefix these interfaces with Api instead of Serializable once the old Api classes have been removed from the code.
 // TODO: Share these interfaces with the Data project.

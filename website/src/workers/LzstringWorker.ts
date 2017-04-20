@@ -1,7 +1,7 @@
 import * as LZString from "lz-string"
 
+import { ApiData } from "../main/model/api-data/ApiData"
 import { LzstringWorkerMessage } from "./LzstringWorkerMessage"
-import { SerializableData } from "../main/model/serializable-data/SerializableData"
 import { TimestampedData } from "../main/model/TimestampedData"
 import { TypedMessageEvent } from "./TypedMessageEvent"
 
@@ -33,9 +33,9 @@ class LzstringWorker {
     return compressedData
   }
 
-  public static decompressStringToSerializedData(compressedSerializableData: string): SerializableData {
+  public static decompressStringToSerializedData(compressedSerializableData: string): ApiData {
     const decompressedSerializableData = LZString.decompressFromBase64(compressedSerializableData)
-    const serializableDataJson = JSON.parse(decompressedSerializableData) as SerializableData
+    const serializableDataJson = JSON.parse(decompressedSerializableData) as ApiData
     return serializableDataJson
   }
 }

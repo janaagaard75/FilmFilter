@@ -1,8 +1,8 @@
 import * as LZString from "lz-string"
 
+import { ApiData } from "./api-data/ApiData"
 import { Logger } from "../utilities/Logger"
 import { LzstringWorkerCaller } from "./LzstringWorkerCaller"
-import { ApiData } from "./serializable-data/SerializableData"
 import { TimestampedData } from "./TimestampedData"
 
 export class DataStorer {

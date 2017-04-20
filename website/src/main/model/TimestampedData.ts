@@ -1,4 +1,4 @@
-import { ApiData } from "./serializable-data/SerializableData"
+import { ApiData } from "./api-data/ApiData"
 
 export interface TimestampedData {
   buildTimestamp: number,

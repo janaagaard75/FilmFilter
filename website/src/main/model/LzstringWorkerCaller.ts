@@ -1,4 +1,4 @@
-import { ApiData } from "./serializable-data/SerializableData"
+import { ApiData } from "./api-data/ApiData"
 import { TimestampedData } from "./TimestampedData"
 import { TypedMessageEvent } from "../../workers/TypedMessageEvent"
 import { LzstringWorkerMessage } from "../../workers/LzstringWorkerMessage"

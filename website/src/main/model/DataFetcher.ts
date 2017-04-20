@@ -1,7 +1,7 @@
 import "whatwg-fetch"
 
+import { ApiData } from "./api-data/ApiData"
 import { LzstringWorkerCaller } from "./LzstringWorkerCaller"
-import { ApiData } from "./serializable-data/SerializableData"
 
 export class DataFetcher {
   private static readonly dataUrl = "https://film-filter-data.herokuapp.com/compressed"
