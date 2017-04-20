@@ -2,7 +2,7 @@ import * as LZString from "lz-string"
 
 import { Logger } from "../utilities/Logger"
 import { LzstringWorkerCaller } from "./LzstringWorkerCaller"
-import { SerializableData } from "./serializable-data/SerializableData"
+import { ApiData } from "./serializable-data/SerializableData"
 import { TimestampedData } from "./TimestampedData"
 
 export class DataStorer {
@@ -38,7 +38,7 @@ export class DataStorer {
     }
   }
 
-  public static async saveData(data: SerializableData): Promise<void> {
+  public static async saveData(data: ApiData): Promise<void> {
     const timestampedData: TimestampedData = {
       buildTimestamp: __BUILD_TIMESTAMP__,
       data: data,

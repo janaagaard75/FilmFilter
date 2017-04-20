@@ -1,4 +1,4 @@
-import { SerializableData } from "./serializable-data/SerializableData"
+import { ApiData } from "./serializable-data/SerializableData"
 import { TimestampedData } from "./TimestampedData"
 import { TypedMessageEvent } from "../../workers/TypedMessageEvent"
 import { LzstringWorkerMessage } from "../../workers/LzstringWorkerMessage"
@@ -30,11 +30,11 @@ export class LzstringWorkerCaller {
     return promise
   }
 
-  public static decompressStringToSerializableData(compressedData: string): Promise<SerializableData> {
+  public static decompressStringToSerializableData(compressedData: string): Promise<ApiData> {
     const lzstringWorker = this.getWorker()
 
-    const promise = new Promise<SerializableData>(resolve => {
-      lzstringWorker.addEventListener("message", (e: TypedMessageEvent<SerializableData>) => {
+    const promise = new Promise<ApiData>(resolve => {
+      lzstringWorker.addEventListener("message", (e: TypedMessageEvent<ApiData>) => {
         resolve(e.data)
       })
     })

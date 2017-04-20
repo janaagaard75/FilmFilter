@@ -4,7 +4,7 @@ import { ImmutableDateTime } from "./moment/ImmutableDateTime"
 import { Language } from "./filters/Language"
 import { Movie } from "./Movie"
 import { SelectableDate } from "./SelectableDate"
-import { SerializableShowing } from "./serializable-data/SerializableShowing"
+import { ApiShowing } from "./serializable-data/SerializableShowing"
 import { ShowingConstructorHelper } from "./ShowingConstructorHelper"
 import { ShowingFlags } from "./serializable-data/ShowingFlags"
 import { ShowingType } from "./filters/ShowingType"
@@ -13,7 +13,7 @@ import { TimeInterval } from "./filters/TimeInterval"
 
 export class Showing {
   constructor(
-    serializableShowing: SerializableShowing,
+    serializableShowing: ApiShowing,
     helper: ShowingConstructorHelper
   ) {
     this.dubbed = Showing.getFlagValue(serializableShowing, ShowingFlags.Dubbed)
@@ -45,7 +45,7 @@ export class Showing {
   public readonly threeD: boolean
   public readonly totalSeats: number
 
-  private static getFlagValue(serializableShowing: SerializableShowing, flag: ShowingFlags): boolean {
+  private static getFlagValue(serializableShowing: ApiShowing, flag: ShowingFlags): boolean {
     const flagValue = (serializableShowing.flags & flag) > 0
     return flagValue
   }

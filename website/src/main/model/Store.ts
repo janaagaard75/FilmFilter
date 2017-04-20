@@ -10,7 +10,7 @@ import { Filters } from "./filters/Filters"
 import { ImmutableDate } from "./moment/ImmutableDate"
 import { Movie } from "./Movie"
 import { SelectableDate } from "./SelectableDate"
-import { SerializableData } from "./serializable-data/SerializableData"
+import { ApiData } from "./serializable-data/SerializableData"
 import { Settings } from "./Settings"
 import { Showing } from "./Showing"
 import { ShowingConstructorHelper } from "./ShowingConstructorHelper"
@@ -122,7 +122,7 @@ export class Store implements ShowingConstructorHelper {
     }
   }
 
-  private async fetchAndSaveData(): Promise<SerializableData> {
+  private async fetchAndSaveData(): Promise<ApiData> {
     this.appState = AppState.FetchingData
     const fetchedData = await DataFetcher.fetchData()
     if (fetchedData === undefined) {
@@ -232,7 +232,7 @@ export class Store implements ShowingConstructorHelper {
     this.appState = AppState.LoadingData
     const storedData = DataStorer.loadData()
 
-    let data: SerializableData
+    let data: ApiData
     if (DataStorer.dataIsOkay(storedData)) {
       data = storedData.data
     }
@@ -292,7 +292,7 @@ export class Store implements ShowingConstructorHelper {
     localStorage.setItem("settings", settingsString)
   }
 
-  public setData(data: SerializableData): void {
+  public setData(data: ApiData): void {
     this.appState = AppState.ParsingData
 
     this.dates = []

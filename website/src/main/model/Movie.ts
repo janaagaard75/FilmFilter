@@ -1,11 +1,11 @@
 import { observable } from "mobx"
 
-import { SerializableMovie } from "./serializable-data/SerializableMovie"
+import { ApiMovie } from "./serializable-data/SerializableMovie"
 import { Showing } from "./Showing"
 import { Strings } from "../utilities/Strings"
 
 export class Movie {
-  constructor(serializableMovie: SerializableMovie) {
+  constructor(serializableMovie: ApiMovie) {
     this.danishTitle = serializableMovie.danishTitle
     this.movieUrl = "http://www.kino.dk/" + serializableMovie.movieUrl
     this.originalTitle = serializableMovie.originalTitle

@@ -1,9 +1,9 @@
 import { observable } from "mobx"
 
-import { SerializableTheater } from "./serializable-data/SerializableTheater"
+import { ApiTheater } from "./serializable-data/SerializableTheater"
 
 export class Theater {
-  constructor(serializableTheater: SerializableTheater) {
+  constructor(serializableTheater: ApiTheater) {
     this.favorited = false
     this.name = Theater.cleanUpTheaterName(serializableTheater.name)
     this.selected = false

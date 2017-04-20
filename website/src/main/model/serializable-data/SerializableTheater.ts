@@ -1,4 +1,4 @@
-export interface SerializableTheater {
+export interface ApiTheater {
   readonly name: string
   readonly theaterId: string
 }
