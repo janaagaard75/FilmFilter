@@ -1,6 +1,7 @@
 import * as moment from "moment"
 import { Moment } from "moment"
 
+import { Comparable } from "../../utilities/Comparable"
 import { ImmutableDateTime } from "./ImmutableDateTime"
 import { ImmutableMoment } from "./ImmutableMoment"
 
@@ -12,7 +13,7 @@ type DateDurationUnit = (
   "quarter" | "quarters" | "Q"
 )
 
-export class ImmutableDate extends ImmutableMoment {
+export class ImmutableDate extends ImmutableMoment implements Comparable<ImmutableDate> {
   constructor(dateTime: Moment) {
     super(ImmutableDate.removeHoursAndMinutes(dateTime))
   }

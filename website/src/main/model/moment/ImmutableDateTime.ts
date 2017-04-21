@@ -2,10 +2,11 @@
 import { DurationInputArg2 } from "moment"
 import { Moment } from "moment"
 
+import { Comparable } from "../../utilities/Comparable"
 import { ImmutableDate } from "./ImmutableDate"
 import { ImmutableMoment } from "./ImmutableMoment"
 
-export class ImmutableDateTime extends ImmutableMoment {
+export class ImmutableDateTime extends ImmutableMoment implements Comparable<ImmutableDateTime> {
   constructor(dateTime?: Moment | string | number) {
     super(dateTime)
   }

@@ -4,6 +4,7 @@ import { reaction } from "mobx"
 
 import { ApiData } from "./api-data/ApiData"
 import { AppState } from "./AppState"
+import { Arrays } from "../utilities/Arrays"
 import { Comparer } from "../utilities/Comparer"
 import { DataFetcher } from "./DataFetcher"
 import { DataStorer } from "./DataStorer"
@@ -28,7 +29,14 @@ export class Store implements ShowingConstructorHelper {
 
   @computed
   public get matchingMovies(): Array<Movie> {
-    const matchingMovies = this.movies.filter(movie => movie.titleMatchesFilter(this.movieNameFilter))
+    const matchingMovies = this.movies
+      .filter(movie => movie.titleMatchesFilter(this.movieNameFilter))
+      .filter(movie => {
+        const movieDates = movie.showings.map(showing => showing.date.date)
+        const selectedDates = this.selectedDates.map(selectedDate => selectedDate.date)
+        const hasDatesInCommon = Arrays.hasSomeInCommon(movieDates, selectedDates)
+        return hasDatesInCommon
+      })
     return matchingMovies
   }
 

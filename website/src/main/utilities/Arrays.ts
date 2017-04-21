@@ -1,4 +1,13 @@
+import { Comparable } from "./Comparable"
+
 export class Arrays {
+  public static hasSomeInCommon<T extends Comparable<T>>(arrayA: Array<T>, arrayB: Array<T>): boolean {
+    const atLeastOneElementInCommon = arrayA.some(elementA =>
+      arrayB.some(elementB => elementA.equals(elementB))
+    )
+    return atLeastOneElementInCommon
+  }
+
   /** Returns an array of integers with the values from `min` to `max`, both inclusive. */
   public static rangeArray(min: number, max: number): Array<number> {
     const length = max - min + 1
