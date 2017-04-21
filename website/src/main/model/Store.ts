@@ -141,6 +141,7 @@ export class Store implements ShowingConstructorHelper {
   }
 
   public getMovie(movieIndex: number): Movie {
+    // TODO: Not sure there is a need for -1 any longer.
     if (movieIndex === -1) {
       return Movie.UndefinedMovie
     }
@@ -295,7 +296,7 @@ export class Store implements ShowingConstructorHelper {
     this.appState = AppState.ParsingData
 
     this.dates = []
-    // Don't sort the movies and the theaters, because the showings refer to them by ID in the array.
+    // Don't sort the movies and the theaters, because the showings refer to them by index in the arrays.
     this.movies = data.movies.map(serializableMovie => new Movie(serializableMovie))
     this.theaters = data.theaters.map(serializableTheater => new Theater(serializableTheater))
 
