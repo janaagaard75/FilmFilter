@@ -208,7 +208,7 @@ export class App extends Component<Props, State> {
           </span>
         </div>
         <div className="row">
-          <div className="col-xl-6 push-xl-6">
+          <div className="col-lg-6 push-lg-6">
             <div className="mb-3">
               {this.getPickerButton("Film", this.getSelectedMoviesText(), Picker.Movie)}
               {this.getPickerButton("Dato", this.getSelectedDatesText(), Picker.Date)}
@@ -217,7 +217,7 @@ export class App extends Component<Props, State> {
             </div>
             {this.getTabContent()}
           </div>
-          <div className="col-xl-6 pull-xl-6">
+          <div className="col-lg-6 pull-lg-6">
             <MatchingShowings
               matchingShowings={this.props.store.matchingShowings}
               selectedMovies={this.props.store.selectedMovies}
