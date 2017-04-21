@@ -35,7 +35,6 @@ export class Store implements ShowingConstructorHelper {
   @computed
   public get matchingShowings(): Array<Showing> {
     const matching = this.showings
-      .filter(showing => showing.movie !== undefined)
       .filter(showing => this.selectedMovies.length === 0 || showing.movie.selected)
       .filter(showing => this.selectedTheaters.length === 0 || showing.theater.selected)
       .filter(showing => this.selectedDates.length === 0 || showing.date.selected)
