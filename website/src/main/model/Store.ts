@@ -4,7 +4,6 @@ import { reaction } from "mobx"
 
 import { ApiData } from "./api-data/ApiData"
 import { AppState } from "./AppState"
-import { Arrays } from "../utilities/Arrays"
 import { Comparer } from "../utilities/Comparer"
 import { DataFetcher } from "./DataFetcher"
 import { DataStorer } from "./DataStorer"
