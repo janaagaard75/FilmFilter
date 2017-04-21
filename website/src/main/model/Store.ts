@@ -29,14 +29,13 @@ export class Store implements ShowingConstructorHelper {
 
   @computed
   public get matchingMovies(): Array<Movie> {
+    const selectedDates = this.selectedDates.map(selectedDate => selectedDate.date)
+
     const matchingMovies = this.movies
       .filter(movie => movie.titleMatchesFilter(this.movieNameFilter))
-      .filter(movie => {
-        const movieDates = movie.showings.map(showing => showing.date.date)
-        const selectedDates = this.selectedDates.map(selectedDate => selectedDate.date)
-        const hasDatesInCommon = Arrays.hasSomeInCommon(movieDates, selectedDates)
-        return hasDatesInCommon
-      })
+      .filter(movie => movie.isShownInOneOfTheTheaters(this.selectedTheaters))
+      .filter(movie => movie.isShownOnDates(selectedDates))
+
     return matchingMovies
   }
 

@@ -1,8 +1,9 @@
 import { observable } from "mobx"
 
+import { Comparable } from "../utilities/Comparable"
 import { ApiTheater } from "./api-data/ApiTheater"
 
-export class Theater {
+export class Theater implements Comparable<Theater> {
   constructor(serializableTheater: ApiTheater) {
     this.favorited = false
     this.name = Theater.cleanUpTheaterName(serializableTheater.name)
@@ -19,6 +20,10 @@ export class Theater {
   public get theaterUrl(): string {
     const theaterUrl = "http://www.kino.dk/biografer/" + this.theaterId
     return theaterUrl
+  }
+
+  public equals(other: Theater) {
+    return this.theaterId === other.theaterId
   }
 
   public static readonly UndefinedTheater = new Theater({

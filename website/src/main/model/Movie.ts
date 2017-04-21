@@ -1,8 +1,11 @@
 import { observable } from "mobx"
 
 import { ApiMovie } from "./api-data/ApiMovie"
+import { Arrays } from "../utilities/Arrays"
+import { ImmutableDate } from "./moment/ImmutableDate"
 import { Showing } from "./Showing"
 import { Strings } from "../utilities/Strings"
+import { Theater } from "./Theater"
 
 export class Movie {
   constructor(serializableMovie: ApiMovie) {
@@ -44,19 +47,39 @@ export class Movie {
     this.showings.push(showing)
   }
 
+  public isShownInOneOfTheTheaters(theaters: Array<Theater>): boolean {
+    if (theaters.length === 0) {
+      return true
+    }
+
+    const theatersShowingTheMovie = this.showings.map(showing => showing.theater)
+    const showedInOneOfTheTheaters = Arrays.hasSomeInCommon(theaters, theatersShowingTheMovie)
+    return showedInOneOfTheTheaters
+  }
+
+  public isShownOnDates(dates: Array<ImmutableDate>): boolean {
+    if (dates.length === 0) {
+      return true
+    }
+
+    const movieDates = this.showings.map(showing => showing.date.date)
+    const isShownOnASelectedDate = Arrays.hasSomeInCommon(movieDates, dates)
+    return isShownOnASelectedDate
+  }
+
   /** Returns true if the string `filter` is container in either the original or the Danish title of this movie. Assumes that `filter` has been transformed with `Strings.searchable()`. */
   public titleMatchesFilter(filter: string): boolean {
     const matches = this.searchableTitle.indexOf(filter) !== -1
     return matches
   }
 
+  public toggleSelection(): void {
+    this.selected = !this.selected
+  }
+
   public static compareByNumberOfShowings(a: Movie, b: Movie): number {
     const compare = b.showings.length - a.showings.length
     return compare
-  }
-
-  public toggleSelection(): void {
-    this.selected = !this.selected
   }
 
   private static getPosterUrl(posterUrl: string | undefined): string {
