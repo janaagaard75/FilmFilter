@@ -14,14 +14,11 @@ export class TheaterPicker extends Component<Props, void> {
   public render() {
     const divCssClasses = classNames(
       "col-12 col-md-6 col-lg-4",
-      "ellipsis no-wrap",
-      {
-        "selected-item": this.props.theater.selected
-      }
+      "ellipsis no-wrap selectable-outer"
     )
 
     const starCssClasses = classNames(
-      "clickable",
+      "clickable mr-2",
       "fa",
       {
         "fa-star": this.props.theater.favorited,
@@ -29,9 +26,26 @@ export class TheaterPicker extends Component<Props, void> {
       }
     )
 
+    const innerCssClasses = classNames(
+      "selectable-inner",
+      {
+        "selected": this.props.theater.selected
+      }
+    )
+
     return (
       <div className={divCssClasses}>
-        <span className={starCssClasses} onClick={() => this.props.theater.toggleFavorited()}/> <span className="clickable" onClick={() => this.props.theater.toggleSelection()}>{this.props.theater.name}</span>
+        <span
+          className={starCssClasses}
+          onClick={() => this.props.theater.toggleFavorited()}
+        /> <span
+          className="clickable"
+          onClick={() => this.props.theater.toggleSelection()}
+        >
+          <span className={innerCssClasses}>
+            {this.props.theater.name}
+          </span>
+        </span>
       </div>
     )
   }

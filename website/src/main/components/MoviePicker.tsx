@@ -13,17 +13,25 @@ interface Props {
 export class MoviePicker extends Component<Props, void> {
   public render() {
     const cssClasses = classNames(
-      "col-6 col-sm-4 col-md-3 col-lg-4 col-xl-3",
-      "clickable ellipsis text-center mb-3",
+      "selectable-inner",
       {
-        "selected-item": this.props.movie.selected
+        "selected": this.props.movie.selected
       }
     )
 
     return (
-      <div className={cssClasses} onClick={() => this.props.movie.toggleSelection()}>
-        <img src={this.props.movie.posterUrl} alt={this.props.movie.originalTitle} className="img-fluid"/>
-        {this.props.movie.originalTitle}
+      <div
+        className="col-6 col-sm-4 col-md-3 col-lg-4 col-xl-3 ellipsis text-center mb-3 selectable-outer clickable"
+        onClick={() => this.props.movie.toggleSelection()}
+      >
+        <div className={cssClasses}>
+          <img
+            alt={this.props.movie.originalTitle}
+            className="img-fluid"
+            src={this.props.movie.posterUrl}
+          />
+          {this.props.movie.originalTitle}
+        </div>
       </div>
     )
   }

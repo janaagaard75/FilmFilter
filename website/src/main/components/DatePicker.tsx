@@ -13,17 +13,29 @@ interface Props {
 export class DatePicker extends Component<Props, void> {
   public render() {
     const hasAtLeastOneShowing = this.props.date.showings.size > 0
-    const cssClasses = classNames(
+    const outerCssClasses = classNames(
+      "selectable-outer",
       {
         "clickable": hasAtLeastOneShowing,
-        "disabled-date": !hasAtLeastOneShowing,
-        "selected-item": this.props.date.selected
+        "disabled-date": !hasAtLeastOneShowing
+      }
+    )
+    const innerCssClasses = classNames(
+      "selectable-inner",
+      "selectable-inner-date",
+      {
+        "selected": this.props.date.selected
       }
     )
 
     return (
-      <td className={cssClasses} onClick={() => hasAtLeastOneShowing && this.props.date.toggleSelection()}>
-        {this.props.date.date.format("D")}
+      <td
+        className={outerCssClasses}
+        onClick={() => hasAtLeastOneShowing && this.props.date.toggleSelection()}
+      >
+        <span className={innerCssClasses}>
+          {this.props.date.date.format("D")}
+        </span>
       </td>
     )
   }

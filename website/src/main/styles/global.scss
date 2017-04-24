@@ -35,8 +35,23 @@ button {
   white-space: nowrap;
 }
 
-.selected-item {
-  background-color: $gray;
+.selectable-outer,
+.table-sm .selectable-outer {
+  padding: 8px;
+}
+
+.selectable-inner {
+  padding: 2px;
+
+  &.selected {
+    border-radius: 5px;
+    box-shadow: 0 0 10px 5px red;
+  }
+}
+
+.selectable-inner-date {
+  display: inline-block;
+  width: 2rem;
 }
 
 .table-showings td {
