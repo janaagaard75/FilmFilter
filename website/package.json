@@ -59,13 +59,13 @@
     "ts-loader": "2.0.3",
     "tslint": "5.1.0",
     "tslint-eslint-rules": "4.0.0",
-    "tslint-react": "2.6.0",
+    "tslint-react": "3.0.0",
     "typescript": "2.2.2",
     "uglify-js": "git://github.com/mishoo/UglifyJS2.git#harmony",
     "uglifyjs-webpack-plugin": "0.4.3",
     "url-loader": "0.5.8",
     "webpack": "2.4.1",
-    "webpack-dev-server": "2.4.2",
+    "webpack-dev-server": "2.4.4",
     "worker-loader": "0.8.0"
   }
 }
