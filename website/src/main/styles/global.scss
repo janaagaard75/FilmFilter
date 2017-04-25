@@ -41,11 +41,11 @@ button {
 }
 
 .selectable-inner {
-  padding: 2px;
+  padding: 2px 5px;
 
   &.selected {
-    border-radius: 5px;
-    box-shadow: 0 0 10px 5px red;
+    border-radius: 4px;
+    box-shadow: 0 0 8px 4px red;
   }
 }
 
