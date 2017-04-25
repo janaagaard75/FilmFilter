@@ -23,7 +23,7 @@ export class MoviesPicker extends Component<Props, void> {
   }
 
   public render() {
-    const firstMovies = this.props.movies.slice(0, 25)
+    const firstMovies = this.props.movies.slice(0, 24)
 
     return (
       <div>
