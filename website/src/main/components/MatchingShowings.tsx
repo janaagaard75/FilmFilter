@@ -20,16 +20,11 @@ export class MatchingShowings extends Component<Props, void> {
     const atLeastOneMatchingShowing = this.props.matchingShowings.length >= 1
     const header = "Forestillinger: " + this.props.matchingShowings.length
 
-    const showMovieColumn = (this.props.selectedMovies.length !== 1)
-    const showTheaterColumn = (this.props.selectedTheaters.length !== 1)
-
     return (
       <Card header={header}>
         {atLeastOneMatchingShowing
           ? <ShowingsTable
             showings={this.props.matchingShowings.slice(0, 25)}
-            showMovieColumns={showMovieColumn}
-            showTheaterColumn={showTheaterColumn}
           />
           : <div className="card-block">
               Ingen matchende forestillinger.

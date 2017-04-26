@@ -17,6 +17,7 @@ import { ShowingConstructorHelper } from "./ShowingConstructorHelper"
 import { Strings } from "../utilities/Strings"
 import { Theater } from "./Theater"
 
+// TODO: Extract the paser into a separate class.
 export class Store implements ShowingConstructorHelper {
   @observable public appState: AppState = AppState.Idle
   @observable public dates: Array<SelectableDate> = []
