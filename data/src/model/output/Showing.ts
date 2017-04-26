@@ -1,5 +1,5 @@
-import { Data } from "./SerializableData"
-import { Movie } from "./SerializableMovie"
+import { Data } from "./Data"
+import { Movie } from "./Movie"
 import { ShowingFlags } from "./ShowingFlags"
 import { ShowingLine } from "../input/ShowingLine"
 import { UrlUtil } from "./UrlUtil"

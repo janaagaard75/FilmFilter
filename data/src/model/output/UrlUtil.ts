@@ -1,4 +1,4 @@
-import { Movie } from "./SerializableMovie"
+import { Movie } from "./Movie"
 
 export class UrlUtil {
   private static readonly standardUrlPrefix = "http://www.kino.dk/"

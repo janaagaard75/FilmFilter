@@ -1,8 +1,8 @@
+import { Movie } from "./Movie"
 import { MovieLine } from "../input/MovieLine"
-import { Movie } from "./SerializableMovie"
-import { Showing } from "./SerializableShowing"
-import { Theater } from "./SerializableTheater"
+import { Showing } from "./Showing"
 import { ShowingLine } from "../input/ShowingLine"
+import { Theater } from "./Theater"
 import { TheaterLine } from "../input/TheaterLine"
 import { UrlUtil } from "./UrlUtil"
 

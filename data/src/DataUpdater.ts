@@ -1,9 +1,9 @@
 import fetch from "node-fetch"
 
+import { Data } from "./model/output/Data"
 import { JobInfo } from "./model/JobInfo"
 import { JsonlType } from "./model/JsonlType"
 import { MovieLine } from "./model/input/MovieLine"
-import { Data } from "./model/output/SerializableData"
 import { ShowingLine } from "./model/input/ShowingLine"
 import { TheaterLine } from "./model/input/TheaterLine"
 import { TypedJsonl } from "./model/TypedJsonl"
