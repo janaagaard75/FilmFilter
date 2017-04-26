@@ -35,11 +35,6 @@ const plugins = [
 ]
 
 if (isProduction) {
-  // plugins.push(
-  //   new UglifyJSPlugin({
-  //     sourceMap: true
-  //   })
-  // )
   plugins.push(
     new BabiliPlugin()
   )
