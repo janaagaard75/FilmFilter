@@ -1,26 +1,26 @@
-import { SerializableData } from "./SerializableData"
-import { SerializableMovie } from "./SerializableMovie"
+import { Data } from "./SerializableData"
+import { Movie } from "./SerializableMovie"
 import { ShowingFlags } from "./ShowingFlags"
 import { ShowingLine } from "../input/ShowingLine"
 import { UrlUtil } from "./UrlUtil"
 
-export class SerializableShowing {
+export class Showing {
   constructor(
     showingLine: ShowingLine,
-    outputData: SerializableData
+    outputData: Data
   ) {
-    if (showingLine.movieUrl === SerializableMovie.noMovieUrl) {
+    if (showingLine.movieUrl === Movie.noMovieUrl) {
       this.movieIndex = outputData.addOrGetMovieIndexFromTitle(showingLine.movieTitle)
     }
     else {
       this.movieIndex = outputData.getMovieIndexFromUrl(showingLine.movieUrl)
     }
 
-    this.freeSeats = SerializableShowing.getFreeSeats(showingLine.seatingInfo)
-    this.totalSeats = SerializableShowing.getTotalSeats(showingLine.seatingInfo)
+    this.freeSeats = Showing.getFreeSeats(showingLine.seatingInfo)
+    this.totalSeats = Showing.getTotalSeats(showingLine.seatingInfo)
 
     this.showingId = UrlUtil.getShowingId(showingLine.showingUrl)
-    this.start = SerializableShowing.convertDateTimeToNumber(showingLine.start)
+    this.start = Showing.convertDateTimeToNumber(showingLine.start)
     this.theaterIndex = outputData.getTheaterIndex(showingLine.theaterUrl)
 
     this.setFlag(ShowingFlags.SpecialShowing, showingLine.version.includes("Særvisning"))

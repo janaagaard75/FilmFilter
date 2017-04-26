@@ -1,7 +1,7 @@
 import { TheaterLine } from "../input/TheaterLine"
 import { UrlUtil } from "./UrlUtil"
 
-export class SerializableTheater {
+export class Theater {
   constructor(theaterLine: TheaterLine) {
     this.name = theaterLine.name
     this.theaterId = UrlUtil.getTheaterId(theaterLine.theaterUrl)

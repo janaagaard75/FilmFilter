@@ -1,35 +1,35 @@
 import { MovieLine } from "../input/MovieLine"
-import { SerializableMovie } from "./SerializableMovie"
-import { SerializableShowing } from "./SerializableShowing"
-import { SerializableTheater } from "./SerializableTheater"
+import { Movie } from "./SerializableMovie"
+import { Showing } from "./SerializableShowing"
+import { Theater } from "./SerializableTheater"
 import { ShowingLine } from "../input/ShowingLine"
 import { TheaterLine } from "../input/TheaterLine"
 import { UrlUtil } from "./UrlUtil"
 
-export class SerializableData {
+export class Data {
   constructor(
     movieLines: Array<MovieLine>,
     showingLines: Array<ShowingLine>,
     theaterLines: Array<TheaterLine>
   ) {
     this.movies = movieLines
-      .map(line => new SerializableMovie(line))
+      .map(line => new Movie(line))
       .filter((movie, index, array) => array.findIndex(m => m.equals(movie)) === index)
 
-    this.theaters = theaterLines.map(line => new SerializableTheater(line))
+    this.theaters = theaterLines.map(line => new Theater(line))
 
-    this.showings = showingLines.map(line => new SerializableShowing(line, this))
+    this.showings = showingLines.map(line => new Showing(line, this))
   }
 
-  public readonly movies: Array<SerializableMovie>
-  public readonly showings: Array<SerializableShowing>
-  public readonly theaters: Array<SerializableTheater>
+  public readonly movies: Array<Movie>
+  public readonly showings: Array<Showing>
+  public readonly theaters: Array<Theater>
 
   public addOrGetMovieIndexFromTitle(originalTitle: string): number {
     const existingMovie = this.movies.find(m => m.movieUrl === undefined && m.originalTitle === originalTitle)
 
     if (existingMovie === undefined) {
-      const newMovie = SerializableMovie.createFromTitle(originalTitle)
+      const newMovie = Movie.createFromTitle(originalTitle)
       this.movies.push(newMovie)
       const movieIndex = this.movies.length - 1
       return movieIndex

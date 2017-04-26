@@ -1,4 +1,4 @@
-import { SerializableMovie } from "./SerializableMovie"
+import { Movie } from "./SerializableMovie"
 
 export class UrlUtil {
   private static readonly standardUrlPrefix = "http://www.kino.dk/"
@@ -7,7 +7,7 @@ export class UrlUtil {
   private static readonly theaterUrlPrefix = UrlUtil.standardUrlPrefix + "biografer/"
 
   public static getMovieUrl(prefixedMovieUrl: string): string | undefined {
-    if (prefixedMovieUrl === SerializableMovie.noMovieUrl) {
+    if (prefixedMovieUrl === Movie.noMovieUrl) {
       return undefined
     }
 

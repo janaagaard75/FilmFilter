@@ -1,7 +1,7 @@
 import { MovieLine } from "../input/MovieLine"
 import { UrlUtil } from "./UrlUtil"
 
-export class SerializableMovie {
+export class Movie {
   constructor(movieLine: MovieLine) {
     if (movieLine.originalTitle === "" && movieLine.danishTitle === "") {
       console.error("Neither original title nor Danish title is defined.")
@@ -21,7 +21,7 @@ export class SerializableMovie {
       }
     }
 
-    if (movieLine.posterUrl !== SerializableMovie.noPosterUrl) {
+    if (movieLine.posterUrl !== Movie.noPosterUrl) {
       this.posterUrl = movieLine.posterUrl
     }
   }
@@ -34,7 +34,7 @@ export class SerializableMovie {
   public static noMovieUrl = "NO_MOVIE_URL"
   public static noPosterUrl = "NO_POSTER_URL"
 
-  public equals(other: SerializableMovie) {
+  public equals(other: Movie) {
     const equals =
       this.danishTitle === other.danishTitle
       && this.movieUrl === other.movieUrl
@@ -43,15 +43,15 @@ export class SerializableMovie {
     return equals
   }
 
-  public static createFromTitle(originalTitle: string): SerializableMovie {
+  public static createFromTitle(originalTitle: string): Movie {
     const fakeMovieLine: MovieLine = {
       danishTitle: originalTitle,
-      movieUrl: SerializableMovie.noMovieUrl,
+      movieUrl: Movie.noMovieUrl,
       originalTitle: originalTitle,
-      posterUrl: SerializableMovie.noPosterUrl
+      posterUrl: Movie.noPosterUrl
     }
 
-    const newMovie = new SerializableMovie(fakeMovieLine)
+    const newMovie = new Movie(fakeMovieLine)
     return newMovie
   }
 }
