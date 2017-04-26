@@ -1,7 +1,7 @@
 import { ApiShowing } from "./interface/ApiShowing"
 import { Data } from "./Data"
 import { Movie } from "./Movie"
-import { ShowingFlags } from "./ShowingFlags"
+import { ShowingFlags } from "./interface/ShowingFlags"
 import { ShowingLine } from "../input/ShowingLine"
 import { UrlUtil } from "./UrlUtil"
 
