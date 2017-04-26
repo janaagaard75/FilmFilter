@@ -2,7 +2,7 @@ import { computed } from "mobx"
 import { observable } from "mobx"
 import { reaction } from "mobx"
 
-import { ApiData } from "./api-data/ApiData"
+import { ApiData } from "./interface/ApiData"
 import { AppState } from "./AppState"
 import { Comparer } from "../utilities/Comparer"
 import { DataFetcher } from "./DataFetcher"

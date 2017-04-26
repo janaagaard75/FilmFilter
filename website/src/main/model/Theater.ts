@@ -1,7 +1,7 @@
 import { observable } from "mobx"
 
 import { Comparable } from "../utilities/Comparable"
-import { ApiTheater } from "./api-data/ApiTheater"
+import { ApiTheater } from "./interface/ApiTheater"
 
 export class Theater implements Comparable<Theater> {
   constructor(serializableTheater: ApiTheater) {

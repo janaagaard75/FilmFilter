@@ -1,6 +1,6 @@
 import * as LZString from "lz-string"
 
-import { ApiData } from "../main/model/api-data/ApiData"
+import { ApiData } from "../main/model/interface/ApiData"
 import { LzstringWorkerMessage } from "./LzstringWorkerMessage"
 import { TimestampedData } from "../main/model/TimestampedData"
 import { TypedMessageEvent } from "./TypedMessageEvent"
