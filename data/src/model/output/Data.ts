@@ -1,3 +1,4 @@
+import { ApiData } from "./interface/ApiData"
 import { Movie } from "./Movie"
 import { MovieLine } from "../input/MovieLine"
 import { Showing } from "./Showing"
@@ -6,7 +7,7 @@ import { Theater } from "./Theater"
 import { TheaterLine } from "../input/TheaterLine"
 import { UrlUtil } from "./UrlUtil"
 
-export class Data {
+export class Data implements ApiData {
   constructor(
     movieLines: Array<MovieLine>,
     showingLines: Array<ShowingLine>,

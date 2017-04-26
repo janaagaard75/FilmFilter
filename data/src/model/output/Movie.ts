@@ -1,7 +1,8 @@
+import { ApiMovie } from "./interface/ApiMovie"
 import { MovieLine } from "../input/MovieLine"
 import { UrlUtil } from "./UrlUtil"
 
-export class Movie {
+export class Movie implements ApiMovie {
   constructor(movieLine: MovieLine) {
     if (movieLine.originalTitle === "" && movieLine.danishTitle === "") {
       console.error("Neither original title nor Danish title is defined.")

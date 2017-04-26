@@ -1,10 +1,11 @@
+import { ApiShowing } from "./interface/ApiShowing"
 import { Data } from "./Data"
 import { Movie } from "./Movie"
 import { ShowingFlags } from "./ShowingFlags"
 import { ShowingLine } from "../input/ShowingLine"
 import { UrlUtil } from "./UrlUtil"
 
-export class Showing {
+export class Showing implements ApiShowing {
   constructor(
     showingLine: ShowingLine,
     outputData: Data
