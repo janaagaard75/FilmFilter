@@ -26,6 +26,11 @@ button {
   text-overflow: ellipsis;
 }
 
+.fa-pulse {
+  // Fix wobbleling of icon. The values depend on the font size. https://github.com/FortAwesome/Font-Awesome/issues/671
+  transform-origin: 50% 52%;
+}
+
 .movie-thumbnail {
   height: $movie-thumbnail-height;
   width: $movie-thumbnail-height / 3 * 2;
