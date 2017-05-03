@@ -7,7 +7,7 @@ import { App } from "./components/App"
 import { Environment } from "./utilities/Environment"
 import { Store } from "./model/Store"
 
-export class ConnectedApp extends Component<void, void> {
+export class ConnectedApp extends Component<{}, void> {
   constructor() {
     super()
 
