@@ -70,22 +70,22 @@ export class Store implements ShowingConstructorHelper {
   public get stateDescription() {
     switch (this.appState) {
       case AppState.FetchingData:
-        return "Fetching data"
+        return "Henter data"
 
       case AppState.Idle:
-        return "Idle"
+        return "Klar"
 
       case AppState.LoadingData:
-        return "Loading data"
+        return "Loader data"
 
       case AppState.LoadingSettings:
-        return "Loading settings"
+        return "Loader indstillinger"
 
       case AppState.ParsingData:
-        return "Parsing data"
+        return "Behandler data"
 
       case AppState.SavingData:
-        return "Saving data"
+        return "Gemmer data"
 
       default:
         return `'${this.appState}' is an unknown state.`
