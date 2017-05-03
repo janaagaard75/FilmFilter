@@ -7,6 +7,7 @@ import { AppState } from "../model/AppState"
 import { Arrays } from "../utilities/Arrays"
 import { CurrentState } from "./CurrentState"
 import { DatesPicker } from "./DatesPicker"
+import { Environment } from "../utilities/Environment"
 import { MatchingShowings } from "./MatchingShowings"
 import { MoviesPicker } from "./MoviesPicker"
 import { Store } from "../model/Store"
@@ -197,16 +198,18 @@ export class App extends Component<Props, State> {
           <span className="align-self-center">
             <CurrentState store={this.props.store}/>
           </span>
-          <span className="align-self-center">
-            <button
-              className="btn btn-secondary btn-sm"
-              onClick={() => this.props.store.fetchAndUpdateData()}
-              disabled={this.props.store.appState !== AppState.Idle}
-            >
-              Opdater
-            </button>
-          </span>
-        </div>
+          {Environment.inDevelopmentMode() &&
+            <span className="align-self-center">
+              <button
+                className="btn btn-secondary btn-sm"
+                onClick={() => this.props.store.fetchAndUpdateData()}
+                disabled={this.props.store.appState !== AppState.Idle}
+              >
+                Opdater
+              </button>
+            </span>
+          }
+          </div>
         <div className="row">
           <div className="col-lg-6 push-lg-6">
             <div className="mb-3">
