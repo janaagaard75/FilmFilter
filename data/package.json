@@ -11,8 +11,8 @@
   "license": "ISC",
   "scripts": {
     "build-and-start": "yarn run build && yarn run start-prod-server",
-    "build-using-tsc": "rimraf dist && tsc",
-    "build": "rimraf dist && cross-env NODE_ENV=production webpack",
+    "build-using-tsc": "rimraf dist yarn install && && tsc",
+    "build": "rimraf dist && yarn install && cross-env NODE_ENV=production webpack",
     "deploy": "cd .. && git subtree push --prefix data heroku master && cd data",
     "lint": "tslint src/**/*.ts",
     "start-client": "rimraf output && mkdirp output && wget http://localhost:5000/ --destination output/data.json && json-pretty-print output/data.json output/data-prettified.json",
