@@ -4,7 +4,7 @@ export class Logger {
   private static lastTimestamp: number | undefined
 
   public static log(message: string): void {
-    if (!Environment.inDevelopmentMode()) {
+    if (!Environment.inDevelopmentMode) {
       return
     }
 
@@ -13,7 +13,7 @@ export class Logger {
   }
 
   public static logAndTime(message: string): void {
-    if (!Environment.inDevelopmentMode()) {
+    if (!Environment.inDevelopmentMode) {
       return
     }
 
@@ -32,7 +32,7 @@ export class Logger {
   }
 
   public static startTimer(): void {
-    if (!Environment.inDevelopmentMode()) {
+    if (!Environment.inDevelopmentMode) {
       return
     }
 

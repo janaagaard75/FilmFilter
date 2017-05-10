@@ -22,7 +22,7 @@ export class ConnectedApp extends Component<{}, void> {
     return (
       <div>
         <App store={this.store}/>
-        {Environment.inDevelopmentMode() &&
+        {Environment.inDevelopmentMode &&
           <DevTools
             position={
               {

@@ -198,7 +198,7 @@ export class App extends Component<Props, State> {
           <span className="align-self-center">
             <CurrentState store={this.props.store}/>
           </span>
-          {Environment.inDevelopmentMode() &&
+          {Environment.inDevelopmentMode &&
             <span className="align-self-center">
               <button
                 className="btn btn-secondary btn-sm"
