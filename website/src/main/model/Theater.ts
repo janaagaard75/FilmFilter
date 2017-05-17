@@ -31,7 +31,12 @@ export class Theater implements Comparable<Theater> {
     theaterId: ""
   })
 
-  private static cleanUpTheaterName(originalName: string) {
+  private static cleanUpTheaterName(originalName: string | null) {
+    // tslint:disable-next-line:no-null-keyword
+    if (originalName === null) {
+      return "(Ukendt briograf)"
+    }
+
     const cleanedUpName = originalName.replace("Nordisk Film Biografer ", "")
     return cleanedUpName
   }
