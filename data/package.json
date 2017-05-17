@@ -21,10 +21,10 @@
   },
   "dependencies": {
     "cors": "2.8.3",
-    "express": "4.15.2",
+    "express": "4.15.3",
     "lz-string": "git+https://github.com/janaagaard75/lz-string",
     "node-fetch": "1.6.3",
-    "ts-node": "3.0.2"
+    "ts-node": "3.0.4"
   },
   "devDependencies": {
     "@types/cors": "^2.8.1",
@@ -32,17 +32,17 @@
     "@types/node-fetch": "1.6.7",
     "babili": "0.0.12",
     "babili-webpack-plugin": "0.0.11",
-    "cross-env": "4.0.0",
+    "cross-env": "5.0.0",
     "json-pretty-print": "0.0.4",
     "mkdirp": "0.5.1",
     "node-wget": "0.4.2",
     "rimraf": "2.6.1",
     "source-map-loader": "0.2.1",
     "ts-loader": "2.0.3",
-    "tslint": "5.1.0",
+    "tslint": "5.2.0",
     "tslint-eslint-rules": "4.0.0",
     "tslint-react": "3.0.0",
-    "typescript": "2.2.2",
-    "webpack": "2.4.1"
+    "typescript": "2.3.2",
+    "webpack": "2.5.1"
   }
 }
