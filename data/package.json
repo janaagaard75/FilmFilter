@@ -17,7 +17,8 @@
     "lint": "tslint src/**/*.ts",
     "start-client": "rimraf output && mkdirp output && wget http://localhost:5000/ --destination output/data.json && json-pretty-print output/data.json output/data-prettified.json",
     "start-dev-server": "ts-node src/main.ts",
-    "start-prod-server": "node dist/main.js"
+    "start-prod-server": "node dist/main.js",
+    "update-dist": "yarn run build && git commit -a -m 'Update dist'"
   },
   "dependencies": {
     "cors": "2.8.3",
