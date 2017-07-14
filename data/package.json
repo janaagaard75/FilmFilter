@@ -21,29 +21,29 @@
     "update-dist": "yarn run build && git commit -a -m 'Update dist'"
   },
   "dependencies": {
-    "cors": "2.8.3",
+    "cors": "2.8.4",
     "express": "4.15.3",
     "lz-string": "git+https://github.com/janaagaard75/lz-string",
-    "node-fetch": "1.6.3",
-    "ts-node": "3.0.4"
+    "node-fetch": "1.7.1",
+    "ts-node": "3.2.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.1",
-    "@types/express": "4.0.35",
+    "@types/express": "4.0.36",
     "@types/node-fetch": "1.6.7",
-    "babili": "0.0.12",
-    "babili-webpack-plugin": "0.0.11",
-    "cross-env": "5.0.0",
+    "babili": "0.1.4",
+    "babili-webpack-plugin": "0.1.2",
+    "cross-env": "5.0.1",
     "json-pretty-print": "0.0.4",
     "mkdirp": "0.5.1",
     "node-wget": "0.4.2",
     "rimraf": "2.6.1",
     "source-map-loader": "0.2.1",
-    "ts-loader": "2.0.3",
-    "tslint": "5.2.0",
-    "tslint-eslint-rules": "4.0.0",
+    "ts-loader": "2.2.2",
+    "tslint": "5.5.0",
+    "tslint-eslint-rules": "4.1.1",
     "tslint-react": "3.0.0",
-    "typescript": "2.3.2",
-    "webpack": "2.5.1"
+    "typescript": "2.4.1",
+    "webpack": "3.2.0"
   }
 }
