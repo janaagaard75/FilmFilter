@@ -21,7 +21,7 @@ class MoviesSpider(scrapy.Spider):
 
     def parse_movie_page(self, response):
         movie = MovieItem()
-        movie['danishTitle'] = response.css('.node-title').xpath('text()').extract_first().strip()
+        movie['danishTitle'] = response.css('.pane-node-title').xpath('text()').extract_first().strip()
         movie['movieUrl'] = response.url
         original_title_field = response.css('.field-field-movie-original-title .field-item')
         if len(original_title_field) > 0:
