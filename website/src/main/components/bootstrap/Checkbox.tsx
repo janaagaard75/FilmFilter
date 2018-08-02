@@ -8,7 +8,7 @@ interface Props {
 }
 
 @observer
-export class Checkbox extends Component<Props, void> {
+export class Checkbox extends Component<Props> {
   public render() {
     return (
       <div className="form-check">

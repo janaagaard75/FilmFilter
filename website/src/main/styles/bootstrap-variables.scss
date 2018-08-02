@@ -1,23 +1,24 @@
 @import "../../../node_modules/bootstrap/scss/variables";
 
 $body-bg: $black;
-$body-color: $gray-lighter;
-$btn-secondary-bg: $gray;
-$btn-secondary-border: $gray-dark;
-$card-border-color: $gray;
-$card-cap-bg: $gray-dark;
+$body-color: $gray-200;
+$btn-secondary-bg: $gray-700;
+$btn-secondary-border: $gray-800;
+$card-border-color: $gray-700;
+$card-cap-bg: $gray-800;
 $link-color: $teal;
-$table-border-color: $gray-dark;
+$table-border-color: $gray-800;
 
 $btn-secondary-color: $body-color;
 $card-bg: $body-bg;
 // TODO: Is it possible to avoid having to duplicate this value?
 $link-hover-color: darken($link-color, 15%);
 
-$grid-gutter-widths: (
-  xs: 10px,
-  sm: 20px,
-  md: $grid-gutter-width-base,
-  lg: $grid-gutter-width-base,
-  xl: $grid-gutter-width-base
-);
+// TODO: Bootstrap no longer support multiple gutter widhts.
+// $grid-gutter-widths: (
+//   xs: 10px,
+//   sm: 20px,
+//   md: $grid-gutter-width,
+//   lg: $grid-gutter-width,
+//   xl: $grid-gutter-width
+// );

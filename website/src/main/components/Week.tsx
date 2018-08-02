@@ -10,7 +10,7 @@ interface Props {
 }
 
 @observer
-export class Week extends Component<Props, void> {
+export class Week extends Component<Props> {
   public render() {
     return (
       <tr>

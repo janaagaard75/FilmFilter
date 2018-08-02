@@ -10,7 +10,7 @@ interface Props {
 }
 
 @observer
-export class TheatersPicker extends Component<Props, void> {
+export class TheatersPicker extends Component<Props> {
   public render() {
     const favoritedTheaters = this.props.theaters.filter(theater => theater.favorited)
     const notFavoritedTheaters = this.props.theaters.filter(theater => !theater.favorited)

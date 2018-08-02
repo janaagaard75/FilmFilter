@@ -11,7 +11,7 @@ interface Props {
 }
 
 @observer
-export class CurrentState extends Component<Props, void> {
+export class CurrentState extends Component<Props> {
   public render() {
     return (
       <span>

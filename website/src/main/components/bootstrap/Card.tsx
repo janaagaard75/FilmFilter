@@ -7,7 +7,7 @@ interface Props {
 }
 
 @observer
-export class Card extends Component<Props, void> {
+export class Card extends Component<Props> {
   public render() {
     return (
       <div className="card">

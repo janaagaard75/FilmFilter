@@ -15,7 +15,7 @@ interface Props {
 }
 
 @observer
-export class MatchingShowings extends Component<Props, void> {
+export class MatchingShowings extends Component<Props> {
   public render() {
     const atLeastOneMatchingShowing = this.props.matchingShowings.length >= 1
     const header = "Forestillinger: " + this.props.matchingShowings.length

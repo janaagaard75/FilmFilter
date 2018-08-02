@@ -13,7 +13,7 @@ interface Props {
 }
 
 @observer
-export class DatesPicker extends Component<Props, void> {
+export class DatesPicker extends Component<Props> {
   public render() {
     return (
       <div>

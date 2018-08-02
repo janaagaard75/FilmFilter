@@ -10,7 +10,7 @@ interface Props {
 }
 
 @observer
-export class DatePicker extends Component<Props, void> {
+export class DatePicker extends Component<Props> {
   public render() {
     const hasAtLeastOneShowing = this.props.date.showings.size > 0
     const outerCssClasses = classNames(

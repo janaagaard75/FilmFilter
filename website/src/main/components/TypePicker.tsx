@@ -10,7 +10,7 @@ interface Props {
 }
 
 @observer
-export class TypePicker extends Component<Props, void> {
+export class TypePicker extends Component<Props> {
   public render() {
     return (
       <div className="row">

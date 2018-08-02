@@ -10,7 +10,7 @@ interface Props {
   startInterval: TimeInterval
 }
 
-export class TimePicker extends Component<Props, void> {
+export class TimePicker extends Component<Props> {
   private handleChangeFrom(formEvent: ChangeEvent<HTMLSelectElement>) {
     this.props.startInterval.from = parseInt(formEvent.currentTarget.value, 10)
 

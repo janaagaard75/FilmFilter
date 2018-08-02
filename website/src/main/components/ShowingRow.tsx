@@ -9,7 +9,7 @@ interface Props {
 }
 
 @observer
-export class ShowingRow extends Component<Props, void> {
+export class ShowingRow extends Component<Props> {
   public render() {
     const startLabel = this.props.showing.start.format("dd D/M HH:mm")
 

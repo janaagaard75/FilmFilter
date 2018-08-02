@@ -10,7 +10,7 @@ interface Props {
 }
 
 @observer
-export class ShowingsTable extends Component<Props, void> {
+export class ShowingsTable extends Component<Props> {
   public render() {
     return (
       <table className="table table-sm table-showings">

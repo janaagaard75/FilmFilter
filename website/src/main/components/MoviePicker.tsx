@@ -10,7 +10,7 @@ interface Props {
 }
 
 @observer
-export class MoviePicker extends Component<Props, void> {
+export class MoviePicker extends Component<Props> {
   public render() {
     const cssClasses = classNames(
       "selectable-inner",

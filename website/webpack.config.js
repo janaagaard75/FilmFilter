@@ -1,4 +1,4 @@
-const BabiliPlugin = require("babili-webpack-plugin")
+const BabelMinifyPlugin = require("babel-minify-webpack-plugin")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
@@ -16,7 +16,7 @@ const plugins = [
       from: "src/main/favicon.ico"
     }
   ]),
-  new ExtractTextPlugin("bundle.[contenthash:8].css"),
+  new ExtractTextPlugin("bundle.[md5:contenthash:hex:8].css"),
   new HtmlWebpackPlugin({
     minify: {
       collapseInlineTagWhitespace: true,
@@ -36,7 +36,7 @@ const plugins = [
 
 if (isProduction) {
   plugins.push(
-    new BabiliPlugin()
+    new BabelMinifyPlugin()
   )
 }
 else {

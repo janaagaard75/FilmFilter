@@ -12,7 +12,7 @@ interface Props {
 }
 
 @observer
-export class MoviesPicker extends Component<Props, void> {
+export class MoviesPicker extends Component<Props> {
   private handleKeyUp(formEvent: KeyboardEvent<HTMLInputElement>) {
     if (formEvent.key === "Escape") {
       formEvent.currentTarget.value = ""
